@@ -1,8 +1,8 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronRight, ChevronLeft, Volume2, VolumeX, Loader } from 'lucide-react';
 import './PresentationMode.css';
 
-const GEMINI_API_KEY = 'AQ.Ab8RN6J-yKZMk220yHlycPzbim6qkC5zc8pTo7Mjx9O3nMM2lQ';
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 export default function PresentationMode({ slides, onClose }) {
   const [currentSlide, setCurrentSlide] = useState(0);

@@ -1,6 +1,8 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 import Sidebar from './components/Sidebar'
+import HomeDashboard from './components/HomeDashboard'
 import Chapter1 from './chapters/Chapter1'
 import Chapter2 from './chapters/Chapter2'
 import Chapter3 from './chapters/Chapter3'
@@ -28,13 +30,25 @@ import Chapter24 from './chapters/Chapter24'
 import './App.css'
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <Router>
       <div className="app-container">
-        <Sidebar />
+        {isSidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
+        <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} />
+        
         <main className="main-content">
+          <button className="mobile-menu-btn" onClick={toggleSidebar}>
+            <Menu size={24} />
+          </button>
           <Routes>
-            <Route path="/" element={<Chapter1 />} />
+            <Route path="/" element={<HomeDashboard />} />
+            <Route path="/chapter1" element={<Chapter1 />} />
             <Route path="/company" element={<Chapter2 />} />
             <Route path="/problem" element={<Chapter3 />} />
             <Route path="/solution" element={<Chapter4 />} />

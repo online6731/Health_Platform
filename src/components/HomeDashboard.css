@@ -1,0 +1,105 @@
+﻿.dashboard-container {
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-hero {
+  background: linear-gradient(135deg, var(--bg-card), rgba(122, 40, 203, 0.15));
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 50%);
+  animation: spin 30s linear infinite;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-hero p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: var(--glass-blur);
+  cursor: pointer;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 10px 25px rgba(0, 210, 255, 0.15);
+  background: rgba(30, 30, 42, 0.8);
+}
+
+.card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(122, 40, 203, 0.1));
+  color: var(--accent-teal);
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-number {
+  font-size: 0.85rem;
+  color: var(--accent-purple);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.dashboard-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.dashboard-card:hover h3 {
+  color: var(--accent-blue);
+}

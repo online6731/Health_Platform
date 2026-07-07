@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity } from 'lucide-react';
+import { Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity } from 'lucide-react';
 import './Sidebar.css';
 
 const chapters = [
-  { id: '1', path: '/', title: 'خلاصه مدیریتی', subtitle: 'Executive Summary', icon: LayoutDashboard },
+  { id: '0', path: '/', title: 'داشبورد اصلی', subtitle: 'Home', icon: Home },
+  { id: '1', path: '/chapter1', title: 'خلاصه مدیریتی', subtitle: 'Executive Summary', icon: Target },
   { id: '2', path: '/company', title: 'معرفی استارتاپ', subtitle: 'Company Overview', icon: Building2 },
   { id: '3', path: '/problem', title: 'مسئله و فرصت بازار', subtitle: 'Problem & Market Need', icon: TrendingUp },
   { id: '4', path: '/solution', title: 'راهکار پیشنهادی', subtitle: 'Proposed Solution', icon: Cpu },
@@ -30,9 +31,9 @@ const chapters = [
   { id: '24', path: '/financials', title: 'پیش‌بینی‌های مالی', subtitle: 'Financial Projections', icon: PieChart },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, closeSidebar }) {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
         <div className="logo-container">
           <Brain className="logo-icon" />
@@ -50,10 +51,11 @@ export default function Sidebar() {
             <NavLink
               key={chapter.id}
               to={chapter.path}
+              onClick={closeSidebar}
               className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
               <div className="nav-content">
-                <span className="chapter-num">فصل {chapter.id}:</span>
+                {chapter.id !== '0' && <span className="chapter-num">فصل {chapter.id}:</span>}
                 <span className="chapter-title">{chapter.title}</span>
                 <span className="chapter-subtitle">{chapter.subtitle}</span>
               </div>

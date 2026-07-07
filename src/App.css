@@ -1,11 +1,11 @@
-.app-container {
+﻿.app-container {
   display: flex;
   min-height: 100vh;
 }
 
 .main-content {
   flex: 1;
-  margin-right: var(--sidebar-width); /* sidebar is on the right because RTL */
+  margin-right: var(--sidebar-width);
   padding: 3rem 4rem;
   max-width: 1200px;
 }
@@ -20,9 +20,42 @@
   padding-bottom: 1.5rem;
 }
 
+.mobile-menu-btn {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .main-content {
     margin-right: 0;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+    backdrop-filter: blur(4px);
   }
 }
