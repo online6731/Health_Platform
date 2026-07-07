@@ -1,5 +1,6 @@
-﻿import React from 'react';
+import React from 'react';
 import { Building2, Compass, Flag, Shield, Heart, Lightbulb, Users, Clock, Target, Rocket, Workflow, Briefcase, Eye, Link, RefreshCw, Cpu } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter2.css';
 
 export default function Chapter2() {
@@ -12,11 +13,11 @@ export default function Chapter2() {
   ];
 
   return (
-    <div className="chapter-container chapter2-container">
-      <div className="chapter-header">
-        <h1>فصل ۲: معرفی استارتاپ (Company Overview)</h1>
-        <p>هویت، مأموریت و چشم‌انداز استارتاپ در مسیر ایجاد سیستم‌عامل سلامت</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲: معرفی استارتاپ (Company Overview)" 
+      englishTitle="هویت، مأموریت و چشم‌انداز استارتاپ در مسیر ایجاد سیستم‌عامل سلامت"
+    >
+      <div className="chapter2-container">
 
       <section className="chapter-section">
         <h3><Building2 className="section-icon" /> ۲-۱ معرفی اکوسیستم</h3>
@@ -141,7 +142,8 @@ export default function Chapter2() {
         </div>
       </section>
 
-    </div>
+      </div>
+    </ChapterLayout>
   );
 }
 

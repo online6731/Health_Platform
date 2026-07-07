@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import './Sidebar.css';
 
 const chapters = [
@@ -42,6 +43,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
             <p>HCOS Architecture</p>
           </div>
         </div>
+        <ThemeToggle />
       </div>
       
       <nav className="sidebar-nav">

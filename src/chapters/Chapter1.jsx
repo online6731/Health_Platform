@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Target, Lightbulb, Users, Zap, TrendingUp, DollarSign, PieChart, Eye, Play } from 'lucide-react';
 import PresentationMode from '../components/PresentationMode';
 import './Chapter1.css';
@@ -58,28 +58,12 @@ const chapter1Slides = [
 ];
 
 export default function Chapter1() {
-  const [showPresentation, setShowPresentation] = useState(false);
-
   return (
-    <div className="chapter-container">
-      {showPresentation && (
-        <PresentationMode 
-          slides={chapter1Slides} 
-          onClose={() => setShowPresentation(false)} 
-        />
-      )}
-
-      <div className="chapter-header">
-        <div className="header-title-group">
-          <h1>فصل ۱: خلاصه مدیریتی</h1>
-          <p>Executive Summary</p>
-        </div>
-        <button className="start-pres-btn" onClick={() => setShowPresentation(true)}>
-          <Play size={20} />
-          شروع ارائه صوتی
-        </button>
-      </div>
-
+    <ChapterLayout 
+      title="فصل ۱: خلاصه مدیریتی" 
+      englishTitle="Executive Summary"
+      slides={chapter1Slides}
+    >
       <div className="intro-box">
         <h3>۱-۱. معرفی پروژه</h3>
         <p>
@@ -232,6 +216,6 @@ export default function Chapter1() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }
