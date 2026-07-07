@@ -4,7 +4,7 @@ import { Target, Building2, Lightbulb, Zap, ShoppingCart, Cpu, Brain, Briefcase,
 import './HomeDashboard.css';
 
 const chapters = [
-  { id: 1, path: '/', name: 'خلاصه مدیریتی', icon: Target },
+  { id: 1, path: '/chapter1', name: 'خلاصه مدیریتی', icon: Target },
   { id: 2, path: '/company', name: 'معرفی استارتاپ', icon: Building2 },
   { id: 3, path: '/problem', name: 'بیان مسئله', icon: Zap },
   { id: 4, path: '/solution', name: 'راهکار و ارزش‌آفرینی', icon: Lightbulb },
