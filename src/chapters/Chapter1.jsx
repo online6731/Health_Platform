@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Target, Lightbulb, Users, Zap, TrendingUp, DollarSign, PieChart, Eye, Play } from 'lucide-react';
 import PresentationMode from '../components/PresentationMode';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter1.css';
 
 const chapter1Slides = [
