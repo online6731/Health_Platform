@@ -1,0 +1,198 @@
+.chapter13-container {
+  padding-bottom: 4rem;
+}
+
+.intro-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--accent-blue);
+  padding: 1.5rem 2rem;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.knowledge-layers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.k-layer-card {
+  background: linear-gradient(145deg, rgba(30, 30, 42, 0.6), rgba(20, 20, 30, 0.8));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.k-layer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.k-layer-card:nth-child(1)::before { background: var(--accent-blue); }
+.k-layer-card:nth-child(2)::before { background: var(--accent-teal); }
+.k-layer-card:nth-child(3)::before { background: var(--accent-purple); }
+
+.k-layer-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 210, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 210, 255, 0.1);
+}
+
+.k-layer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.k-layer-header h4 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.k-layer-icon {
+  background: rgba(0, 210, 255, 0.1);
+  color: var(--accent-blue);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.k-layer-card:nth-child(2) .k-layer-icon {
+  color: var(--accent-teal);
+  background: rgba(0, 210, 255, 0.1);
+}
+
+.k-layer-card:nth-child(3) .k-layer-icon {
+  color: var(--accent-purple);
+  background: rgba(122, 40, 203, 0.1);
+}
+
+.k-layer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.k-layer-list li {
+  position: relative;
+  padding-right: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.k-layer-list li::before {
+  content: '✓';
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--accent-teal);
+}
+
+.knowledge-domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.domain-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 1.25rem;
+  border-radius: 20px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.domain-tag:hover {
+  background: rgba(0, 210, 255, 0.1);
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+.domain-tag svg {
+  color: var(--accent-purple);
+}
+
+/* Graph Visualization Mockup */
+.graph-viz {
+  background: #111116;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.graph-node {
+  background: rgba(122, 40, 203, 0.2);
+  border: 1px solid var(--accent-purple);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.graph-node.primary {
+  background: rgba(0, 210, 255, 0.2);
+  border-color: var(--accent-teal);
+  font-size: 1.1rem;
+}
+
+.graph-edge {
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, var(--accent-teal), var(--accent-purple));
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature-box {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.feature-box h5 {
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-box p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}

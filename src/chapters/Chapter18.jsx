@@ -1,0 +1,38 @@
+﻿import React from 'react';
+import { Smartphone, Monitor, BrainCircuit, Users, Maximize, Eye } from 'lucide-react';
+import './Chapter18.css';
+
+export default function Chapter18() {
+  return (
+    <div className="chapter-container chapter18-container">
+      <div className="chapter-header">
+        <h1>فصل ۱۸: تجربه کاربری و رابط‌های شناختی</h1>
+        <p>UX & Cognitive Interfaces</p>
+      </div>
+      <div className="intro-box">
+        <h3>۱۸-۱ مقدمه: طراحی انسان‌محور</h3>
+        <p>فناوری پیچیده هوش مصنوعی باید در قالبی بسیار ساده و کارآمد به کاربر نهایی ارائه شود. در این اکوسیستم، تجربه کاربری از یک واسط گرافیکی صرف (GUI) به یک رابط شناختی مکالمه‌محور (CUI) ارتقاء یافته است که نیازها و احساسات کاربر را درک می‌کند.</p>
+      </div>
+      <section className="chapter-section">
+        <h3><Maximize className="section-icon" /> ۱۸-۲ اصول طراحی پلتفرم</h3>
+        <div className="ux-grid">
+          <div className="ux-card">
+            <Smartphone size={32} className="ux-icon"/>
+            <h4>طراحی تطبیق‌پذیر (Adaptive UI)</h4>
+            <p>تغییر چیدمان، فونت‌ها و رنگ‌ها بر اساس سن، سطح سواد سلامت و توانایی‌های شناختی بیمار.</p>
+          </div>
+          <div className="ux-card">
+            <BrainCircuit size={32} className="ux-icon"/>
+            <h4>رابط مبتنی بر عامل (Agentic UI)</h4>
+            <p>کاربر نیازی به پر کردن فرم‌های طولانی ندارد؛ عامل‌های هوشمند از طریق مکالمه صوتی یا متنی تمام اطلاعات لازم را جمع‌آوری و ساختاردهی می‌کنند.</p>
+          </div>
+          <div className="ux-card">
+            <Monitor size={32} className="ux-icon"/>
+            <h4>داشبوردهای پزشک‌محور</h4>
+            <p>نمایش سریع چکیده‌ی همزاد دیجیتال بیمار در ۳۰ ثانیه، جهت کاهش بار شناختی (Cognitive Load) پزشک در زمان ویزیت.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

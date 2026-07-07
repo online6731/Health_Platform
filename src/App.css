@@ -1,0 +1,28 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-right: var(--sidebar-width); /* sidebar is on the right because RTL */
+  padding: 3rem 4rem;
+  max-width: 1200px;
+}
+
+.chapter-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.chapter-header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-right: 0;
+    padding: 2rem 1.5rem;
+  }
+}
