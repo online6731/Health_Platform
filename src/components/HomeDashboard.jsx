@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Target, Building2, Lightbulb, Zap, ShoppingCart, Cpu, Brain, Briefcase, Activity, Shield, Link as LinkIcon, Users, LineChart, Globe, Settings, DollarSign, BookOpen } from 'lucide-react';
 import './HomeDashboard.css';
@@ -44,7 +44,7 @@ export default function HomeDashboard() {
         {chapters.map((chapter, idx) => {
           const Icon = chapter.icon;
           return (
-            <Link to={chapter.path} key={chapter.id} className="dashboard-card animate-fade-in" style={{ animationDelay: \\s\ }}>
+            <Link to={chapter.path} key={chapter.id} className="dashboard-card animate-fade-in" style={{ animationDelay: `${idx * 0.05}s` }}>
               <div className="card-icon-wrapper">
                 <Icon size={32} />
               </div>

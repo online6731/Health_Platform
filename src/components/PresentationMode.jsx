@@ -153,7 +153,7 @@ export default function PresentationMode({ slides, onClose }) {
       </button>
 
       <button 
-        className={\pres-audio-btn \\}
+        className={`pres-audio-btn ${isAudioEnabled ? 'audio-on' : 'audio-off'}`}
         onClick={() => setIsAudioEnabled(!isAudioEnabled)}
         title="روشن/خاموش کردن صدای گوینده هوشمند"
       >
@@ -169,7 +169,7 @@ export default function PresentationMode({ slides, onClose }) {
         </span>
       </button>
 
-      <div className={\pres-content \\}>
+      <div className={`pres-content ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
         {Icon && <div className="pres-icon-wrapper"><Icon size={80} /></div>}
         <h1 className="pres-title">{current.title}</h1>
         <p className="pres-text">{current.content}</p>
@@ -177,7 +177,7 @@ export default function PresentationMode({ slides, onClose }) {
         {current.bullets && (
           <ul className="pres-bullets">
             {current.bullets.map((bullet, idx) => (
-              <li key={idx} style={{ animationDelay: \\s\ }} className="bullet-item">
+              <li key={idx} style={{ animationDelay: `${idx * 0.2}s` }} className="bullet-item">
                 {bullet}
               </li>
             ))}
@@ -186,7 +186,7 @@ export default function PresentationMode({ slides, onClose }) {
       </div>
 
       {current.narration && (
-        <div className={\pres-cinematic-subtitles \\}>
+        <div className={`pres-cinematic-subtitles ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
           <div className="subtitle-text">{current.narration}</div>
         </div>
       )}
@@ -204,7 +204,7 @@ export default function PresentationMode({ slides, onClose }) {
           {slides.map((_, idx) => (
             <div 
               key={idx} 
-              className={\pres-dot \\}
+              className={`pres-dot ${idx === currentSlide ? 'active' : ''}`}
               onClick={() => {
                 if (idx !== currentSlide) {
                   setIsTransitioning(true);
