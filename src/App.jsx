@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import Sidebar from './components/Sidebar'
@@ -27,6 +27,8 @@ import Chapter21 from './chapters/Chapter21'
 import Chapter22 from './chapters/Chapter22'
 import Chapter23 from './chapters/Chapter23'
 import Chapter24 from './chapters/Chapter24'
+import ScrollProgress from './components/ScrollProgress'
+import AIChatbot from './components/AIChatbot'
 import './App.css'
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollProgress />
       <div className="app-container">
         {isSidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
         <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} />
@@ -74,6 +77,7 @@ function App() {
             <Route path="/financials" element={<Chapter24 />} />
           </Routes>
         </main>
+        <AIChatbot />
       </div>
     </Router>
   )
