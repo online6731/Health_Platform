@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity } from 'lucide-react';
+import { Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity, Download } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import './Sidebar.css';
 
@@ -30,6 +30,7 @@ const chapters = [
   { id: '22', path: '/operations', title: 'عملیات و AgentOps', subtitle: 'Operations & DevOps', icon: Activity },
   { id: '23', path: '/global-expansion', title: 'استراتژی توسعه جهانی', subtitle: 'Global Expansion', icon: Globe },
   { id: '24', path: '/financials', title: 'پیش‌بینی‌های مالی', subtitle: 'Financial Projections', icon: PieChart },
+  { id: 'export', path: '/export', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
 ];
 
 export default function Sidebar({ isOpen, closeSidebar }) {
