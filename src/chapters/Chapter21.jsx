@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Scale, ShieldAlert, GitCommit, Search, CheckSquare } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter21.css';
 
 export default function Chapter21() {
   return (
-    <div className="chapter-container chapter21-container">
-      <div className="chapter-header">
-        <h1>فصل ۲۱: حاکمیت هوش مصنوعی و اخلاق پزشکی</h1>
-        <p>AI Governance & Medical Ethics</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲۱: حاکمیت هوش مصنوعی و اخلاق پزشکی" 
+      englishTitle="AI Governance & Medical Ethics"
+    >
       <div className="intro-box">
         <h3>۲۱-۱ مقدمه: مسئولیت‌پذیری الگوریتم‌ها</h3>
         <p>هوش مصنوعی در این سیستم، نقش پشتیبان تصمیم‌گیری را ایفا می‌کند. استقرار چنین فناوری‌ای بدون وجود یک چارچوب حاکمیتی شفاف و مکانیزم‌های کنترل کیفیت اخلاقی، خطرات قانونی و بالینی به همراه دارد.</p>
@@ -30,6 +30,6 @@ export default function Chapter21() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

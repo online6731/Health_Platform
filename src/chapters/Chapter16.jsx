@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Scale, FileCheck, Globe, CheckCircle2, Bookmark } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter16.css';
 
 export default function Chapter16() {
   return (
-    <div className="chapter-container chapter16-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۶: قوانین، مقررات و انطباق</h1>
-        <p>Regulatory & International Compliance</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۶: قوانین، مقررات و انطباق" 
+      englishTitle="Regulatory & International Compliance"
+    >
       <div className="intro-box">
         <h3>۱۶-۱ مقدمه: استانداردسازی جهانی</h3>
         <p>حوزه سلامت یکی از قانون‌مندترین صنایع جهان است. معماری سیستم از روز اول بر پایه انطباق با سخت‌گیرانه‌ترین استانداردهای بین‌المللی بنا شده است تا مانعی برای گسترش در بازارهای جهانی وجود نداشته باشد.</p>
@@ -34,6 +34,6 @@ export default function Chapter16() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

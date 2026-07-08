@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Rocket, Target, Users, Share2, Award, Search, Bell, Shield, Megaphone, CheckCircle } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter9.css';
 
 export default function Chapter9() {
   return (
-    <div className="chapter-container chapter9-container">
-      <div className="chapter-header">
-        <h1>فصل ۹: استراتژی ورود به بازار</h1>
-        <p>Go-to-Market Strategy (GTM)</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۹: استراتژی ورود به بازار" 
+      englishTitle="Go-to-Market Strategy (GTM)"
+    >
 
       <div className="intro-box">
         <h3>۹-۱ مقدمه و استراتژی کلان</h3>
@@ -122,7 +122,6 @@ export default function Chapter9() {
           <li><CheckCircle size={18} className="moat-icon" /> <strong>یکپارچگی و هاب مرکزی بودن:</strong> جایگزینی یک پلتفرم که پزشک، داروخانه، ساعت هوشمند و روانشناس را همزمان مدیریت می‌کند برای رقبا بسیار دشوار است.</li>
         </ul>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }
-

@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Store, Code, Puzzle, ShoppingBag, Terminal, Plug, Coins, LayoutGrid } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter20.css';
 
 export default function Chapter20() {
   return (
-    <div className="chapter-container chapter20-container">
-      <div className="chapter-header">
-        <h1>فصل ۲۰: بازار خدمات و نرم‌افزارهای سلامت</h1>
-        <p>App Store & Health Marketplace</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲۰: بازار خدمات و نرم‌افزارهای سلامت" 
+      englishTitle="App Store & Health Marketplace"
+    >
 
       <div className="intro-box">
         <h3>۲۰-۱ استراتژی پلتفرم باز (Open Ecosystem)</h3>
@@ -51,6 +51,6 @@ export default function Chapter20() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

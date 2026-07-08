@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { DollarSign, Briefcase, TrendingUp, Users, Server, FileDigit, Link, ArrowDownCircle, Network, Share2 } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter19.css';
 
 export default function Chapter19() {
   return (
-    <div className="chapter-container chapter19-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۹: اقتصاد پلتفرم و مدل کسب‌وکار</h1>
-        <p>Business Model & Platform Economics</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۹: اقتصاد پلتفرم و مدل کسب‌وکار" 
+      englishTitle="Business Model & Platform Economics"
+    >
 
       <div className="intro-box">
         <h3>۱۹-۱ اکوسیستم چندوجهی (Multi-Sided Platform)</h3>
@@ -68,6 +68,6 @@ export default function Chapter19() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

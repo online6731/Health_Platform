@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Database, Network, BookOpen, Layers, Target, Stethoscope, Brain, HeartPulse, Activity, BrainCircuit, Link2, BookMarked, Search, History, ShieldCheck, FileText } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter13.css';
 
 export default function Chapter13() {
   return (
-    <div className="chapter-container chapter13-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۳: سکوی دانش سلامت و هوش پزشکی</h1>
-        <p>Health Knowledge Platform</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۳: سکوی دانش سلامت و هوش پزشکی" 
+      englishTitle="Health Knowledge Platform"
+    >
 
       <div className="intro-box">
         <h3>۱۳-۱ مقدمه: فراتر از مدل‌های زبانی</h3>
@@ -89,7 +89,6 @@ export default function Chapter13() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }
-

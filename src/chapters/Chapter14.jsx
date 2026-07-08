@@ -1,14 +1,14 @@
 import React from 'react';
 import { Globe2, Layers, Activity, Pill, CloudSun, Hospital, Workflow, ActivitySquare, Brain, Network, PlaySquare, ShieldAlert, GitCommit, Users } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter14.css';
 
 export default function Chapter14() {
   return (
-    <div className="chapter-container chapter14-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۴: شبیه‌سازی جهان سلامت</h1>
-        <p>Simulation Engine & Health World Model</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۴: شبیه‌سازی جهان سلامت" 
+      englishTitle="Simulation Engine & Health World Model"
+    >
 
       <div className="intro-box">
         <h3>۱۴-۱ مقدمه: فراتر از پیش‌بینی، حرکت به سمت شبیه‌سازی</h3>
@@ -90,7 +90,6 @@ export default function Chapter14() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }
-

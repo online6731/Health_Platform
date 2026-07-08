@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { PieChart, TrendingUp, BarChart4, Target, Activity, Zap } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter24.css';
 
 export default function Chapter24() {
   return (
-    <div className="chapter-container chapter24-container">
-      <div className="chapter-header">
-        <h1>فصل ۲۴: پیش‌بینی‌های مالی</h1>
-        <p>Financial Projections & ROI</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲۴: پیش‌بینی‌های مالی" 
+      englishTitle="Financial Projections & ROI"
+    >
 
       <div className="intro-box">
         <h3>۲۴-۱ ساختار هزینه‌ها و مقیاس‌پذیری</h3>
@@ -59,6 +59,6 @@ export default function Chapter24() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

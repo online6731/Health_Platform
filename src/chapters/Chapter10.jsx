@@ -1,14 +1,14 @@
 import React from 'react';
 import { Users, Briefcase, Cpu, Stethoscope, Brain, LayoutTemplate, Megaphone, Network, Code, HeartPulse, Palette, Headset, Lightbulb, Heart, Zap, Database } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter10.css';
 
 export default function Chapter10() {
   return (
-    <div className="chapter-container chapter10-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۰: تیم و ساختار سازمانی</h1>
-        <p>Team & Organizational Structure</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۰: تیم و ساختار سازمانی" 
+      englishTitle="Team & Organizational Structure"
+    >
 
       <div className="intro-box">
         <h3>۱۰-۱ مقدمه</h3>
@@ -152,6 +152,6 @@ export default function Chapter10() {
         </div>
       </section>
 
-    </div>
+    </ChapterLayout>
   );
 }

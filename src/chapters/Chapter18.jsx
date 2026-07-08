@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Smartphone, Monitor, BrainCircuit, Users, Maximize, Eye } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter18.css';
 
 export default function Chapter18() {
   return (
-    <div className="chapter-container chapter18-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۸: تجربه کاربری و رابط‌های شناختی</h1>
-        <p>UX & Cognitive Interfaces</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۸: تجربه کاربری و رابط‌های شناختی" 
+      englishTitle="UX & Cognitive Interfaces"
+    >
       <div className="intro-box">
         <h3>۱۸-۱ مقدمه: طراحی انسان‌محور</h3>
         <p>فناوری پیچیده هوش مصنوعی باید در قالبی بسیار ساده و کارآمد به کاربر نهایی ارائه شود. در این اکوسیستم، تجربه کاربری از یک واسط گرافیکی صرف (GUI) به یک رابط شناختی مکالمه‌محور (CUI) ارتقاء یافته است که نیازها و احساسات کاربر را درک می‌کند.</p>
@@ -33,6 +33,6 @@ export default function Chapter18() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

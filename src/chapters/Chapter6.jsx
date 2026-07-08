@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Server, Database, Cloud, ShieldCheck, Box, Network, Lock, Cpu, Blocks, MonitorSmartphone, Share2, Layers } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter6.css';
 
 export default function Chapter6() {
   return (
-    <div className="chapter-container chapter6-container">
-      <div className="chapter-header">
-        <h1>فصل ۶: معماری کلان فناوری و زیرساخت</h1>
-        <p>Software & Platform Architecture</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۶: معماری کلان فناوری و زیرساخت" 
+      englishTitle="Software & Platform Architecture"
+    >
 
       <div className="intro-box">
         <h3>۶-۱ فلسفه معماری اکوسیستم</h3>
@@ -147,7 +147,6 @@ export default function Chapter6() {
           کاربران مالکیت کامل داده‌های خود را دارند و هیچ پردازشی بدون رضایت آگاهانه (Informed Consent) انجام نمی‌گیرد. سیستم با استانداردهای جهانی تبادل داده‌های سلامت (مانند HL7 FHIR) سازگاری کامل خواهد داشت.
         </p>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }
-

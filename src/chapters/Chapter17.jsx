@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Link, Network, Database, Layers, Hospital } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter17.css';
 
 export default function Chapter17() {
   return (
-    <div className="chapter-container chapter17-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۷: یکپارچگی و تعامل‌پذیری</h1>
-        <p>Integration & Interoperability</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۷: یکپارچگی و تعامل‌پذیری" 
+      englishTitle="Integration & Interoperability"
+    >
       <div className="intro-box">
         <h3>۱۷-۱ مقدمه: پایان سیلوهای اطلاعاتی</h3>
         <p>ارزش واقعی همزاد دیجیتال زمانی مشخص می‌شود که بتواند اطلاعات را از صدها منبع مختلف دریافت کند. این پلتفرم از استانداردهای ارتباطی بین‌المللی برای یکپارچه‌سازی سیستم‌های قدیمی بیمارستانی با هوش مصنوعی نوین استفاده می‌کند.</p>
@@ -33,6 +33,6 @@ export default function Chapter17() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

@@ -4,15 +4,15 @@ import {
   Dumbbell, Microscope, MonitorSpeaker, Building2, Code, Share2, Route,
   Sparkles, Layers, Users, Library, Blocks, Network, Server
 } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter5.css';
 
 export default function Chapter5() {
   return (
-    <div className="chapter-container chapter5-container">
-      <div className="chapter-header">
-        <h1>فصل ۵: خانواده محصولات و پلتفرم‌ها (Products & Platforms)</h1>
-        <p>معرفی جامع محصولات اکوسیستم سلامت هوشمند در قالب ۱۱ خانواده یکپارچه</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۵: خانواده محصولات و پلتفرم‌ها (Products & Platforms)" 
+      englishTitle="معرفی جامع محصولات اکوسیستم سلامت هوشمند در قالب ۱۱ خانواده یکپارچه"
+    >
 
       <div className="intro-box">
         <h3>۵-۱ معماری پلتفرمی</h3>
@@ -210,7 +210,6 @@ export default function Chapter5() {
           نقطه قوت اصلی اکوسیستم، <strong>یکپارچگی میان محصولات</strong> است. پزشک می‌تواند خلاصه روانشناختی را ببیند، روانشناس می‌تواند بیماری‌های جسمی را ببیند و برنامه تغذیه مستقیماً بر اساس نتایج آزمایش به‌روز می‌شود. دستیار هوشمند با دسترسی به تمام این داده‌ها، پیشنهادهای هماهنگ ارائه می‌دهد. این هم‌افزایی ارزش کل اکوسیستم را به‌مراتب بیشتر از مجموع تک‌تک سرویس‌ها می‌کند.
         </p>
       </div>
-    </div>
+    </ChapterLayout>
   );
 }
-

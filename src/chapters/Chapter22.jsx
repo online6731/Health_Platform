@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Server, Activity, ArrowRightLeft, Settings, Cpu } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter22.css';
 
 export default function Chapter22() {
   return (
-    <div className="chapter-container chapter22-container">
-      <div className="chapter-header">
-        <h1>فصل ۲۲: عملیات و AgentOps</h1>
-        <p>Operations, DevOps & AgentOps</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲۲: عملیات و AgentOps" 
+      englishTitle="Operations, DevOps & AgentOps"
+    >
       <div className="intro-box">
         <h3>۲۲-۱ مقدمه: مدیریت چرخه‌حیات عامل‌ها</h3>
         <p>معماری مبتنی بر عامل (Agentic Architecture) نیازمند ابزارهای استقرار و پایش متفاوتی نسبت به نرم‌افزارهای سنتی است. ما از چارچوب <strong>AgentOps</strong> برای پایش رفتار، هزینه‌ی توکن‌ها و کیفیت پاسخ‌های سیستم استفاده می‌کنیم.</p>
@@ -33,6 +33,6 @@ export default function Chapter22() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

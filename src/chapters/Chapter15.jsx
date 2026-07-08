@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Shield, Lock, FileKey, Database, CheckCircle, ServerCrash } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter15.css';
 
 export default function Chapter15() {
   return (
-    <div className="chapter-container chapter15-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۵: امنیت و حریم خصوصی</h1>
-        <p>Security, Privacy & Data Governance</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۵: امنیت و حریم خصوصی" 
+      englishTitle="Security, Privacy & Data Governance"
+    >
       <div className="intro-box">
         <h3>۱۵-۱ مقدمه: معماری اعتماد صفر (Zero-Trust)</h3>
         <p>با توجه به حساسیت فوق‌العاده‌ی داده‌های سلامت، پلتفرم از معماری اعتماد صفر استفاده می‌کند. هیچ کاربری، حتی در داخل شبکه، پیش‌فرض ایمن تلقی نمی‌شود. رمزنگاری سرتاسری (End-to-End Encryption) و کنترل دسترسی پویای مبتنی بر نقش (RBAC) ارکان اصلی این معماری هستند.</p>
@@ -33,6 +33,6 @@ export default function Chapter15() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

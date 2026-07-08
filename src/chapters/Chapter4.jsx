@@ -4,15 +4,15 @@ import {
   Lightbulb, Activity, Brain, Shield, Clock, Blocks, Network, TabletSmartphone,
   Pill, Dumbbell, Microscope, FileText, CheckCircle, BrainCircuit, Bot, Award
 } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter4.css';
 
 export default function Chapter4() {
   return (
-    <div className="chapter-container chapter4-container">
-      <div className="chapter-header">
-        <h1>فصل ۴: راه‌حل پیشنهادی (Proposed Solution)</h1>
-        <p>معماری اکوسیستم جامع سلامت مبتنی بر هوش مصنوعی</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۴: راه‌حل پیشنهادی (Proposed Solution)" 
+      englishTitle="معماری اکوسیستم جامع سلامت مبتنی بر هوش مصنوعی"
+    >
 
       <div className="intro-box">
         <h3>۴-۱ مقدمه</h3>
@@ -274,6 +274,6 @@ export default function Chapter4() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }

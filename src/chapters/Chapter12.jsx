@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Network, Bot, Settings, Users, Brain, Activity, ShieldCheck, Stethoscope, Briefcase, FileCode, CheckCircle, Database } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter12.css';
 
 export default function Chapter12() {
   return (
-    <div className="chapter-container chapter12-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۲: موتور ارکستراسیون عامل‌های هوشمند</h1>
-        <p>AI Agent Orchestration Engine</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۲: موتور ارکستراسیون عامل‌های هوشمند" 
+      englishTitle="AI Agent Orchestration Engine"
+    >
 
       <div className="intro-box">
         <h3>۱۲-۱ مقدمه: مغز متفکر اکوسیستم</h3>
@@ -91,7 +91,6 @@ export default function Chapter12() {
           <li><CheckCircle size={18} className="moat-icon" /> <strong>API Gateway & Plugin Router:</strong> ارتباط عامل‌ها با سامانه‌های خارجی (سیستم رزرو نوبت یا سفارش دارو).</li>
         </ul>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }
-

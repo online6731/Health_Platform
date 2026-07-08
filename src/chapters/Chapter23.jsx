@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Globe, Map, Navigation, ShieldCheck, Languages, Building, Plane } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter23.css';
 
 export default function Chapter23() {
   return (
-    <div className="chapter-container chapter23-container">
-      <div className="chapter-header">
-        <h1>فصل ۲۳: استراتژی توسعه جهانی</h1>
-        <p>Global Expansion Strategy</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۲۳: استراتژی توسعه جهانی" 
+      englishTitle="Global Expansion Strategy"
+    >
 
       <div className="intro-box">
         <h3>۲۳-۱ چشم‌انداز بین‌المللی</h3>
@@ -64,6 +64,6 @@ export default function Chapter23() {
           </div>
         </div>
       </section>
-    </div>
+    </ChapterLayout>
   );
 }

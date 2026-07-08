@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, ArrowLeftRight, Clock, UserX, Bot, Zap, CheckCircle2, AlertOctagon, TrendingUp, BrainCircuit, Database, Check, Target } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter3.css';
 
 export default function Chapter3() {
@@ -17,11 +18,10 @@ export default function Chapter3() {
   ];
 
   return (
-    <div className="chapter-container chapter3-container">
-      <div className="chapter-header">
-        <h1>فصل ۳: تحلیل مسئله و فرصت بازار</h1>
-        <p>Problem Analysis & Market Need</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۳: تحلیل مسئله و فرصت بازار" 
+      englishTitle="Problem Analysis & Market Need"
+    >
 
       <div className="intro-box">
         <h3>۳-۱ مقدمه</h3>
@@ -145,6 +145,6 @@ export default function Chapter3() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }

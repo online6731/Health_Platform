@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { DollarSign, Wallet, Building2, Receipt, Target, PieChart, TrendingUp, Users, Activity, HeartPulse, LineChart, Stethoscope, Share2, Network, Code } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter8.css';
 
 export default function Chapter8() {
   return (
-    <div className="chapter-container chapter8-container">
-      <div className="chapter-header">
-        <h1>فصل ۸: مدل کسب‌وکار و استراتژی تجاری</h1>
-        <p>Platform Business Model & Revenue Streams</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۸: مدل کسب‌وکار و استراتژی تجاری" 
+      englishTitle="Platform Business Model & Revenue Streams"
+    >
 
       <div className="intro-box">
         <h3>۸-۱ فلسفه مدل کسب‌وکار</h3>
@@ -127,7 +127,6 @@ export default function Chapter8() {
         </div>
       </section>
 
-    </div>
+    </ChapterLayout>
   );
 }
-

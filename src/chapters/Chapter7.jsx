@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { Brain, Cpu, Bot, Settings, GitPullRequest, Search, CheckCircle, Activity, BrainCircuit, ScanEye, Network, MessageSquare, LineChart, ShieldCheck, Microscope, Database, Sparkles, Layers } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter7.css';
 
 export default function Chapter7() {
   return (
-    <div className="chapter-container chapter7-container">
-      <div className="chapter-header">
-        <h1>فصل ۷: معماری هوش مصنوعی و مدل‌های پایه</h1>
-        <p>AI Core Engine & Agentic Architecture</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۷: معماری هوش مصنوعی و مدل‌های پایه" 
+      englishTitle="AI Core Engine & Agentic Architecture"
+    >
 
       <div className="intro-box">
         <h3>۷-۱ پارادایم جدید هوش مصنوعی در سلامت</h3>
@@ -127,7 +127,6 @@ export default function Chapter7() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }
-

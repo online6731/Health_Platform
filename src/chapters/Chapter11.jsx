@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { TrendingUp, Map, PieChart, Coins, Briefcase, Activity, Calendar, Target, Zap, Rocket, LineChart, ShieldCheck, Cpu, Share2, Globe } from 'lucide-react';
+import ChapterLayout from '../components/ChapterLayout';
 import './Chapter11.css';
 
 export default function Chapter11() {
   return (
-    <div className="chapter-container chapter11-container">
-      <div className="chapter-header">
-        <h1>فصل ۱۱: نقشه راه توسعه و سرمایه‌گذاری</h1>
-        <p>Roadmap & Investment Strategy</p>
-      </div>
+    <ChapterLayout 
+      title="فصل ۱۱: نقشه راه توسعه و سرمایه‌گذاری" 
+      englishTitle="Roadmap & Investment Strategy"
+    >
 
       <div className="intro-box">
         <h3>۱۱-۱ استراتژی توسعه (Implementation Strategy)</h3>
@@ -122,7 +122,6 @@ export default function Chapter11() {
         </p>
       </div>
 
-    </div>
+    </ChapterLayout>
   );
 }
-
