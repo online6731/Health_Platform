@@ -34,7 +34,23 @@ const chapters = [
   { id: 27, path: '/design-system', name: 'سیستم دیزاین', icon: Target },
   { id: 28, path: '/decision-engines', name: 'موتورهای تصمیم‌ساز', icon: Target },
   { id: 29, path: '/deployment-sla', name: 'استقرار و SLA', icon: Target },
-  { id: 30, path: '/enterprise-knowledge', name: 'سیستم دانش سازمانی', icon: BookOpen }
+  { id: 30, path: '/enterprise-knowledge', name: 'سیستم دانش سازمانی', icon: BookOpen },
+  { id: 31, path: '/smart-health-record', name: 'پرونده سلامت هوشمند', icon: Target },
+  { id: 32, path: '/ai-doctor', name: 'پزشک هوشمند', icon: Target },
+  { id: 33, path: '/ai-orchestration-platform', name: 'پلتفرم هوش مصنوعی مرکزی', icon: Target },
+  { id: 34, path: '/agent-platform', name: 'سیستم‌عامل ایجنت‌های پزشکی', icon: Target },
+  { id: 35, path: '/healthcare-knowledge-graph', name: 'گراف دانش سلامت', icon: Target },
+  { id: 36, path: '/digital-human-platform', name: 'همزاد دیجیتال سلامت', icon: Target },
+  { id: 37, path: '/healthcare-super-app', name: 'سوپر اپلیکیشن سلامت', icon: Target },
+  { id: 38, path: '/healthcare-enterprise-platform', name: 'پلتفرم سازمانی سلامت', icon: Target },
+  { id: 39, path: '/healthcare-data-ai-platform', name: 'پلتفرم داده و هوش مصنوعی', icon: Target },
+  { id: 40, path: '/healthcare-ecosystem-strategy', name: 'استراتژی اکوسیستم سلامت', icon: Target },
+  { id: 41, path: '/platform-architecture', name: 'معماری کلان پلتفرم', icon: Target },
+  { id: 42, path: '/engineering-platform', name: 'معماری مهندسی و توسعه', icon: Target },
+  { id: 43, path: '/haios', name: 'سیستم‌عامل هوش مصنوعی سلامت', icon: Target },
+  { id: 44, path: '/business-operating-system', name: 'سیستم‌عامل کسب‌وکار', icon: Target },
+  { id: 45, path: '/healthcare-ai-constitution', name: 'قانون اساسی هوش مصنوعی', icon: Target },
+  { id: 46, path: '/healthcare-reference-architecture', name: 'معماری مرجع سلامت', icon: Target }
 ];
 
 export default function HomeDashboard() {
