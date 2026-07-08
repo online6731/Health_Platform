@@ -32,6 +32,7 @@ import Chapter26 from './chapters/Chapter26'
 import Chapter27 from './chapters/Chapter27'
 import Chapter28 from './chapters/Chapter28'
 import Chapter29 from './chapters/Chapter29'
+import Chapter30 from './chapters/Chapter30'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
 import './App.css'
@@ -63,19 +64,19 @@ function App() {
             <Route path="/products" element={<Chapter5 />} />
             <Route path="/tech-architecture" element={<Chapter6 />} />
             <Route path="/ai-architecture" element={<Chapter7 />} />
-            <Route path="/business-model" element={<Chapter8 />} />
-            <Route path="/go-to-market" element={<Chapter9 />} />
-            <Route path="/team" element={<Chapter10 />} />
-            <Route path="/investment" element={<Chapter11 />} />
-            <Route path="/agent-orchestration" element={<Chapter12 />} />
-            <Route path="/knowledge-platform" element={<Chapter13 />} />
-            <Route path="/world-model" element={<Chapter14 />} />
-            <Route path="/security" element={<Chapter15 />} />
-            <Route path="/compliance" element={<Chapter16 />} />
-            <Route path="/integration" element={<Chapter17 />} />
-            <Route path="/ux" element={<Chapter18 />} />
-            <Route path="/economics" element={<Chapter19 />} />
-            <Route path="/marketplace" element={<Chapter20 />} />
+            <Route path="/security" element={<Chapter8 />} />
+            <Route path="/super-app" element={<Chapter9 />} />
+            <Route path="/tokenomics" element={<Chapter10 />} />
+            <Route path="/gamification" element={<Chapter11 />} />
+            <Route path="/b2b" element={<Chapter12 />} />
+            <Route path="/vr-ar" element={<Chapter13 />} />
+            <Route path="/iot" element={<Chapter14 />} />
+            <Route path="/social" element={<Chapter15 />} />
+            <Route path="/digital-twin" element={<Chapter16 />} />
+            <Route path="/genomics" element={<Chapter17 />} />
+            <Route path="/roadmap" element={<Chapter18 />} />
+            <Route path="/business-model" element={<Chapter19 />} />
+            <Route path="/market" element={<Chapter20 />} />
             <Route path="/ai-governance" element={<Chapter21 />} />
             <Route path="/operations" element={<Chapter22 />} />
             <Route path="/global-expansion" element={<Chapter23 />} />
@@ -85,6 +86,7 @@ function App() {
             <Route path="/design-system" element={<Chapter27 />} />
             <Route path="/decision-engines" element={<Chapter28 />} />
             <Route path="/deployment-sla" element={<Chapter29 />} />
+            <Route path="/enterprise-knowledge" element={<Chapter30 />} />
           </Routes>
         </main>
         <AIChatbot />

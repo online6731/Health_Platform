@@ -33,7 +33,8 @@ const chapters = [
   { id: 26, path: '/workflows', name: 'جریان‌های کاری', icon: Target },
   { id: 27, path: '/design-system', name: 'سیستم دیزاین', icon: Target },
   { id: 28, path: '/decision-engines', name: 'موتورهای تصمیم‌ساز', icon: Target },
-  { id: 29, path: '/deployment-sla', name: 'استقرار و SLA', icon: Target }
+  { id: 29, path: '/deployment-sla', name: 'استقرار و SLA', icon: Target },
+  { id: 30, path: '/enterprise-knowledge', name: 'سیستم دانش سازمانی', icon: BookOpen }
 ];
 
 export default function HomeDashboard() {

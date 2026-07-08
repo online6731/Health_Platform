@@ -36,6 +36,7 @@ const chapters = [
   { id: '27', path: '/design-system', title: 'سیستم دیزاین و UX', subtitle: 'Design System & UI', icon: Target },
   { id: '28', path: '/decision-engines', title: 'موتورهای تصمیم‌ساز', subtitle: 'Decision Engines', icon: Target },
   { id: '29', path: '/deployment-sla', title: 'استقرار، امنیت و SLA', subtitle: 'Deployment & SLA', icon: Target },
+  { id: '30', path: '/enterprise-knowledge', title: 'سیستم دانش سازمانی', subtitle: 'Enterprise Knowledge', icon: Target },
   { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
 ];
 
