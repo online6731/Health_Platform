@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Server, Database, Cloud, ShieldCheck, Box, Network, Lock, Cpu, Blocks, MonitorSmartphone, Share2, Layers } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter6.css';
@@ -58,10 +58,10 @@ export default function Chapter6() {
             </div>
           </div>
 
-          <div className="arch-card" style={{borderColor: 'var(--accent-teal)'}}>
-            <div className="arch-card-header" style={{background: 'var(--accent-teal)'}}>
-              <Cpu size={24} color="white" />
-              <h4 style={{color: 'white'}}>لایه سوم: عامل‌های هوشمند (AI Agent Layer)</h4>
+          <div className="arch-card">
+            <div className="arch-card-header">
+              <Cpu size={24} />
+              <h4>لایه سوم: عامل‌های هوشمند (AI Agent Layer)</h4>
             </div>
             <div className="arch-card-body">
               <p>مغز عملیاتی اکوسیستم؛ متشکل از صدها عامل تخصصی که با یکدیگر همکاری می‌کنند:</p>
@@ -123,9 +123,9 @@ export default function Chapter6() {
           </div>
 
           <div className="arch-card" style={{gridColumn: '1 / -1'}}>
-            <div className="arch-card-header" style={{background: 'var(--text-primary)'}}>
-              <Cloud size={24} color="white" />
-              <h4 style={{color: 'white'}}>لایه هفتم: زیرساخت (Infrastructure Layer)</h4>
+            <div className="arch-card-header">
+              <Cloud size={24} />
+              <h4>لایه هفتم: زیرساخت (Infrastructure Layer)</h4>
             </div>
             <div className="arch-card-body">
               <p>زیرساخت فیزیکی، ابری و شبکه‌ای که کل پلتفرم را میزبانی می‌کند (طراحی شده بر پایه Cloud Native):</p>
