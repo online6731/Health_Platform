@@ -52,14 +52,20 @@ export default function HomeDashboard() {
         <div className="hero-content">
           <h1>پلتفرم جامع سلامت هوشمند</h1>
           <p>سیستم‌عامل شناختی و زیرساخت نوین سلامت جهانی، مبتنی بر همزاد دیجیتال و هوش مصنوعی چندعاملی</p>
-          <button 
-            onClick={handleExport} 
-            disabled={isExporting}
-            className="hero-export-btn"
-          >
-            {isExporting ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
-            {isExporting ? 'در حال آماده‌سازی فایل...' : 'دانلود مستند یکپارچه (آفلاین)'}
-          </button>
+          <div className="hero-buttons">
+            <Link to="/docs" className="hero-docs-btn">
+              <BookOpen size={20} />
+              مرکز پایگاه دانش
+            </Link>
+            <button 
+              onClick={handleExport} 
+              disabled={isExporting}
+              className="hero-export-btn"
+            >
+              {isExporting ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
+              {isExporting ? 'در حال آماده‌سازی فایل...' : 'دانلود مستند یکپارچه (آفلاین)'}
+            </button>
+          </div>
         </div>
       </div>
       

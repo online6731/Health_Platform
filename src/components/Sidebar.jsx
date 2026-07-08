@@ -31,6 +31,7 @@ const chapters = [
   { id: '22', path: '/operations', title: 'عملیات و AgentOps', subtitle: 'Operations & DevOps', icon: Activity },
   { id: '23', path: '/global-expansion', title: 'استراتژی توسعه جهانی', subtitle: 'Global Expansion', icon: Globe },
   { id: '24', path: '/financials', title: 'پیش‌بینی‌های مالی', subtitle: 'Financial Projections', icon: PieChart },
+  { id: 'docs', path: '/docs', title: 'پایگاه دانش', subtitle: 'Knowledge Base', icon: BookOpen },
   { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
 ];
 
