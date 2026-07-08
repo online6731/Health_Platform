@@ -29,7 +29,6 @@ import Chapter23 from './chapters/Chapter23'
 import Chapter24 from './chapters/Chapter24'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
-import ExportView from './pages/ExportView'
 import './App.css'
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
           </button>
           <Routes>
             <Route path="/" element={<HomeDashboard />} />
-            <Route path="/export" element={<ExportView />} />
             <Route path="/chapter1" element={<Chapter1 />} />
             <Route path="/company" element={<Chapter2 />} />
             <Route path="/problem" element={<Chapter3 />} />

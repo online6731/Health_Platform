@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Download, ArrowRight, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import './ExportView.css';
-
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { MemoryRouter } from 'react-router-dom';
 import Chapter1 from '../chapters/Chapter1';
 import Chapter2 from '../chapters/Chapter2';
 import Chapter3 from '../chapters/Chapter3';
@@ -29,25 +27,50 @@ import Chapter23 from '../chapters/Chapter23';
 import Chapter24 from '../chapters/Chapter24';
 
 
-export default function ExportView() {
-  const [isExporting, setIsExporting] = useState(false);
-
-  useEffect(() => {
-    // Force light theme for export view to ensure elements render with light theme styles
-    document.documentElement.classList.add('light-theme');
-    return () => {
-      // Clean up if they navigate back (though ThemeToggle usually manages this)
-      document.documentElement.classList.remove('light-theme');
-    };
-  }, []);
-
-  const handleDownloadHtml = () => {
-    setIsExporting(true);
-    
-    setTimeout(() => {
-      const content = document.getElementById('export-content').innerHTML;
+export const downloadFullProposalHtml = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      const container = document.createElement('div');
       
-      const htmlTemplate = `<!DOCTYPE html>
+      const AllChapters = () => (
+        <MemoryRouter>
+          <div className="all-chapters-wrapper" style={{ padding: '20px' }}>
+          <Chapter1 />
+          <Chapter2 />
+          <Chapter3 />
+          <Chapter4 />
+          <Chapter5 />
+          <Chapter6 />
+          <Chapter7 />
+          <Chapter8 />
+          <Chapter9 />
+          <Chapter10 />
+          <Chapter11 />
+          <Chapter12 />
+          <Chapter13 />
+          <Chapter14 />
+          <Chapter15 />
+          <Chapter16 />
+          <Chapter17 />
+          <Chapter18 />
+          <Chapter19 />
+          <Chapter20 />
+          <Chapter21 />
+          <Chapter22 />
+          <Chapter23 />
+          <Chapter24 />
+          </div>
+        </MemoryRouter>
+      );
+
+      const root = createRoot(container);
+      root.render(<AllChapters />);
+
+      // Wait a moment for icons and DOM to fully render
+      setTimeout(() => {
+        const contentHtml = container.innerHTML;
+        
+        const htmlTemplate = `<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -144,71 +167,26 @@ export default function ExportView() {
         <p style="font-size: 1.5rem; color: #666;">نسخه یکپارچه و آفلاین مستندات</p>
     </div>
     
-    ${content}
+    ${contentHtml}
 </body>
 </html>`;
 
-      const blob = new Blob([htmlTemplate], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Health_Platform_Proposal_Full.html';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-      
-      setIsExporting(false);
-    }, 500); // Small delay to show loading state
-  };
-
-  return (
-    <div className="export-view-container">
-      <div className="export-controls">
-        <Link to="/" className="back-btn">
-          <ArrowRight size={20} />
-          بازگشت به داشبورد
-        </Link>
-        <button 
-          className="download-html-btn" 
-          onClick={handleDownloadHtml}
-          disabled={isExporting}
-        >
-          {isExporting ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
-          دانلود خروجی HTML تک‌فایل
-        </button>
-      </div>
-      
-      <div className="export-warning">
-        <p>در این صفحه تمام ۲۴ فصل پروپوزال برای استخراج آماده شده‌اند. برای دریافت فایل نهایی روی دکمه دانلود کلیک کنید.</p>
-      </div>
-
-      <div id="export-content" className="all-chapters-wrapper">
-          <Chapter1 />
-          <Chapter2 />
-          <Chapter3 />
-          <Chapter4 />
-          <Chapter5 />
-          <Chapter6 />
-          <Chapter7 />
-          <Chapter8 />
-          <Chapter9 />
-          <Chapter10 />
-          <Chapter11 />
-          <Chapter12 />
-          <Chapter13 />
-          <Chapter14 />
-          <Chapter15 />
-          <Chapter16 />
-          <Chapter17 />
-          <Chapter18 />
-          <Chapter19 />
-          <Chapter20 />
-          <Chapter21 />
-          <Chapter22 />
-          <Chapter23 />
-          <Chapter24 />
-      </div>
-    </div>
-  );
-}
+        const blob = new Blob([htmlTemplate], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Health_Platform_Proposal_Full.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        root.unmount();
+        resolve();
+      }, 1500); // 1.5s delay to ensure all lucide icons and inner components are rendered
+    } catch (err) {
+      console.error('Error generating HTML:', err);
+      reject(err);
+    }
+  });
+};

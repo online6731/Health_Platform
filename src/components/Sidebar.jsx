@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, Smartphone, ShieldAlert, Activity, Download } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { downloadFullProposalHtml } from '../utils/exportHtml';
 import './Sidebar.css';
 
 const chapters = [
@@ -30,10 +31,26 @@ const chapters = [
   { id: '22', path: '/operations', title: 'عملیات و AgentOps', subtitle: 'Operations & DevOps', icon: Activity },
   { id: '23', path: '/global-expansion', title: 'استراتژی توسعه جهانی', subtitle: 'Global Expansion', icon: Globe },
   { id: '24', path: '/financials', title: 'پیش‌بینی‌های مالی', subtitle: 'Financial Projections', icon: PieChart },
-  { id: 'export', path: '/export', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
+  { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
 ];
 
 export default function Sidebar({ isOpen, closeSidebar }) {
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = async (e) => {
+    e.preventDefault();
+    if (isExporting) return;
+    setIsExporting(true);
+    try {
+      await downloadFullProposalHtml();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsExporting(false);
+      if (closeSidebar) closeSidebar();
+    }
+  };
+
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
@@ -50,6 +67,31 @@ export default function Sidebar({ isOpen, closeSidebar }) {
       <nav className="sidebar-nav">
         {chapters.map((chapter) => {
           const Icon = chapter.icon;
+          
+          if (chapter.id === 'export') {
+            return (
+              <button
+                key={chapter.id}
+                onClick={handleExport}
+                className={`nav-item ${isExporting ? 'exporting' : ''}`}
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  width: '100%', 
+                  textAlign: 'right', 
+                  cursor: isExporting ? 'wait' : 'pointer',
+                  opacity: isExporting ? 0.7 : 1
+                }}
+              >
+                <div className="nav-content">
+                  <span className="chapter-title">{isExporting ? 'در حال آماده‌سازی...' : chapter.title}</span>
+                  <span className="chapter-subtitle">{chapter.subtitle}</span>
+                </div>
+                <Icon className="nav-icon" size={20} />
+              </button>
+            );
+          }
+
           return (
             <NavLink
               key={chapter.id}

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Target, Building2, Lightbulb, Zap, ShoppingCart, Cpu, Brain, Briefcase, Activity, Shield, Link as LinkIcon, Users, LineChart, Globe, Settings, DollarSign, BookOpen } from 'lucide-react';
+import { Target, Building2, Lightbulb, Zap, ShoppingCart, Cpu, Brain, Briefcase, Activity, Shield, Link as LinkIcon, Users, LineChart, Globe, Settings, DollarSign, BookOpen, Download, Loader2 } from 'lucide-react';
+import { downloadFullProposalHtml } from '../utils/exportHtml';
 import './HomeDashboard.css';
 
 const chapters = [
@@ -31,12 +32,34 @@ const chapters = [
 ];
 
 export default function HomeDashboard() {
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = async () => {
+    if (isExporting) return;
+    setIsExporting(true);
+    try {
+      await downloadFullProposalHtml();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-hero animate-fade-in">
         <div className="hero-content">
           <h1>پلتفرم جامع سلامت هوشمند</h1>
           <p>سیستم‌عامل شناختی و زیرساخت نوین سلامت جهانی، مبتنی بر همزاد دیجیتال و هوش مصنوعی چندعاملی</p>
+          <button 
+            onClick={handleExport} 
+            disabled={isExporting}
+            className="hero-export-btn"
+          >
+            {isExporting ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
+            {isExporting ? 'در حال آماده‌سازی فایل...' : 'دانلود مستند یکپارچه (آفلاین)'}
+          </button>
         </div>
       </div>
       
