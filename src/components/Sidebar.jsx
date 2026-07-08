@@ -31,7 +31,11 @@ const chapters = [
   { id: '22', path: '/operations', title: 'عملیات و AgentOps', subtitle: 'Operations & DevOps', icon: Activity },
   { id: '23', path: '/global-expansion', title: 'استراتژی توسعه جهانی', subtitle: 'Global Expansion', icon: Globe },
   { id: '24', path: '/financials', title: 'پیش‌بینی‌های مالی', subtitle: 'Financial Projections', icon: PieChart },
-  { id: 'docs', path: '/docs', title: 'پایگاه دانش', subtitle: 'Knowledge Base', icon: BookOpen },
+  { id: '25', path: '/product-catalog', title: 'کاتالوگ جامع محصولات', subtitle: 'Product Catalog', icon: Target },
+  { id: '26', path: '/workflows', title: 'سناریوها و جریان‌های کاری', subtitle: 'Workflows & Scenarios', icon: Target },
+  { id: '27', path: '/design-system', title: 'سیستم دیزاین و UX', subtitle: 'Design System & UI', icon: Target },
+  { id: '28', path: '/decision-engines', title: 'موتورهای تصمیم‌ساز', subtitle: 'Decision Engines', icon: Target },
+  { id: '29', path: '/deployment-sla', title: 'استقرار، امنیت و SLA', subtitle: 'Deployment & SLA', icon: Target },
   { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download },
 ];
 

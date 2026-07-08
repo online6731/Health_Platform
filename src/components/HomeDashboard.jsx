@@ -28,7 +28,12 @@ const chapters = [
   { id: 21, path: '/ai-governance', name: 'حاکمیت هوش مصنوعی', icon: Brain },
   { id: 22, path: '/operations', name: 'عملیات و پشتیبانی', icon: Settings },
   { id: 23, path: '/global-expansion', name: 'توسعه جهانی', icon: Globe },
-  { id: 24, path: '/financials', name: 'پیش‌بینی مالی', icon: LineChart }
+  { id: 24, path: '/financials', name: 'پیش‌بینی مالی', icon: LineChart },
+  { id: 25, path: '/product-catalog', name: 'کاتالوگ محصولات', icon: Target },
+  { id: 26, path: '/workflows', name: 'جریان‌های کاری', icon: Target },
+  { id: 27, path: '/design-system', name: 'سیستم دیزاین', icon: Target },
+  { id: 28, path: '/decision-engines', name: 'موتورهای تصمیم‌ساز', icon: Target },
+  { id: 29, path: '/deployment-sla', name: 'استقرار و SLA', icon: Target }
 ];
 
 export default function HomeDashboard() {
@@ -53,10 +58,6 @@ export default function HomeDashboard() {
           <h1>پلتفرم جامع سلامت هوشمند</h1>
           <p>سیستم‌عامل شناختی و زیرساخت نوین سلامت جهانی، مبتنی بر همزاد دیجیتال و هوش مصنوعی چندعاملی</p>
           <div className="hero-buttons">
-            <Link to="/docs" className="hero-docs-btn">
-              <BookOpen size={20} />
-              مرکز پایگاه دانش
-            </Link>
             <button 
               onClick={handleExport} 
               disabled={isExporting}

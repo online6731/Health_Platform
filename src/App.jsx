@@ -27,9 +27,13 @@ import Chapter21 from './chapters/Chapter21'
 import Chapter22 from './chapters/Chapter22'
 import Chapter23 from './chapters/Chapter23'
 import Chapter24 from './chapters/Chapter24'
+import Chapter25 from './chapters/Chapter25'
+import Chapter26 from './chapters/Chapter26'
+import Chapter27 from './chapters/Chapter27'
+import Chapter28 from './chapters/Chapter28'
+import Chapter29 from './chapters/Chapter29'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
-import DocumentationCenter from './pages/DocumentationCenter'
 import './App.css'
 
 function App() {
@@ -52,7 +56,6 @@ function App() {
           </button>
           <Routes>
             <Route path="/" element={<HomeDashboard />} />
-            <Route path="/docs" element={<DocumentationCenter />} />
             <Route path="/chapter1" element={<Chapter1 />} />
             <Route path="/company" element={<Chapter2 />} />
             <Route path="/problem" element={<Chapter3 />} />
@@ -77,6 +80,11 @@ function App() {
             <Route path="/operations" element={<Chapter22 />} />
             <Route path="/global-expansion" element={<Chapter23 />} />
             <Route path="/financials" element={<Chapter24 />} />
+            <Route path="/product-catalog" element={<Chapter25 />} />
+            <Route path="/workflows" element={<Chapter26 />} />
+            <Route path="/design-system" element={<Chapter27 />} />
+            <Route path="/decision-engines" element={<Chapter28 />} />
+            <Route path="/deployment-sla" element={<Chapter29 />} />
           </Routes>
         </main>
         <AIChatbot />
