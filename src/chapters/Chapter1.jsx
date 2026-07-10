@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { Target, Lightbulb, Users, Zap, TrendingUp, DollarSign, PieChart, Eye, Play } from 'lucide-react';
+import { Target, Lightbulb, Users, Zap, TrendingUp, DollarSign, PieChart as PieChartIcon, Eye, Play } from 'lucide-react';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter1.css';
+
+const marketData = [
+  { name: 'بازار مستقیم (B2C)', value: 40, color: '#00d2ff' },
+  { name: 'بازار سازمانی (B2B)', value: 45, color: '#3a7bd5' },
+  { name: 'اکوسیستم (API)', value: 15, color: '#7a28cb' },
+];
 
 export default function Chapter1() {
   return (
@@ -13,14 +20,32 @@ export default function Chapter1() {
         <h3>۱-۱. معرفی پروژه</h3>
         <p>
           جهان سلامت در آستانه یکی از بزرگ‌ترین تحولات تاریخ خود قرار دارد. رشد سریع هوش مصنوعی، اینترنت اشیاء (IoT) و پزشکی شخصی‌سازی‌شده (Personalized Medicine)، بستری فراهم کرده است تا رویکرد سنتی سلامت از «درمان پس از بروز بیماری» به «پیشگیری و بهینه‌سازی مستمر» تغییر یابد.
-          <br /><br />
-          این پروژه، طراحی و توسعه یک <strong>پلتفرم سلامت هوشمند مبتنی بر هوش مصنوعی چندعاملی (Multi-Agent AI) و همزاد دیجیتال انسان (Digital Twin)</strong> است.
         </p>
+        <div className="quote-box">
+          این پروژه، طراحی و توسعه یک <strong>پلتفرم سلامت هوشمند مبتنی بر هوش مصنوعی چندعاملی (Multi-Agent AI) و همزاد دیجیتال انسان (Digital Twin)</strong> است.
+        </div>
+      </div>
+
+      <div className="grid-3-col">
+        <div className="metric-card">
+          <div className="metric-value">۳۵٪</div>
+          <div className="metric-label">کاهش هزینه‌های درمانی (تخمین)</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-value">۲۴/۷</div>
+          <div className="metric-label">نظارت و مانیتورینگ بلادرنگ</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-value">۳</div>
+          <div className="metric-label">سطح یکپارچه‌سازی (کاربر، پزشک، سیستم)</div>
+        </div>
       </div>
 
       <section className="chapter-section">
         <h3><Target className="section-icon" /> ۱-۲. بیان مسئله (Problem Statement)</h3>
-        <p>نظام سلامت فعلی با چالش‌های ساختاری متعددی روبه‌رو است که مانع از ارائه خدمات بهینه، دقیق و پیشگیرانه می‌شود:</p>
+        <div className="highlight-box">
+          نظام سلامت فعلی با چالش‌های ساختاری متعددی روبه‌رو است که مانع از ارائه خدمات بهینه، دقیق و پیشگیرانه می‌شود. این سیستم نیازمند تغییر از رویکرد واکنشی به رویکرد پیشگیرانه است.
+        </div>
         <ul style={{color: 'var(--text-secondary)', lineHeight: '1.8'}}>
           <li><strong>پراکندگی و جزیره‌ای بودن داده‌ها:</strong> اطلاعات بیماران در بیمارستان‌ها، مطب‌ها، آزمایشگاه‌ها و پوشیدنی‌های هوشمند پخش شده‌اند و هیچ دیدگاه یکپارچه‌ای (Holistic View) از وضعیت فرد وجود ندارد.</li>
           <li><strong>رویکرد واکنشی (Reactive):</strong> سیستم‌های درمانی معمولاً پس از بروز علائم بالینی وارد عمل می‌شوند و فاقد قابلیت پیش‌بینی دقیق وضعیت آینده بیمار هستند.</li>
@@ -46,7 +71,7 @@ export default function Chapter1() {
           <div className="solution-card">
             <div className="solution-icon">۳</div>
             <h4>مدل بنیادین کاربر (User Foundation Model)</h4>
-            <p>یک مدل یادگیری عمیق که بر اساس داده‌های چندوجهی کاربر (آزمایشات ژنتیک، تصاویر پزشکی، لاگ‌های تغذیه و حالات روحی) آموزش دیده و منحصر به همان فرد است.</p>
+            <p>یک مدل یادگیری عمیق که بر اساس داده‌های چندوجهی کاربر آموزش دیده و منحصر به همان فرد است.</p>
           </div>
         </div>
       </section>
@@ -65,7 +90,7 @@ export default function Chapter1() {
             </ul>
           </div>
           <div className="executive-card">
-            <h4><Target size={20} style={{marginRight: '8px'}} /> برای پزشکان و مراکز درمانی</h4>
+            <h4><Target size={20} style={{marginRight: '8px'}} /> برای پزشکان</h4>
             <ul>
               <li>دستیار هوشمند برای تصمیم‌گیری بالینی</li>
               <li>کاهش خطاهای تشخیصی</li>
@@ -75,85 +100,75 @@ export default function Chapter1() {
           <div className="executive-card">
             <h4><Zap size={20} style={{marginRight: '8px'}} /> برای توسعه‌دهندگان</h4>
             <ul>
-              <li>ایجاد عامل‌های هوشمند و نرم‌افزارهای تخصصی</li>
+              <li>ایجاد عامل‌های هوشمند تخصصی</li>
               <li>انتشار سرویس‌ها در Marketplace</li>
               <li>کاهش هزینه ورود به بازار</li>
             </ul>
           </div>
         </div>
 
-        <h4>مزیت‌های رقابتی</h4>
-        <p>یکپارچگی کامل، همزاد دیجیتال انسان، معماری چندعاملی، شخصی‌سازی عمیق، یادگیری مستمر، اکوسیستم باز و مقیاس‌پذیری جهانی، مزیت‌های رقابتی و استراتژیک این پلتفرم هستند که ارزش آن را در بلندمدت پیوسته افزایش می‌دهند.</p>
+        <div className="highlight-box" style={{marginTop: '2rem'}}>
+          <strong>مزیت‌های رقابتی:</strong> یکپارچگی کامل، همزاد دیجیتال انسان، معماری چندعاملی، شخصی‌سازی عمیق، یادگیری مستمر، اکوسیستم باز و مقیاس‌پذیری جهانی.
+        </div>
       </section>
 
       <section className="chapter-section">
         <h3><TrendingUp className="section-icon" /> ۱-۵. اندازه بازار (Market Size)</h3>
         <p>این پروژه در نقطه تلاقی چند صنعت بزرگ جهانی قرار دارد و بازار آن محدود به یک بخش خاص نیست. بازارهای هدف در سه سطح قابل تعریف هستند:</p>
         
-        <div className="market-size-container">
-          <div className="market-tier">
-            <h5>۱. بازار مستقیم</h5>
-            <p>شامل افرادی که از خدمات سلامت استفاده می‌کنند: بیماران، افراد سالم با رویکرد پیشگیرانه، پزشکان، روانشناسان، متخصصان تغذیه و آزمایشگاه‌ها.</p>
+        <div className="grid-2-col">
+          <div style={{ height: '300px', width: '100%', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={marketData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={100}
+                  paddingAngle={5}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {marketData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip contentStyle={{background: '#1a1f2e', border: '1px solid #3a7bd5', borderRadius: '8px', color: '#fff'}} itemStyle={{color: '#fff'}} />
+                <Legend verticalAlign="bottom" height={36} wrapperStyle={{color: '#fff', fontSize: '0.9rem'}}/>
+              </PieChart>
+            </ResponsiveContainer>
           </div>
-          <div className="market-tier">
-            <h5>۲. بازار سازمانی</h5>
-            <p>شامل سازمان‌های نیازمند خدمات سلامت هوشمند: بیمارستان‌ها، شرکت‌های بیمه، وزارتخانه‌ها، سازمان‌های بزرگ و شرکت‌های فناوری.</p>
-          </div>
-          <div className="market-tier">
-            <h5>۳. بازار زیرساخت و اکوسیستم</h5>
-            <p>توسعه‌دهندگانی که از پلتفرم استفاده می‌کنند: استارتاپ‌ها، شرکت‌های دارویی و تجهیزات، سازندگان پوشیدنی‌ها و ارائه‌دهندگان API.</p>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center'}}>
+            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #00d2ff'}}>
+              <h5>۱. بازار مستقیم</h5>
+              <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>بیماران، افراد سالم، پزشکان و روانشناسان.</p>
+            </div>
+            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #3a7bd5'}}>
+              <h5>۲. بازار سازمانی</h5>
+              <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>بیمارستان‌ها، شرکت‌های بیمه، و سازمان‌ها.</p>
+            </div>
+            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #7a28cb'}}>
+              <h5>۳. بازار اکوسیستم</h5>
+              <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>استارتاپ‌ها، داروسازی‌ها، پوشیدنی‌ها.</p>
+            </div>
           </div>
         </div>
-
-        <h4>روندها و بازارهای اصلی</h4>
-        <ul style={{color: 'var(--text-secondary)', lineHeight: '1.8'}}>
-          <li><strong>سلامت دیجیتال (Digital Health) و هوش مصنوعی در سلامت:</strong> بازاری با رشد سریع شامل سیستم‌های تصمیم‌یار، اتوماسیون درمان و تحلیل داده.</li>
-          <li><strong>پرونده سلامت الکترونیک و سلامت روان دیجیتال:</strong> جایگزینی سامانه‌های سنتی و رشد خدمات مشاوره و درمان شناختی آنلاین.</li>
-          <li><strong>پزشکی شخصی‌سازی‌شده و بازار سازمانی:</strong> ارائه خدمات منحصربه‌فرد بر اساس داده‌های شخصی و خدمات به شرکت‌های بزرگ و بیمه‌ها.</li>
-        </ul>
-
-        <h4>مدل تحلیل بازار (TAM, SAM, SOM)</h4>
-        <p>برای برآورد ظرفیت بازار، از چارچوب استاندارد استفاده می‌شود که <strong>بازار کل قابل دستیابی (TAM)</strong> به عنوان بازار جهانی سلامت دیجیتال و هوش مصنوعی درمانی مورد هدف قرار می‌گیرد.</p>
       </section>
 
       <section className="chapter-section">
         <h3><DollarSign className="section-icon" /> ۱-۶. مدل درآمدی (Business Model)</h3>
-        <p>درآمدهای پیش‌بینی‌شده شامل موارد زیر است:</p>
-        <div className="executive-grid" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))'}}>
-          <div className="executive-card">اشتراک ماهانه و سالانه کاربران</div>
-          <div className="executive-card">فروش خدمات ارزیابی شناختی و سلامت دیجیتال</div>
-          <div className="executive-card">مشاوره تخصصی و برنامه‌های ارتقای شناخت</div>
-          <div className="executive-card">خدمات سازمانی (B2B) و داشبوردهای مدیریتی</div>
-          <div className="executive-card">API و خدمات هوش مصنوعی (White Label)</div>
-          <div className="executive-card">استقرار سامانه روی سرور اختصاصی و صدور مجوز (Licensing)</div>
+        <div className="grid-3-col">
+          <div className="executive-card" style={{textAlign: 'center'}}>اشتراک ماهانه و سالانه کاربران (B2C)</div>
+          <div className="executive-card" style={{textAlign: 'center'}}>فروش خدمات ارزیابی شناختی</div>
+          <div className="executive-card" style={{textAlign: 'center'}}>مشاوره تخصصی و برنامه‌های ارتقا</div>
+          <div className="executive-card" style={{textAlign: 'center'}}>خدمات سازمانی و داشبوردها (B2B)</div>
+          <div className="executive-card" style={{textAlign: 'center'}}>API و خدمات White Label</div>
+          <div className="executive-card" style={{textAlign: 'center'}}>صدور مجوز (Licensing) سرورها</div>
         </div>
       </section>
 
-      <section className="chapter-section">
-        <h3><Zap className="section-icon" /> ۱-۷. مزیت رقابتی (Competitive Advantage)</h3>
-        <ul style={{color: 'var(--text-secondary)', lineHeight: '1.8'}}>
-          <li>ایجاد همزاد دیجیتال شناختی اختصاصی برای هر کاربر</li>
-          <li>ترکیب داده‌های پزشکی، روانشناختی، شناختی و رفتاری در یک مدل واحد</li>
-          <li>یادگیری مستمر و به‌روزرسانی خودکار مدل کاربر</li>
-          <li>شخصی‌سازی عمیق توصیه‌ها و تحلیل‌ها</li>
-          <li>قابلیت استقرار روی زیرساخت اختصاصی سازمان‌ها برای حفظ امنیت داده‌ها</li>
-          <li>معماری ماژولار، مقیاس‌پذیر و توسعه‌پذیر بدون تغییر در هسته سیستم</li>
-          <li>استفاده از چندین مدل هوش مصنوعی و معماری عامل‌محور (Multi-Agent) برای تحلیل‌های دقیق‌تر</li>
-        </ul>
-      </section>
-
-      <section className="chapter-section">
-        <h3><PieChart className="section-icon" /> ۱-۸. نیاز سرمایه‌گذاری (Investment Requirement)</h3>
-        <p>برای توسعه، تجاری‌سازی و ورود به بازار، سرمایه موردنیاز در چند مرحله جذب خواهد شد و برای موارد زیر تخصیص می‌یابد:</p>
-        <ul style={{color: 'var(--text-secondary)', lineHeight: '1.8'}}>
-          <li>توسعه محصول (Product Development) و زیرساخت فنی و ابری</li>
-          <li>جذب نیروی متخصص و تحقیقات و توسعه (R&D)</li>
-          <li>بازاریابی، فروش و توسعه بازار داخلی و بین‌المللی</li>
-          <li>اخذ مجوزها و استانداردها</li>
-        </ul>
-      </section>
-
-      <div className="vision-box">
+      <div className="vision-box" style={{marginTop: '4rem'}}>
         <h3><Eye className="section-icon" style={{color: '#fff'}} /> ۱-۹. چشم‌انداز (Vision)</h3>
         <p>
           چشم‌انداز این پروژه، تبدیل‌شدن به یکی از پیشروترین پلتفرم‌های سلامت هوشمند و تصمیم‌یار شخصی در منطقه و سپس بازارهای بین‌المللی است.<br/><br/>

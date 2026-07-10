@@ -1,0 +1,143 @@
+.ethics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.ethics-hero {
+  background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+  color: white;
+  padding: 3.5rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(180, 83, 9, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.ethics-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% -20%, rgba(253, 224, 71, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ethics-hero h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #fde047;
+}
+
+.ethics-hero p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.principle-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.principle-card:hover {
+  transform: translateY(-5px);
+  border-color: #eab308;
+  box-shadow: 0 10px 20px -5px rgba(234, 179, 8, 0.15);
+}
+
+.principle-icon {
+  background: rgba(234, 179, 8, 0.1);
+  color: #eab308;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+}
+
+.principle-card h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.principle-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.constitution-doc {
+  background: var(--bg-primary);
+  border: 1px solid #eab308;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-top: 1.5rem;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(234, 179, 8, 0.05);
+}
+
+.constitution-doc::before {
+  content: 'CONSTITUTION';
+  position: absolute;
+  top: -12px;
+  left: 2rem;
+  background: var(--bg-primary);
+  padding: 0 1rem;
+  color: #eab308;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.doc-rule {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.doc-rule:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.rule-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #eab308;
+  opacity: 0.5;
+}
+
+.rule-content h5 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.rule-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

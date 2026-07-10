@@ -1,0 +1,119 @@
+.architecture-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.architecture-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding: 3.5rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.4);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid #14b8a6;
+}
+
+.architecture-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px) 0 0 / 20px 20px,
+    linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px) 0 0 / 20px 20px;
+  pointer-events: none;
+}
+
+.architecture-hero h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #5eead4;
+}
+
+.architecture-hero p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.layer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.arch-layer-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.arch-layer-card:hover {
+  transform: translateX(-5px);
+  border-color: #14b8a6;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+.arch-layer-icon {
+  background: rgba(20, 184, 166, 0.1);
+  color: #14b8a6;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.arch-layer-content h4 {
+  margin: 0 0 0.5rem 0;
+  color: #14b8a6;
+  font-size: 1.3rem;
+}
+
+.arch-layer-content p {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .arch-layer-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .tech-tags {
+    justify-content: center;
+  }
+}

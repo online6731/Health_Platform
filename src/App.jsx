@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import Sidebar from './components/Sidebar'
+import SearchModal from './components/SearchModal'
 import HomeDashboard from './components/HomeDashboard'
 import Chapter1 from './chapters/Chapter1'
 import Chapter2 from './chapters/Chapter2'
@@ -49,24 +50,54 @@ import Chapter43 from './chapters/Chapter43'
 import Chapter44 from './chapters/Chapter44'
 import Chapter45 from './chapters/Chapter45'
 import Chapter46 from './chapters/Chapter46'
+import Chapter47 from './chapters/Chapter47'
+import Chapter48 from './chapters/Chapter48'
+import Chapter49 from './chapters/Chapter49'
+import Chapter50 from './chapters/Chapter50'
+import Chapter51 from './chapters/Chapter51'
+import Chapter52 from './chapters/Chapter52'
+import Chapter53 from './chapters/Chapter53'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
 import './App.css'
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      // Ctrl + K or Cmd + K
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
   return (
     <Router>
       <ScrollProgress />
       <div className="app-container">
+        {/* Mobile Header */}
+        <div className="mobile-header d-md-none">
+          <button className="menu-toggle" onClick={toggleSidebar}>
+            <Menu size={24} />
+          </button>
+          <h2>پلتفرم سلامت هوشمند</h2>
+        </div>
+
         {isSidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
-        <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} />
+        <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} onOpenSearch={() => setIsSearchOpen(true)} />
         
+        <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+
         <main className="main-content">
           <button className="mobile-menu-btn" onClick={toggleSidebar}>
             <Menu size={24} />
@@ -119,6 +150,13 @@ function App() {
             <Route path="/business-operating-system" element={<Chapter44 />} />
             <Route path="/healthcare-ai-constitution" element={<Chapter45 />} />
             <Route path="/healthcare-reference-architecture" element={<Chapter46 />} />
+            <Route path="/ai-psychologist" element={<Chapter47 />} />
+            <Route path="/ai-nutrition-fitness" element={<Chapter48 />} />
+            <Route path="/smart-pharmacy-lab" element={<Chapter49 />} />
+            <Route path="/smart-insurance-prescription" element={<Chapter50 />} />
+            <Route path="/personalization-monitoring" element={<Chapter51 />} />
+            <Route path="/enterprise-api-integration" element={<Chapter52 />} />
+            <Route path="/deployment-pricing" element={<Chapter53 />} />
           </Routes>
         </main>
         <AIChatbot />
