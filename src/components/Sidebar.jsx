@@ -60,6 +60,17 @@ export const chapters = [
   { id: '51', path: '/personalization-monitoring', title: 'موتور شخصی‌سازی و پایش', subtitle: 'Personalization & Monitoring', icon: Target, audience: 'user' },
   { id: '52', path: '/enterprise-api-integration', title: 'مستندات API سازمانی', subtitle: 'Enterprise API & Integration', icon: Target, audience: 'developer' },
   { id: '53', path: '/deployment-pricing', title: 'مدل‌های استقرار و قیمت‌گذاری', subtitle: 'Deployment Models & Pricing', icon: Target, audience: 'enterprise' },
+  { id: '54', path: '/competitive-analysis', title: 'تحلیل رقبا', subtitle: 'Competitive Analysis', icon: PieChart, audience: 'investor' },
+  { id: '55', path: '/swot', title: 'تحلیل SWOT', subtitle: 'SWOT Analysis', icon: Target, audience: 'investor' },
+  { id: '56', path: '/personas', title: 'پرسونای مخاطبان', subtitle: 'User Personas', icon: Users, audience: 'user' },
+  { id: '57', path: '/roadmap', title: 'نقشه راه محصول', subtitle: 'Product Roadmap', icon: TrendingUp, audience: 'investor' },
+  { id: '58', path: '/system-architecture', title: 'معماری سیستم و طرح داده', subtitle: 'System Architecture & ERD', icon: Server, audience: 'developer' },
+  { id: '59', path: '/api-docs', title: 'مستندات API و یکپارچه‌سازی', subtitle: 'API & Integration Docs', icon: Link, audience: 'developer' },
+  { id: '60', path: '/compliance-security', title: 'امنیت و انطباق استانداردها', subtitle: 'Compliance & Security', icon: Shield, audience: 'regulator' },
+  { id: '61', path: '/financial-statements', title: 'صورت‌های مالی و سهم‌داری', subtitle: 'Financials & Cap Table', icon: DollarSign, audience: 'investor' },
+  { id: '62', path: '/legal-framework', title: 'مجوزها و قرارداد نمونه', subtitle: 'Legal & Contracts', icon: Scale, audience: 'regulator' },
+  { id: '63', path: '/operational-sops', title: 'روش‌های اجرایی و تداوم کسب‌وکار', subtitle: 'Operations & BCP', icon: Activity, audience: 'developer' },
+  { id: '64', path: '/prd-prototype', title: 'سند محصول و وایرفریم‌ها', subtitle: 'PRD & Prototype', icon: Smartphone, audience: 'user' },
   { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download, audience: 'all' },
 ];
 

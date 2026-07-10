@@ -93,7 +93,7 @@ export default function HomeDashboard() {
           return (
             <Link to={chapter.path} key={chapter.id} className="dashboard-card animate-fade-in" style={{ animationDelay: `${idx * 0.05}s` }}>
               <div className="card-icon-wrapper">
-                <Icon size={32} />
+                <Icon size={24} />
               </div>
               <div className="card-content">
                 <span className="chapter-number">فصل {chapter.id}</span>

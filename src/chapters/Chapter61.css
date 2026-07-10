@@ -1,0 +1,136 @@
+.financial-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.fin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.fin-tab-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.fin-tab-btn.active {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(122, 40, 203, 0.25);
+}
+
+.financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.financial-table th, .financial-table td {
+  padding: 0.9rem 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.9rem;
+}
+
+.financial-table th {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.financial-table td.metric-name {
+  text-align: right;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.highlight-row {
+  background: rgba(0, 255, 204, 0.05);
+}
+
+.highlight-row td {
+  color: var(--accent-teal) !important;
+  font-weight: bold !important;
+}
+
+.table-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Unit economics grid */
+.unit-economics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.economics-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.economics-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(0, 210, 255, 0.1);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.75rem;
+}
+
+.card-top h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.econ-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--accent-teal);
+}
+
+.economics-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .financial-tabs {
+    flex-direction: column;
+  }
+}

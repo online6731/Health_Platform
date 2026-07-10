@@ -1,0 +1,226 @@
+.ch54-container .comp-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+}
+
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.comp-table th, .comp-table td {
+  padding: 0.85rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+.comp-table th {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.comp-table td.feature-name {
+  text-align: right;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.comp-table th.us-col, .comp-table td.us-col {
+  background: rgba(0, 210, 255, 0.06);
+  border-left: 2px solid var(--accent-blue);
+  border-right: 2px solid var(--accent-blue);
+}
+
+.comp-name {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.comp-origin {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.icon-yes { color: var(--accent-teal); }
+.icon-no { color: rgba(255,100,100,0.6); }
+
+.type-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(122,40,203,0.15);
+  color: var(--accent-purple);
+  border: 1px solid rgba(122,40,203,0.3);
+}
+
+/* Positioning bars */
+.positioning-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.pos-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pos-label {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.pos-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.pos-track {
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  height: 22px;
+  overflow: hidden;
+}
+
+.pos-bar {
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: width 1s ease;
+}
+
+.hcos-bar {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+  color: #000;
+  justify-content: flex-start;
+}
+
+.avg-bar {
+  background: rgba(255,255,255,0.15);
+  color: var(--text-secondary);
+  justify-content: flex-start;
+}
+
+.pos-legend {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+.legend-hcos { color: var(--accent-teal); }
+.legend-avg { color: var(--text-secondary); }
+
+/* Competitor cards */
+.comp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.comp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comp-card:hover, .comp-card.expanded {
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 20px rgba(0,210,255,0.1);
+}
+
+.comp-card-header h4 {
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+
+.comp-card-origin {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.comp-card-body {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.3s ease;
+}
+
+.comp-strength {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--accent-teal);
+  font-size: 0.88rem;
+}
+
+.comp-weakness {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: rgba(255,120,120,0.9);
+  font-size: 0.88rem;
+}
+
+/* Advantages */
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.advantage-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.advantage-item:hover {
+  border-color: var(--accent-purple);
+  transform: translateY(-3px);
+}
+
+.adv-icon {
+  color: var(--accent-purple);
+  margin-bottom: 0.75rem;
+}
+
+.advantage-item h5 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.advantage-item p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}

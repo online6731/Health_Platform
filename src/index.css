@@ -26,8 +26,8 @@
   --glass-blur: blur(12px);
   
   /* Layout */
-  --sidebar-width: 280px;
-  --header-height: 70px;
+  --sidebar-width: 230px;
+  --header-height: 60px;
 }
 
 * {
@@ -133,6 +133,7 @@ a:hover {
 }
 
 html {
+  font-size: 13px;
   scroll-behavior: smooth;
 }
 

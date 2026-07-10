@@ -1,0 +1,124 @@
+.licenses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.license-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.license-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-blue);
+}
+
+.lic-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 210, 255, 0.1);
+  color: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lic-info h5 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.lic-type {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent-teal);
+  margin-bottom: 0.75rem;
+}
+
+.lic-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Accordion clauses */
+.accordion-clauses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.clause-item {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.clause-title-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: right;
+  transition: background 0.2s ease;
+}
+
+.clause-title-btn:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.clause-text-box {
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+.clause-text-box p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Privacy box */
+.privacy-statement-box {
+  background: linear-gradient(90deg, rgba(122, 40, 203, 0.08), transparent);
+  border-right: 4px solid var(--accent-purple);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.privacy-statement-box ul {
+  padding-right: 1.25rem;
+  margin: 0;
+}
+
+.privacy-statement-box li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}

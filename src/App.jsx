@@ -57,6 +57,17 @@ import Chapter50 from './chapters/Chapter50'
 import Chapter51 from './chapters/Chapter51'
 import Chapter52 from './chapters/Chapter52'
 import Chapter53 from './chapters/Chapter53'
+import Chapter54 from './chapters/Chapter54'
+import Chapter55 from './chapters/Chapter55'
+import Chapter56 from './chapters/Chapter56'
+import Chapter57 from './chapters/Chapter57'
+import Chapter58 from './chapters/Chapter58'
+import Chapter59 from './chapters/Chapter59'
+import Chapter60 from './chapters/Chapter60'
+import Chapter61 from './chapters/Chapter61'
+import Chapter62 from './chapters/Chapter62'
+import Chapter63 from './chapters/Chapter63'
+import Chapter64 from './chapters/Chapter64'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
 import './App.css'
@@ -157,6 +168,17 @@ function App() {
             <Route path="/personalization-monitoring" element={<Chapter51 />} />
             <Route path="/enterprise-api-integration" element={<Chapter52 />} />
             <Route path="/deployment-pricing" element={<Chapter53 />} />
+            <Route path="/competitive-analysis" element={<Chapter54 />} />
+            <Route path="/swot" element={<Chapter55 />} />
+            <Route path="/personas" element={<Chapter56 />} />
+            <Route path="/roadmap" element={<Chapter57 />} />
+            <Route path="/system-architecture" element={<Chapter58 />} />
+            <Route path="/api-docs" element={<Chapter59 />} />
+            <Route path="/compliance-security" element={<Chapter60 />} />
+            <Route path="/financial-statements" element={<Chapter61 />} />
+            <Route path="/legal-framework" element={<Chapter62 />} />
+            <Route path="/operational-sops" element={<Chapter63 />} />
+            <Route path="/prd-prototype" element={<Chapter64 />} />
           </Routes>
         </main>
         <AIChatbot />
