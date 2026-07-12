@@ -2,7 +2,9 @@ import {
   Home, LayoutDashboard, Target, Building2, TrendingUp, Cpu, Workflow, 
   Server, Brain, Database, BrainCircuit, DollarSign, Store, Globe, 
   PieChart, Users, Settings, BookOpen, Globe2, Shield, Scale, Link, 
-  Smartphone, ShieldAlert, Activity, Download, Search 
+  Smartphone, ShieldAlert, Activity, Download, Search, FileText, 
+  FileSearch, HelpCircle, Network, UserCheck, Stethoscope, Briefcase, 
+  Key, CheckCircle, ClipboardList, BookMarked, Share2 
 } from 'lucide-react';
 
 export const chapters = [
@@ -71,6 +73,20 @@ export const chapters = [
   { id: '62', path: '/legal-framework', title: 'مجوزها و قرارداد نمونه', subtitle: 'Legal & Contracts', icon: Scale, tags: ['legal'] },
   { id: '63', path: '/operational-sops', title: 'روش‌های اجرایی و تداوم کسب‌وکار', subtitle: 'Operations & BCP', icon: Activity, tags: ['business'] },
   { id: '64', path: '/prd-prototype', title: 'سند محصول و وایرفریم‌ها', subtitle: 'PRD & Prototype', icon: Smartphone, tags: ['product'] },
+  { id: '65', path: '/project-master-record', title: 'شناسنامه جامع پروژه', subtitle: 'Project Master Record', icon: Briefcase, tags: ['knowledge_base'] },
+  { id: '66', path: '/glossary', title: 'واژه‌نامه مرکزی پروژه', subtitle: 'Glossary', icon: BookMarked, tags: ['knowledge_base'] },
+  { id: '67', path: '/product-capability-registry', title: 'رجیستری محصولات و قابلیت‌ها', subtitle: 'Product & Capability Registry', icon: ClipboardList, tags: ['knowledge_base'] },
+  { id: '68', path: '/requirements-repository', title: 'مخزن نیازمندی‌ها', subtitle: 'Requirements Repository', icon: CheckCircle, tags: ['knowledge_base'] },
+  { id: '69', path: '/project-status', title: 'وضعیت واقعی پروژه', subtitle: 'Project Status', icon: Activity, tags: ['knowledge_base'] },
+  { id: '70', path: '/clinical-safety', title: 'ایمنی بالینی و ریسک پزشکی', subtitle: 'Clinical Safety Case', icon: Stethoscope, tags: ['knowledge_base'] },
+  { id: '71', path: '/decision-log', title: 'دفتر تصمیمات پروژه', subtitle: 'Decision Log', icon: HelpCircle, tags: ['knowledge_base'] },
+  { id: '72', path: '/assumption-register', title: 'ثبت فرضیات', subtitle: 'Assumption Register', icon: FileText, tags: ['knowledge_base'] },
+  { id: '73', path: '/gap-register', title: 'شکاف‌ها و ابهامات', subtitle: 'Gap Register', icon: FileSearch, tags: ['knowledge_base'] },
+  { id: '74', path: '/risk-register', title: 'ثبت جامع ریسک‌ها', subtitle: 'Risk Register', icon: ShieldAlert, tags: ['knowledge_base'] },
+  { id: '75', path: '/evidence-research', title: 'مخزن تحقیقات و شواهد', subtitle: 'Evidence & Research Library', icon: BookOpen, tags: ['knowledge_base'] },
+  { id: '76', path: '/data-dictionary', title: 'فرهنگ داده اجرایی', subtitle: 'Data Dictionary', icon: Database, tags: ['knowledge_base'] },
+  { id: '77', path: '/stakeholders-roles', title: 'ماتریس نقش‌ها و ذی‌نفعان', subtitle: 'Stakeholders & Roles', icon: UserCheck, tags: ['knowledge_base'] },
+  { id: '78', path: '/integration-traceability', title: 'نقشه اتصال و ردیابی', subtitle: 'Integration & Traceability', icon: Network, tags: ['knowledge_base'] },
   { id: 'export', path: '#', title: 'دانلود مستند یکپارچه', subtitle: 'Export HTML', icon: Download, tags: ['all'] },
 ];
 
@@ -82,6 +98,7 @@ export const getTagLabel = (tag) => {
     ai: 'هوش مصنوعی',
     market: 'بازار و استراتژی',
     legal: 'حقوقی و امنیت',
+    knowledge_base: 'مرکز اطلاعات پروژه',
     all: ''
   };
   return map[tag] || '';
