@@ -10,31 +10,38 @@ const Chapter73 = () => {
       <div className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-600 text-right" dir="rtl">
         
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">فهرست شکاف‌ها (Gaps) و ابهامات</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-red-50 p-4 rounded-lg border border-red-100">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-bold text-red-800">GAP-001: مسئولیت حقوقی خطای AI</h3>
-              <span className="bg-white px-2 py-1 rounded text-xs text-red-600 font-mono">Legal</span>
-            </div>
-            <p className="text-red-700 text-sm">در صورت تشخیص اشتباه توسط پزشک هوشمند، چه کسی از نظر حقوقی پاسخگوست؟ پلتفرم، مدل AI یا کاربر؟</p>
-          </div>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">ثبت شکاف‌ها و ابهامات پروژه (Gaps)</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          <div className="bg-orange-50 p-4 rounded-lg border border-orange-100">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-bold text-orange-800">GAP-002: احراز هویت پزشکان</h3>
-              <span className="bg-white px-2 py-1 rounded text-xs text-orange-600 font-mono">Operation</span>
-            </div>
-            <p className="text-orange-700 text-sm">فرآیند دقیق استعلام و تأیید پروانه طبابت پزشکان به صورت خودکار هنوز نهایی نشده است.</p>
+          <div className="bg-white p-6 rounded-xl border border-orange-200 shadow-sm">
+            <h3 className="font-bold text-lg text-orange-800 mb-3 flex items-center gap-2">شکاف‌های فنی (Technical Gaps)</h3>
+            <ul className="space-y-4">
+              <li className="p-3 bg-orange-50 rounded-lg">
+                <span className="font-bold text-gray-800 block mb-1">یکپارچگی با دستگاه‌های پوشیدنی (Wearables)</span>
+                <span className="text-sm text-gray-600">پروتکل استاندارد و API مشخصی برای استخراج داده از اپل‌واچ و ساعت‌های هوشمند بازار ایران هنوز در معماری لحاظ نشده است.</span>
+              </li>
+              <li className="p-3 bg-orange-50 rounded-lg">
+                <span className="font-bold text-gray-800 block mb-1">مدل زبان تخصصی فارسی (Medical LLM)</span>
+                <span className="text-sm text-gray-600">مدل‌های متن‌باز فعلی زبان فارسی در حوزه اصطلاحات پزشکی خطای بالایی دارند. نیاز به Fine-tune یک مدل پایه (مثل Llama 3) با دادگان پزشکی فارسی داریم.</span>
+              </li>
+            </ul>
           </div>
 
-          <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-bold text-yellow-800">GAP-003: مدل قیمت‌گذاری B2C</h3>
-              <span className="bg-white px-2 py-1 rounded text-xs text-yellow-600 font-mono">Business</span>
-            </div>
-            <p className="text-yellow-700 text-sm">آیا هزینه خدمات AI به صورت اشتراک ماهانه است یا پرداخت به ازای هر مشاوره (Pay-per-use)؟</p>
+          <div className="bg-white p-6 rounded-xl border border-red-200 shadow-sm">
+            <h3 className="font-bold text-lg text-red-800 mb-3 flex items-center gap-2">شکاف‌های کسب‌وکار / رگولاتوری (Business Gaps)</h3>
+            <ul className="space-y-4">
+              <li className="p-3 bg-red-50 rounded-lg">
+                <span className="font-bold text-gray-800 block mb-1">دسترسی به API بیمه‌های پایه</span>
+                <span className="text-sm text-gray-600">تامین اجتماعی و بیمه سلامت ساختار یکپارچه‌ای برای احراز هویت بیماران توسط استارتاپ‌های شخص ثالث بدون مجوز رسمی ارائه نمی‌دهند.</span>
+              </li>
+              <li className="p-3 bg-red-50 rounded-lg">
+                <span className="font-bold text-gray-800 block mb-1">مسئولیت حقوقی نسخه الکترونیک</span>
+                <span className="text-sm text-gray-600">مشخص نیست در صورت خطای پزشکی در نسخه‌ای که توسط هوش مصنوعی پیش‌نویس شده و توسط پزشک تایید شده، درصد تقصیر پلتفرم چقدر است.</span>
+              </li>
+            </ul>
           </div>
+
         </div>
       </section>
         

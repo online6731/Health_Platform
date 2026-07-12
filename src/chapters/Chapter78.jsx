@@ -4,54 +4,51 @@ import ChapterLayout from '../components/ChapterLayout';
 const Chapter78 = () => {
   return (
     <ChapterLayout 
-      title="نقشه اتصال و ردیابی (Integration & Traceability)"
+      title="ماتریس ردیابی (Traceability Matrix)"
       chapterNumber={Number(78)}
     >
       <div className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-600 text-right" dir="rtl">
         
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">نقشه یکپارچگی ماژول‌ها (Integration Matrix)</h2>
-        <div className="overflow-x-auto mb-10">
-          <table className="w-full text-center border-collapse text-sm">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">ماتریس ردیابی و اتصال (Integration Traceability)</h2>
+        
+        <p className="text-gray-600 mb-6 font-medium">این ماتریس نشان می‌دهد که چگونه نیازمندی‌های سطح کسب‌وکار (BR) به سرویس‌های معماری و در نهایت به توابع فنی متصل می‌شوند.</p>
+
+        <div className="overflow-x-auto shadow-sm rounded-xl border border-gray-200">
+          <table className="w-full text-right border-collapse text-sm">
             <thead>
               <tr className="bg-gray-800 text-white">
-                <th className="p-3 border font-semibold text-right">درخواست از / به →</th>
-                <th className="p-3 border font-semibold">SHR (پرونده)</th>
-                <th className="p-3 border font-semibold">AI Doctor</th>
-                <th className="p-3 border font-semibold">Pharmacy</th>
-                <th className="p-3 border font-semibold">Lab</th>
+                <th className="p-4 font-semibold rounded-tr-xl">نیاز کسب‌وکار (BR)</th>
+                <th className="p-4 font-semibold">نیاز عملیاتی (FR)</th>
+                <th className="p-4 font-semibold">سرویس مسئول (Service)</th>
+                <th className="p-4 font-semibold">سیستم ثالث (3rd Party)</th>
+                <th className="p-4 font-semibold rounded-tl-xl">اندپوینت / API</th>
               </tr>
             </thead>
             <tbody className="text-gray-700 bg-white">
-              <tr>
-                <td className="p-3 border font-bold bg-gray-100 text-right">SHR (پرونده سلامت)</td>
-                <td className="p-3 border bg-gray-50 text-gray-400">—</td>
-                <td className="p-3 border text-blue-600">Read / Write</td>
-                <td className="p-3 border text-green-600">Read</td>
-                <td className="p-3 border text-purple-600">Write Results</td>
+              <tr className="border-b hover:bg-blue-50 transition-colors">
+                <td className="p-4 font-bold">BR-01: امکان رزرو ویزیت آنلاین پس از مکالمه با بات</td>
+                <td className="p-4 text-gray-600 font-mono">FR-DOC-005</td>
+                <td className="p-4 text-blue-700 font-bold">Scheduling Agent</td>
+                <td className="p-4">سامانه نوبت‌دهی بقراط / پذیرش۲۴</td>
+                <td className="p-4 font-mono text-xs bg-gray-100 rounded px-2">POST /api/v1/appointments</td>
               </tr>
-              <tr>
-                <td className="p-3 border font-bold bg-gray-100 text-right">AI Doctor</td>
-                <td className="p-3 border text-blue-600">Query History</td>
-                <td className="p-3 border bg-gray-50 text-gray-400">—</td>
-                <td className="p-3 border text-orange-600">Check Interaction</td>
-                <td className="p-3 border text-orange-600">Suggest Tests</td>
+              <tr className="border-b hover:bg-blue-50 transition-colors">
+                <td className="p-4 font-bold">BR-02: جلوگیری از خطای تجویز داروی اشتباه</td>
+                <td className="p-4 text-gray-600 font-mono">FR-PHA-002</td>
+                <td className="p-4 text-blue-700 font-bold">Clinical Safety Engine</td>
+                <td className="p-4">دیتابیس دارویی سازمان غذا و دارو (TTAC)</td>
+                <td className="p-4 font-mono text-xs bg-gray-100 rounded px-2">GET /api/safety/drug-interaction</td>
+              </tr>
+              <tr className="border-b hover:bg-blue-50 transition-colors">
+                <td className="p-4 font-bold">BR-03: خواندن جواب آزمایش خونی کاغذی</td>
+                <td className="p-4 text-gray-600 font-mono">FR-SHR-001</td>
+                <td className="p-4 text-blue-700 font-bold">Vision Agent</td>
+                <td className="p-4">OpenAI GPT-4V / Google Cloud Vision</td>
+                <td className="p-4 font-mono text-xs bg-gray-100 rounded px-2">POST /api/v1/ocr/lab-result</td>
               </tr>
             </tbody>
           </table>
-        </div>
-
-        <h2 className="text-xl font-bold mb-4 text-gray-800 border-b pb-2">زنجیره ردیابی نیازمندی‌ها (Traceability)</h2>
-        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <div className="flex flex-col md:flex-row items-center justify-between text-sm font-mono text-gray-700 text-center gap-2">
-            <div className="p-3 bg-white border rounded shadow-sm w-full">نیاز بازار<br/><span className="text-xs text-gray-500">Market Prob</span></div>
-            <span className="hidden md:block">→</span>
-            <div className="p-3 bg-white border rounded shadow-sm w-full">نیازمندی محصول<br/><span className="text-xs text-blue-500">FR-01</span></div>
-            <span className="hidden md:block">→</span>
-            <div className="p-3 bg-white border rounded shadow-sm w-full">ماژول سیستم<br/><span className="text-xs text-purple-500">AI Doctor</span></div>
-            <span className="hidden md:block">→</span>
-            <div className="p-3 bg-white border rounded shadow-sm w-full">سرویس API<br/><span className="text-xs text-green-500">/api/triage</span></div>
-          </div>
         </div>
       </section>
         
