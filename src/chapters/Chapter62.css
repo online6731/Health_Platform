@@ -86,13 +86,13 @@
 }
 
 .clause-title-btn:hover {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-secondary);
 }
 
 .clause-text-box {
   padding: 1rem 1.5rem;
   background: rgba(0,0,0,0.15);
-  border-top: 1px solid rgba(255,255,255,0.03);
+  border-top: 1px solid var(--bg-secondary);
 }
 
 .clause-text-box p {

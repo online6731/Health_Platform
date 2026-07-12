@@ -39,10 +39,10 @@ const competitors = [
   {
     name: 'HCOS (ما)',
     origin: 'ایران / خاورمیانه',
-    type: 'B2B2C + B2G',
+    type: 'B2B (Wedge) -> B2B2C',
     features: { ai_diagnosis: true, ehr: true, mental: true, b2b: true, digital_twin: true, marketplace: true, rtl: true },
-    weakness: '—',
-    strength: 'تنها پلتفرم Health OS با همزاد دیجیتال برای منطقه',
+    weakness: 'نیازمند سرمایه اولیه بالا برای زیرساخت AI و زمان‌بر بودن جمع‌آوری دیتای بومی',
+    strength: 'مدل هوش مصنوعی بومی‌شده با پتانسیل تصاحب داده‌های اختصاصی (Proprietary Data)',
     isUs: true
   },
 ];

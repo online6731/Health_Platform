@@ -46,10 +46,10 @@
   gap: 1.5rem;
 }
 .ux-card, .ops-card {
-  background: rgba(20, 20, 30, 0.4);
+  background: var(--bg-card-hover);
   padding: 1.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--bg-secondary);
   transition: transform 0.3s ease;
 }
 .ux-card:hover, .ops-card:hover {

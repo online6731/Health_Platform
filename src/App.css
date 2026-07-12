@@ -1,19 +1,20 @@
 .app-container {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
 .main-content {
   flex: 1;
-  margin-right: var(--sidebar-width);
-  padding: 2.5rem 3rem;
-  /* For ultra-wide screens, constrain the whole main content but let it anchor right */
-  max-width: 1600px;
+  padding: calc(70px + 2.5rem) 3rem 2.5rem;
+  width: 100%;
 }
 
 .chapter-container {
   animation: fadeIn 0.5s ease-out;
-  max-width: 1400px;
+  max-width: 1300px;
+  margin: 0 auto; /* Center the chapters nicely */
+  width: 100%;
 }
 
 .chapter-header {
@@ -22,42 +23,9 @@
   padding-bottom: 1rem;
 }
 
-.mobile-menu-btn {
-  display: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
-
-.sidebar-overlay {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .main-content {
-    margin-right: 0;
-    padding: 1.5rem;
-  }
-  
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .sidebar-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 90;
-    backdrop-filter: blur(4px);
+    padding: calc(70px + 1.5rem) 1.5rem 1.5rem;
   }
 }
+

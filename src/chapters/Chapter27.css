@@ -15,7 +15,7 @@
 
 .color-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px var(--glass-shadow);
 }
 
 .color-preview {
@@ -38,7 +38,7 @@
   display: inline-block;
   font-family: monospace;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-size: 0.9rem;
@@ -59,8 +59,8 @@
 }
 
 .ui-principle {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
   padding: 2rem;
   border-radius: 16px;
   text-align: center;
@@ -68,7 +68,7 @@
 }
 
 .ui-principle:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   border-color: var(--accent-purple);
 }
 
@@ -154,7 +154,7 @@
 }
 
 .mock-input {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.8rem 1rem;
   border-radius: 8px;
@@ -180,7 +180,7 @@
   position: absolute;
   top: 2px;
   left: 26px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px var(--glass-shadow);
 }
 
 @media (max-width: 768px) {

@@ -24,7 +24,7 @@
   opacity: 0.9;
   max-width: 700px;
   margin: 0 auto;
-}
+
 
 .shr-features-grid {
   display: grid;
@@ -45,7 +45,7 @@
 
 .shr-feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px -5px var(--glass-shadow);
   border-color: #10b981;
 }
 

@@ -3,8 +3,8 @@
 }
 
 .intro-box {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
   border-left: 4px solid var(--accent-purple);
   padding: 1.5rem 2rem;
   border-radius: 0 12px 12px 0;
@@ -27,7 +27,7 @@
 }
 
 .agent-card {
-  background: linear-gradient(135deg, rgba(30, 30, 42, 0.8), rgba(20, 20, 30, 0.9));
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
   border: 1px solid rgba(122, 40, 203, 0.2);
   border-radius: 12px;
   padding: 2rem;

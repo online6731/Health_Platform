@@ -39,15 +39,15 @@ export default function Chapter3() {
           در مدل فعلی، بیماران تنها <strong>پس از بروز علائم</strong> به پزشک مراجعه می‌کنند و فرصت حیاتی پیشگیری و مدیریت پیش‌هنگام از دست می‌رود.
         </div>
         <div className="grid-3-col">
-          <div className="status-card" style={{padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
+          <div className="status-card" style={{padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
             <h4><AlertOctagon size={18} color="#ff6b6b"/> رویکرد واکنشی</h4>
             <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>تمرکز بر درمان به جای پیشگیری</p>
           </div>
-          <div className="status-card" style={{padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
+          <div className="status-card" style={{padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
             <h4><AlertOctagon size={18} color="#ff6b6b"/> کمبود تعامل</h4>
             <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>محدود بودن زمان تعامل متخصص با بیمار</p>
           </div>
-          <div className="status-card" style={{padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
+          <div className="status-card" style={{padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '12px', borderLeft: '4px solid #ff6b6b'}}>
             <h4><AlertOctagon size={18} color="#ff6b6b"/> جزیره‌ای بودن</h4>
             <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>پراکندگی اطلاعات حیاتی سلامت</p>
           </div>

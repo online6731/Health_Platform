@@ -25,7 +25,7 @@
   max-width: 750px;
   margin: 0 auto;
   line-height: 1.6;
-}
+
 
 .insurance-grid {
   display: grid;
@@ -46,7 +46,7 @@
 .insurance-card:hover {
   transform: translateY(-5px);
   border-color: #3b82f6;
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px -5px var(--glass-shadow);
 }
 
 .insurance-icon {

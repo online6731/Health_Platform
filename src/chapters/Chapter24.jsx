@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { PieChart, TrendingUp, BarChart4, Target, Activity, Zap } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter24.css';
@@ -13,7 +13,7 @@ export default function Chapter24() {
       <div className="intro-box">
         <h3>۲۴-۱ ساختار هزینه‌ها و مقیاس‌پذیری</h3>
         <p>
-          ماهیت نرم‌افزاری و مبتنی بر هوش مصنوعی پلتفرم، باعث می‌شود پس از توسعه‌ی هسته‌ی اصلی (Core AI)، هزینه‌ی نهایی (Marginal Cost) اضافه‌شدن هر کاربر جدید تقریباً صفر باشد. بیشترین سرمایه‌گذاری اولیه در بخش R&D مدل‌های Foundation و زیرساخت‌های پردازشی (GPU Clusters) خواهد بود.
+          با توجه به استفاده گسترده از پردازش‌های هوش مصنوعی (GenAI)، مدیریت هزینه سرور (Inference Cost) به ازای هر کاربر نیازمند استراتژی دقیق است. سرمایه‌گذاری اولیه معطوف به توسعه مدل‌های بومی (R&D)، زیرساخت‌های پردازشی عظیم (GPU Clusters) و همچنین رعایت سخت‌گیرانه‌ترین استانداردهای حقوقی و امنیتی داده‌های پزشکی (Compliance) خواهد بود تا یک خندق دفاعی (Moat) قوی شکل بگیرد.
         </p>
       </div>
 
@@ -44,18 +44,18 @@ export default function Chapter24() {
         <div className="roi-grid">
           <div className="roi-item">
             <Target className="roi-icon"/>
-            <h4>سال اول: توسعه و تست</h4>
-            <p>تمرکز بر ساخت MVP، جمع‌آوری داده‌های اولیه و دریافت تاییدیه‌های بالینی. درآمد محدود به پروژه‌های پایلوت B2B است.</p>
+            <h4>سال ۱ و ۲: زیرساخت، داده و اعتبارسنجی</h4>
+            <p>تمرکز بر توسعه MVP (یک نیچ متمرکز B2B)، جمع‌آوری داده‌های یونیک، و طی کردن فرآیندهای طولانی تاییدیه‌های بالینی و رگولاتوری.</p>
           </div>
           <div className="roi-item">
             <Zap className="roi-icon"/>
-            <h4>سال دوم: رشد سریع (Traction)</h4>
-            <p>ورود به بازار B2C با مدل Freemium. رسیدن به نقطه‌ی سر‌به‌سر (Break-even) در پایان سال دوم.</p>
+            <h4>سال سوم: مقیاس‌پذیری (Scaling)</h4>
+            <p>گسترش به بازار B2C پس از جلب اعتماد. رشد سریع پایگاه کاربری، همزمان با مدیریت هزینه‌های سنگین پردازش AI (Compute Costs).</p>
           </div>
           <div className="roi-item">
             <Activity className="roi-icon"/>
-            <h4>سال سوم و بعد: سودآوری نمایی</h4>
-            <p>اثرات شبکه‌ای به حداکثر می‌رسد. درآمد اصلی از طریق Marketplace و حق‌اشتراک‌های B2B2C با حاشیه سود بالای ۸۰٪ تأمین می‌شود.</p>
+            <h4>سال ۴ به بعد: سر‌به‌سر (Break-even) و سودآوری</h4>
+            <p>با فعال‌شدن اکوسیستم Marketplace و بهینه‌سازی مدل‌های هوش مصنوعی، اثر شبکه‌ای کامل شده و شرکت به نقطه‌ی سر‌به‌سر و سپس سودآوری کلان می‌رسد.</p>
           </div>
         </div>
       </section>

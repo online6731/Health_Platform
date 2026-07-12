@@ -1,5 +1,5 @@
 ﻿.chapter19-container .intro-box {
-  background: linear-gradient(135deg, rgba(30, 30, 42, 0.8) 0%, rgba(20, 20, 30, 0.9) 100%);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
   border-left: 5px solid var(--accent-blue);
 }
 .network-effect-box {

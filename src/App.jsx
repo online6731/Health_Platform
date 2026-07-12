@@ -1,84 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
-import { Menu } from 'lucide-react'
-import Sidebar from './components/Sidebar'
+import { Menu, Loader2 } from 'lucide-react'
+import TopMenu from './components/TopMenu'
 import SearchModal from './components/SearchModal'
-import HomeDashboard from './components/HomeDashboard'
-import Chapter1 from './chapters/Chapter1'
-import Chapter2 from './chapters/Chapter2'
-import Chapter3 from './chapters/Chapter3'
-import Chapter4 from './chapters/Chapter4'
-import Chapter5 from './chapters/Chapter5'
-import Chapter6 from './chapters/Chapter6'
-import Chapter7 from './chapters/Chapter7'
-import Chapter8 from './chapters/Chapter8'
-import Chapter9 from './chapters/Chapter9'
-import Chapter10 from './chapters/Chapter10'
-import Chapter11 from './chapters/Chapter11'
-import Chapter12 from './chapters/Chapter12'
-import Chapter13 from './chapters/Chapter13'
-import Chapter14 from './chapters/Chapter14'
-import Chapter15 from './chapters/Chapter15'
-import Chapter16 from './chapters/Chapter16'
-import Chapter17 from './chapters/Chapter17'
-import Chapter18 from './chapters/Chapter18'
-import Chapter19 from './chapters/Chapter19'
-import Chapter20 from './chapters/Chapter20'
-import Chapter21 from './chapters/Chapter21'
-import Chapter22 from './chapters/Chapter22'
-import Chapter23 from './chapters/Chapter23'
-import Chapter24 from './chapters/Chapter24'
-import Chapter25 from './chapters/Chapter25'
-import Chapter26 from './chapters/Chapter26'
-import Chapter27 from './chapters/Chapter27'
-import Chapter28 from './chapters/Chapter28'
-import Chapter29 from './chapters/Chapter29'
-import Chapter30 from './chapters/Chapter30'
-import Chapter31 from './chapters/Chapter31'
-import Chapter32 from './chapters/Chapter32'
-import Chapter33 from './chapters/Chapter33'
-import Chapter34 from './chapters/Chapter34'
-import Chapter35 from './chapters/Chapter35'
-import Chapter36 from './chapters/Chapter36'
-import Chapter37 from './chapters/Chapter37'
-import Chapter38 from './chapters/Chapter38'
-import Chapter39 from './chapters/Chapter39'
-import Chapter40 from './chapters/Chapter40'
-import Chapter41 from './chapters/Chapter41'
-import Chapter42 from './chapters/Chapter42'
-import Chapter43 from './chapters/Chapter43'
-import Chapter44 from './chapters/Chapter44'
-import Chapter45 from './chapters/Chapter45'
-import Chapter46 from './chapters/Chapter46'
-import Chapter47 from './chapters/Chapter47'
-import Chapter48 from './chapters/Chapter48'
-import Chapter49 from './chapters/Chapter49'
-import Chapter50 from './chapters/Chapter50'
-import Chapter51 from './chapters/Chapter51'
-import Chapter52 from './chapters/Chapter52'
-import Chapter53 from './chapters/Chapter53'
-import Chapter54 from './chapters/Chapter54'
-import Chapter55 from './chapters/Chapter55'
-import Chapter56 from './chapters/Chapter56'
-import Chapter57 from './chapters/Chapter57'
-import Chapter58 from './chapters/Chapter58'
-import Chapter59 from './chapters/Chapter59'
-import Chapter60 from './chapters/Chapter60'
-import Chapter61 from './chapters/Chapter61'
-import Chapter62 from './chapters/Chapter62'
-import Chapter63 from './chapters/Chapter63'
-import Chapter64 from './chapters/Chapter64'
+import ErrorBoundary from './components/ErrorBoundary'
+import { chapters } from './config/chapters'
 import ScrollProgress from './components/ScrollProgress'
 import AIChatbot from './components/AIChatbot'
 import './App.css'
 
-function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+const HomeDashboard = lazy(() => import('./components/HomeDashboard'));
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+// Dynamically create lazy components for all chapters
+const chapterComponents = {};
+chapters.forEach(c => {
+  if (c.id !== '0' && c.id !== 'export') {
+    chapterComponents[c.id] = lazy(() => import(`./chapters/Chapter${c.id}.jsx`));
+  }
+});
+
+function App() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
@@ -96,90 +38,29 @@ function App() {
     <Router>
       <ScrollProgress />
       <div className="app-container">
-        {/* Mobile Header */}
-        <div className="mobile-header d-md-none">
-          <button className="menu-toggle" onClick={toggleSidebar}>
-            <Menu size={24} />
-          </button>
-          <h2>پلتفرم سلامت هوشمند</h2>
-        </div>
-
-        {isSidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
-        <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} onOpenSearch={() => setIsSearchOpen(true)} />
-        
+        <TopMenu onOpenSearch={() => setIsSearchOpen(true)} />
         <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
         <main className="main-content">
-          <button className="mobile-menu-btn" onClick={toggleSidebar}>
-            <Menu size={24} />
-          </button>
-          <Routes>
-            <Route path="/" element={<HomeDashboard />} />
-            <Route path="/chapter1" element={<Chapter1 />} />
-            <Route path="/company" element={<Chapter2 />} />
-            <Route path="/problem" element={<Chapter3 />} />
-            <Route path="/solution" element={<Chapter4 />} />
-            <Route path="/products" element={<Chapter5 />} />
-            <Route path="/tech-architecture" element={<Chapter6 />} />
-            <Route path="/ai-architecture" element={<Chapter7 />} />
-            <Route path="/business-model" element={<Chapter8 />} />
-            <Route path="/go-to-market" element={<Chapter9 />} />
-            <Route path="/team" element={<Chapter10 />} />
-            <Route path="/investment" element={<Chapter11 />} />
-            <Route path="/agent-orchestration" element={<Chapter12 />} />
-            <Route path="/knowledge-platform" element={<Chapter13 />} />
-            <Route path="/world-model" element={<Chapter14 />} />
-            <Route path="/security" element={<Chapter15 />} />
-            <Route path="/compliance" element={<Chapter16 />} />
-            <Route path="/integration" element={<Chapter17 />} />
-            <Route path="/ux" element={<Chapter18 />} />
-            <Route path="/economics" element={<Chapter19 />} />
-            <Route path="/marketplace" element={<Chapter20 />} />
-            <Route path="/ai-governance" element={<Chapter21 />} />
-            <Route path="/operations" element={<Chapter22 />} />
-            <Route path="/global-expansion" element={<Chapter23 />} />
-            <Route path="/financials" element={<Chapter24 />} />
-            <Route path="/product-catalog" element={<Chapter25 />} />
-            <Route path="/workflows" element={<Chapter26 />} />
-            <Route path="/design-system" element={<Chapter27 />} />
-            <Route path="/decision-engines" element={<Chapter28 />} />
-            <Route path="/deployment-sla" element={<Chapter29 />} />
-            <Route path="/enterprise-knowledge" element={<Chapter30 />} />
-            <Route path="/smart-health-record" element={<Chapter31 />} />
-            <Route path="/ai-doctor" element={<Chapter32 />} />
-            <Route path="/ai-orchestration-platform" element={<Chapter33 />} />
-            <Route path="/agent-platform" element={<Chapter34 />} />
-            <Route path="/healthcare-knowledge-graph" element={<Chapter35 />} />
-            <Route path="/digital-human-platform" element={<Chapter36 />} />
-            <Route path="/healthcare-super-app" element={<Chapter37 />} />
-            <Route path="/healthcare-enterprise-platform" element={<Chapter38 />} />
-            <Route path="/healthcare-data-ai-platform" element={<Chapter39 />} />
-            <Route path="/healthcare-ecosystem-strategy" element={<Chapter40 />} />
-            <Route path="/platform-architecture" element={<Chapter41 />} />
-            <Route path="/engineering-platform" element={<Chapter42 />} />
-            <Route path="/haios" element={<Chapter43 />} />
-            <Route path="/business-operating-system" element={<Chapter44 />} />
-            <Route path="/healthcare-ai-constitution" element={<Chapter45 />} />
-            <Route path="/healthcare-reference-architecture" element={<Chapter46 />} />
-            <Route path="/ai-psychologist" element={<Chapter47 />} />
-            <Route path="/ai-nutrition-fitness" element={<Chapter48 />} />
-            <Route path="/smart-pharmacy-lab" element={<Chapter49 />} />
-            <Route path="/smart-insurance-prescription" element={<Chapter50 />} />
-            <Route path="/personalization-monitoring" element={<Chapter51 />} />
-            <Route path="/enterprise-api-integration" element={<Chapter52 />} />
-            <Route path="/deployment-pricing" element={<Chapter53 />} />
-            <Route path="/competitive-analysis" element={<Chapter54 />} />
-            <Route path="/swot" element={<Chapter55 />} />
-            <Route path="/personas" element={<Chapter56 />} />
-            <Route path="/roadmap" element={<Chapter57 />} />
-            <Route path="/system-architecture" element={<Chapter58 />} />
-            <Route path="/api-docs" element={<Chapter59 />} />
-            <Route path="/compliance-security" element={<Chapter60 />} />
-            <Route path="/financial-statements" element={<Chapter61 />} />
-            <Route path="/legal-framework" element={<Chapter62 />} />
-            <Route path="/operational-sops" element={<Chapter63 />} />
-            <Route path="/prd-prototype" element={<Chapter64 />} />
-          </Routes>
+          <ErrorBoundary>
+            <Suspense fallback={
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%' }}>
+                <Loader2 className="animate-spin" size={40} color="var(--accent-blue)" />
+              </div>
+            }>
+              <Routes>
+                {chapters.map(chapter => {
+                  if (chapter.id === 'export') return null;
+                  
+                  const Component = chapter.id === '0' 
+                    ? HomeDashboard 
+                    : chapterComponents[chapter.id];
+
+                  return <Route key={chapter.path} path={chapter.path} element={<Component />} />;
+                })}
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </main>
         <AIChatbot />
       </div>

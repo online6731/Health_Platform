@@ -7,14 +7,14 @@
 .prd-table th, .prd-table td {
   padding: 0.8rem 1rem;
   text-align: right;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--bg-secondary);
   font-size: 0.88rem;
 }
 
 .prd-table th {
   color: var(--text-secondary);
   font-weight: 600;
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-secondary);
 }
 
 .prd-table code {
@@ -85,7 +85,7 @@
 
 .wf-description {
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--bg-secondary);
   padding-bottom: 0.75rem;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .wf-mockup-canvas {
-  background: rgba(0,0,0,0.5);
+  background: var(--glass-shadow);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
@@ -115,7 +115,7 @@
   text-align: left;
   line-height: 1.8;
   white-space: pre-wrap;
-  box-shadow: inset 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: inset 0 4px 12px var(--glass-shadow);
 }
 
 .wf-line {
@@ -131,7 +131,7 @@
 }
 
 .qa-card {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 1.5rem;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, X, FileText } from 'lucide-react';
-import { chapters, getAudienceLabel } from './Sidebar';
+import { chapters, getTagLabel } from '../config/chapters';
 import './SearchModal.css';
 
 export default function SearchModal({ isOpen, onClose }) {
@@ -96,9 +96,9 @@ export default function SearchModal({ isOpen, onClose }) {
                   </div>
                   <div className="result-subtitle">{chapter.subtitle}</div>
                 </div>
-                {chapter.audience && chapter.audience !== 'all' && (
-                  <span className={`audience-badge badge-${chapter.audience}`}>
-                    {getAudienceLabel(chapter.audience)}
+                {chapter.tags && !chapter.tags.includes('all') && (
+                  <span className={`audience-badge badge-${chapter.tags[0]}`}>
+                    {chapter.tags.map(t => getTagLabel(t)).join('، ')}
                   </span>
                 )}
               </div>

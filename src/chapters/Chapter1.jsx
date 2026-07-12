@@ -117,7 +117,7 @@ export default function Chapter1() {
         <p>این پروژه در نقطه تلاقی چند صنعت بزرگ جهانی قرار دارد و بازار آن محدود به یک بخش خاص نیست. بازارهای هدف در سه سطح قابل تعریف هستند:</p>
         
         <div className="grid-2-col">
-          <div style={{ height: '300px', width: '100%', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ height: '300px', width: '100%', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -134,21 +134,21 @@ export default function Chapter1() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{background: '#1a1f2e', border: '1px solid #3a7bd5', borderRadius: '8px', color: '#fff'}} itemStyle={{color: '#fff'}} />
+                <Tooltip contentStyle={{background: 'var(--bg-card)', border: '1px solid #3a7bd5', borderRadius: '8px', color: '#fff'}} itemStyle={{color: '#fff'}} />
                 <Legend verticalAlign="bottom" height={36} wrapperStyle={{color: '#fff', fontSize: '0.9rem'}}/>
               </PieChart>
             </ResponsiveContainer>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center'}}>
-            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #00d2ff'}}>
+            <div className="market-tier" style={{background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #00d2ff'}}>
               <h5>۱. بازار مستقیم</h5>
               <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>بیماران، افراد سالم، پزشکان و روانشناسان.</p>
             </div>
-            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #3a7bd5'}}>
+            <div className="market-tier" style={{background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #3a7bd5'}}>
               <h5>۲. بازار سازمانی</h5>
               <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>بیمارستان‌ها، شرکت‌های بیمه، و سازمان‌ها.</p>
             </div>
-            <div className="market-tier" style={{background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #7a28cb'}}>
+            <div className="market-tier" style={{background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)', borderRight: '4px solid #7a28cb'}}>
               <h5>۳. بازار اکوسیستم</h5>
               <p style={{fontSize: '0.85rem', color: 'var(--text-secondary)'}}>استارتاپ‌ها، داروسازی‌ها، پوشیدنی‌ها.</p>
             </div>

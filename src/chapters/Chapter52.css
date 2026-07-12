@@ -25,7 +25,7 @@
   max-width: 750px;
   margin: 0 auto;
   line-height: 1.6;
-}
+
 
 .api-grid {
   display: grid;
@@ -48,7 +48,7 @@
 .api-card:hover {
   transform: translateY(-5px);
   border-color: #64748b;
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px -5px var(--glass-shadow);
 }
 
 .api-icon {

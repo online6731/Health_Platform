@@ -85,8 +85,8 @@
 }
 
 .security-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -154,7 +154,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--glass-shadow);
   padding: 2rem;
   border-radius: 12px;
 }

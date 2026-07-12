@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { DollarSign, Wallet, Building2, Receipt, Target, PieChart, TrendingUp, Users, Activity, HeartPulse, LineChart, Stethoscope, Share2, Network, Code } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter8.css';
@@ -58,11 +58,11 @@ export default function Chapter8() {
               <h4>الف) مدل اشتراک (Subscription)</h4>
             </div>
             <div className="revenue-body">
-              <p>درآمد مستمر از کاربران نهایی و سازمان‌ها:</p>
+              <p>استراتژی لند اند اکسپند (Land & Expand):</p>
               <ul>
-                <li><strong>Freemium:</strong> خدمات پایه رایگان برای جذب شبکه.</li>
-                <li><strong>کاربران Premium:</strong> حق‌اشتراک برای دستیار هوشمند پیشرفته، تحلیل داده‌ها و برنامه‌های شخصی‌سازی‌شده.</li>
-                <li><strong>سازمان‌ها:</strong> هزینه لایسنس نرم‌افزار (SaaS) برای کلینیک‌ها و داشبوردهای سلامت سازمانی (Corporate Wellness).</li>
+                <li><strong>مدل سازمانی (B2B SaaS):</strong> فروش نقطه ورود (Wedge) به کلینیک‌ها جهت مدیریت بیماران مزمن برای تولید درآمد زودهنگام و جمع‌آوری داده.</li>
+                <li><strong>کاربران Premium (B2C):</strong> پس از اعتمادسازی اولیه، ارائه حق‌اشتراک برای دستیار هوشمند پیشرفته و برنامه‌های شخصی‌سازی‌شده.</li>
+                <li><strong>داشبوردهای Corporate Wellness:</strong> قراردادهای سالانه کلان با شرکت‌ها برای پایش سلامت پرسنل.</li>
               </ul>
             </div>
           </div>
@@ -111,8 +111,13 @@ export default function Chapter8() {
           </div>
           <div className="kpi-card">
             <div className="kpi-label">LTV / CAC</div>
-            <div className="kpi-value">نسبت ارزش به هزینه</div>
-            <div className="kpi-desc">نسبت ارزش طول عمر مشتری به هزینه جذب (باید بالاتر از ۳ باشد)</div>
+            <div className="kpi-value">ارزش طول‌عمر به هزینه جذب</div>
+            <div className="kpi-desc">با توجه به بالا بودن هزینه جذب در سلامت (CAC)، این نسبت باید با تمرکز بر B2B بالاتر از ۳ باشد</div>
+          </div>
+          <div className="kpi-card">
+            <div className="kpi-label">Margin / Inference</div>
+            <div className="kpi-value">حاشیه سود به هزینه پردازش</div>
+            <div className="kpi-desc">کنترل دقیق هزینه‌های پردازش هوش مصنوعی (API Calls/GPU) به ازای هر کاربر فعال</div>
           </div>
           <div className="kpi-card">
             <div className="kpi-label">GMV</div>

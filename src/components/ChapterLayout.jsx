@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
-import { chapters, getAudienceLabel } from './Sidebar';
+import { chapters, getTagLabel } from '../config/chapters';
 import './ChapterLayout.css';
 
 export default function ChapterLayout({ title, englishTitle, children }) {
   const location = useLocation();
   const currentIndex = chapters.findIndex(c => c.path === location.pathname);
   const currentChapter = chapters[currentIndex];
+
+  useEffect(() => {
+    document.title = title ? `${title} | Health Platform` : 'Health Platform';
+  }, [title]);
 
   const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
   // Ignore the 'export' chapter at the very end
@@ -19,9 +23,9 @@ export default function ChapterLayout({ title, englishTitle, children }) {
         <div className="header-title-group">
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <h1>{title}</h1>
-            {currentChapter && currentChapter.audience && currentChapter.audience !== 'all' && (
-              <span className={`audience-badge badge-${currentChapter.audience}`} style={{ fontSize: '0.8rem', padding: '0.3rem 0.8rem', marginTop: '0' }}>
-                مخاطب: {getAudienceLabel(currentChapter.audience)}
+            {currentChapter && currentChapter.tags && !currentChapter.tags.includes('all') && (
+              <span className={`audience-badge badge-${currentChapter.tags[0]}`} style={{ fontSize: '0.8rem', padding: '0.3rem 0.8rem', marginTop: '0' }}>
+                برچسب: {currentChapter.tags.map(t => getTagLabel(t)).join('، ')}
               </span>
             )}
           </div>

@@ -38,7 +38,7 @@
 }
 .timeline-content {
   margin-left: 2rem;
-  background: rgba(30, 30, 42, 0.5);
+  background: var(--bg-card);
   padding: 1.5rem;
   border-radius: 8px;
   width: 100%;

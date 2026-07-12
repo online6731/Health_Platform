@@ -33,7 +33,7 @@
 .engine-card:hover {
   transform: translateY(-5px);
   border-color: var(--accent-blue);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px var(--glass-shadow);
 }
 
 .engine-card:hover::after {
@@ -43,14 +43,14 @@
 .engine-icon-box {
   width: 70px;
   height: 70px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-blue);
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--bg-secondary);
   transition: all 0.3s ease;
 }
 

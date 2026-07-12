@@ -43,12 +43,12 @@
 .financial-table th, .financial-table td {
   padding: 0.9rem 1.25rem;
   text-align: center;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--bg-secondary);
   font-size: 0.9rem;
 }
 
 .financial-table th {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-secondary);
   color: var(--text-secondary);
   font-weight: 600;
 }
@@ -106,7 +106,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--bg-secondary);
   padding-bottom: 0.75rem;
 }
 

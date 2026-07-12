@@ -3,8 +3,8 @@
 }
 
 .intro-box {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
   border-left: 4px solid var(--accent-blue);
   padding: 1.5rem 2rem;
   border-radius: 0 12px 12px 0;
@@ -38,8 +38,8 @@
 
 .revenue-header {
   padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--bg-secondary);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -106,7 +106,7 @@
 .pricing-box {
   flex: 1;
   min-width: 250px;
-  background: linear-gradient(135deg, rgba(30, 30, 42, 0.8), rgba(20, 20, 30, 0.9));
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
   border: 1px dashed rgba(255, 255, 255, 0.15);
   padding: 1.5rem;
   border-radius: 12px;
@@ -116,7 +116,7 @@
 
 .pricing-box:hover {
   border-color: var(--accent-teal);
-  background: linear-gradient(135deg, rgba(30, 30, 42, 0.9), rgba(20, 20, 30, 1));
+  background: linear-gradient(135deg, var(--bg-card), rgba(20, 20, 30, 1));
 }
 
 .pricing-box h5 {
@@ -140,8 +140,8 @@
 }
 
 .kpi-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 12px;
   text-align: center;

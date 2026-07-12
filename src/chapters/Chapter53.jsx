@@ -89,13 +89,13 @@ export default function Chapter53() {
 
         <section className="chapter-section">
           <h3><TrendingUp className="section-icon" style={{ color: '#ec4899' }} /> پیش‌بینی مالی (رشد درآمد ৫ ساله)</h3>
-          <div style={{ height: '400px', width: '100%', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '2rem' }}>
+          <div style={{ height: '400px', width: '100%', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '2rem' }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={revenueData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                 <XAxis dataKey="year" stroke="#fff" tick={{fill: '#fff'}} />
                 <YAxis stroke="#fff" tick={{fill: '#fff'}} />
-                <RechartsTooltip contentStyle={{background: '#1a1f2e', border: '1px solid #ec4899', borderRadius: '8px', color: '#fff'}} itemStyle={{color: '#fff'}} />
+                <RechartsTooltip contentStyle={{background: 'var(--bg-card)', border: '1px solid #ec4899', borderRadius: '8px', color: '#fff'}} itemStyle={{color: '#fff'}} />
                 <Legend wrapperStyle={{paddingTop: '20px'}} />
                 <Bar dataKey="اشتراک B2C" stackId="a" fill="#00d2ff" radius={[0, 0, 4, 4]} />
                 <Bar dataKey="سازمانی B2B" stackId="a" fill="#3a7bd5" />

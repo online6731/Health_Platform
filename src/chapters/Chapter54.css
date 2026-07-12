@@ -19,7 +19,7 @@
 }
 
 .comp-table th {
-  background: rgba(255,255,255,0.04);
+  background: var(--bg-secondary);
   color: var(--text-secondary);
   font-weight: 600;
 }
@@ -90,7 +90,7 @@
 }
 
 .pos-track {
-  background: rgba(255,255,255,0.04);
+  background: var(--bg-secondary);
   border-radius: 4px;
   height: 22px;
   overflow: hidden;
@@ -196,7 +196,7 @@
 }
 
 .advantage-item {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
