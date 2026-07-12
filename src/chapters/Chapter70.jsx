@@ -9,49 +9,49 @@ const Chapter70 = () => {
     >
       <div className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-600 text-right" dir="rtl">
         
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-red-800 border-b border-red-200 pb-2">ایمنی بالینی (Clinical Safety)</h2>
+      <section className="mb-12 animate-fade-in">
+        <h2 className="text-2xl font-bold mb-6 text-[#ef4444] border-b border-[var(--border-color)] pb-2">ایمنی بالینی (Clinical Safety)</h2>
         
-        <div className="bg-red-50 border border-red-200 p-6 rounded-xl mb-8">
-          <h3 className="text-lg font-bold text-red-800 mb-2 flex items-center gap-2">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[#ef4444]" style={{background: 'rgba(239, 68, 68, 0.05)'}}>
+          <h3 className="text-lg font-bold text-[#ef4444] mb-3 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
             هشدارهای حیاتی (Contraindications)
           </h3>
-          <ul className="list-disc list-inside text-red-900 space-y-2 font-medium">
+          <ul className="list-disc list-inside premium-text-primary space-y-2 text-sm leading-relaxed">
             <li>این سیستم به هیچ وجه برای <strong>موارد اورژانس پزشکی (Trauma/Emergency)</strong> طراحی نشده است.</li>
-            <li>سیستم مجاز به <strong>تشخیص قطعی بیماری‌های صعب‌العلاج (مانند سرطان)</strong> بدون دخالت و تایید پزشک انسانی (HITL) نیست.</li>
-            <li>نسخه‌نویسی داروهای تحت کنترل (مخدرها و اعصاب) توسط AI مطلقاً ممنوع است.</li>
+            <li>سیستم مجاز به <strong>تشخیص قطعی بیماری‌های صعب‌العلاج</strong> بدون دخالت پزشک انسانی (HITL) نیست.</li>
+            <li>نسخه‌نویسی داروهای تحت کنترل (مخدرها و اعصاب) توسط عامل هوش مصنوعی مطلقاً ممنوع است.</li>
           </ul>
         </div>
 
-        <div className="overflow-x-auto shadow-sm rounded-xl border border-gray-200">
-          <table className="w-full text-right border-collapse text-sm">
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
-              <tr className="bg-gray-100 text-gray-700">
-                <th className="p-4 border-b font-semibold">شناسه خطر (Hazard ID)</th>
-                <th className="p-4 border-b font-semibold">شرح رویداد خطرناک (Hazardous Event)</th>
-                <th className="p-4 border-b font-semibold">پیامد بالینی (Harm)</th>
-                <th className="p-4 border-b font-semibold">کنترل ایمنی (Safety Control)</th>
+              <tr>
+                <th>شناسه خطر (Hazard ID)</th>
+                <th>شرح رویداد خطرناک (Hazardous Event)</th>
+                <th>پیامد بالینی (Harm)</th>
+                <th>کنترل ایمنی (Safety Control)</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 bg-white">
-              <tr className="border-b hover:bg-gray-50">
-                <td className="p-4 font-mono font-bold text-red-700">HAZ-001</td>
-                <td className="p-4">هوش مصنوعی علائم حمله قلبی را به عنوان سوءهاضمه ساده طبقه‌بندی کند.</td>
-                <td className="p-4">تأخیر در درمان حیاتی، مرگ بیمار</td>
-                <td className="p-4">فیلتر اجباری کلمات کلیدی (Chest Pain, Radiating Pain) در ماژول Triage قبل از ورود به LLM و ارجاع فوری به اورژانس.</td>
+            <tbody>
+              <tr>
+                <td className="font-mono font-bold text-[#ef4444]">HAZ-001</td>
+                <td className="premium-text-primary">هوش مصنوعی حمله قلبی را سوءهاضمه بداند.</td>
+                <td><span className="badge badge-red">مرگ بیمار</span></td>
+                <td className="text-sm">فیلتر کلمات کلیدی در ماژول Triage و ارجاع فوری.</td>
               </tr>
-              <tr className="border-b hover:bg-gray-50">
-                <td className="p-4 font-mono font-bold text-red-700">HAZ-002</td>
-                <td className="p-4">تجویز داروی جدید توسط AI بدون بررسی حساسیت دارویی ثبت شده در پرونده بیمار.</td>
-                <td className="p-4">شوک آنافیلاکسی، بستری</td>
-                <td className="p-4">اجرای اتوماتیک Rule Engine بررسی تداخل دارویی بین خروجی AI و پروفایل SHR پیش از نمایش به کاربر.</td>
+              <tr>
+                <td className="font-mono font-bold text-[#ef4444]">HAZ-002</td>
+                <td className="premium-text-primary">تجویز دارو بدون چک کردن حساسیت بیمار.</td>
+                <td><span className="badge badge-red">شوک آنافیلاکسی</span></td>
+                <td className="text-sm">اجرای اتوماتیک Rule Engine تداخل دارویی با SHR.</td>
               </tr>
-              <tr className="border-b hover:bg-gray-50">
-                <td className="p-4 font-mono font-bold text-red-700">HAZ-003</td>
-                <td className="p-4">بیمار دچار اضطراب شدید، از ادبیات خشن/خودکشی استفاده کند و AI پاسخ عادی/همدلانه بدهد.</td>
-                <td className="p-4">آسیب به خود</td>
-                <td className="p-4">استفاده از سیستم Sentiment/Intent Analysis ثانویه برای توقف بات و ارجاع به اپراتور انسانی در صورت تشخیص تمایل به خودکشی.</td>
+              <tr>
+                <td className="font-mono font-bold text-[#ef4444]">HAZ-003</td>
+                <td className="premium-text-primary">ادبیات خشن بیمار و پاسخ همدلانه بی‌اثر بات.</td>
+                <td><span className="badge badge-orange">آسیب به خود</span></td>
+                <td className="text-sm">استفاده از Sentiment Analysis برای توقف بات و ارجاع.</td>
               </tr>
             </tbody>
           </table>

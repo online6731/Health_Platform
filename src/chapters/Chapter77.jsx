@@ -9,95 +9,86 @@ const Chapter77 = () => {
     >
       <div className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-600 text-right" dir="rtl">
         
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">مدیریت ذی‌نفعان و ماتریس نقش‌ها</h2>
+      <section className="mb-12 animate-fade-in">
+        <h2 className="text-2xl font-bold mb-6 premium-text-accent border-b border-[var(--border-color)] pb-2">ذی‌نفعان و نقش‌ها (RBAC & Journey)</h2>
         
-        <h3 className="font-bold text-xl text-blue-800 mb-4 mt-8">۱. ماتریس دسترسی و نقش‌ها (RBAC)</h3>
-        <div className="overflow-x-auto shadow-sm rounded-xl border border-gray-200 mb-10">
-          <table className="w-full text-center border-collapse text-sm">
+        <h3 className="font-bold text-xl premium-text-primary mb-4 mt-8">۱. ماتریس دسترسی و نقش‌ها (RBAC)</h3>
+        <div className="premium-table-container mb-10">
+          <table className="premium-table text-center">
             <thead>
-              <tr className="bg-gray-100 text-gray-700">
-                <th className="p-4 border-b font-semibold text-right">نقش (Role)</th>
-                <th className="p-4 border-b font-semibold">مشاهده پرونده</th>
-                <th className="p-4 border-b font-semibold">ویرایش رکوردها</th>
-                <th className="p-4 border-b font-semibold">دسترسی به AI Doctor</th>
-                <th className="p-4 border-b font-semibold">ثبت نسخه/دستور</th>
-                <th className="p-4 border-b font-semibold">خروجی داده خام</th>
+              <tr>
+                <th className="text-right">نقش (Role)</th>
+                <th className="text-center">مشاهده پرونده</th>
+                <th className="text-center">ویرایش رکوردها</th>
+                <th className="text-center">دسترسی دستیار AI</th>
+                <th className="text-center">صدور نسخه</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 bg-white">
-              <tr className="border-b hover:bg-gray-50 transition-colors">
-                <td className="p-4 font-bold text-right text-gray-800">بیمار (Patient)</td>
-                <td className="p-4 text-green-600 font-semibold">فقط خودش (Full)</td>
-                <td className="p-4 text-orange-500 font-semibold">محدود به خود‌اظهاری</td>
-                <td className="p-4 text-green-600 font-semibold">نسخه عمومی</td>
-                <td className="p-4 text-red-500">خیر</td>
-                <td className="p-4 text-green-600 font-semibold">داده‌های شخصی</td>
+            <tbody>
+              <tr>
+                <td className="font-bold text-right premium-text-primary">بیمار (Patient)</td>
+                <td><span className="badge badge-green">کامل (Full)</span></td>
+                <td><span className="badge badge-yellow">خوداظهاری</span></td>
+                <td><span className="badge badge-blue">نسخه عمومی</span></td>
+                <td><span className="badge badge-red">خیر</span></td>
               </tr>
-              <tr className="border-b hover:bg-gray-50 transition-colors">
-                <td className="p-4 font-bold text-right text-gray-800">پزشک معالج</td>
-                <td className="p-4 text-green-600 font-semibold">بیماران دارای رضایت</td>
-                <td className="p-4 text-green-600 font-semibold">ثبت ویزیت و تشخیص</td>
-                <td className="p-4 text-blue-600 font-semibold">دستیار تخصصی (Pro)</td>
-                <td className="p-4 text-green-600 font-semibold">بله (قطعی)</td>
-                <td className="p-4 text-orange-500 font-semibold">گزارشات تجمیعی</td>
+              <tr>
+                <td className="font-bold text-right premium-text-primary">پزشک معالج</td>
+                <td><span className="badge badge-green">بیماران خود</span></td>
+                <td><span className="badge badge-green">تشخیص و ویزیت</span></td>
+                <td><span className="badge badge-purple">نسخه پرو (Pro)</span></td>
+                <td><span className="badge badge-green">بله</span></td>
               </tr>
-              <tr className="border-b hover:bg-gray-50 transition-colors">
-                <td className="p-4 font-bold text-right text-gray-800">متصدی آزمایشگاه</td>
-                <td className="p-4 text-orange-500 font-semibold">فقط درخواست‌های تست</td>
-                <td className="p-4 text-green-600 font-semibold">آپلود نتایج</td>
-                <td className="p-4 text-red-500">خیر</td>
-                <td className="p-4 text-red-500">خیر</td>
-                <td className="p-4 text-red-500">خیر</td>
-              </tr>
-              <tr className="border-b hover:bg-gray-50 transition-colors">
-                <td className="p-4 font-bold text-right text-gray-800">داروساز</td>
-                <td className="p-4 text-orange-500 font-semibold">فقط نسخ دارویی</td>
-                <td className="p-4 text-orange-500 font-semibold">ثبت تحویل دارو</td>
-                <td className="p-4 text-green-600 font-semibold">چک تداخل دارویی</td>
-                <td className="p-4 text-red-500">خیر</td>
-                <td className="p-4 text-red-500">خیر</td>
+              <tr>
+                <td className="font-bold text-right premium-text-primary">متصدی آزمایشگاه</td>
+                <td><span className="badge badge-yellow">نسخه آزمایش</span></td>
+                <td><span className="badge badge-green">آپلود نتایج</span></td>
+                <td><span className="badge badge-red">خیر</span></td>
+                <td><span className="badge badge-red">خیر</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h3 className="font-bold text-xl text-purple-800 mb-4 mt-8">۲. نقشه سفر کاربر (Patient Journey Map)</h3>
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+        <h3 className="font-bold text-xl premium-text-primary mb-4 mt-8">۲. نقشه سفر بیمار (Patient Journey Map)</h3>
+        <div className="glass-panel p-6">
           <div className="flex flex-col space-y-6">
             
             <div className="flex flex-col md:flex-row gap-4 items-start">
-              <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-800 shrink-0">۱</div>
-              <div className="bg-gray-50 p-4 rounded-lg flex-1 border border-gray-100 w-full">
-                <h4 className="font-bold text-gray-800 mb-2">احساس ناخوشی (Awareness)</h4>
-                <p className="text-sm text-gray-600 mb-2">کاربر علائمی دارد و با AI Doctor وارد مکالمه می‌شود.</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded">نقش AI: دریافت شرح حال</span>
-                  <span className="px-2 py-1 bg-red-100 text-red-700 rounded">ریسک: توهم در تفسیر علائم</span>
+              <div className="w-12 h-12 rounded-full bg-[rgba(168,85,247,0.15)] border border-[var(--accent-purple)] flex items-center justify-center font-bold text-[var(--accent-purple)] shrink-0 shadow-lg">۱</div>
+              <div className="bg-[var(--bg-primary)] p-4 rounded-xl flex-1 border border-[var(--border-color)] w-full relative overflow-hidden group">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[var(--accent-purple)] group-hover:w-2 transition-all"></div>
+                <h4 className="font-bold premium-text-primary mb-2">احساس ناخوشی (Awareness)</h4>
+                <p className="text-sm premium-text-secondary mb-3">کاربر علائمی دارد و با بات وارد مکالمه می‌شود.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="badge badge-blue">AI: دریافت شرح حال</span>
+                  <span className="badge badge-red">ریسک: توهم هوش مصنوعی</span>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row gap-4 items-start">
-              <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-800 shrink-0">۲</div>
-              <div className="bg-gray-50 p-4 rounded-lg flex-1 border border-gray-100 w-full">
-                <h4 className="font-bold text-gray-800 mb-2">تریاژ و ارجاع (Triage)</h4>
-                <p className="text-sm text-gray-600 mb-2">مدل AI علائم خطر را چک کرده و کاربر را به پزشک گوارش ارجاع می‌دهد.</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded">نقش AI: ارزیابی ریسک</span>
-                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded">اکشن: رزرو نوبت</span>
+              <div className="w-12 h-12 rounded-full bg-[rgba(168,85,247,0.15)] border border-[var(--accent-purple)] flex items-center justify-center font-bold text-[var(--accent-purple)] shrink-0 shadow-lg">۲</div>
+              <div className="bg-[var(--bg-primary)] p-4 rounded-xl flex-1 border border-[var(--border-color)] w-full relative overflow-hidden group">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[var(--accent-blue)] group-hover:w-2 transition-all"></div>
+                <h4 className="font-bold premium-text-primary mb-2">تریاژ و ارجاع (Triage)</h4>
+                <p className="text-sm premium-text-secondary mb-3">مدل، علائم خطر را چک کرده و رزرو نوبت می‌کند.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="badge badge-blue">AI: تریاژ خطر</span>
+                  <span className="badge badge-green">اکشن: سیستم نوبت‌دهی</span>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row gap-4 items-start">
-              <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-800 shrink-0">۳</div>
-              <div className="bg-gray-50 p-4 rounded-lg flex-1 border border-gray-100 w-full">
-                <h4 className="font-bold text-gray-800 mb-2">ویزیت آنلاین و نسخه (Treatment)</h4>
-                <p className="text-sm text-gray-600 mb-2">پزشک با مشاهده خلاصه پرونده (تهیه شده توسط AI) بیمار را ویزیت و نسخه صادر می‌کند.</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded">نقش AI: خلاصه‌سازی پرونده</span>
-                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded">اکشن: صدور نسخه و بیمه</span>
+              <div className="w-12 h-12 rounded-full bg-[rgba(168,85,247,0.15)] border border-[var(--accent-purple)] flex items-center justify-center font-bold text-[var(--accent-purple)] shrink-0 shadow-lg">۳</div>
+              <div className="bg-[var(--bg-primary)] p-4 rounded-xl flex-1 border border-[var(--border-color)] w-full relative overflow-hidden group">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[var(--accent-teal)] group-hover:w-2 transition-all"></div>
+                <h4 className="font-bold premium-text-primary mb-2">ویزیت آنلاین (Treatment)</h4>
+                <p className="text-sm premium-text-secondary mb-3">پزشک خلاصه تهیه شده توسط AI را دیده و نسخه می‌دهد.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="badge badge-blue">AI: خلاصه‌سازی هوشمند</span>
+                  <span className="badge badge-purple">اکشن: صدور نسخه دیجیتال</span>
                 </div>
               </div>
             </div>
