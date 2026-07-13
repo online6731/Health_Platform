@@ -596,3 +596,10 @@ html {
 .premium-text-primary { color: var(--text-primary); font-weight: 600; }
 .premium-text-secondary { color: var(--text-secondary); }
 .premium-text-accent { color: var(--accent-blue); }
+
+
+/* Global Expanded State for Premium Cards (Deep Audit Fix) */
+.premium-card.expanded {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.2) !important;
+}

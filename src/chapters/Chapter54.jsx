@@ -162,7 +162,7 @@ export default function Chapter54() {
             {competitors.filter(c => !c.isUs).map(comp => (
               <div
                 key={comp.name}
-                className={`comp-card ${activeCompetitor === comp.name ? 'expanded' : ''}`}
+                className={`premium-card p-6 ${activeCompetitor === comp.name ? 'expanded' : ''}`}
                 onClick={() => setActiveCompetitor(activeCompetitor === comp.name ? null : comp.name)}
               >
                 <div className="comp-card-header">

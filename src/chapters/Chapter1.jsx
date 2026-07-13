@@ -169,7 +169,7 @@ export default function Chapter1() {
       </section>
 
       <div className="premium-card p-8 bg-[var(--bg-secondary)] border border-[var(--accent-teal)] shadow-lg" style={{marginTop: '4rem'}}>
-        <h3><Eye className="section-icon" style={{color: '#fff'}} /> ۱-۹. چشم‌انداز (Vision)</h3>
+        <h3><Eye className="section-icon" style={{color: 'var(--text-primary)'}} /> ۱-۹. چشم‌انداز (Vision)</h3>
         <p>
           چشم‌انداز این پروژه، تبدیل‌شدن به یکی از پیشروترین پلتفرم‌های سلامت هوشمند و تصمیم‌یار شخصی در منطقه و سپس بازارهای بین‌المللی است.<br/><br/>
           هدف نهایی، ایجاد زیرساختی است که در آن هر فرد یک <strong>همزاد دیجیتال مبتنی بر هوش مصنوعی</strong> در اختیار داشته باشد؛ همزادی که با شناخت عمیق از وضعیت جسمی، روانی، شناختی و رفتاری او، بتواند در تمام مراحل زندگی نقش یک مشاور، دستیار و تصمیم‌یار هوشمند را ایفا کند.
