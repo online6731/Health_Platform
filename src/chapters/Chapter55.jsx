@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { TrendingUp, TrendingDown, Shield, AlertTriangle, CheckCircle, Zap, Target, Globe, Lock, Cpu } from 'lucide-react';
-import './Chapter55.css';
+import { TrendingUp, TrendingDown, Shield, AlertTriangle, CheckCircle, Zap, Target, Globe, Lock, Cpu, Lightbulb } from 'lucide-react';
 
 const swotData = {
   strengths: [
@@ -35,32 +34,32 @@ const swotData = {
 };
 
 const quadrantConfig = {
-  strengths: { title: 'نقاط قوت', subtitle: 'Strengths', colorClass: 'q-strength', icon: TrendingUp },
-  weaknesses: { title: 'نقاط ضعف', subtitle: 'Weaknesses', colorClass: 'q-weakness', icon: TrendingDown },
-  opportunities: { title: 'فرصت‌ها', subtitle: 'Opportunities', colorClass: 'q-opportunity', icon: Zap },
-  threats: { title: 'تهدیدات', subtitle: 'Threats', colorClass: 'q-threat', icon: Shield },
+  strengths: { title: 'نقاط قوت', subtitle: 'Strengths', theme: 'emerald', icon: TrendingUp },
+  weaknesses: { title: 'نقاط ضعف', subtitle: 'Weaknesses', theme: 'rose', icon: TrendingDown },
+  opportunities: { title: 'فرصت‌ها', subtitle: 'Opportunities', theme: 'blue', icon: Zap },
+  threats: { title: 'تهدیدات', subtitle: 'Threats', theme: 'amber', icon: Shield },
 };
 
 const strategies = [
   {
     title: 'SO – رشد تهاجمی',
     desc: 'از قدرت معماری هوش مصنوعی برای تسخیر سریع بازار خاورمیانه قبل از ورود رقبای خارجی استفاده کنیم.',
-    color: 'var(--accent-teal)',
+    theme: 'teal',
   },
   {
     title: 'WO – غلبه بر ضعف',
     desc: 'از طریق شراکت با دانشگاه‌های علوم پزشکی، هم چرخه تأییدیه را تسریع می‌کنیم هم داده آموزشی مدل‌ها را تأمین می‌کنیم.',
-    color: 'var(--accent-blue)',
+    theme: 'blue',
   },
   {
     title: 'ST – دفاع استراتژیک',
     desc: 'ایجاد اثر قفل‌شدگی (Lock-in) از طریق Health ID و داده‌های تاریخی کاربران که رقبا نمی‌توانند آن را تکثیر کنند.',
-    color: 'var(--accent-purple)',
+    theme: 'purple',
   },
   {
     title: 'WT – مدیریت ریسک',
     desc: 'سرمایه‌گذاری در امنیت داده و اخذ گواهینامه‌های بین‌المللی برای کاهش ریسک قانونی و افزایش اعتماد.',
-    color: '#f59e0b',
+    theme: 'amber',
   },
 ];
 
@@ -72,41 +71,72 @@ export default function Chapter55() {
       title="فصل ۵۵: تحلیل SWOT"
       englishTitle="SWOT Analysis & Strategic Framework"
     >
-      <div className="ch55-container">
+      <div className="prose prose-lg max-w-none text-right" dir="rtl">
 
-        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
-          <h3>۵۵-۱ مقدمه: چارچوب استراتژیک</h3>
-          <p>
+        <div className="flex items-center gap-3 mb-8 border-b border-[var(--border-color)] pb-4">
+          <div className="p-3 rounded-2xl bg-[rgba(16,185,129,0.1)] border border-[rgba(16,185,129,0.2)]">
+            <Target className="w-8 h-8 text-emerald-500" />
+          </div>
+          <div>
+            <h2 className="text-3xl font-black m-0 bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-600">
+              تحلیل SWOT و چارچوب استراتژیک
+            </h2>
+            <p className="text-sm premium-text-secondary mt-1 mb-0 font-medium tracking-wide">SWOT Analysis & Strategy</p>
+          </div>
+        </div>
+
+        <div className="glass-panel p-6 mb-12 border-r-4 border-r-emerald-500 relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+          <h3 className="text-xl font-bold premium-text-primary mb-3 mt-0 relative z-10 flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-emerald-500" /> ۵۵-۱ مقدمه: چارچوب استراتژیک
+          </h3>
+          <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
             تحلیل SWOT یک ارزیابی صادقانه از موقعیت استراتژیک HCOS در لحظه حاضر است. این تحلیل مبنای تصمیم‌گیری‌های اجرایی در ۱۸ ماه اول است.
           </p>
         </div>
 
-        {/* SWOT Matrix */}
-        <section className="chapter-section">
-          <h3><Target className="section-icon" /> ۵۵-۲ ماتریس SWOT تعاملی</h3>
-          <div className="swot-tabs">
+        {/* SWOT Interactive Matrix */}
+        <section className="mb-12">
+          <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
+            <Target className="w-6 h-6 text-emerald-500" /> ۵۵-۲ ماتریس SWOT تعاملی
+          </h3>
+          
+          <div className="flex flex-wrap gap-3 mb-6">
             {Object.entries(quadrantConfig).map(([key, config]) => (
               <button
                 key={key}
-                className={`swot-tab ${config.colorClass} ${activeQuadrant === key ? 'active' : ''}`}
+                className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 p-3 rounded-xl border-2 transition-all duration-300 font-bold text-sm shadow-sm
+                  ${activeQuadrant === key 
+                    ? `border-${config.theme}-500 bg-${config.theme}-500 text-white shadow-${config.theme}-500/25 transform scale-[1.02]` 
+                    : `border-[var(--border-color)] bg-[var(--bg-secondary)] text-${config.theme}-500 hover:bg-${config.theme}-500/5 hover:border-${config.theme}-400`}`}
                 onClick={() => setActiveQuadrant(key)}
               >
-                <config.icon size={18} />
+                <config.icon size={18} className={activeQuadrant === key ? 'text-white' : `text-${config.theme}-500`} />
                 <span>{config.title}</span>
               </button>
             ))}
           </div>
 
-          <div className={`swot-content ${quadrantConfig[activeQuadrant].colorClass}`}>
-            <div className="swot-header">
-              <h4>{quadrantConfig[activeQuadrant].title}</h4>
-              <span className="swot-en">{quadrantConfig[activeQuadrant].subtitle}</span>
+          <div className={`glass-panel p-6 md:p-8 rounded-2xl border-t-4 border-t-${quadrantConfig[activeQuadrant].theme}-500 animate-fade-in shadow-xl bg-gradient-to-br from-${quadrantConfig[activeQuadrant].theme}-500/5 to-transparent`}>
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--border-color)]">
+              <div className={`p-2 rounded-lg bg-${quadrantConfig[activeQuadrant].theme}-500/10 text-${quadrantConfig[activeQuadrant].theme}-500`}>
+                {React.createElement(quadrantConfig[activeQuadrant].icon, { size: 24 })}
+              </div>
+              <div>
+                <h4 className="font-bold text-2xl premium-text-primary m-0">{quadrantConfig[activeQuadrant].title}</h4>
+                <span className={`text-sm font-medium text-${quadrantConfig[activeQuadrant].theme}-500 block mt-1 tracking-wider uppercase`}>
+                  {quadrantConfig[activeQuadrant].subtitle}
+                </span>
+              </div>
             </div>
-            <ul className="swot-list">
+            
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 m-0 p-0 list-none">
               {swotData[activeQuadrant].map((item, i) => (
-                <li key={i}>
-                  <item.icon size={16} className="swot-item-icon" />
-                  <span>{item.text}</span>
+                <li key={i} className={`flex items-start gap-3 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-${quadrantConfig[activeQuadrant].theme}-500/30 transition-colors group`}>
+                  <div className={`mt-0.5 text-${quadrantConfig[activeQuadrant].theme}-500 group-hover:scale-110 transition-transform`}>
+                    <item.icon size={18} />
+                  </div>
+                  <span className="text-sm premium-text-primary leading-relaxed">{item.text}</span>
                 </li>
               ))}
             </ul>
@@ -114,23 +144,24 @@ export default function Chapter55() {
         </section>
 
         {/* Full Matrix View */}
-        <section className="chapter-section">
-          <h3><Globe className="section-icon" /> ۵۵-۳ نمای کامل ماتریس ۴ بخشی</h3>
-          <div className="swot-matrix">
+        <section className="mb-12 hidden lg:block">
+          <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
+            <Globe className="w-6 h-6 text-emerald-500" /> ۵۵-۳ نمای کامل ماتریس ۴ بخشی
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
             {Object.entries(swotData).map(([key, items]) => {
               const config = quadrantConfig[key];
               return (
-                <div key={key} className={`matrix-cell ${config.colorClass}`}>
-                  <div className="matrix-cell-header">
+                <div key={key} className={`glass-panel p-5 rounded-2xl border border-[var(--border-color)] hover:border-${config.theme}-500/30 transition-colors h-full flex flex-col`}>
+                  <div className={`flex items-center gap-2 mb-4 pb-3 border-b border-[var(--border-color)] text-${config.theme}-500`}>
                     <config.icon size={20} />
-                    <div>
-                      <strong>{config.title}</strong>
-                      <small>{config.subtitle}</small>
-                    </div>
+                    <strong className="font-bold">{config.title}</strong>
                   </div>
-                  <ul>
+                  <ul className="space-y-3 m-0 p-0 list-none flex-1">
                     {items.map((item, i) => (
-                      <li key={i}>{item.text}</li>
+                      <li key={i} className="flex items-start gap-2 text-xs premium-text-secondary leading-relaxed">
+                        <span className={`text-${config.theme}-400 mt-1 shrink-0`}>•</span> {item.text}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -140,13 +171,16 @@ export default function Chapter55() {
         </section>
 
         {/* Strategies */}
-        <section className="chapter-section">
-          <h3><Zap className="section-icon" /> ۵۵-۴ استراتژی‌های مستخرج از SWOT</h3>
-          <div className="strategies-grid">
+        <section className="mb-8">
+          <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
+            <Zap className="w-6 h-6 text-emerald-500" /> ۵۵-۴ استراتژی‌های مستخرج از SWOT
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {strategies.map(s => (
-              <div key={s.title} className="strategy-card" style={{ borderColor: s.color }}>
-                <h5 style={{ color: s.color }}>{s.title}</h5>
-                <p>{s.desc}</p>
+              <div key={s.title} className={`glass-panel p-5 rounded-xl border-r-4 border-r-${s.theme}-500 hover:-translate-y-1 transition-transform duration-300 shadow-sm relative overflow-hidden group`}>
+                <div className={`absolute inset-0 bg-gradient-to-l from-${s.theme}-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+                <h5 className={`font-bold text-${s.theme}-600 dark:text-${s.theme}-400 m-0 mb-3 relative z-10 text-lg`}>{s.title}</h5>
+                <p className="text-sm premium-text-secondary m-0 leading-relaxed relative z-10">{s.desc}</p>
               </div>
             ))}
           </div>
