@@ -11,7 +11,7 @@ export default function Chapter27() {
       title="فصل ۲۷: سیستم دیزاین و تجربه کاربری" 
       englishTitle="Design System & User Experience"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>زبان طراحی یکپارچه (Unified Design Language)</h3>
         <p>
           با توجه به اینکه پلتفرم ما توسط گروه‌های مختلفی اعم از بیماران (کودک تا سالمند)، پزشکان، 

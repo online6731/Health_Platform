@@ -59,7 +59,7 @@ export default function Chapter64() {
     >
       <div className="ch64-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۶۴-۱ سند الزامات محصول (PRD)</h3>
           <p>
             این بخش الزامات عملکردی (Functional Requirements) و غیرعملکردی کلیدی پلتفرم HCOS را به همراه وایرفریم‌های اولیه تعاملی و مدل‌های تست پایداری بالینی مرور می‌کند.

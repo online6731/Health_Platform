@@ -110,7 +110,7 @@ export default function Chapter59() {
     >
       <div className="ch59-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۹-۱ پلتفرم باز HCOS و توسعه‌دهندگان</h3>
           <p>
             سیستم‌عامل سلامت HCOS از روز اول با رویکرد پلتفرم باز (Open API) توسعه یافته است. ما با ارائه مستندات استاندارد، کیت‌های توسعه نرم‌افزار (SDK) به زبان‌های محبوب و وب‌هویک‌های بلادرنگ، یکپارچه‌سازی را تسهیل کرده‌ایم.

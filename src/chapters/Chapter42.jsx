@@ -30,7 +30,7 @@ export default function Chapter42() {
             {engineeringPillars.map((pillar, idx) => {
               const Icon = pillar.icon;
               return (
-                <div key={idx} className="dev-card">
+                <div key={idx} className="premium-card p-6">
                   <div className="dev-icon">
                     <Icon size={24} />
                   </div>

@@ -34,7 +34,7 @@ export default function Chapter62() {
     >
       <div className="ch62-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۶۲-۱ چارچوب انطباق قانونی پلتفرم</h3>
           <p>
             سلامت دیجیتال مستلزم رعایت دقیق قوانین بالینی، استانداردهای سازمان‌های حاکمیتی و حمایت همه‌جانبه از حقوق قانونی بیماران و کادر درمان است. HCOS منطبق بر جدیدترین آیین‌نامه‌های وزارت بهداشت عمل می‌کند.

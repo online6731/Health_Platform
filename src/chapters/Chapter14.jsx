@@ -10,7 +10,7 @@ export default function Chapter14() {
       englishTitle="Simulation Engine & Health World Model"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۴-۱ مقدمه: فراتر از پیش‌بینی، حرکت به سمت شبیه‌سازی</h3>
         <p>
           پس از ساخت همزاد دیجیتال (Digital Twin) برای تک‌تک کاربران، این پلتفرم با تجمیع داده‌های ناشناس ده‌ها هزار نفر، یک <strong>مدل کلان از جهان سلامت (Health World Model)</strong> می‌سازد. این موتور شبیه‌سازی به سیاست‌گذاران و سازمان‌ها امکان می‌دهد تا پیش از اجرای واقعی یک تصمیم، اثرات آن را در یک محیط دیجیتال و امن بررسی کنند.

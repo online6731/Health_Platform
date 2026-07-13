@@ -74,7 +74,7 @@ export default function Chapter55() {
     >
       <div className="ch55-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۵-۱ مقدمه: چارچوب استراتژیک</h3>
           <p>
             تحلیل SWOT یک ارزیابی صادقانه از موقعیت استراتژیک HCOS در لحظه حاضر است. این تحلیل مبنای تصمیم‌گیری‌های اجرایی در ۱۸ ماه اول است.

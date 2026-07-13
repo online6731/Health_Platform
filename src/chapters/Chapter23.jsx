@@ -10,7 +10,7 @@ export default function Chapter23() {
       englishTitle="Global Expansion Strategy"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۲۳-۱ چشم‌انداز بین‌المللی</h3>
         <p>
           سلامت یک نیاز جهانی است و معماری پلتفرم ما محدود به مرزهای جغرافیایی نیست. مدل همزاد دیجیتال و عامل‌های هوش مصنوعی ما به گونه‌ای طراحی شده‌اند که قابلیت تطبیق (Localization) با زبان‌ها، فرهنگ‌ها و ژنتیک‌های مختلف را داشته باشند.

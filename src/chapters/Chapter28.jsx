@@ -42,7 +42,7 @@ export default function Chapter28() {
       title="فصل ۲۸: موتورهای تصمیم‌ساز هوش مصنوعی" 
       englishTitle="AI Decision Engines"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>مغز متفکر پلتفرم سلامت</h3>
         <p>
           هوش مصنوعی در این پلتفرم صرفاً یک چت‌بات ساده نیست؛ بلکه مجموعه‌ای از <strong>موتورهای پردازشی تخصصی (Engines)</strong> است که در پس‌زمینه (Background) کار می‌کنند. این موتورها به صورت لحظه‌ای داده‌های ورودی را پردازش کرده و بینش‌های عملی (Actionable Insights) تولید می‌کنند.

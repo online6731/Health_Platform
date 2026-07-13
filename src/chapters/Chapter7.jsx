@@ -10,7 +10,7 @@ export default function Chapter7() {
       englishTitle="AI Core Engine & Agentic Architecture"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۷-۱ پارادایم جدید هوش مصنوعی در سلامت</h3>
         <p>
           در این پلتفرم، هوش مصنوعی یک امکان جانبی (Add-on) نیست، بلکه دقیقاً <strong>«هسته مرکزی»</strong> تمام پردازش‌ها محسوب می‌شود. 

@@ -76,7 +76,7 @@ export default function Chapter54() {
     >
       <div className="ch54-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۴-۱ نقشه رقابتی بازار</h3>
           <p>
             بازار سلامت دیجیتال در خاورمیانه و به‌خصوص ایران هنوز بدون یک رقیب مسلط است. رقبای جهانی پوشش منطقه‌ای ندارند، رقبای داخلی از هوش مصنوعی واقعی بهره نمی‌برند. این خلأ دقیقاً جایگاه HCOS است.
@@ -158,7 +158,7 @@ export default function Chapter54() {
         {/* Competitor Cards */}
         <section className="chapter-section">
           <h3><TrendingUp className="section-icon" /> ۵۴-۴ پروفایل تفصیلی رقبا</h3>
-          <div className="comp-cards">
+          <div className="grid-2-col">
             {competitors.filter(c => !c.isUs).map(comp => (
               <div
                 key={comp.name}
@@ -187,7 +187,7 @@ export default function Chapter54() {
         {/* Our Advantage */}
         <section className="chapter-section">
           <h3><Shield className="section-icon" /> ۵۴-۵ مزیت رقابتی پایدار HCOS</h3>
-          <div className="advantages-grid">
+          <div className="grid-2-col">
             {[
               { icon: Zap, title: 'بومی‌سازی عمیق', desc: 'تنها پلتفرمی که زبان، فرهنگ، قوانین و زیرساخت پزشکی منطقه را درک می‌کند.' },
               { icon: Target, title: 'Health OS نه App', desc: 'ما یک اکوسیستم چندجانبه می‌سازیم، نه یک اپلیکیشن تکی که رقبا بتوانند کپی کنند.' },

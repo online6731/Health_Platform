@@ -60,7 +60,7 @@ export default function Chapter57() {
     >
       <div className="ch57-container">
         
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۷-۱ تایملاین و اهداف فازبندی شده</h3>
           <p>
             نقشه راه توسعه HCOS به‌گونه‌ای طراحی شده که با مدیریت بهینه منابع مالی و R&D، در هر فاز ارزش ملموسی را به بازار تحویل دهد و به‌طور مستمر ریسک‌های فنی را کاهش دهد.

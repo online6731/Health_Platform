@@ -23,19 +23,19 @@ export default function Chapter3() {
       englishTitle="Problem Analysis & Market Need"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۳-۱ مقدمه</h3>
         <p>
           سلامت یکی از بنیادی‌ترین نیازهای انسان است و به‌طور مستقیم بر کیفیت زندگی، بهره‌وری فردی، توسعه اقتصادی و رفاه اجتماعی تأثیر می‌گذارد. با وجود پیشرفت‌های چشمگیر پزشکی، فناوری اطلاعات و هوش مصنوعی، نظام‌های سلامت در سراسر جهان همچنان با چالش‌های متعددی مواجه هستند.
         </p>
-        <div className="quote-box">
+        <div className="premium-card text-center p-8 my-8 border border-[var(--accent-purple)] text-lg">
           بزرگ‌ترین چالش سلامت امروز، کمبود پزشک نیست؛ بلکه «پراکندگی داده‌ها» و «واکنشی بودن درمان» است.
         </div>
       </div>
 
       <section className="chapter-section">
         <h3><Search className="section-icon" /> ۳-۲ وضعیت فعلی نظام سلامت</h3>
-        <div className="highlight-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-purple)]">
           در مدل فعلی، بیماران تنها <strong>پس از بروز علائم</strong> به پزشک مراجعه می‌کنند و فرصت حیاتی پیشگیری و مدیریت پیش‌هنگام از دست می‌رود.
         </div>
         <div className="grid-3-col">
@@ -75,7 +75,7 @@ export default function Chapter3() {
           </div>
         </div>
 
-        <div className="highlight-box" style={{marginTop: '2rem'}}>
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-purple)]" style={{marginTop: '2rem'}}>
           <strong>محدودیت هوش مصنوعی‌های عمومی (نظیر ChatGPT):</strong> عدم دسترسی به پرونده مستمر بیمار، نبود حافظه بلندمدت ساختاریافته پزشکی، و ناتوانی در تحلیل یکپارچه داده‌های چندمنبعی.
         </div>
       </section>

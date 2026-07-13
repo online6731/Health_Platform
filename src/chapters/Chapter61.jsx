@@ -37,7 +37,7 @@ export default function Chapter61() {
     >
       <div className="ch61-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۶۱-۱ درآمدزایی و رشد در ابعاد مالی</h3>
           <p>
             توسعه یک مدل مالی پایدار مبتنی بر سود ناخالص بالا (بیش از ۸۰٪ در فازهای بلوغ)، مشخصه اصلی مدل نرم‌افزاری HCOS است که ارزش‌آفرینی بلندمدت برای سرمایه‌گذاران را تضمین می‌کند.

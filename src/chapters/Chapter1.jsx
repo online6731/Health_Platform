@@ -16,26 +16,26 @@ export default function Chapter1() {
       title="فصل ۱: خلاصه مدیریتی" 
       englishTitle="Executive Summary"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱-۱. معرفی پروژه</h3>
         <p>
           جهان سلامت در آستانه یکی از بزرگ‌ترین تحولات تاریخ خود قرار دارد. رشد سریع هوش مصنوعی، اینترنت اشیاء (IoT) و پزشکی شخصی‌سازی‌شده (Personalized Medicine)، بستری فراهم کرده است تا رویکرد سنتی سلامت از «درمان پس از بروز بیماری» به «پیشگیری و بهینه‌سازی مستمر» تغییر یابد.
         </p>
-        <div className="quote-box">
+        <div className="premium-card text-center p-8 my-8 border border-[var(--accent-purple)] text-lg">
           این پروژه، طراحی و توسعه یک <strong>پلتفرم سلامت هوشمند مبتنی بر هوش مصنوعی چندعاملی (Multi-Agent AI) و همزاد دیجیتال انسان (Digital Twin)</strong> است.
         </div>
       </div>
 
       <div className="grid-3-col">
-        <div className="metric-card">
+        <div className="premium-card text-center flex flex-col items-center justify-center p-6 border-b-4 border-b-[var(--accent-teal)]">
           <div className="metric-value">۳۵٪</div>
           <div className="metric-label">کاهش هزینه‌های درمانی (تخمین)</div>
         </div>
-        <div className="metric-card">
+        <div className="premium-card text-center flex flex-col items-center justify-center p-6 border-b-4 border-b-[var(--accent-teal)]">
           <div className="metric-value">۲۴/۷</div>
           <div className="metric-label">نظارت و مانیتورینگ بلادرنگ</div>
         </div>
-        <div className="metric-card">
+        <div className="premium-card text-center flex flex-col items-center justify-center p-6 border-b-4 border-b-[var(--accent-teal)]">
           <div className="metric-value">۳</div>
           <div className="metric-label">سطح یکپارچه‌سازی (کاربر، پزشک، سیستم)</div>
         </div>
@@ -43,7 +43,7 @@ export default function Chapter1() {
 
       <section className="chapter-section">
         <h3><Target className="section-icon" /> ۱-۲. بیان مسئله (Problem Statement)</h3>
-        <div className="highlight-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-purple)]">
           نظام سلامت فعلی با چالش‌های ساختاری متعددی روبه‌رو است که مانع از ارائه خدمات بهینه، دقیق و پیشگیرانه می‌شود. این سیستم نیازمند تغییر از رویکرد واکنشی به رویکرد پیشگیرانه است.
         </div>
         <ul style={{color: 'var(--text-secondary)', lineHeight: '1.8'}}>
@@ -57,18 +57,18 @@ export default function Chapter1() {
       <section className="chapter-section">
         <h3><Lightbulb className="section-icon" /> ۱-۳. راهکار پیشنهادی (The Solution)</h3>
         <p>این پلتفرم به عنوان یک <strong>سیستم‌عامل سلامت (Health OS)</strong> عمل می‌کند. هسته اصلی راهکار ما شامل سه بخش نوآورانه است:</p>
-        <div className="solution-grid">
-          <div className="solution-card">
+        <div className="grid-3-col">
+          <div className="premium-card p-6 border-t-4 border-t-[var(--accent-blue)]">
             <div className="solution-icon">۱</div>
             <h4>همزاد دیجیتال (Digital Twin)</h4>
             <p>ایجاد یک مدل مجازی و دینامیک از هر کاربر که به صورت پیوسته با دریافت داده‌های جدید آپدیت می‌شود و وضعیت فعلی و آینده سلامت فرد را شبیه‌سازی می‌کند.</p>
           </div>
-          <div className="solution-card">
+          <div className="premium-card p-6 border-t-4 border-t-[var(--accent-blue)]">
             <div className="solution-icon">۲</div>
             <h4>معماری چندعاملی (Multi-Agent Architecture)</h4>
             <p>استفاده از چندین عامل هوشمند (مانند عامل تشخیصی، روانشناختی، تغذیه و مربی شخصی) که به صورت خودمختار با یکدیگر همکاری کرده و بهترین برنامه‌ی شخصی‌سازی‌شده را ارائه می‌دهند.</p>
           </div>
-          <div className="solution-card">
+          <div className="premium-card p-6 border-t-4 border-t-[var(--accent-blue)]">
             <div className="solution-icon">۳</div>
             <h4>مدل بنیادین کاربر (User Foundation Model)</h4>
             <p>یک مدل یادگیری عمیق که بر اساس داده‌های چندوجهی کاربر آموزش دیده و منحصر به همان فرد است.</p>
@@ -80,8 +80,8 @@ export default function Chapter1() {
         <h3><Users className="section-icon" /> ۱-۴. ارزش‌آفرینی (Value Proposition)</h3>
         <p>پلتفرم ما یک اکوسیستم برد-برد-برد ایجاد می‌کند:</p>
         
-        <div className="executive-grid">
-          <div className="executive-card">
+        <div className="grid-3-col">
+          <div className="premium-card p-6">
             <h4><Users size={20} style={{marginRight: '8px'}} /> برای کاربران (بیماران)</h4>
             <ul>
               <li>مشاور و مراقب سلامت شخصی ۲۴/۷</li>
@@ -89,7 +89,7 @@ export default function Chapter1() {
               <li>کاهش هزینه‌های درمانی بلندمدت</li>
             </ul>
           </div>
-          <div className="executive-card">
+          <div className="premium-card p-6">
             <h4><Target size={20} style={{marginRight: '8px'}} /> برای پزشکان</h4>
             <ul>
               <li>دستیار هوشمند برای تصمیم‌گیری بالینی</li>
@@ -97,7 +97,7 @@ export default function Chapter1() {
               <li>دسترسی به داده‌های ساختاریافته</li>
             </ul>
           </div>
-          <div className="executive-card">
+          <div className="premium-card p-6">
             <h4><Zap size={20} style={{marginRight: '8px'}} /> برای توسعه‌دهندگان</h4>
             <ul>
               <li>ایجاد عامل‌های هوشمند تخصصی</li>
@@ -107,7 +107,7 @@ export default function Chapter1() {
           </div>
         </div>
 
-        <div className="highlight-box" style={{marginTop: '2rem'}}>
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-purple)]" style={{marginTop: '2rem'}}>
           <strong>مزیت‌های رقابتی:</strong> یکپارچگی کامل، همزاد دیجیتال انسان، معماری چندعاملی، شخصی‌سازی عمیق، یادگیری مستمر، اکوسیستم باز و مقیاس‌پذیری جهانی.
         </div>
       </section>
@@ -159,16 +159,16 @@ export default function Chapter1() {
       <section className="chapter-section">
         <h3><DollarSign className="section-icon" /> ۱-۶. مدل درآمدی (Business Model)</h3>
         <div className="grid-3-col">
-          <div className="executive-card" style={{textAlign: 'center'}}>اشتراک ماهانه و سالانه کاربران (B2C)</div>
-          <div className="executive-card" style={{textAlign: 'center'}}>فروش خدمات ارزیابی شناختی</div>
-          <div className="executive-card" style={{textAlign: 'center'}}>مشاوره تخصصی و برنامه‌های ارتقا</div>
-          <div className="executive-card" style={{textAlign: 'center'}}>خدمات سازمانی و داشبوردها (B2B)</div>
-          <div className="executive-card" style={{textAlign: 'center'}}>API و خدمات White Label</div>
-          <div className="executive-card" style={{textAlign: 'center'}}>صدور مجوز (Licensing) سرورها</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>اشتراک ماهانه و سالانه کاربران (B2C)</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>فروش خدمات ارزیابی شناختی</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>مشاوره تخصصی و برنامه‌های ارتقا</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>خدمات سازمانی و داشبوردها (B2B)</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>API و خدمات White Label</div>
+          <div className="premium-card p-6" style={{textAlign: 'center'}}>صدور مجوز (Licensing) سرورها</div>
         </div>
       </section>
 
-      <div className="vision-box" style={{marginTop: '4rem'}}>
+      <div className="premium-card p-8 bg-[var(--bg-secondary)] border border-[var(--accent-teal)] shadow-lg" style={{marginTop: '4rem'}}>
         <h3><Eye className="section-icon" style={{color: '#fff'}} /> ۱-۹. چشم‌انداز (Vision)</h3>
         <p>
           چشم‌انداز این پروژه، تبدیل‌شدن به یکی از پیشروترین پلتفرم‌های سلامت هوشمند و تصمیم‌یار شخصی در منطقه و سپس بازارهای بین‌المللی است.<br/><br/>

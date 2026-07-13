@@ -10,7 +10,7 @@ export default function Chapter11() {
       englishTitle="Roadmap & Investment Strategy"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۱-۱ استراتژی توسعه (Implementation Strategy)</h3>
         <p>
           توسعه همزمان تمامی محصولات و سرویس‌های یک سیستم‌عامل سلامت، ریسک بالایی دارد. بنابراین، نقشه راه ما بر پایه <strong>توسعه مرحله‌ای (Phased Roadmap)</strong>، معماری ماژولار و اعتبارسنجی مستمر طراحی شده است تا در هر مرحله، هم ارزش ملموسی برای کاربر خلق شود و هم زیرساخت برای فاز بعدی آماده گردد.

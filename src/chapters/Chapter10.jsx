@@ -10,7 +10,7 @@ export default function Chapter10() {
       englishTitle="Team & Organizational Structure"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۰-۱ مقدمه</h3>
         <p>
           موفقیت یک اکوسیستم سلامت هوشمند بیش از آنکه صرفاً به فناوری وابسته باشد، به تیمی چندتخصصی، هم‌افزا و هماهنگ بستگی دارد. این پروژه به‌دلیل ماهیت پیچیده‌اش، نیازمند ترکیب بی‌نظیری از متخصصان هوش مصنوعی، مهندسان نرم‌افزار، پزشکان، روانشناسان و محققان علوم شناختی است تا بتواند ارزش واقعی برای کاربران خلق کند.

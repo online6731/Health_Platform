@@ -9,7 +9,7 @@ export default function Chapter15() {
       title="فصل ۱۵: امنیت و حریم خصوصی" 
       englishTitle="Security, Privacy & Data Governance"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۵-۱ مقدمه: معماری اعتماد صفر (Zero-Trust)</h3>
         <p>با توجه به حساسیت فوق‌العاده‌ی داده‌های سلامت، پلتفرم از معماری اعتماد صفر استفاده می‌کند. هیچ کاربری، حتی در داخل شبکه، پیش‌فرض ایمن تلقی نمی‌شود. رمزنگاری سرتاسری (End-to-End Encryption) و کنترل دسترسی پویای مبتنی بر نقش (RBAC) ارکان اصلی این معماری هستند.</p>
       </div>

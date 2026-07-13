@@ -10,7 +10,7 @@ export default function Chapter13() {
       englishTitle="Health Knowledge Platform"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۳-۱ مقدمه: فراتر از مدل‌های زبانی</h3>
         <p>
           اگرچه مدل‌های زبانی بزرگ (LLMs) توانایی درک مطلب بالایی دارند، اما به تنهایی برای حوزه درمان خطرناک‌اند (احتمال توهم یا Hallucination). راهکار پلتفرم ما برای تبدیل هوش مصنوعی عمومی به هوش پزشکی دقیق، استفاده از <strong>سکوی دانش سلامت (Health Knowledge Platform)</strong> است؛ یک پایگاه داده ساخت‌یافته، معتبر و دائماً به‌روز که به عنوان منبع حقیقت (Ground Truth) برای عامل‌های هوشمند عمل می‌کند.

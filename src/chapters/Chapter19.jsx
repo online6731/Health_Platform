@@ -10,7 +10,7 @@ export default function Chapter19() {
       englishTitle="Business Model & Platform Economics"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۹-۱ اکوسیستم چندوجهی (Multi-Sided Platform)</h3>
         <p>
           این پلتفرم تنها یک نرم‌افزار سلامت یا سامانه مشاوره نیست، بلکه یک اقتصاد دیجیتالِ پررونق است که بیماران، متخصصان، توسعه‌دهندگان شخص ثالث و سیستم‌های بیمه‌ای را در یک چرخه ارزش‌آفرینی به هم متصل می‌کند. ما زیرساختی (Infrastructure) هستیم که همه بازیگران در آن برنده خواهند بود.

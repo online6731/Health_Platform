@@ -10,7 +10,7 @@ export default function Chapter8() {
       englishTitle="Platform Business Model & Revenue Streams"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۸-۱ فلسفه مدل کسب‌وکار</h3>
         <p>
           نوآوری فناورانه زمانی به موفقیت پایدار منجر می‌شود که با یک مدل کسب‌وکار مقیاس‌پذیر همراه باشد. این پروژه از ابتدا به‌عنوان یک <strong>پلتفرم (Platform Business)</strong> طراحی شده است، نه صرفاً یک محصول نرم‌افزاری.

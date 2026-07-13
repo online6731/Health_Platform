@@ -83,7 +83,7 @@ export default function Chapter56() {
     >
       <div className="ch56-container">
         
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۶-۱ مقدمه و اهداف</h3>
           <p>
             توسعه هر بخش از سیستم‌عامل سلامت HCOS بر پایه شناخت دقیق نیازها، چالش‌ها و رفتارهای سه گروه اصلی از مخاطبان انجام می‌شود. در این بخش، پرسونای مرجع بیماران، پزشکان و خریداران سازمانی را بررسی می‌کنیم.

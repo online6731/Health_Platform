@@ -9,7 +9,7 @@ export default function Chapter16() {
       title="فصل ۱۶: قوانین، مقررات و انطباق" 
       englishTitle="Regulatory & International Compliance"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۶-۱ مقدمه: استانداردسازی جهانی</h3>
         <p>حوزه سلامت یکی از قانون‌مندترین صنایع جهان است. معماری سیستم از روز اول بر پایه انطباق با سخت‌گیرانه‌ترین استانداردهای بین‌المللی بنا شده است تا مانعی برای گسترش در بازارهای جهانی وجود نداشته باشد.</p>
       </div>

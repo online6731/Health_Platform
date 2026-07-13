@@ -9,7 +9,7 @@ export default function Chapter18() {
       title="فصل ۱۸: تجربه کاربری و رابط‌های شناختی" 
       englishTitle="UX & Cognitive Interfaces"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۸-۱ مقدمه: طراحی انسان‌محور</h3>
         <p>فناوری پیچیده هوش مصنوعی باید در قالبی بسیار ساده و کارآمد به کاربر نهایی ارائه شود. در این اکوسیستم، تجربه کاربری از یک واسط گرافیکی صرف (GUI) به یک رابط شناختی مکالمه‌محور (CUI) ارتقاء یافته است که نیازها و احساسات کاربر را درک می‌کند.</p>
       </div>

@@ -10,7 +10,7 @@ export default function Chapter24() {
       englishTitle="Financial Projections & ROI"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۲۴-۱ ساختار هزینه‌ها و مقیاس‌پذیری</h3>
         <p>
           با توجه به استفاده گسترده از پردازش‌های هوش مصنوعی (GenAI)، مدیریت هزینه سرور (Inference Cost) به ازای هر کاربر نیازمند استراتژی دقیق است. سرمایه‌گذاری اولیه معطوف به توسعه مدل‌های بومی (R&D)، زیرساخت‌های پردازشی عظیم (GPU Clusters) و همچنین رعایت سخت‌گیرانه‌ترین استانداردهای حقوقی و امنیتی داده‌های پزشکی (Compliance) خواهد بود تا یک خندق دفاعی (Moat) قوی شکل بگیرد.

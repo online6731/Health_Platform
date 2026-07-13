@@ -9,7 +9,7 @@ export default function Chapter21() {
       title="فصل ۲۱: حاکمیت هوش مصنوعی و اخلاق پزشکی" 
       englishTitle="AI Governance & Medical Ethics"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۲۱-۱ مقدمه: مسئولیت‌پذیری الگوریتم‌ها</h3>
         <p>هوش مصنوعی در این سیستم، نقش پشتیبان تصمیم‌گیری را ایفا می‌کند. استقرار چنین فناوری‌ای بدون وجود یک چارچوب حاکمیتی شفاف و مکانیزم‌های کنترل کیفیت اخلاقی، خطرات قانونی و بالینی به همراه دارد.</p>
       </div>

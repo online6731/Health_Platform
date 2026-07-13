@@ -10,7 +10,7 @@ export default function Chapter9() {
       englishTitle="Go-to-Market Strategy (GTM)"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۹-۱ مقدمه و استراتژی کلان</h3>
         <p>
           نحوه جذب کاربران اولیه و توسعه سهم بازار یکی از مهم‌ترین چالش‌های پلتفرم‌های سلامت است. استراتژی این پروژه بر اساس توسعه مرحله‌ای، ایجاد اعتماد، اعتبارسنجی فناوری و بهره‌گیری از <strong>اثر شبکه‌ای (Network Effect)</strong> بنا شده است.

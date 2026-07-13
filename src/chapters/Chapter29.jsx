@@ -18,7 +18,7 @@ export default function Chapter29() {
       title="فصل ۲۹: استقرار، امنیت و SLA" 
       englishTitle="Deployment, Security & SLA"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>تضمین پایداری و امنیت داده‌های حیاتی</h3>
         <p>
           داده‌های حوزه سلامت از حساس‌ترین نوع داده‌ها هستند. معماری زیرساخت پلتفرم ما به گونه‌ای طراحی شده 

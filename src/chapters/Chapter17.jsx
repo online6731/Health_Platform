@@ -9,7 +9,7 @@ export default function Chapter17() {
       title="فصل ۱۷: یکپارچگی و تعامل‌پذیری" 
       englishTitle="Integration & Interoperability"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۷-۱ مقدمه: پایان سیلوهای اطلاعاتی</h3>
         <p>ارزش واقعی همزاد دیجیتال زمانی مشخص می‌شود که بتواند اطلاعات را از صدها منبع مختلف دریافت کند. این پلتفرم از استانداردهای ارتباطی بین‌المللی برای یکپارچه‌سازی سیستم‌های قدیمی بیمارستانی با هوش مصنوعی نوین استفاده می‌کند.</p>
       </div>

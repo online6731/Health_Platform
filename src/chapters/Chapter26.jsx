@@ -50,7 +50,7 @@ export default function Chapter26() {
       title="فصل ۲۶: سناریوها و جریان‌های کاری" 
       englishTitle="Workflows & User Journeys"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>تجربه کاربری یکپارچه (Seamless User Journey)</h3>
         <p>
           تفاوت اصلی پلتفرم ما در اتصال بی‌نقص (Frictionless) سرویس‌ها به یکدیگر است. 

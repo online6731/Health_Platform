@@ -46,7 +46,7 @@ export default function Chapter63() {
     >
       <div className="ch63-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۶۳-۱ استانداردسازی عملیات در HCOS</h3>
           <p>
             تضمین کیفیت و تداوم ارائه خدمات پزشکی و مراقبتی در یک پلتفرم چندعاملی، نیازمند تدوین دقیق روش‌های اجرایی استاندارد (SOP) و آمادگی کامل در برابر حوادث غیرمترقبه (BCP) است.

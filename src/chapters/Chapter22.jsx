@@ -9,7 +9,7 @@ export default function Chapter22() {
       title="فصل ۲۲: عملیات و AgentOps" 
       englishTitle="Operations, DevOps & AgentOps"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۲۲-۱ مقدمه: مدیریت چرخه‌حیات عامل‌ها</h3>
         <p>معماری مبتنی بر عامل (Agentic Architecture) نیازمند ابزارهای استقرار و پایش متفاوتی نسبت به نرم‌افزارهای سنتی است. ما از چارچوب <strong>AgentOps</strong> برای پایش رفتار، هزینه‌ی توکن‌ها و کیفیت پاسخ‌های سیستم استفاده می‌کنیم.</p>
       </div>

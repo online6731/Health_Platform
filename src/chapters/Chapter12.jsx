@@ -10,7 +10,7 @@ export default function Chapter12() {
       englishTitle="AI Agent Orchestration Engine"
     >
 
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۲-۱ مقدمه: مغز متفکر اکوسیستم</h3>
         <p>
           در پلتفرم‌های نوین هوش مصنوعی، یک عامل منفرد (Single Agent) پاسخگوی پیچیدگی‌های پزشکی و درمانی نیست. اکوسیستم ما متشکل از ده‌ها <strong>عامل تخصصی (Specialized Agents)</strong> است که هرکدام در حوزه‌ای خاص تبحر دارند.

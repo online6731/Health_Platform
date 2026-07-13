@@ -48,7 +48,7 @@ export default function Chapter60() {
     >
       <div className="ch60-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۶۰-۱ رویکرد پیش‌فرضِ حریم خصوصی (Privacy-by-Design)</h3>
           <p>
             حفاظت از حساس‌ترین لایه اطلاعاتی کاربران (داده‌های سلامت جسم، روان و شناخت) مبنای اصلی تصمیم‌گیری‌های مهندسی HCOS است. معماری ما برای هماهنگی با سخت‌گیرانه‌ترین قوانین بین‌المللی و ملی طراحی شده است.

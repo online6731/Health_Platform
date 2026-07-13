@@ -70,7 +70,7 @@ export default function Chapter58() {
     >
       <div className="ch58-container">
 
-        <div className="intro-box">
+        <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
           <h3>۵۸-۱ مقدمه: معماری ماژولار و مبتنی بر میکرو‌سرویس</h3>
           <p>
             سیستم‌عامل سلامت HCOS از یک ساختار توزیع‌شده با اتصال‌های ماژولار بهره می‌برد تا بتواند داده‌های سنگین میلیون‌ها همزاد دیجیتال را بدون هیچ تأخیری پردازش و تحلیل کند.

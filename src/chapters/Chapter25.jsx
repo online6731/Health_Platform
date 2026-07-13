@@ -112,7 +112,7 @@ export default function Chapter25() {
       title="فصل ۲۵: کاتالوگ جامع محصولات و امکانات" 
       englishTitle="Comprehensive Product Catalog"
     >
-      <div className="intro-box">
+      <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>کاتالوگ هوشمند محصولات اکوسیستم سلامت</h3>
         <p>
           پلتفرم سلامت هوشمند مجموعه‌ای از سرویس‌های تخصصی است که به‌صورت یکپارچه در کنار یکدیگر قرار گرفته‌اند. 
