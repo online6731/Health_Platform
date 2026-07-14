@@ -11,7 +11,7 @@
     "test:watch": "vitest",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -t -f --nojekyll -v \"**/{*,.[!.]*,..?*}\""
   },
   "dependencies": {
     "lucide-react": "^1.23.0",
