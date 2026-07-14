@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, BrainCircuit, ShieldAlert, ChevronRight, Binary, Network, Lock } from 'lucide-react';
+import { Database, BrainCircuit, ChevronRight, Binary, Network, Lock } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter39.css';
 
@@ -40,7 +40,7 @@ export default function Chapter39() {
             <div className="data-stage">
               <div className="stage-icon"><BrainCircuit size={28} /></div>
               <h4>۳. AI Training & Inference</h4>
-              <p>آموزش مستمر مدل‌ها، آپدیت همزاد دیجیتال کاربر و استنتاج بلادرنگ (Real-time AI).</p>
+              <p>نسخه‌بندی داده/مدل، batch inference در صورت نیاز و پایش کنترل‌شده؛ آموزش پیوسته و real-time پیش‌فرض نیستند.</p>
             </div>
           </div>
         </section>
@@ -51,7 +51,7 @@ export default function Chapter39() {
             <div className="security-content">
               <h4>حریم خصوصی و یادگیری فدراتیو (Federated Learning)</h4>
               <p>
-                در حوزه سلامت، حریم خصوصی اولویت اول است. پلتفرم ما با استفاده از تکنیک یادگیری فدراتیو (Federated Learning)، مدل‌های هوش مصنوعی را روی دستگاه کاربر یا سرورهای ایزوله بیمارستان‌ها آموزش می‌دهد. به این ترتیب، <strong>مدل هوشمند می‌شود اما داده خام بیمار هرگز از بیمارستان یا موبایل او خارج نمی‌شود</strong>. همچنین، تمام داده‌های ذخیره‌شده در فضای ابری، پیش از ذخیره‌سازی کاملاً بی‌نام (De-identified) و رمزنگاری می‌شوند تا با استانداردهای جهانی مانند HIPAA منطبق باشند.
+                یادگیری فدراتیو یک گزینه پژوهشی است و به‌تنهایی حریم خصوصی را تضمین نمی‌کند؛ گرادیان‌ها، متادیتا، حملات بازسازی و عملیات کلاینت باید بررسی شوند. ناشناس‌سازی نیز ادعای مطلق نیست و به ارزیابی ریسک بازشناسایی، حداقل‌سازی، قرارداد و کنترل دسترسی نیاز دارد.
               </p>
             </div>
           </div>

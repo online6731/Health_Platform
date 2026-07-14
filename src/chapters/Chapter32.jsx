@@ -1,33 +1,33 @@
 import React from 'react';
-import { MessageSquare, AlertTriangle, FileText, FlaskConical, Pill, GitBranch, HeartPulse, Stethoscope, Workflow } from 'lucide-react';
+import { MessageSquare, AlertTriangle, FileText, FlaskConical, Pill, GitBranch, Stethoscope, Workflow } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter32.css';
 
 export default function Chapter32() {
   const capabilities = [
-    { icon: MessageSquare, title: 'گفت‌وگوی هوشمند', desc: 'ارتباط طبیعی با بیمار برای دریافت شرح حال و علائم دقیق.' },
-    { icon: AlertTriangle, title: 'ارزیابی سطح خطر', desc: 'تشخیص میزان اورژانسی بودن شرایط بیمار بر اساس علائم.' },
-    { icon: FileText, title: 'بررسی سوابق پزشکی', desc: 'تحلیل خودکار پرونده سلامت بیمار پیش از ارائه هرگونه مشاوره.' },
-    { icon: FlaskConical, title: 'تحلیل نتایج آزمایش', desc: 'خواندن و تفسیر هوشمند نتایج آزمایشگاهی و تصاویر پزشکی.' },
-    { icon: Pill, title: 'بررسی تداخل دارویی', desc: 'جلوگیری از عوارض جانبی با بررسی دقیق تداخلات دارویی.' },
-    { icon: GitBranch, title: 'ارجاع هوشمند', desc: 'راهنمایی بیمار به مناسب‌ترین پزشک متخصص در صورت نیاز.' }
+    { icon: MessageSquare, title: 'گردآوری ساختاریافته', desc: 'پرسش‌های قابل بازبینی برای تکمیل شرح حال؛ بدون ادعای جامع یا دقیق‌بودن خودکار.' },
+    { icon: AlertTriangle, title: 'غربال علائم هشدار', desc: 'اجرای قواعد مصوب برای پیشنهاد مسیر مراقبت؛ نه تشخیص اورژانس و نه جایگزین تماس مستقیم با خدمات اضطراری.' },
+    { icon: FileText, title: 'خلاصه‌سازی سوابق', desc: 'نمایش خلاصه همراه منبع و امکان اصلاح توسط کاربر یا درمانگر.' },
+    { icon: FlaskConical, title: 'نمایش نتایج', desc: 'ساختاریافته‌کردن مقادیر آزمایش در محدوده تعریف‌شده؛ تفسیر تصویر پزشکی خارج از MVP است.' },
+    { icon: Pill, title: 'کنترل دارویی', desc: 'نمایش هشدار منبع‌دار از پایگاه معتبر؛ تصمیم نهایی با پزشک یا داروساز است.' },
+    { icon: GitBranch, title: 'پیشنهاد ارجاع', desc: 'نمایش گزینه‌ها بر پایه قواعد و ظرفیت؛ انتخاب با کاربر و ارائه‌دهنده است.' }
   ];
 
   return (
     <ChapterLayout 
-      title="فصل ۳۲: پزشک هوشمند" 
-      englishTitle="AI Doctor"
+      title="فصل ۳۲: دستیار تصمیم‌یار بالینی"
+      englishTitle="Clinical Decision Support Assistant"
     >
       <div className="ai-doc-container">
         <div className="ai-doc-hero">
           <h3>دستیار هوشمند و خستگی‌ناپذیر سلامت</h3>
           <p>
-            پزشک هوشمند (AI Doctor) جایگزین پزشک انسانی نیست، بلکه یک لایه حمایتی و تریاژ هوشمند است که دسترسی به مشاوره‌های اولیه پزشکی را در هر ساعت از شبانه‌روز امکان‌پذیر می‌سازد و بار کاری سیستم درمان را کاهش می‌دهد.
+            این دستیار جایگزین پزشک نیست. هدف پیشنهادی آن ساختاریافته‌کردن شرح حال، نمایش اطلاعات منبع‌دار و کمک به ارجاع است؛ ساعات خدمت، اثر بر بار کاری و کاربرد پزشکی نهایی هنوز نیازمند طراحی و اعتبارسنجی هستند.
           </p>
         </div>
 
         <section className="chapter-section">
-          <h3><Stethoscope className="section-icon" style={{ color: '#3b82f6' }} /> قابلیت‌های اصلی پزشک هوشمند</h3>
+          <h3><Stethoscope className="section-icon" style={{ color: '#3b82f6' }} /> قابلیت‌های پیشنهادی دستیار بالینی</h3>
           <div className="ai-doc-grid">
             {capabilities.map((cap, idx) => {
               const Icon = cap.icon;
@@ -49,7 +49,7 @@ export default function Chapter32() {
         <section className="ai-doc-workflow">
           <h3><Workflow className="section-icon" style={{ color: '#3b82f6' }} /> موتور تصمیم‌یار پزشکی (Clinical Decision Engine)</h3>
           <p className="section-desc">
-            پزشک هوشمند از یک معماری چند مرحله‌ای برای تصمیم‌گیری ایمن استفاده می‌کند:
+            طرح اولیه برای کاهش ریسک شامل مراحل زیر است؛ این مراحل بدون validation و نظارت انسانی ایمنی را تضمین نمی‌کنند:
           </p>
           <div className="workflow-steps">
             <div className="workflow-step">

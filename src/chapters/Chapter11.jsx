@@ -1,37 +1,39 @@
-﻿import React from 'react';
-import { TrendingUp, Map, PieChart, Coins, Briefcase, Activity, Calendar, Target, Zap, Rocket, LineChart, ShieldCheck, Cpu, Share2, Globe } from 'lucide-react';
+import React from 'react';
+import { TrendingUp, Map, Coins, Zap, Rocket, ShieldCheck } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter11.css';
 
 export default function Chapter11() {
   return (
-    <ChapterLayout 
-      title="فصل ۱۱: نقشه راه توسعه و سرمایه‌گذاری" 
-      englishTitle="Roadmap & Investment Strategy"
+    <ChapterLayout
+      title="فصل ۱۱: نقشه راه توسعه و سرمایه‌گذاری"
+      englishTitle="Evidence-gated Investment Strategy"
     >
-
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
-        <h3>۱۱-۱ استراتژی توسعه (Implementation Strategy)</h3>
+        <h3>۱۱-۱ نقش این سند</h3>
         <p>
-          توسعه همزمان تمامی محصولات و سرویس‌های یک سیستم‌عامل سلامت، ریسک بالایی دارد. بنابراین، نقشه راه ما بر پایه <strong>توسعه مرحله‌ای (Phased Roadmap)</strong>، معماری ماژولار و اعتبارسنجی مستمر طراحی شده است تا در هر مرحله، هم ارزش ملموسی برای کاربر خلق شود و هم زیرساخت برای فاز بعدی آماده گردد.
+          فصل ۵۷ منبع اصلی نقشه راه محصول است. این فصل مشخص می‌کند سرمایه در هر مرحله برای خریدن <strong>کدام
+          شاهد و کاهش کدام عدم‌قطعیت</strong> مصرف می‌شود؛ بنابراین فهرست قابلیت یا تقویم مستقل دیگری ایجاد نمی‌کند.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          مدت، مبلغ و ترکیب تیم تا زمان برآورد پایین‌به‌بالا TBD هستند. عبور زمان یا تمام‌شدن بودجه به‌تنهایی مجوز
+          شروع مرحله بعد نیست.
         </p>
       </div>
 
       <section className="chapter-section">
-        <h3><Map className="section-icon" /> ۱۱-۲ نقشه راه توسعه محصول (۴ فاز اصلی)</h3>
-        
+        <h3><Map className="section-icon" /> ۱۱-۲ مراحل سرمایه‌گذاری و خروجی لازم</h3>
         <div className="roadmap-grid">
-          
           <div className="roadmap-phase">
             <div className="phase-indicator">۱</div>
             <div className="phase-content">
-              <h4>فاز اول: پی‌ریزی هسته اکوسیستم (Foundation)</h4>
-              <div className="phase-budget">زمان: ۶ تا ۹ ماه</div>
+              <h4>Discovery: اثبات مسئله و دامنه</h4>
+              <div className="phase-budget">تصمیم خروج: ورود یا عدم ورود به prototype</div>
               <ul>
-                <li>توسعه Core Platform و Health ID یکپارچه</li>
-                <li>راه‌اندازی پرونده سلامت هوشمند (Smart EHR)</li>
-                <li>توسعه اپلیکیشن موبایل با تمرکز بر سلامت جسم و روان</li>
-                <li>رونمایی از نسخه اولیه دستیار سلامت شخصی (Personal Agent)</li>
+                <li>سایت نامزد، ICP و مسیر غیراضطراری مشخص</li>
+                <li>baseline زمان، دوباره‌کاری و شکست ارجاع</li>
+                <li>intended use، خارج از دامنه و مالکان محصول/بالینی/عملیات</li>
+                <li>برآورد تیم، بودجه و ریسک مرحله بعد</li>
               </ul>
             </div>
           </div>
@@ -39,13 +41,13 @@ export default function Chapter11() {
           <div className="roadmap-phase">
             <div className="phase-indicator">۲</div>
             <div className="phase-content">
-              <h4>فاز دوم: هوشمندسازی خدمات (AI & Smart Services)</h4>
-              <div className="phase-budget" style={{color: 'var(--accent-purple)', background: 'rgba(157, 78, 221, 0.1)'}}>زمان: ۹ تا ۱۵ ماه</div>
+              <h4>Prototype: اثبات کاربردپذیری و کنترل</h4>
+              <div className="phase-budget" style={{ color: 'var(--accent-purple)', background: 'rgba(157, 78, 221, 0.1)' }}>تصمیم خروج: آمادگی یا عدم آمادگی پایلوت</div>
               <ul>
-                <li>توسعه عامل‌های تخصصی (Medical, Nutrition, Mental)</li>
-                <li>راه‌اندازی موتور همزاد دیجیتال (Digital Twin)</li>
-                <li>یکپارچه‌سازی با ابزارهای پوشیدنی (ساعت هوشمند، IoT)</li>
-                <li>توسعه پنل تخصصی برای پزشکان و روان‌شناسان</li>
+                <li>نمونه قابل آزمون برای ثبت، اصلاح خلاصه و پیگیری وضعیت</li>
+                <li>آزمون بیمار، پذیرش و درمانگر با معیار ازپیش‌تعریف‌شده</li>
+                <li>hazard/threat model، قرارداد داده و مسیر failure</li>
+                <li>پیشنهاد تجاری و SOW پایلوت</li>
               </ul>
             </div>
           </div>
@@ -53,13 +55,13 @@ export default function Chapter11() {
           <div className="roadmap-phase">
             <div className="phase-indicator">۳</div>
             <div className="phase-content">
-              <h4>فاز سوم: گسترش اکوسیستم درمانی (Ecosystem Expansion)</h4>
-              <div className="phase-budget" style={{color: 'var(--accent-teal)', background: 'rgba(72, 191, 227, 0.1)'}}>زمان: ۱۵ تا ۲۴ ماه</div>
+              <h4>Pilot: اثبات ارزش در محیط واقعی</h4>
+              <div className="phase-budget" style={{ color: 'var(--accent-teal)', background: 'rgba(72, 191, 227, 0.1)' }}>تصمیم خروج: توقف، اصلاح یا تمدید محدود</div>
               <ul>
-                <li>اتصال یکپارچه به آزمایشگاه‌ها و مراکز تصویربرداری</li>
-                <li>ارائه سرویس سلامت سازمانی (B2B) به شرکت‌های بزرگ</li>
-                <li>راه‌اندازی کامل داروخانه آنلاین هوشمند</li>
-                <li>پیاده‌سازی پلتفرم پژوهشی (Research Platform)</li>
+                <li>اجرای محدود با رضایت، آموزش، پشتیبانی و ثبت رخداد</li>
+                <li>مقایسه نتیجه با baseline و آستانه پذیرش</li>
+                <li>اندازه‌گیری cost-to-serve و willingness-to-pay</li>
+                <li>گزارش ریسک باقی‌مانده و تصمیم امضاشده</li>
               </ul>
             </div>
           </div>
@@ -67,61 +69,60 @@ export default function Chapter11() {
           <div className="roadmap-phase">
             <div className="phase-indicator">۴</div>
             <div className="phase-content">
-              <h4>فاز چهارم: مقیاس‌پذیری و اکوسیستم باز (Open Ecosystem)</h4>
-              <div className="phase-budget" style={{color: 'var(--accent-blue)', background: 'rgba(83, 144, 217, 0.1)'}}>زمان: ۲۴ تا ۳۶ ماه</div>
+              <h4>Repeatability: اثبات استقرار در مرکز دوم</h4>
+              <div className="phase-budget" style={{ color: 'var(--accent-blue)', background: 'rgba(83, 144, 217, 0.1)' }}>افق مشروط؛ خارج از درخواست سرمایه فعلی</div>
               <ul>
-                <li>رونمایی از بازار سلامت هوشمند (Marketplace & Agent Store)</li>
-                <li>عرضه Health API برای توسعه‌دهندگان شخص ثالث</li>
-                <li>اتصال به سامانه‌های بیمه‌گر و نظام سلامت کشوری (B2G)</li>
-                <li>بومی‌سازی زبان‌ها و آغاز گسترش بین‌المللی در منطقه</li>
+                <li>کاهش زمان و هزینه راه‌اندازی نسبت به پایلوت اول</li>
+                <li>قرارداد و integration profile تکرارپذیر</li>
+                <li>اقتصاد واحد و ظرفیت پشتیبانی قابل دفاع</li>
+                <li>ارزیابی جداگانه هر قابلیت یا بازار جدید</li>
               </ul>
             </div>
           </div>
-
         </div>
       </section>
 
       <section className="chapter-section">
-        <h3><Coins className="section-icon" /> ۱۱-۳ استراتژی جذب سرمایه</h3>
-        <p>توسعه این پلتفرم در سه راند سرمایه‌گذاری اصلی برنامه‌ریزی شده است:</p>
-        
+        <h3><Coins className="section-icon" /> ۱۱-۳ منطق جذب و مصرف سرمایه</h3>
+        <p>هر راند فقط تا گیت شواهد بعدی تأمین می‌شود؛ عنوان راند، مبلغ یا valuation هنوز تصویب نشده است.</p>
         <div className="funding-cards">
           <div className="funding-card">
             <div className="funding-header">
               <Zap size={24} />
-              <h4>Pre-Seed / Seed</h4>
+              <h4>درخواست قابل دفاع اکنون</h4>
             </div>
-            <p><strong>هدف:</strong> توسعه MVP، تیم‌سازی، زیرساخت پایه هوش مصنوعی و جذب ۱۰۰۰ کاربر اولیه.</p>
-            <p className="allocation"><strong>تخصیص:</strong> ۶۰٪ توسعه فنی، ۲۰٪ عملیات و مجوزها، ۲۰٪ بازاریابی اولیه.</p>
+            <p><strong>هدف:</strong> discovery و prototype محدود با خروجی تصمیم‌پذیر.</p>
+            <p className="allocation"><strong>مصرف:</strong> پژوهش کاربر، محصول/طراحی، مهندسی نمونه، ایمنی بالینی، امنیت/حریم خصوصی و طراحی پایلوت.</p>
+          </div>
+
+          <div className="funding-card">
+            <div className="funding-header">
+              <ShieldCheck size={24} />
+              <h4>سرمایه پایلوت؛ مشروط</h4>
+            </div>
+            <p><strong>پیش‌شرط:</strong> عبور از معیارهای prototype و وجود مرکز با تعهد قراردادی.</p>
+            <p className="allocation"><strong>مصرف:</strong> پیاده‌سازی محدود، عملیات، پشتیبانی، اعتبارسنجی، امنیت و ذخیره contingency.</p>
           </div>
 
           <div className="funding-card">
             <div className="funding-header">
               <TrendingUp size={24} />
-              <h4>Series A</h4>
+              <h4>سرمایه توسعه؛ هنوز زود است</h4>
             </div>
-            <p><strong>هدف:</strong> توسعه همزاد دیجیتال، گسترش مارکتینگ، ورود به بازار B2B و اتصال به شبکه‌های آزمایشگاهی.</p>
-            <p className="allocation"><strong>تخصیص:</strong> ۴۰٪ مارکتینگ و جذب کاربر، ۴۰٪ توسعه محصول، ۲۰٪ توسعه تیم.</p>
-          </div>
-
-          <div className="funding-card">
-            <div className="funding-header">
-              <Globe size={24} />
-              <h4>Series B</h4>
-            </div>
-            <p><strong>هدف:</strong> راه‌اندازی کامل Marketplace، سلطه بر بازار داخلی و آغاز مقیاس‌پذیری در خاورمیانه.</p>
-            <p className="allocation"><strong>تخصیص:</strong> ۵۰٪ گسترش بازار منطقه‌ای، ۳۰٪ زیرساخت Marketplace، ۲۰٪ تحقیق و توسعه (R&D).</p>
+            <p><strong>پیش‌شرط:</strong> ارزش، ایمنی، خرید و اقتصاد واحد در پایلوت و تکرار در مرکز دوم.</p>
+            <p className="allocation"><strong>وضعیت:</strong> Marketplace، B2C، بیمه، همزاد دیجیتال و توسعه جغرافیایی در این درخواست بودجه نیستند.</p>
           </div>
         </div>
       </section>
 
       <div className="conclusion-box">
-        <h3><Rocket style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}}/> چشم‌انداز نهایی (Endgame)</h3>
+        <h3><Rocket style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> تصمیم موردنیاز</h3>
         <p>
-          در پایان سال سوم، این پروژه دیگر یک استارتاپ سلامت نیست؛ بلکه یک <strong>زیرساخت مرجع (Health OS)</strong> است که میلیون‌ها کاربر، هزاران سازمان و صدها عامل هوشمند را در یک بستر واحد گرد هم آورده و نقش کلیدی در گذار جامعه به سمت <strong>«پزشکی پیشگیرانه، دقیق و هوشمند»</strong> ایفا خواهد کرد.
+          اسپانسر باید سقف بودجه و خروجی مرحله discovery/prototype را تصویب کند و اختیار توقف را به گیت‌های
+          مسئله، کاربردپذیری، ایمنی، خرید و قابلیت تحویل متصل سازد. چشم‌انداز Health OS سناریوی بلندمدت است،
+          نه وعده این راند یا پیش‌بینی سال سوم.
         </p>
       </div>
-
     </ChapterLayout>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  Package, Stethoscope, Brain, FileText, Pill, Microscope, 
-  Apple, Dumbbell, Calendar, FileSignature, ShieldAlert, 
-  Video, ActivitySquare, CheckCircle2, Star, Zap
+import {
+  Stethoscope, Brain, FileText, Pill, Microscope,
+  Apple, Dumbbell, Calendar, FileSignature, ShieldAlert,
+  Video, ActivitySquare, CheckCircle2, Zap
 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter25.css';
@@ -11,8 +11,8 @@ export default function Chapter25() {
   const products = [
     {
       id: 1,
-      title: 'پزشک هوشمند',
-      en: 'AI Doctor',
+      title: 'دستیار تصمیم‌یار بالینی',
+      en: 'Clinical Support Assistant',
       icon: Stethoscope,
       desc: 'دستیار پزشکی مبتنی بر هوش مصنوعی برای تحلیل علائم، سوابق پزشکی و نتایج آزمایش‌ها جهت ارزیابی اولیه سلامت.',
       features: ['تحلیل علائم و احتمال بیماری', 'بررسی تداخل دارویی', 'ارجاع به پزشک متخصص', 'تحلیل آزمایش‌های پزشکی']
@@ -78,7 +78,7 @@ export default function Chapter25() {
       title: 'نسخه الکترونیک',
       en: 'e-Prescription',
       icon: FileSignature,
-      desc: 'زیرساخت ثبت، مدیریت و رهگیری نسخه‌های پزشکی بدون نیاز به کاغذ و کاملاً یکپارچه با بیمه.',
+      desc: 'قابلیت آینده برای دریافت نسخه امضاشده و رهگیری وضعیت؛ اتصال بیمه و حذف کاغذ به قرارداد و قانون وابسته است.',
       features: ['ثبت سریع با AI', 'اتصال به داروخانه', 'استعلام بیمه', 'جلوگیری از خطای دست‌خط']
     },
     {
@@ -86,7 +86,7 @@ export default function Chapter25() {
       title: 'بیمه هوشمند',
       en: 'Smart Insurance',
       icon: ShieldAlert,
-      desc: 'پلتفرم اتصال مستقیم به شرکت‌های بیمه پایه و تکمیلی برای محاسبه خودکار فرانشیز و هزینه‌ها.',
+      desc: 'نامزد یکپارچه‌سازی با بیمه برای استعلام و نمایش محاسبه؛ نتیجه رسمی از بیمه می‌آید و اتصال تأیید نشده است.',
       features: ['استعلام آنی پوشش', 'محاسبه فرانشیز', 'تاییدیه آنلاین', 'مدیریت سقف بیمه']
     },
     {
@@ -116,7 +116,7 @@ export default function Chapter25() {
         <h3>کاتالوگ هوشمند محصولات اکوسیستم سلامت</h3>
         <p>
           پلتفرم سلامت هوشمند مجموعه‌ای از سرویس‌های تخصصی است که به‌صورت یکپارچه در کنار یکدیگر قرار گرفته‌اند. 
-          هر محصول می‌تواند به‌صورت مستقل یا در قالب یک اکوسیستم کامل مورد استفاده قرار گیرد. تمامی این محصولات 
+          هر ردیف یک مفهوم محصول است و فقط پس از تعریف مالک، کاربرد، نیازمندی، شاهد و وضعیت می‌تواند مستقل یا متصل ارائه شود. این محصولات
           از طریق هسته مرکزی هوش مصنوعی و پرونده سلامت الکترونیک (EHR) با یکدیگر تبادل داده دارند.
         </p>
       </div>
@@ -165,7 +165,7 @@ export default function Chapter25() {
           <p>
             تفاوت اصلی این پلتفرم با ابزارهای جزیره‌ای موجود در بازار این است که خروجی هر محصول، ورودی محصول دیگر است. 
             برای مثال، <strong>مربی تغذیه هوشمند</strong> با دسترسی به نتایج <strong>آزمایشگاه هوشمند</strong> 
-            و توصیه‌های <strong>پزشک هوشمند</strong>، رژیمی کاملاً اختصاصی و بالینی تجویز می‌کند.
+            و اهداف ثبت‌شده توسط تیم درمان، پیشنهاد برنامه غذایی قابل بازبینی ارائه می‌کند؛ تجویز بالینی بر عهده فرد حرفه‌ای مجاز است.
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Link, Network, Database, Layers, Hospital } from 'lucide-react';
+import { Link, Network, Layers, Hospital } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter17.css';
 
@@ -11,7 +11,7 @@ export default function Chapter17() {
     >
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۷-۱ مقدمه: پایان سیلوهای اطلاعاتی</h3>
-        <p>ارزش واقعی همزاد دیجیتال زمانی مشخص می‌شود که بتواند اطلاعات را از صدها منبع مختلف دریافت کند. این پلتفرم از استانداردهای ارتباطی بین‌المللی برای یکپارچه‌سازی سیستم‌های قدیمی بیمارستانی با هوش مصنوعی نوین استفاده می‌کند.</p>
+        <p>ارزش تعامل‌پذیری از تبادل حداقل داده لازم با چند منبع معتبر آغاز می‌شود، نه اتصال به صدها منبع. هر اتصال باید هدف، قرارداد، پروفایل داده، کیفیت، رضایت/مبنای قانونی و مالک خطا داشته باشد.</p>
       </div>
       <section className="chapter-section">
         <h3><Network className="section-icon" /> ۱۷-۲ معماری یکپارچگی</h3>

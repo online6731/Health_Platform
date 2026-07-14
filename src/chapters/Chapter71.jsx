@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { BookOpenCheck, Database, GitMerge, CheckCircle, MessageSquare, ListTree, Zap, Layers, Search, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpenCheck, Database, GitMerge, MessageSquare, ListTree, Zap, Layers, Search, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
 
 const Chapter71 = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,11 +18,11 @@ const Chapter71 = () => {
     {
       id: 1,
       code: 'ADR 001',
-      title: 'انتخاب RAG به جای Fine-Tuning',
-      status: 'Accepted',
+      title: 'ترکیب RAG و ارزیابی نیاز به Fine-Tuning',
+      status: 'Proposed',
       context: 'نیاز به پاسخگویی دقیق و آپدیت سریع براساس گایدلاین‌های بالینی در حال تغییر.',
-      decision: 'استفاده از معماری RAG به جای Fine-tuning مداوم مدل‌های سنگین.',
-      consequences: 'هزینه آموزش حذف می‌شود، توهم کاهش می‌یابد اما تاخیر سرچ دیتابیس برداری افزوده می‌شود.',
+      decision: 'RAG گزینه پایه برای دانش نسخه‌دار است؛ Fine-tuning فقط پس از آزمون خط مبنا و برای وظیفه مشخص ارزیابی می‌شود.',
+      consequences: 'هیچ‌کدام حذف توهم یا دقت بالینی را تضمین نمی‌کنند؛ هر ترکیب به مجموعه آزمون، منبع‌دهی، پایش و کنترل تغییر نیاز دارد.',
       icon: Database,
       color: 'purple'
     },
@@ -30,10 +30,10 @@ const Chapter71 = () => {
       id: 2,
       code: 'ADR 002',
       title: 'معماری Microservices روی K8s',
-      status: 'Accepted',
+      status: 'Proposed',
       context: 'پلتفرم شامل ده‌ها ایجنت مجزا است که به صورت مستقل باید مقیاس‌پذیر و ایزوله باشند.',
       decision: 'استقرار Agentها به صورت سرویس‌های مستقل داکرایز شده روی Kubernetes.',
-      consequences: 'افزایش پیچیدگی دواپس (Service Mesh) در ازای به دست آوردن مقیاس‌پذیری بی‌نهایت.',
+      consequences: 'افزایش هزینه و پیچیدگی عملیات؛ انتخاب نهایی باید با بار واقعی، توان تیم و گزینه معماری ساده‌تر مقایسه شود.',
       icon: Layers,
       color: 'blue'
     },
@@ -41,9 +41,9 @@ const Chapter71 = () => {
       id: 3,
       code: 'ADR 003',
       title: 'ذخیره‌سازی اسناد در Vector Database (Qdrant)',
-      status: 'Accepted',
+      status: 'Proposed',
       context: 'نیاز به جستجوی شباهت معنایی با سرعت بالا روی هزاران برگ سند و گایدلاین پزشکی RAG.',
-      decision: 'استفاده از Qdrant به دلیل بازدهی بالا و پشتیبانی قوی از فیلترهای جانبی (Payload Filtering).',
+      decision: 'اجرای proof of concept بین Qdrant و گزینه‌های جایگزین با داده و بار نماینده، پیش از پذیرش نهایی.',
       consequences: 'سرعت بازیابی داده افزایش می‌یابد اما نیاز به مدیریت یک دیتابیس تخصصی در کنار دیتابیس رابطه ای است.',
       icon: Database,
       color: 'teal'
@@ -82,7 +82,7 @@ const Chapter71 = () => {
 
   return (
     <ChapterLayout 
-      title="ثبت تصمیمات معماری (Decision Log - ADR)"
+      title="ثبت تصمیمات معماری پیشنهادی"
       chapterNumber={Number(71)}
     >
       <div className="prose prose-lg max-w-none text-right" dir="rtl">

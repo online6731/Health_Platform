@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Network, Link2, Cpu, Globe, Database, CalendarCheck, ShieldAlert, FileText, Search, UserCheck, HeartPulse, RefreshCw } from 'lucide-react';
+import { Network, Link2, Cpu, Globe, Database, CalendarCheck, ShieldAlert, FileText, Search, RefreshCw } from 'lucide-react';
 
 const Chapter78 = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,20 +10,20 @@ const Chapter78 = () => {
     {
       id: 1,
       br: 'رزرو ویزیت آنلاین پس از چت',
-      fr: 'FR-DOC-005',
+      fr: 'TBD-FR-APPT',
       service: 'Scheduling Agent',
-      thirdParty: 'نوبت‌دهی بقراط / پذیرش۲۴',
-      api: 'POST /appointments',
+      thirdParty: 'نامزد: سرویس نوبت‌دهی دارای قرارداد',
+      api: 'Draft: POST /appointments',
       type: 'scheduling',
       color: 'teal'
     },
     {
       id: 2,
       br: 'جلوگیری از تداخل دارویی',
-      fr: 'FR-PHA-002',
+      fr: 'TBD-FR-MED',
       service: 'Clinical Safety Engine',
-      thirdParty: 'دیتابیس TTAC وزارت بهداشت',
-      api: 'GET /drug-interaction',
+      thirdParty: 'نامزد: منبع رسمی دارو با مجوز دسترسی',
+      api: 'Draft: GET /drug-interaction',
       type: 'safety',
       color: 'purple'
     },
@@ -32,38 +32,38 @@ const Chapter78 = () => {
       br: 'استخراج پارامتر از جواب آزمایش',
       fr: 'FR-SHR-001',
       service: 'Vision Agent',
-      thirdParty: 'OpenAI GPT-4V Vision API',
-      api: 'POST /ocr/lab-result',
+      thirdParty: 'نامزد: سرویس OCR/Vision پس از ارزیابی حریم خصوصی',
+      api: 'Draft: POST /ocr/lab-result',
       type: 'vision',
       color: 'blue'
     },
     {
       id: 4,
       br: 'ارزیابی سلامت روان و اضطراب بیمار',
-      fr: 'FR-PSY-003',
+      fr: 'TBD-FR-PSY',
       service: 'Psychological Care Agent',
-      thirdParty: 'گایدلاین‌های بالینی DSM-5',
-      api: 'POST /psychology/assessment',
+      thirdParty: 'مرجع محتوایی مجاز؛ نه API ثالث',
+      api: 'Draft: POST /psychology/assessment',
       type: 'mental',
       color: 'purple'
     },
     {
       id: 5,
       br: 'ردیابی و تجویز برنامه غذایی سفارشی',
-      fr: 'FR-NUT-012',
+      fr: 'TBD-FR-NUT',
       service: 'Nutrition Agent',
-      thirdParty: 'پایگاه داده ارزش غذایی USDA',
-      api: 'POST /nutrition/meal-plan',
+      thirdParty: 'نامزد: پایگاه غذایی با نگاشت محلی',
+      api: 'Draft: POST /nutrition/meal-plan',
       type: 'nutrition',
       color: 'teal'
     },
     {
       id: 6,
       br: 'استعلام آنلاین پوشش بیمه تکمیلی',
-      fr: 'FR-INS-008',
+      fr: 'TBD-FR-INS',
       service: 'Insurance Engine',
-      thirdParty: 'پورتال سازمان بیمه سلامت',
-      api: 'GET /insurance/coverage',
+      thirdParty: 'نامزد: بیمه‌گر دارای توافق فنی و حقوقی',
+      api: 'Draft: GET /insurance/coverage',
       type: 'insurance',
       color: 'blue'
     }
@@ -114,7 +114,7 @@ const Chapter78 = () => {
           <p className="premium-text-secondary text-sm leading-relaxed relative z-10 m-0 flex items-start gap-2">
             <Link2 className="w-5 h-5 text-[var(--accent-purple)] shrink-0 mt-0.5" />
             <span>
-              ماتریس اتصال نیازمندی‌های بیزینس به سرویس‌های معماری و در نهایت اندپوینت‌های فنی سیستم. این ساختار تضمین می‌کند که هیچ نیاز تجاری بدون پیاده‌سازی نمانده و هر اندپوینت هدفی مشخص دارد.
+              این ماتریس پیش‌نویس شکاف‌های ردیابی است. شناسه‌های دارای پیشوند TBD هنوز در مخزن نیازمندی‌ها تعریف نشده‌اند و سیستم‌های ثالث فقط نامزد یکپارچه‌سازی هستند؛ قرارداد، دسترسی API و پیاده‌سازی آن‌ها تأیید نشده است.
             </span>
           </p>
         </div>

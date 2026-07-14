@@ -22,6 +22,12 @@ const Chapter68 = () => {
             <p className="text-sm premium-text-secondary mt-1 mb-0 font-medium tracking-wide">(Requirements)</p>
           </div>
         </div>
+
+        <div className="glass-panel p-5 mb-8 border-r-4 border-r-amber-500">
+          <p className="premium-text-secondary text-sm m-0 leading-relaxed">
+            این فصل فقط seed اولیه مخزن نیازمندی‌هاست و کامل تلقی نمی‌شود. هر نیازمندی پیش از برنامه‌ریزی باید منبع، مالک، اولویت، نسخه، معیار پذیرش، روش verification، وضعیت و پیوند به خطر/آزمون داشته باشد.
+          </p>
+        </div>
         
         <div className="grid-2-col gap-8">
           <div className="space-y-6">
@@ -74,7 +80,7 @@ const Chapter68 = () => {
                 <span className="font-mono font-bold text-[var(--accent-purple)] text-sm flex items-center gap-1.5"><Lock className="w-4 h-4"/> NFR-SEC-001</span>
                 <span className="badge badge-purple shadow-sm">Security</span>
               </div>
-              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">داده‌های حساس پزشکی (PHI) باید تماماً با AES-256 رمزنگاری شوند.</p>
+              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">داده حساس باید در انتقال و سکون با الگوریتم و مدیریت کلید مصوب رمز شود؛ روش، دامنه و آزمون در طراحی امنیت تعیین می‌شود.</p>
             </div>
             
             <div className="glass-panel p-5 relative overflow-hidden group hover:shadow-xl transition-all duration-300 border-r-4 border-r-yellow-500">
@@ -83,7 +89,7 @@ const Chapter68 = () => {
                 <span className="font-mono font-bold text-yellow-500 text-sm flex items-center gap-1.5"><Server className="w-4 h-4"/> NFR-PERF-001</span>
                 <span className="badge badge-yellow shadow-sm">Performance</span>
               </div>
-              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">زمان تأخیر (Latency) بات نباید در مکالمات ساده از ۱.۵ ثانیه بگذرد.</p>
+              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">SLO زمان پاسخ باید بر اساس نوع تعامل، صدک اندازه‌گیری، بار، منطقه و حالت افت سرویس تعریف و اعتبارسنجی شود.</p>
             </div>
 
             <div className="glass-panel p-5 relative overflow-hidden group hover:shadow-xl transition-all duration-300 border-r-4 border-r-gray-500">
@@ -92,7 +98,7 @@ const Chapter68 = () => {
                 <span className="font-mono font-bold text-gray-500 text-sm flex items-center gap-1.5"><Scale className="w-4 h-4"/> NFR-COMP-001</span>
                 <span className="badge badge-gray shadow-sm">Compliance</span>
               </div>
-              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">طراحی معماری باید با الزامات HIPAA و وزارت بهداشت تطابق داشته باشد.</p>
+              <p className="premium-text-primary text-sm m-0 leading-relaxed relative z-10">معماری باید الزامات قانونی قابل اعمال در هر حوزه استقرار را پس از تحلیل رسمی دامنه و نقش حقوقی پوشش دهد.</p>
             </div>
           </div>
         </div>

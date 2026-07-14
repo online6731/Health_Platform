@@ -3,9 +3,9 @@ import ChapterLayout from '../components/ChapterLayout';
 import { Scale, ShieldCheck, FileText, Landmark, Key, ChevronDown, ChevronUp, Lock } from 'lucide-react';
 
 const licenses = [
-  { name: 'مجوز معاونت درمان وزارت بهداشت', type: 'مجوز فعالیت سلامت دیجیتال', desc: 'تأییدیه صلاحیت بالینی الگوریتم‌ها و بستر مشاوره پزشکی از راه دور.' },
-  { name: 'پروانه سازمان نظام پزشکی', type: 'احراز صلاحیت پزشکان همکار', desc: 'اتصال خودکار به وب‌سرویس نظام پزشکی برای تطابق دقیق کد پزشکان عضو.' },
-  { name: 'گواهی افتا (امنیت اطلاعات)', type: 'صلاحیت امنیتی پلتفرم سازمانی', desc: 'تأییدیه عدم نفوذپذیری، رمزنگاری و مدیریت امنیت کلیدها صادر شده توسط مرکز افتا.' }
+  { name: 'مسیر مجوز خدمات سلامت دیجیتال', type: 'وضعیت: نیازمند تعیین دامنه و مرجع', desc: 'نوع خدمت، نقش ارائه‌دهنده، وجود مشاوره/تجویز و حوزه استقرار باید پیش از تعیین مجوز لازم مشخص شود.' },
+  { name: 'احراز صلاحیت حرفه‌ای پزشکان', type: 'وضعیت: نیازمند طراحی و توافق دسترسی', desc: 'منبع رسمی، روش احراز، دوره بازبینی و مجوز استفاده از وب‌سرویس باید مستند شود.' },
+  { name: 'ارزیابی و گواهی‌های امنیتی', type: 'وضعیت: برنامه‌ریزی نشده / بدون مدرک', desc: 'دامنه ارزیابی، مرجع صادرکننده، کنترل‌های لازم و شواهد آزمون نفوذ باید در برنامه انطباق ثبت شود.' }
 ];
 
 const contractClauses = [
@@ -15,11 +15,11 @@ const contractClauses = [
   },
   {
     title: 'ماده ۲: تقسیم درآمد و کارمزد پلتفرم (Split-Fee)',
-    text: 'از هر مشاوره آنلاین موفق، پلتفرم HCOS معادل ۱۵٪ کارمزد بابت نگهداری پرونده سلامت، تحلیل داده‌ها و زیرساخت ارتباطی کسر کرده و ۸۵٪ مابقی ظرف حداکثر ۲۴ ساعت به حساب پزشک همکار واریز خواهد شد.'
+    text: 'درصد کارمزد، زمان تسویه، مالیات، بازپرداخت و مسئولیت خدمات باید پس از اعتبارسنجی مدل مالی و بررسی حقوقی در پیوست تجاری قرارداد درج شود. در نسخه فعلی عدد مصوب یا قرارداد لازم‌الاجرا وجود ندارد.'
   },
   {
     title: 'ماده ۳: محرمانگی و مالکیت معنوی داده‌ها',
-    text: 'تمام داده‌های بالینی جمع‌آوری‌شده در همزاد دیجیتال بیمار متعلق به شخص بیمار بوده و پزشک صرفاً در دوره درمان مجاز به مشاهده داده‌ها است. هرگونه دانلود، کپی‌برداری یا انتقال داده‌های هویتی بیماران به خارج از پلتفرم ممنوع و پیگرد قانونی دارد.'
+    text: 'حقوق موضوع داده، مالکیت رکورد، نقش کنترل‌کننده/پردازشگر و دسترسی درمانگر باید طبق قانون و قرارداد هر حوزه مشخص شود. محدودیت export باید با قابلیت حمل، نیاز مراقبتی، ممیزی و پاسخ به رخداد متوازن باشد.'
   }
 ];
 
@@ -28,8 +28,8 @@ export default function Chapter62() {
 
   return (
     <ChapterLayout
-      title="فصل ۶۲: مستندات حقوقی، قانونی و مجوزها"
-      englishTitle="Legal Framework, Compliance Licenses & Contracts"
+      title="فصل ۶۲: چارچوب حقوقی و برنامه مجوزها"
+      englishTitle="Legal, Licensing & Contract Planning"
     >
       <div className="prose prose-lg max-w-none text-right" dir="rtl">
 
@@ -49,14 +49,14 @@ export default function Chapter62() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500 opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
           <h3 className="text-xl font-bold premium-text-primary mb-3 mt-0 relative z-10">۶۲-۱ چارچوب انطباق قانونی پلتفرم</h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            سلامت دیجیتال مستلزم رعایت دقیق قوانین بالینی، استانداردهای سازمان‌های حاکمیتی و حمایت همه‌جانبه از حقوق قانونی بیماران و کادر درمان است. HCOS منطبق بر جدیدترین آیین‌نامه‌های وزارت بهداشت عمل می‌کند.
+            این فصل فهرست اولیه موضوعات حقوقی است و اعلام انطباق یا اخذ مجوز محسوب نمی‌شود. الزامات نهایی پس از تثبیت محصول، کاربرد پزشکی موردنظر، نقش طرف‌ها و حوزه قضایی، باید توسط مشاور حقوقی ذی‌صلاح تعیین و با شماره سند و تاریخ ثبت شوند.
           </p>
         </div>
 
         {/* Required Licenses */}
         <section className="mb-12">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <Landmark className="w-6 h-6 text-yellow-500" /> ۶۲-۲ مجوزهای قانونی کسب شده و در دست اقدام
+            <Landmark className="w-6 h-6 text-yellow-500" /> ۶۲-۲ مسیرهای مجوز و موارد نیازمند بررسی
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {licenses.map((lic, idx) => (
@@ -77,7 +77,7 @@ export default function Chapter62() {
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
             <FileText className="w-6 h-6 text-blue-500" /> ۶۲-۳ مفاد کلیدی قرارداد نمونه با پزشکان همکار
           </h3>
-          <p className="premium-text-secondary text-sm mb-6">خلاصه‌ای از قراردادهای منعقد شده فی‌مابین پزشکان متخصص و شرکت توسعه‌دهنده پلتفرم:</p>
+          <p className="premium-text-secondary text-sm mb-6">بندهای زیر صرفاً پیش‌نویس مذاکره هستند، قرارداد منعقدشده محسوب نمی‌شوند و پیش از استفاده به بازبینی حقوقی، مالیاتی، بیمه مسئولیت و تأیید طرفین نیاز دارند.</p>
           
           <div className="flex flex-col gap-3">
             {contractClauses.map((clause, idx) => (

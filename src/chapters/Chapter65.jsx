@@ -31,7 +31,7 @@ const Chapter65 = () => {
                 <FileBadge className="w-4 h-4 text-[var(--accent-blue)]" /> نام رسمی پلتفرم
               </h3>
             </div>
-            <p className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600 m-0 relative z-10">Healthcare AI Operating System (HAIOS)</p>
+            <p className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600 m-0 relative z-10">Health Platform — نام کاری تا تصمیم برند</p>
           </div>
 
           <div className="glass-panel p-6 border-r-4 border-r-[var(--accent-teal)] relative overflow-hidden group hover:shadow-xl transition-all duration-300">
@@ -41,7 +41,7 @@ const Chapter65 = () => {
                 <Target className="w-4 h-4 text-[var(--accent-teal)]" /> هدف کلان (North Star Metric)
               </h3>
             </div>
-            <p className="text-xl font-bold premium-text-primary m-0 relative z-10 leading-relaxed">کاهش خطای پزشکی و افزایش دسترسی عادلانه</p>
+            <p className="text-xl font-bold premium-text-primary m-0 relative z-10 leading-relaxed">کاهش زمان دستیابی به اطلاعات معتبر و ارجاع مناسب؛ نیازمند تعیین خط مبنا</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ const Chapter65 = () => {
                 <Briefcase className="w-5 h-5 text-gray-400 group-hover/item:text-teal-500 transition-colors" />
                 <p className="text-xs font-bold premium-text-secondary m-0">اسپانسر پروژه</p>
               </div>
-              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">هیئت مدیره هلدینگ سلامت</p>
+              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">TBD — نیازمند نام فرد/نهاد و اختیار مصوب</p>
             </div>
             
             <div className="p-5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-blue-500/30 transition-colors shadow-sm group/item">
@@ -66,7 +66,7 @@ const Chapter65 = () => {
                 <Activity className="w-5 h-5 text-gray-400 group-hover/item:text-blue-500 transition-colors" />
                 <p className="text-xs font-bold premium-text-secondary m-0">وضعیت فعلی پروژه</p>
               </div>
-              <p className="font-bold text-[var(--accent-blue)] text-base m-0 leading-relaxed">فاز ۱ - تحقیق و توسعه (R&D)</p>
+              <p className="font-bold text-[var(--accent-blue)] text-base m-0 leading-relaxed">پروپوزال و نمایشگر فرانت‌اند؛ محصول عملیاتی وجود ندارد</p>
             </div>
             
             <div className="p-5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-purple-500/30 transition-colors shadow-sm group/item">
@@ -74,7 +74,7 @@ const Chapter65 = () => {
                 <Users className="w-5 h-5 text-gray-400 group-hover/item:text-purple-500 transition-colors" />
                 <p className="text-xs font-bold premium-text-secondary m-0">مخاطب اصلی</p>
               </div>
-              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">بیماران، پزشکان، کلینیک‌ها</p>
+              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">کاربر بزرگسال، پذیرش/هماهنگ‌کننده و درمانگر در یک مرکز پایلوت؛ نیازهای کودک، سالمند وابسته و بحران جداگانه‌اند</p>
             </div>
             
             <div className="p-5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-orange-500/30 transition-colors shadow-sm group/item">
@@ -82,7 +82,7 @@ const Chapter65 = () => {
                 <Cpu className="w-5 h-5 text-gray-400 group-hover/item:text-orange-500 transition-colors" />
                 <p className="text-xs font-bold premium-text-secondary m-0">معماری کلان</p>
               </div>
-              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">Microservices + Agentic AI</p>
+              <p className="font-bold premium-text-primary text-base m-0 leading-relaxed">گزینه‌های مفهومی؛ معماری اجرایی هنوز انتخاب نشده</p>
             </div>
             
             <div className="p-5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-green-500/30 transition-colors shadow-sm group/item">
@@ -98,8 +98,23 @@ const Chapter65 = () => {
                 <ScrollText className="w-5 h-5 text-gray-400 group-hover/item:text-red-500 transition-colors" />
                 <p className="text-xs font-bold premium-text-secondary m-0">استاندارد داده</p>
               </div>
-              <p className="font-bold premium-text-primary text-base font-mono m-0">FHIR R4 / HIPAA / HL7</p>
+              <p className="font-bold premium-text-primary text-base m-0">FHIR به‌عنوان نامزد؛ قوانین پس از تحلیل حوزه قضایی</p>
             </div>
+          </div>
+        </div>
+
+        <div className="grid-3-col gap-6 mt-8">
+          <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
+            <h3 className="font-bold text-lg premium-text-primary mt-0">MVP پیشنهادی</h3>
+            <p className="premium-text-secondary text-sm leading-relaxed mb-0">گردآوری شرح حال ساختاریافته، نمایش پرونده واردشده توسط کاربر و ارجاع به پزشک؛ بدون تشخیص مستقل، تجویز خودکار یا تماس خودکار با اورژانس.</p>
+          </div>
+          <div className="glass-panel p-6 border-t-4 border-t-amber-500">
+            <h3 className="font-bold text-lg premium-text-primary mt-0">intended use موقت برای پژوهش MVP</h3>
+            <p className="premium-text-secondary text-sm leading-relaxed mb-0">کمک اداری به کاربر بزرگسال برای ثبت اطلاعات خوداظهاری و کمک به کارکنان مرکز برای آماده‌سازی خلاصه قابل اصلاح و پیگیری وضعیت ارجاع؛ در محیط غیراضطراری و با بازبینی انسانی. این تعریف نیازمند تصویب مالک بالینی/حقوقی است و خروجی نباید تشخیص، تریاژ قطعی یا توصیه درمانی تلقی شود.</p>
+          </div>
+          <div className="glass-panel p-6 border-t-4 border-t-red-500">
+            <h3 className="font-bold text-lg premium-text-primary mt-0">خارج از محدوده فعلی</h3>
+            <p className="premium-text-secondary text-sm leading-relaxed mb-0">تشخیص قطعی، نسخه‌نویسی مستقل AI، پیش‌بینی جمعیتی، Digital Twin درمانی، بیمه و Marketplace تا زمان شواهد، قرارداد و مجوز خارج از MVP هستند.</p>
           </div>
         </div>
       </section>

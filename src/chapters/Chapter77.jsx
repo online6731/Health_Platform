@@ -9,9 +9,9 @@ const Chapter77 = () => {
   const rbacRoles = [
     {
       name: 'بیمار (Patient)',
-      view: 'کامل (Full)',
+      view: 'داده شخصی طبق سیاست و محدودیت قانونی',
       edit: 'خوداظهاری',
-      ai: 'نسخه عمومی',
+      ai: 'قابلیت مجاز طبق intended use',
       prescription: 'خیر',
       icon: User,
       color: 'teal',
@@ -26,7 +26,7 @@ const Chapter77 = () => {
       name: 'پزشک معالج',
       view: 'بیماران خود',
       edit: 'تشخیص و ویزیت',
-      ai: 'نسخه پرو (Pro)',
+      ai: 'تصمیم‌یار مجاز + ثبت نظارت انسانی',
       prescription: 'بله',
       icon: Stethoscope,
       color: 'purple',
@@ -51,6 +51,46 @@ const Chapter77 = () => {
         ai: 'badge-red',
         prescription: 'badge-red'
       }
+    },
+    {
+      name: 'پرستار / هماهنگ‌کننده مراقبت',
+      view: 'بیماران تخصیص‌یافته + purpose of use',
+      edit: 'علائم حیاتی و یادداشت مراقبت',
+      ai: 'خلاصه و هشدارهای مجاز',
+      prescription: 'خیر',
+      icon: HeartPulse,
+      color: 'teal',
+      badgeClass: { view: 'badge-yellow', edit: 'badge-green', ai: 'badge-blue', prescription: 'badge-red' }
+    },
+    {
+      name: 'داروساز',
+      view: 'نسخه و اطلاعات لازم برای تحویل',
+      edit: 'وضعیت تحویل و بررسی دارویی',
+      ai: 'هشدار تداخل منبع‌دار',
+      prescription: 'اصلاح فقط با فرایند مجاز',
+      icon: FlaskConical,
+      color: 'purple',
+      badgeClass: { view: 'badge-yellow', edit: 'badge-green', ai: 'badge-blue', prescription: 'badge-yellow' }
+    },
+    {
+      name: 'مسئول حریم خصوصی / ممیز',
+      view: 'لاگ و متادیتا؛ محتوا فقط با مجوز',
+      edit: 'یافته ممیزی و پرونده رخداد',
+      ai: 'خیر',
+      prescription: 'خیر',
+      icon: ShieldCheck,
+      color: 'blue',
+      badgeClass: { view: 'badge-yellow', edit: 'badge-yellow', ai: 'badge-red', prescription: 'badge-red' }
+    },
+    {
+      name: 'مدیر فنی / حساب سرویس',
+      view: 'پیش‌فرض بدون PHI؛ break-glass ثبت‌شده',
+      edit: 'تنظیمات فنی محدود',
+      ai: 'خیر',
+      prescription: 'خیر',
+      icon: User,
+      color: 'red',
+      badgeClass: { view: 'badge-red', edit: 'badge-yellow', ai: 'badge-red', prescription: 'badge-red' }
     }
   ];
 
@@ -72,14 +112,14 @@ const Chapter77 = () => {
     },
     {
       title: 'تریاژ و ارجاع (Triage)',
-      description: 'مدل، علائم خطر را چک کرده، فوریت را تشخیص داده و رزرو نوبت می‌کند.',
+      description: 'قواعد مصوب علائم هشدار را غربال می‌کنند و گزینه مسیر مراقبت را برای تأیید انسان نمایش می‌دهند.',
       badge1: 'AI: تریاژ خطر',
       badge2: 'اکشن: سیستم نوبت‌دهی',
       icon: StethoscopeIcon,
       color: 'blue',
       badge1Icon: Activity,
       badge2Icon: User,
-      details: 'الگوریتم‌های اورژانسی علائم حیاتی را بررسی می‌کنند. در صورت وجود علائم قرمز (مانند درد شدید قفسه سینه)، بیمار بلافاصله به اورژانس ارجاع داده می‌شود، در غیر این صورت زمان‌بندی مناسب با پزشک هماهنگ می‌گردد.'
+      details: 'در MVP غیراضطراری، رابط باید محدودیت را روشن و برای علائم قرمز پیام اقدام فوری/تماس محلی نشان دهد. سامانه فوریت را قطعی تشخیص نمی‌دهد و رزرو به ظرفیت و تأیید کاربر/مرکز وابسته است.'
     },
     {
       title: 'ویزیت آنلاین (Treatment)',
@@ -90,7 +130,7 @@ const Chapter77 = () => {
       color: 'teal',
       badge1Icon: ShieldCheck,
       badge2Icon: FlaskConical,
-      details: 'پزشک وارد اتاق ویزیت مجازی می‌شود. خلاصه‌ای دقیق و طبقه‌بندی شده از چت‌های بیمار و سوابق پزشکی قبلی توسط AI آماده شده است که زمان ویزیت را تا ۶۰٪ بهینه‌تر می‌کند.'
+      details: 'در سناریوی هدف، پزشک خلاصه‌ای منبع‌دار از اطلاعات مجاز را بازبینی و در صورت نیاز اصلاح می‌کند. اثر بر زمان ویزیت باید با تعریف معیار، خط مبنا و پایلوت اندازه‌گیری شود و در حال حاضر عدد تأییدشده‌ای وجود ندارد.'
     },
     {
       title: 'مراقبت و پایش پس از درمان (Follow-up)',
@@ -101,7 +141,7 @@ const Chapter77 = () => {
       color: 'purple',
       badge1Icon: Activity,
       badge2Icon: ShieldCheck,
-      details: 'ایجنت به صورت خودکار پیام‌هایی جهت ارزیابی عوارض دارویی یا بهبود علائم ارسال می‌کند. گزارش روند بهبودی در پرونده الکترونیک سلامت (EHR) ثبت می‌شود تا در مراجعه بعدی در دسترس باشد.'
+      details: 'پیگیری فقط با برنامه مصوب، رضایت، بازه زمانی، متن تأییدشده و مسئول رسیدگی انجام می‌شود. خوداظهاری کاربر با منشأ مشخص ثبت می‌شود و «بهبود» به‌صورت خودکار نتیجه‌گیری نمی‌شود.'
     }
   ];
 

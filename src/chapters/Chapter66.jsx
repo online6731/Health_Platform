@@ -28,7 +28,7 @@ const Chapter66 = () => {
           <p className="premium-text-secondary text-sm leading-relaxed relative z-10 m-0 flex items-start gap-2">
             <Info className="w-5 h-5 text-purple-500 shrink-0 mt-0.5" />
             <span>
-              جهت هم‌زبانی تیم‌های فنی، پزشکی و تجاری، این واژه‌نامه تمامی کلمات کلیدی، مرزها و مالکان هر مفهوم در پروژه HAIOS را مشخص می‌کند.
+              این واژه‌نامه نام‌های کاری و مرز مفاهیم را مشخص می‌کند. نام عمومی فعلی «Health Platform» است؛ HCOS و HAIOS تا تصمیم رسمی برند فقط نام‌های تاریخی/داخلی‌اند و نباید دو محصول مستقل تلقی شوند.
             </span>
           </p>
         </div>
@@ -53,32 +53,32 @@ const Chapter66 = () => {
                 </tr>
                 <tr className="hover:bg-[rgba(168,85,247,0.03)] transition-colors group">
                   <td className="font-bold text-[var(--accent-purple)] pl-4 text-left font-mono text-xs">Medical Brain</td>
-                  <td className="premium-text-primary font-medium leading-relaxed">لایه دانش، گراف‌های سلامت، و پروتکل‌های پزشکی تایید شده.</td>
-                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">یک شبکه عصبی نیست، بلکه گراف دانش قطعی است.</td>
+                  <td className="premium-text-primary font-medium leading-relaxed">نام کاری برای مجموعه منابع نسخه‌دار، retrieval و قواعد بالینی پیشنهادی.</td>
+                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">گراف یا «قطعی» بودن، صحت بالینی را تضمین نمی‌کند و به حاکمیت محتوا نیاز دارد.</td>
                   <td className="pr-4"><span className="badge badge-purple shadow-sm flex items-center gap-1 w-max"><User className="w-3 h-3"/> Clinical</span></td>
                 </tr>
                 <tr className="hover:bg-[rgba(168,85,247,0.03)] transition-colors group">
                   <td className="font-bold text-[var(--accent-purple)] pl-4 text-left font-mono text-xs">Digital Human</td>
-                  <td className="premium-text-primary font-medium leading-relaxed">مدل شبیه‌سازی شده طولی از سلامت بر پایه داده‌های گذشته و حال.</td>
-                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">پرونده سلامت نیست، چرا که قدرت شبیه‌سازی آینده را دارد.</td>
+                  <td className="premium-text-primary font-medium leading-relaxed">مفهوم پژوهشی برای نمایش وضعیت طولی؛ در MVP وجود ندارد.</td>
+                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">نباید با پرونده سلامت یا مدل پیش‌بینی درمانی اعتبارسنجی‌شده اشتباه شود.</td>
                   <td className="pr-4"><span className="badge badge-green shadow-sm flex items-center gap-1 w-max"><User className="w-3 h-3"/> Product</span></td>
                 </tr>
                 <tr className="hover:bg-[rgba(168,85,247,0.03)] transition-colors group">
                   <td className="font-bold text-[var(--accent-purple)] pl-4 text-left font-mono text-xs">Agent</td>
-                  <td className="premium-text-primary font-medium leading-relaxed">عامل خودمختار برای انجام یک وظیفه خاص (رزرو نوبت/تفسیر آزمایش).</td>
-                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">چت‌بات ساده نیست، توانایی برنامه‌ریزی (Reasoning) دارد.</td>
+                  <td className="premium-text-primary font-medium leading-relaxed">مولفه نرم‌افزاری محدود به وظیفه، ابزارهای مجاز و سیاست توقف مشخص.</td>
+                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">خودمختاری نامحدود یا reasoning قابل اعتماد فرض نمی‌شود؛ عملکرد باید آزمون و ثبت شود.</td>
                   <td className="pr-4"><span className="badge badge-blue shadow-sm flex items-center gap-1 w-max"><User className="w-3 h-3"/> AI Agent</span></td>
                 </tr>
                 <tr className="hover:bg-[rgba(168,85,247,0.03)] transition-colors group">
                   <td className="font-bold text-[var(--accent-purple)] pl-4 text-left font-mono text-xs">HAIOS</td>
-                  <td className="premium-text-primary font-medium leading-relaxed">سیستم‌عامل هوش مصنوعی سلامت (Healthcare AI OS).</td>
-                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">پلتفرم مادر است و تمامی Agentها روی آن اجرا می‌شوند.</td>
+                  <td className="premium-text-primary font-medium leading-relaxed">نام داخلی تاریخی برای چشم‌انداز لایه AI پلتفرم.</td>
+                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">تا تصمیم برند و معماری، نام محصول رسمی یا سیستم عملیاتی مستقل نیست.</td>
                   <td className="pr-4"><span className="badge badge-gray shadow-sm flex items-center gap-1 w-max"><User className="w-3 h-3"/> Platform</span></td>
                 </tr>
                 <tr className="hover:bg-[rgba(239,68,68,0.03)] transition-colors group border-b-0">
                   <td className="font-bold text-red-500 pl-4 text-left font-mono text-xs">Clinical Decision Engine</td>
-                  <td className="premium-text-primary font-medium leading-relaxed">موتور تصمیم‌ساز بالینی که خروجی مدل‌ها را فیلتر می‌کند.</td>
-                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">وظیفه تأیید (Validation) و رد توصیه‌های پرخطر را دارد.</td>
+                  <td className="premium-text-primary font-medium leading-relaxed">مفهوم پیشنهادی برای اجرای قواعد ایمنی، نمایش منبع و ارجاع به انسان.</td>
+                  <td className="text-xs premium-text-secondary leading-relaxed border-r border-[var(--border-color)] pr-4">فیلتر خودکار جایگزین validation بالینی، قضاوت پزشک یا کنترل چرخه عمر نیست.</td>
                   <td className="pr-4"><span className="badge badge-red shadow-sm flex items-center gap-1 w-max"><User className="w-3 h-3"/> Safety</span></td>
                 </tr>
               </tbody>

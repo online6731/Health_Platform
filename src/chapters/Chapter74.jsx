@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { AlertTriangle, ShieldAlert, Activity, Flame, Shield, Crosshair, ClipboardCheck, Hash, Layers, Search, RefreshCw } from 'lucide-react';
+import { AlertTriangle, ShieldAlert, Activity, Flame, Shield, ClipboardCheck, Hash, Layers, Search, RefreshCw } from 'lucide-react';
 
 const Chapter74 = () => {
   const [selectedRiskId, setSelectedRiskId] = useState(null);
@@ -30,7 +30,7 @@ const Chapter74 = () => {
       score: 20,
       level: 'Extreme',
       color: 'red',
-      mitigation: 'اتصال به دیتابیس گایدلاین‌ها از طریق RAG و فیلتر نهایی توسط Rule Engine قطعی.'
+      mitigation: 'محدودکردن کاربرد، منابع نسخه‌دار، مجموعه آزمون، قواعد قابل ممیزی، abstention، بازبینی انسانی و توقف انتشار در عبور از آستانه خطر.'
     },
     {
       id: 3,
@@ -66,7 +66,7 @@ const Chapter74 = () => {
       score: 12,
       level: 'Medium',
       color: 'yellow',
-      mitigation: 'برگزاری ورکشاپ‌های آموزشی، ارائه‌ آمارهای کاهش زمان درمان و ترغیب مالی پزشکان.'
+      mitigation: 'پژوهش مشارکتی با درمانگر، اندازه‌گیری بار کاری واقعی، شفافیت محدودیت و طراحی مشوق بدون تعارض منافع؛ آمار فقط پس از مطالعه گزارش می‌شود.'
     },
     {
       id: 6,

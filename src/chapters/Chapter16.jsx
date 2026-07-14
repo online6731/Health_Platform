@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Scale, FileCheck, Globe, CheckCircle2, Bookmark } from 'lucide-react';
+import { FileCheck, CheckCircle2 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter16.css';
 
@@ -11,26 +11,26 @@ export default function Chapter16() {
     >
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۶-۱ مقدمه: استانداردسازی جهانی</h3>
-        <p>حوزه سلامت یکی از قانون‌مندترین صنایع جهان است. معماری سیستم از روز اول بر پایه انطباق با سخت‌گیرانه‌ترین استانداردهای بین‌المللی بنا شده است تا مانعی برای گسترش در بازارهای جهانی وجود نداشته باشد.</p>
+        <p>الزامات سلامت به intended use، نوع محصول، نقش حقوقی سازمان و کشور استقرار وابسته‌اند. این فصل نقشه اولیه بررسی است و اعلام انطباق، ثبت یا تأییدیه محسوب نمی‌شود.</p>
       </div>
       <section className="chapter-section">
         <h3><FileCheck className="section-icon" /> ۱۶-۲ پروتکل‌های انطباق‌پذیری</h3>
         <div className="compliance-list">
           <div className="compliance-item">
-            <h5><CheckCircle2 size={16}/> استاندارد HIPAA</h5>
-            <p>انطباق کامل با قوانین صیانت از داده‌های بیماران در ایالات متحده.</p>
+            <h5><CheckCircle2 size={16}/> بررسی دامنه HIPAA</h5>
+            <p>تعیین Covered Entity/Business Associate بودن، نوع PHI، قرارداد BAA و شواهد کنترل‌های اداری، فیزیکی و فنی.</p>
           </div>
           <div className="compliance-item">
-            <h5><CheckCircle2 size={16}/> استاندارد GDPR</h5>
-            <p>رعایت حق فراموش‌شدن و مقررات حفاظت از داده‌های اروپا.</p>
+            <h5><CheckCircle2 size={16}/> بررسی دامنه GDPR</h5>
+            <p>تعیین controller/processor، مبنای قانونی، داده ویژه سلامت، DPIA، حقوق اشخاص و انتقال بین‌المللی.</p>
           </div>
           <div className="compliance-item">
             <h5><CheckCircle2 size={16}/> استاندارد ISO 27799</h5>
-            <p>استاندارد بین‌المللی مدیریت امنیت اطلاعات در حوزه سلامت.</p>
+            <p>مرجع نامزد برای کنترل‌های امنیت اطلاعات سلامت؛ نسخه، دامنه و برنامه ممیزی هنوز تعیین نشده است.</p>
           </div>
           <div className="compliance-item">
-            <h5><CheckCircle2 size={16}/> تاییدیه FDA / CE</h5>
-            <p>رعایت الزامات قانونی برای استفاده از الگوریتم‌های AI به عنوان ابزار تشخیص بالینی (SaMD).</p>
+            <h5><CheckCircle2 size={16}/> تحلیل مسیر FDA / CE در صورت شمول</h5>
+            <p>طبقه‌بندی، intended use، حوزه قضایی و شواهد بالینی تعیین می‌کنند آیا و کدام مسیر قابل اعمال است.</p>
           </div>
         </div>
       </section>

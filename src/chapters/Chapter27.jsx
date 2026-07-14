@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Layout, Palette, Type, MousePointerClick, Smartphone, Monitor, Layers, Moon
+  Palette, Type, MousePointerClick, Smartphone, Layers, Moon
 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter27.css';
@@ -72,8 +72,8 @@ export default function Chapter27() {
         <div className="ui-principles-grid">
           <div className="ui-principle">
             <Moon size={32} />
-            <h4>پشتیبانی کامل از Dark Mode</h4>
-            <p>تمامی پنل‌های پزشکان و بیماران به صورت پیش‌فرض از حالت تاریک پشتیبانی می‌کنند تا خستگی چشم در شیفت‌های شبانه کاهش یابد.</p>
+            <h4>حالت روشن/تاریک در نمایشگر فعلی</h4>
+            <p>نمونه وب از تغییر تم پشتیبانی می‌کند؛ اثر بر خستگی چشم ادعای بالینی نیست و پنل‌های آینده باید جداگانه از نظر کنتراست و دسترس‌پذیری آزمون شوند.</p>
           </div>
           <div className="ui-principle">
             <Type size={32} />
@@ -83,7 +83,7 @@ export default function Chapter27() {
           <div className="ui-principle">
             <Smartphone size={32} />
             <h4>رویکرد Mobile-First</h4>
-            <p>طراحی از موبایل شروع می‌شود. بیش از ۸۰٪ تعاملات بیماران از طریق تلفن هوشمند انجام خواهد شد.</p>
+            <p>Mobile-first یک فرضیه طراحی است و سهم تعاملات موبایل باید با پژوهش کاربر، دسترس‌پذیری، کیفیت شبکه و نیاز گروه‌های مختلف سنجیده شود.</p>
           </div>
           <div className="ui-principle">
             <MousePointerClick size={32} />

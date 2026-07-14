@@ -1,16 +1,52 @@
-# React + Vite
+# Health Platform Proposal
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+نمایشگر تحت وب پروپوزال «پلتفرم سلامت» شامل ۷۸ فصل، جست‌وجو، دسته‌بندی موضوعی، تم روشن/تاریک و خروجی HTML یکپارچه و آفلاین.
 
-Currently, two official plugins are available:
+داشبورد برای جلوگیری از تکرار، ۲۵ سند مرجع را در چهار مسیر «راهبرد»، «محصول»، «مهندسی» و «ایمنی/حاکمیت» نمایش می‌دهد. سایر فصل‌ها به‌عنوان پیوست تخصصی حفظ شده‌اند. وضعیت و قواعد انتشار ادعاها در [حاکمیت مستندات](./docs/DOCUMENTATION_GOVERNANCE.md) و شکاف‌ها، تکرارها و اسناد لازم در [ارزیابی کامل‌بودن محتوا](./docs/CONTENT_COMPLETENESS.md) ثبت شده‌اند؛ فایل‌های خام پژوهشی در `docs/archive` منبع رسمی پروژه نیستند.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> این مخزن در وضعیت فعلی یک پروپوزال تعاملی و نمونهٔ نمایشی است؛ بک‌اند، احراز هویت، پایگاه داده و سرویس پزشکی عملیاتی ندارد و نباید برای تصمیم‌گیری یا ارائهٔ خدمات پزشکی استفاده شود.
 
-## React Compiler
+## اجرا
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+نیازمندی: Node.js 20.19 یا جدیدتر (نسخهٔ پیشنهادی: Node 22).
 
-## Expanding the Oxlint configuration
+```bash
+npm ci
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+نشانی پیش‌فرض Vite را در مرورگر باز کنید. برای تست و build تولید:
+
+```bash
+npm run lint
+npm test
+npm run build
+npm run preview
+```
+
+## دستیار هوش مصنوعی
+
+کلید ارائه‌دهندهٔ هوش مصنوعی نباید در کد فرانت‌اند یا متغیرهای `VITE_*` قرار بگیرد. در صورت نیاز، یک endpoint هم‌مبدأ در بک‌اند بسازید و مسیر آن را در فایل محلی `.env` تنظیم کنید:
+
+```env
+VITE_AI_PROXY_URL=/api/assistant
+```
+
+endpoint باید درخواست `POST` با بدنهٔ زیر را بپذیرد و پاسخی مانند `{ "text": "..." }` برگرداند:
+
+```json
+{
+  "message": "متن پرسش",
+  "context": "health-platform-proposal"
+}
+```
+
+در بک‌اند احراز هویت، محدودسازی نرخ، اعتبارسنجی ورودی، ثبت رضایت و سیاست مناسب داده‌های سلامت را اعمال کنید. بدون تنظیم proxy، دستیار در رابط کاربری غیرفعال می‌ماند.
+
+## استقرار
+
+مقدار `base` برای GitHub Pages روی `/Health_Platform/` تنظیم شده است. فرمان `npm run deploy` خروجی `dist` را در شاخهٔ Pages منتشر می‌کند.
+
+## امنیت
+
+فایل‌های `.env` در Git نادیده گرفته می‌شوند و `.env.example` فقط شامل تنظیمات غیرمحرمانه است. گزارش آسیب‌پذیری یا رخداد اعتبارنامه را طبق [SECURITY.md](./SECURITY.md) پیگیری کنید.

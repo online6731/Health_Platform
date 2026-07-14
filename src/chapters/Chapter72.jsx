@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Lightbulb, Fingerprint, MessageSquare, Target, CheckCircle2, Activity, FlaskConical, Server, Scale, ArrowRightCircle, Search, RefreshCw, AlertTriangle } from 'lucide-react';
+import { Lightbulb, Fingerprint, MessageSquare, Target, CheckCircle2, FlaskConical, Server, Scale, ArrowRightCircle, Search, RefreshCw, AlertTriangle } from 'lucide-react';
 
 const Chapter72 = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,8 +20,8 @@ const Chapter72 = () => {
       id: 'ASM-02',
       hypothesis: 'پزشکان از خلاصه‌ساز هوشمند استقبال می‌کنند.',
       importance: 'High',
-      validation: 'مصاحبه با ۳۰ پزشک متخصص.',
-      status: 'Validated',
+      validation: 'برنامه: مصاحبه ساختاریافته با پزشکان، ثبت نمونه، سؤالات، نتایج و معیار پذیرش.',
+      status: 'Researching',
       color: 'yellow'
     },
     {
@@ -36,7 +36,7 @@ const Chapter72 = () => {
       id: 'ASM-04',
       hypothesis: 'رگولاتوری به نسخه تلفیقی (AI+Doctor) مجوز می‌دهد.',
       importance: 'Critical',
-      validation: 'مذاکره حقوقی با سازمان غذا و دارو.',
+      validation: 'تعیین intended use و دریافت نظر مکتوب از مشاور حقوقی و مرجع ذی‌صلاح.',
       status: 'High Risk',
       color: 'red'
     },

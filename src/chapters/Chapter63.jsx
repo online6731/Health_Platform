@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Settings, ShieldAlert, Award, FileCode, CheckCircle2, ShieldCheck, HelpCircle, HardDrive, ListOrdered, ArrowLeft } from 'lucide-react';
+import { Settings, ShieldAlert, Award, CheckCircle2, HardDrive, ListOrdered } from 'lucide-react';
 
 const sops = [
   {
     stage: '۱. تریاژ با هوش مصنوعی',
     actor: 'Personal Health Agent',
-    desc: 'ایجنت هوش مصنوعی علائم را بررسی کرده، در صورت خطر بحرانی، فوری هشدار اورژانسی صادر می‌کند.'
+    desc: 'قواعد مصوب می‌توانند پیام ایمنی و گزینه تماس محلی را نمایش دهند؛ تشخیص وضعیت بحرانی یا تماس خودکار بدون پروتکل، مکان و تأیید کاربر مجاز نیست.'
   },
   {
     stage: '۲. انتقال به پزشک متخصص شیفت',
@@ -23,7 +23,7 @@ const sops = [
 const bcpMeasures = [
   {
     risk: 'افت یا قطعی کلاسترهای GPU',
-    mitigation: 'انتقال بار پردازشی مدل‌ها به سرورهای محلی پشتیبان به‌صورت خودکار با تاخیر کمتر از ۵ ثانیه.'
+    mitigation: 'تعریف degraded mode بدون AI، صف امن، RTO/RPO، مالک تصمیم و آزمون دوره‌ای بازیابی؛ زمان بازیابی هنوز اندازه‌گیری نشده است.'
   },
   {
     risk: 'حملات سایبری یا هک گسترده',
@@ -61,7 +61,7 @@ export default function Chapter63() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500 opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
           <h3 className="text-xl font-bold premium-text-primary mb-3 mt-0 relative z-10">۶۳-۱ استانداردسازی عملیات در HCOS</h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            تضمین کیفیت و تداوم ارائه خدمات پزشکی و مراقبتی در یک پلتفرم چندعاملی، نیازمند تدوین دقیق روش‌های اجرایی استاندارد (SOP) و آمادگی کامل در برابر حوادث غیرمترقبه (BCP) است.
+            این فصل فهرست موضوعات لازم برای SOP و BCP است، نه روش اجرایی مصوب. هر SOP باید شناسه، مالک، نسخه، trigger، نقش‌ها، ورودی/خروجی، استثنا، escalation، آموزش، شاهد اجرا و تاریخ بازبینی داشته باشد.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function Chapter63() {
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
             <ShieldAlert className="w-6 h-6 text-red-500" /> ۶۳-۳ برنامه تداوم کسب‌وکار و مدیریت بحران (BCP)
           </h3>
-          <p className="premium-text-secondary text-sm mb-6">تدابیر مهندسی و اداری HCOS برای مقابله با چالش‌های بحرانی:</p>
+          <p className="premium-text-secondary text-sm mb-6">کنترل‌های پیشنهادی و آزمون‌نشده برای تکمیل برنامه تداوم:</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {bcpMeasures.map((measure, idx) => (
@@ -153,7 +153,7 @@ export default function Chapter63() {
                 <div>
                   <strong className="text-lg premium-text-primary block mb-2">آموزش پزشکان همکار</strong>
                   <p className="premium-text-secondary text-sm leading-relaxed m-0">
-                    کارگاه‌های آنلاین ۲ ساعته ماهانه جهت آشنایی با نحوه کار با CDSS و داشبورد همزاد دیجیتال.
+                    محتوای نقش‌محور، سناریوی خطا، محدودیت سیستم و ارزیابی شایستگی؛ تناوب پس از تحلیل نیاز آموزشی تعیین می‌شود.
                   </p>
                 </div>
               </li>

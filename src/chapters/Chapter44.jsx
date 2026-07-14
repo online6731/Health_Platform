@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bluetooth, Wifi, Usb, SmartphoneNfc, Link2, Database, ShieldCheck } from 'lucide-react';
+import { Bluetooth, Wifi, Link2, Database, ShieldCheck } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter44.css';
 
@@ -38,7 +38,7 @@ export default function Chapter44() {
     >
       <div className="integration-container">
         <div className="integration-hero">
-          <h3>پلی به سوی تمامی سیستم‌های سلامت</h3>
+          <h3>اتصال مرحله‌ای به سیستم‌های منتخب</h3>
           <p>
             سلامت ایزوله نیست. پلتفرم ما به گونه‌ای طراحی شده که بتواند با هر دستگاه، نرم‌افزار و سیستم استاندارد دیگری در جهان ارتباط برقرار کند. زبان مشترک ما، استانداردهای بین‌المللی ارتباطات پزشکی است.
           </p>

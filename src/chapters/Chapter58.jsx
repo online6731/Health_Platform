@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Server, Database, Code, Shield, Network, Layout, Key, ArrowLeftRight, ChevronLeft } from 'lucide-react';
+import { Server, Database, Shield, Network, Layout, ArrowLeftRight, ChevronLeft } from 'lucide-react';
 
 const layers = [
   {
     name: '۱. لایه کلاینت و ارائه (Client Layer)',
     icon: Layout,
-    desc: 'سوپراپ موبایل، پرتال وب پزشکان، ویجت‌های هوشمند سیستم‌عامل و یکپارچه‌سازهای اینترنت اشیاء (IoT) برای همگام‌سازی بلادرنگ داده‌ها.',
+    desc: 'کلاینت وب MVP و کانال‌های احتمالی آینده؛ موبایل، IoT و SDK پس از نیازسنجی و قرارداد رابط اضافه می‌شوند.',
     components: ['HCOS iOS/Android App', 'Physician Portal Web', 'IoT Gateway Service', 'API Client SDK']
   },
   {
     name: '۲. لایه گیت‌وی و امنیت (API Gateway & Security)',
     icon: Shield,
-    desc: 'امنیت و کنترل ترافیک با لایه پیشرفته ترازساز بار، تأیید هویت توکن‌های JWT غیرمتمرکز، و دیوارهای امنیتی مجهز به هوش مصنوعی ضد‌نفوذ.',
-    components: ['Kong API Gateway', 'OAuth2 / Keycloak Server', 'WAF / DDoS Protection', 'Rate Limiter Service']
+    desc: 'طرح مفهومی کنترل ترافیک، احراز هویت متمرکز، rate limiting و WAF؛ انتخاب محصول و کنترل‌ها پس از threat model انجام می‌شود.',
+    components: ['API Gateway (TBD)', 'Identity Provider (TBD)', 'WAF / DDoS Controls', 'Rate Limiting']
   },
   {
     name: '۳. ارکستراسیون عامل‌ها و منطق بیزینس (AI & Logic Layer)',
     icon: Network,
-    desc: 'هسته هوشمند چندعاملی (Multi-Agent Engine) برای هدایت، تلفیق، مانیتورینگ و تولید فرامین توصیه‌گر هوشمند سلامت بر پایه RAG.',
-    components: ['Agentic Router', 'RAG Knowledge Integrator', 'Medical Inference Engine', 'Asynchronous Task Queue (Celery)']
+    desc: 'سرویس کاربرد و مؤلفه AI اختیاری برای خلاصه‌سازی/بازیابی منبع‌دار؛ انتخاب multi-agent یا معماری ساده‌تر پس از benchmark.',
+    components: ['Application Service', 'RAG Candidate', 'Rules & Safety Gate', 'Background Jobs (TBD)']
   },
   {
     name: '۴. لایه ذخیره‌سازی داده (Database & Storage)',
     icon: Database,
-    desc: 'پایگاه‌های داده بهینه‌سازی‌شده برای سناریوهای زمانی، اسناد متنی، گراف روابط پزشکی و همزاد دیجیتال موازی.',
-    components: ['TimescaleDB (IoT Timeseries)', 'PostgreSQL (EHR Ledger)', 'Neo4j (Medical Knowledge Graph)', 'Redis (Caching & State)']
+    desc: 'شروع با حداقل ذخیره‌سازی لازم و تفکیک داده هویتی/سلامت؛ فناوری‌های سری زمانی، گراف و vector فقط با نیاز اثبات‌شده.',
+    components: ['Transactional Store (TBD)', 'Object Storage (TBD)', 'Audit Log', 'Cache / Vector / Graph (Optional)']
   }
 ];
 
@@ -34,8 +34,8 @@ const databaseSchema = [
     table: 'Users (کاربران)',
     fields: [
       { name: 'user_id', type: 'UUID (PK)', desc: 'شناسه یکتای کاربر در کل سیستم' },
-      { name: 'health_id', type: 'VARCHAR (Unique)', desc: 'شناسه ملی سلامت هوشمند کاربر' },
-      { name: 'profile_data', type: 'JSONB', desc: 'اطلاعات هویتی رمزنگاری‌شده با AES-256' }
+      { name: 'external_identity_ref', type: 'TOKEN/REFERENCE', desc: 'ارجاع کمینه‌شده به هویت؛ نه کپی پیش‌فرض شناسه ملی' },
+      { name: 'profile_data', type: 'STRUCTURE (TBD)', desc: 'حداقل داده لازم با کنترل دسترسی و مدیریت کلید مصوب' }
     ]
   },
   {
@@ -43,18 +43,18 @@ const databaseSchema = [
     fields: [
       { name: 'record_id', type: 'UUID (PK)', desc: 'شناسه سند ثبت سلامت' },
       { name: 'user_id', type: 'UUID (FK)', desc: 'ارجاع به جدول کاربران' },
-      { name: 'metric_type', type: 'VARCHAR', desc: 'نوع داده (مثل گلوکز، ضربان قلب، نتایج آزمایش)' },
-      { name: 'metric_value', type: 'JSONB', desc: 'مقدار ثبت‌شده به صورت ساختاریافته' },
-      { name: 'recorded_at', type: 'TIMESTAMP', desc: 'زمان دقیق ثبت داده' }
+      { name: 'resource_type', type: 'CODE (bound)', desc: 'نوع منبع با terminology binding نسخه‌دار' },
+      { name: 'payload_ref', type: 'REFERENCE', desc: 'ارجاع به منبع ساختاریافته، منشأ و نسخه' },
+      { name: 'recorded_at', type: 'TIMESTAMP + TZ', desc: 'زمان رویداد با timezone و دقت ثبت‌شده' }
     ]
   },
   {
-    table: 'DigitalTwins (همزادهای دیجیتال)',
+    table: 'UserStateSnapshots (نمای وضعیت؛ اختیاری)',
     fields: [
-      { name: 'twin_id', type: 'UUID (PK)', desc: 'شناسه همزاد دیجیتال کاربر' },
+      { name: 'snapshot_id', type: 'UUID (PK)', desc: 'شناسه نسخه نمای وضعیت' },
       { name: 'user_id', type: 'UUID (FK)', desc: 'ارجاع به جدول کاربران' },
-      { name: 'state_vector', type: 'VECTOR(1536)', desc: 'بردار وضعیت وضعیت سلامت شناختی و جسمی برای هوش مصنوعی' },
-      { name: 'updated_at', type: 'TIMESTAMP', desc: 'زمان آخرین بازسازی همزاد' }
+      { name: 'state_summary', type: 'STRUCTURE (TBD)', desc: 'خلاصه قابل توضیح با ورودی، نسخه و محدودیت؛ نه تشخیص' },
+      { name: 'updated_at', type: 'TIMESTAMP + TZ', desc: 'زمان تولید snapshot و نسخه الگوریتم' }
     ]
   }
 ];
@@ -87,7 +87,7 @@ export default function Chapter58() {
             <Network className="w-5 h-5 text-amber-500" /> ۵۸-۱ معماری ماژولار و مبتنی بر میکرو‌سرویس
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            سیستم‌عامل سلامت HCOS از یک ساختار توزیع‌شده با اتصال‌های ماژولار بهره می‌برد تا بتواند داده‌های سنگین میلیون‌ها همزاد دیجیتال را بدون هیچ تأخیری پردازش و تحلیل کند.
+            این معماری یک گزینه مفهومی برای جداسازی مسئولیت‌هاست. مقیاس هدف، بودجه latency، انتخاب monolith یا microservices و فناوری‌های ذخیره‌سازی باید با بار نماینده، هزینه و توان تیم اعتبارسنجی شوند.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export default function Chapter58() {
         {/* Data Schema / ERD table */}
         <section className="mb-12">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <Database className="w-6 h-6 text-blue-500" /> ۵۸-۳ ساختار داده‌ها و انطباق ERD
+            <Database className="w-6 h-6 text-blue-500" /> ۵۸-۳ طرح اولیه داده (ERD مفهومی)
           </h3>
           <p className="premium-text-secondary text-sm mb-6">طرح‌واره‌های پایگاه داده متمرکز بر حفاظت حداکثری از داده‌های سلامت (Security-by-Design):</p>
           

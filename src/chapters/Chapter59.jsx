@@ -1,91 +1,61 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Code, Link2, Copy, Check, Terminal, ExternalLink, Globe, Database, Server, Webhook } from 'lucide-react';
+import { Code, Link2, Copy, Check, Terminal, Globe, Database, Server, Webhook } from 'lucide-react';
 
 const endpoints = [
   {
     method: 'POST',
-    path: '/api/v1/health-record/metrics',
-    desc: 'ارسال داده‌های علائم حیاتی به‌صورت تکی یا دسته‌ای از ابزارهای پوشیدنی.',
+    path: '/draft/v1/intake-responses',
+    desc: 'نمونه غیرعملیاتی ثبت پاسخ شرح حال با idempotency، رضایت و منشأ؛ قرارداد نهایی هنوز تعریف نشده است.',
     request: `{
-  "metrics": [
-    {
-      "type": "heart_rate",
-      "value": 78,
-      "unit": "bpm",
-      "timestamp": "2026-07-10T04:30:00Z"
-    }
-  ]
+  "questionnaire_id": "example-intake-v0",
+  "subject_ref": "demo-subject",
+  "consent_ref": "demo-consent",
+  "answers": []
 }`,
     response: `{
-  "status": "success",
-  "processed_records": 1,
-  "twin_updated": true
+  "status": "accepted-for-validation",
+  "resource_id": "demo-only",
+  "warnings": ["DRAFT_CONTRACT"]
 }`
   },
   {
     method: 'GET',
-    path: '/api/v1/digital-twin/{user_id}/prediction',
-    desc: 'دریافت بردار پیش‌بینی علائم سلامت در ۲۴ ساعت آینده بر اساس داده‌های همزاد دیجیتال.',
+    path: '/draft/v1/referrals/{referral_id}',
+    desc: 'نمونه غیرعملیاتی مشاهده وضعیت ارجاع با کنترل هدف استفاده و دسترسی مبتنی بر نقش.',
     request: '// No request body needed (Requires Bearer Token)',
     response: `{
-  "user_id": "8f3b-41da",
-  "predictions": {
-    "blood_pressure": "120/80",
-    "stress_risk_index": 0.15,
-    "cognitive_alertness": "optimal"
-  },
-  "confidence_score": 0.94
+  "referral_id": "demo-referral",
+  "status": "awaiting-human-review",
+  "updated_at": "2026-07-14T08:00:00Z"
 }`
   }
 ];
 
 const langSnippets = {
-  curl: `curl -X POST https://api.hcos.health/api/v1/health-record/metrics \\
+  curl: `curl -X POST https://api.example.invalid/draft/v1/intake-responses \\
   -H "Authorization: Bearer YOUR_API_TOKEN" \\
   -H "Content-Type: application/json" \\
-  -d '{
-    "metrics": [
-      {
-        "type": "heart_rate",
-        "value": 82,
-        "unit": "bpm",
-        "timestamp": "2026-07-10T05:00:00Z"
-      }
-    ]
-  }'`,
+  -H "Idempotency-Key: DEMO_KEY" \\
+  -d '{"questionnaire_id":"example-intake-v0","answers":[]}'`,
   python: `import requests
 
-url = "https://api.hcos.health/api/v1/health-record/metrics"
+url = "https://api.example.invalid/draft/v1/intake-responses"
 headers = {
     "Authorization": "Bearer YOUR_API_TOKEN",
     "Content-Type": "application/json"
 }
-payload = {
-    "metrics": [{
-        "type": "heart_rate",
-        "value": 82,
-        "unit": "bpm",
-        "timestamp": "2026-07-10T05:00:00Z"
-    }]
-}
+payload = {"questionnaire_id": "example-intake-v0", "answers": []}
 
 response = requests.post(url, headers=headers, json=payload)
 print(response.json())`,
-  javascript: `fetch('https://api.hcos.health/api/v1/health-record/metrics', {
+  javascript: `fetch('https://api.example.invalid/draft/v1/intake-responses', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_TOKEN',
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({
-    metrics: [{
-      type: 'heart_rate',
-      value: 82,
-      unit: 'bpm',
-      timestamp: '2026-07-10T05:00:00Z'
-    }]
-  })
+  body: JSON.stringify({ questionnaire_id: 'example-intake-v0', answers: [] })
 })
 .then(res => res.json())
 .then(data => console.log(data));`
@@ -127,14 +97,14 @@ export default function Chapter59() {
             <Code className="w-5 h-5 text-sky-500" /> ۵۹-۱ پلتفرم باز HCOS و توسعه‌دهندگان
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            سیستم‌عامل سلامت HCOS از روز اول با رویکرد پلتفرم باز (Open API) توسعه یافته است. ما با ارائه مستندات استاندارد، کیت‌های توسعه نرم‌افزار (SDK) به زبان‌های محبوب و وب‌هویک‌های بلادرنگ، یکپارچه‌سازی را تسهیل کرده‌ایم.
+            این صفحه یک قرارداد نمونه و غیرقابل اجراست، نه مستند API منتشرشده. پیش از پیاده‌سازی باید مدل منبع، مالک، احراز هویت، scope، رضایت، خطا، idempotency، pagination، نسخه‌بندی، audit، محدودیت نرخ و سیاست حذف مشخص شوند.
           </p>
         </div>
 
         {/* API Endpoint Selector */}
         <section className="mb-12">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <Server className="w-6 h-6 text-sky-500" /> ۵۹-۲ اندپوینت‌های کلیدی REST API
+            <Server className="w-6 h-6 text-sky-500" /> ۵۹-۲ نمونه اندپوینت‌های پیش‌نویس
           </h3>
           <p className="premium-text-secondary text-sm mb-6">برای مشاهده مستندات اندپوینت و قالب درخواست/پاسخ کلیک کنید:</p>
           
@@ -202,7 +172,7 @@ export default function Chapter59() {
         {/* Multi-language SDK snippets */}
         <section className="mb-12">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <Terminal className="w-6 h-6 text-purple-500" /> ۵۹-۳ نمونه کدهای یکپارچه‌سازی (SDK)
+            <Terminal className="w-6 h-6 text-purple-500" /> ۵۹-۳ نمونه کد غیرعملیاتی
           </h3>
           <div className="glass-panel border border-[var(--border-color)] rounded-2xl overflow-hidden shadow-md">
             <div className="flex border-b border-[var(--border-color)] bg-[var(--bg-secondary)]" dir="ltr">
@@ -246,7 +216,7 @@ export default function Chapter59() {
                 <h5 className="font-bold premium-text-primary m-0 text-lg">اتصال ساعت‌های هوشمند</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed relative z-10">
-                استفاده از سیستم‌عامل HCOS IoT Gateway برای تجمیع داده‌های سنسورها با فرکانس مشخص.
+                سناریوی آینده؛ نیازمند قرارداد سازنده، کیفیت/واحد داده، رضایت، device identity، retry و داده گمشده.
               </p>
             </div>
             <div className="glass-panel p-6 border-r-4 border-r-indigo-500 hover:-translate-y-1 transition-transform duration-300 shadow-sm relative overflow-hidden">
@@ -256,7 +226,7 @@ export default function Chapter59() {
                 <h5 className="font-bold premium-text-primary m-0 text-lg">اتصال سیستم‌های بیمارستانی (HIS)</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed relative z-10">
-                پشتیبانی کامل از استانداردهای تبادل داده سلامت بین‌المللی مانند HL7 FHIR.
+                FHIR نامزد مدل تبادل است؛ نسخه، پروفایل، terminology، capability statement و آزمون conformance هنوز تعریف نشده‌اند.
               </p>
             </div>
           </div>

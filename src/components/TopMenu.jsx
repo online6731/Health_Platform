@@ -3,19 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { Brain, Search, Download, Menu as MenuIcon, X, ChevronDown, Loader2 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { downloadFullProposalHtml } from '../utils/exportHtml';
-import { chapters, getTagLabel } from '../config/chapters';
+import { chapters, documentTracks } from '../config/chapters';
 import './TopMenu.css';
 
-// Grouping logic based on tags
-const groupedChapters = chapters.reduce((acc, chapter) => {
-  if (chapter.id === '0' || chapter.id === 'export') return acc;
-  const tags = chapter.tags || ['product'];
-  tags.forEach(tag => {
-    if (!acc[tag]) acc[tag] = [];
-    acc[tag].push(chapter);
-  });
-  return acc;
-}, {});
+const chapterById = new Map(chapters.map((chapter) => [chapter.id, chapter]));
+const groupedChapters = Object.fromEntries(documentTracks.map((track) => [
+  track.id,
+  track.chapterIds.map((id) => chapterById.get(id)).filter(Boolean)
+]));
 
 export default function TopMenu({ onOpenSearch }) {
   const [isExporting, setIsExporting] = useState(false);
@@ -35,7 +30,7 @@ export default function TopMenu({ onOpenSearch }) {
     }
   };
 
-  const navTags = ['business', 'tech', 'product', 'ai', 'market', 'legal'];
+  const navTracks = documentTracks;
 
   return (
     <header className="top-menu">
@@ -55,22 +50,30 @@ export default function TopMenu({ onOpenSearch }) {
             داشبورد
           </NavLink>
           
-          {navTags.map(tag => {
-             const group = groupedChapters[tag];
+          {navTracks.map(track => {
+             const group = groupedChapters[track.id];
              if (!group || group.length === 0) return null;
              
              return (
                <div 
-                 key={tag} 
+                 key={track.id}
                  className="nav-dropdown-wrapper"
-                 onMouseEnter={() => setActiveDropdown(tag)}
+                 onMouseEnter={() => setActiveDropdown(track.id)}
                  onMouseLeave={() => setActiveDropdown(null)}
                >
-                 <button className={`nav-link dropdown-trigger ${activeDropdown === tag ? 'active' : ''}`}>
-                   {getTagLabel(tag)} <ChevronDown size={16} />
+                 <button
+                   type="button"
+                   className={`nav-link dropdown-trigger ${activeDropdown === track.id ? 'active' : ''}`}
+                   aria-expanded={activeDropdown === track.id}
+                   aria-controls={`menu-${track.id}`}
+                   onClick={() => setActiveDropdown(activeDropdown === track.id ? null : track.id)}
+                   onFocus={() => setActiveDropdown(track.id)}
+                   onKeyDown={(event) => event.key === 'Escape' && setActiveDropdown(null)}
+                 >
+                   {track.title} <ChevronDown size={16} />
                  </button>
                  
-                 <div className={`mega-menu ${activeDropdown === tag ? 'open' : ''}`}>
+                 <div id={`menu-${track.id}`} className={`mega-menu ${activeDropdown === track.id ? 'open' : ''}`}>
                    <div className="mega-menu-grid">
                      {group.map(chapter => {
                        const Icon = chapter.icon;
@@ -97,20 +100,26 @@ export default function TopMenu({ onOpenSearch }) {
         </nav>
 
         <div className="top-menu-actions">
-           <button className="icon-btn search-btn" onClick={onOpenSearch} title="جستجو">
+           <button type="button" className="icon-btn search-btn" onClick={onOpenSearch} title="جستجو" aria-label="جستجو">
              <Search size={20} />
            </button>
            <button 
+             type="button"
              className={`icon-btn export-btn ${isExporting ? 'exporting' : ''}`} 
              onClick={handleExport} 
              title="دانلود مستند"
+             aria-label="دانلود مستند یکپارچه"
            >
              {isExporting ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
            </button>
            <ThemeToggle />
            <button 
+             type="button"
              className="icon-btn mobile-menu-toggle d-md-none" 
              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+             aria-label={isMobileMenuOpen ? 'بستن منوی فصل‌ها' : 'باز کردن منوی فصل‌ها'}
+             aria-expanded={isMobileMenuOpen}
+             aria-controls="mobile-chapter-menu"
            >
              {isMobileMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
            </button>
@@ -118,15 +127,15 @@ export default function TopMenu({ onOpenSearch }) {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
+      <div id="mobile-chapter-menu" className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`} aria-hidden={!isMobileMenuOpen}>
          <div className="mobile-nav-inner">
            <NavLink to="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>داشبورد اصلی</NavLink>
-           {navTags.map(tag => {
-              const group = groupedChapters[tag];
+           {navTracks.map(track => {
+              const group = groupedChapters[track.id];
               if (!group || group.length === 0) return null;
               return (
-                <div key={tag} className="mobile-nav-group">
-                  <h4>{getTagLabel(tag)}</h4>
+                <div key={track.id} className="mobile-nav-group">
+                  <h4>{track.title}</h4>
                   {group.map(chapter => {
                     const Icon = chapter.icon;
                     return (

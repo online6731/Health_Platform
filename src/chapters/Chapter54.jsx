@@ -1,47 +1,47 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { BarChart2, CheckCircle, XCircle, Minus, Zap, Target, TrendingUp, Shield, Activity } from 'lucide-react';
+import { BarChart2, CheckCircle, XCircle, Minus, Zap, Target, TrendingUp, Shield, Activity, HelpCircle } from 'lucide-react';
 
 const competitors = [
   {
     name: 'Ada Health',
     origin: 'آلمان',
     type: 'B2C',
-    features: { ai_diagnosis: true, ehr: false, mental: false, b2b: true, digital_twin: false, marketplace: false, rtl: false },
-    weakness: 'فاقد پرونده سلامت یکپارچه، بدون پشتیبانی فارسی',
-    strength: 'موتور تشخیص قوی'
+    features: { ai_diagnosis: null, ehr: null, mental: null, b2b: null, digital_twin: null, marketplace: null, rtl: null },
+    weakness: 'نیازمند بررسی منابع رسمی، بازار هدف و بازه زمانی',
+    strength: 'نیازمند بررسی منابع رسمی، شواهد محصول و بازه زمانی'
   },
   {
     name: 'Babylon Health',
     origin: 'انگلستان',
     type: 'B2B2C',
-    features: { ai_diagnosis: true, ehr: true, mental: true, b2b: true, digital_twin: false, marketplace: false, rtl: false },
-    weakness: 'ورشکستگی در ۲۰۲۳، مشکلات مقیاس‌پذیری',
-    strength: 'یکپارچگی با NHS'
+    features: { ai_diagnosis: null, ehr: null, mental: null, b2b: null, digital_twin: null, marketplace: null, rtl: null },
+    weakness: 'وضعیت حقوقی/تجاری و دارایی‌های محصول باید با منبع به‌روز بررسی شود',
+    strength: 'مطالعه تاریخی نیازمند منبع و تفکیک محصول از شرکت است'
   },
   {
     name: 'K Health',
     origin: 'آمریکا',
     type: 'B2C',
-    features: { ai_diagnosis: true, ehr: false, mental: true, b2b: false, digital_twin: false, marketplace: false, rtl: false },
-    weakness: 'فقط بازار آمریکا، بدون اکوسیستم',
-    strength: 'تشخیص سریع و ارزان'
+    features: { ai_diagnosis: null, ehr: null, mental: null, b2b: null, digital_twin: null, marketplace: null, rtl: null },
+    weakness: 'نیازمند بررسی بازار، مدل خدمت و محدودیت‌های اعلام‌شده',
+    strength: 'نیازمند بررسی شواهد رسمی و تجربه کاربر'
   },
   {
     name: 'SnappDoctor (ایران)',
     origin: 'ایران',
     type: 'B2C',
-    features: { ai_diagnosis: false, ehr: false, mental: false, b2b: false, digital_twin: false, marketplace: false, rtl: true },
-    weakness: 'فاقد هوش مصنوعی، فقط پلتفرم ویزیت آنلاین',
-    strength: 'برند شناخته‌شده در ایران'
+    features: { ai_diagnosis: null, ehr: null, mental: null, b2b: null, digital_twin: null, marketplace: null, rtl: null },
+    weakness: 'قابلیت‌ها، پوشش و وضعیت جاری نیازمند بررسی منبع‌دار است',
+    strength: 'شناخت بازار و برند باید با پژوهش کاربر سنجیده شود'
   },
   {
     name: 'HCOS (ما)',
     origin: 'ایران / خاورمیانه',
     type: 'B2B (Wedge) -> B2B2C',
-    features: { ai_diagnosis: true, ehr: true, mental: true, b2b: true, digital_twin: true, marketplace: true, rtl: true },
-    weakness: 'نیازمند سرمایه اولیه بالا برای زیرساخت AI و زمان‌بر بودن جمع‌آوری دیتای بومی',
-    strength: 'مدل هوش مصنوعی بومی‌شده با پتانسیل تصاحب داده‌های اختصاصی (Proprietary Data)',
+    features: { ai_diagnosis: false, ehr: false, mental: false, b2b: false, digital_twin: false, marketplace: false, rtl: true },
+    weakness: 'در وضعیت فعلی یک پروپوزال نمایشی است و قابلیت عملیاتی یا اعتبارسنجی‌شده ندارد',
+    strength: 'چشم‌انداز یکپارچه و طراحی فارسی/RTL؛ سایر قابلیت‌ها هدف آینده هستند',
     isUs: true
   },
 ];
@@ -57,12 +57,12 @@ const featureLabels = {
 };
 
 const positioningData = [
-  { label: 'هوش مصنوعی', hcos: 95, avg: 45 },
-  { label: 'یکپارچگی داده', hcos: 90, avg: 35 },
-  { label: 'پوشش منطقه‌ای', hcos: 85, avg: 20 },
-  { label: 'سلامت جامع', hcos: 95, avg: 40 },
-  { label: 'اکوسیستم باز', hcos: 80, avg: 15 },
-  { label: 'انطباق قانونی', hcos: 85, avg: 30 },
+  { label: 'هوش مصنوعی', hcos: 0, avg: 0 },
+  { label: 'یکپارچگی داده', hcos: 0, avg: 0 },
+  { label: 'پوشش منطقه‌ای', hcos: 0, avg: 0 },
+  { label: 'سلامت جامع', hcos: 0, avg: 0 },
+  { label: 'اکوسیستم باز', hcos: 0, avg: 0 },
+  { label: 'انطباق قانونی', hcos: 0, avg: 0 },
 ];
 
 export default function Chapter54() {
@@ -93,7 +93,7 @@ export default function Chapter54() {
             <Activity className="w-5 h-5 text-blue-500" /> ۵۴-۱ نقشه رقابتی بازار
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            بازار سلامت دیجیتال در خاورمیانه و به‌خصوص ایران هنوز بدون یک رقیب مسلط است. رقبای جهانی پوشش منطقه‌ای ندارند، رقبای داخلی از هوش مصنوعی واقعی بهره نمی‌برند. این خلأ دقیقاً جایگاه HCOS است.
+            این مقایسه یک فرضیه جایگاه‌یابی است و باید با تاریخ، دامنه بازار و منابع به‌روز تکمیل شود. وضعیت رقبا و قابلیت‌های آن‌ها متغیر است؛ صفر بودن امتیاز HCOS در نمودار به معنی نبود شواهد عملیاتی فعلی است، نه هدف نهایی محصول.
           </p>
         </div>
 
@@ -122,10 +122,11 @@ export default function Chapter54() {
                     {competitors.map(c => (
                       <td key={c.name} className={`py-3 px-4 text-center ${c.isUs ? 'bg-blue-500/5' : ''}`}>
                         <div className="flex justify-center">
-                          {c.features[key]
+                          {c.features[key] === true
                             ? <CheckCircle size={20} className="text-emerald-500 drop-shadow-sm" />
-                            : <Minus size={20} className="text-gray-300 dark:text-gray-600" />
-                          }
+                            : c.features[key] === false
+                              ? <Minus size={20} className="text-gray-300 dark:text-gray-600" />
+                              : <HelpCircle size={20} className="text-amber-500" aria-label="نیازمند منبع" />}
                         </div>
                       </td>
                     ))}
@@ -152,7 +153,7 @@ export default function Chapter54() {
             <Target className="w-6 h-6 text-blue-500" /> ۵۴-۳ مقایسه جایگاه‌یابی استراتژیک
           </h3>
           <div className="glass-panel p-6 rounded-2xl shadow-sm border border-[var(--border-color)]">
-            <p className="premium-text-secondary text-sm mb-6">مقایسه HCOS با میانگین رقبا در ۶ بُعد کلیدی (امتیاز از ۱۰۰):</p>
+            <p className="premium-text-secondary text-sm mb-6">امتیازها تا تعریف روش، وزن معیار، تاریخ snapshot و ثبت منابع صفر نگه داشته شده‌اند؛ این نمودار فعلاً قالب پژوهش است.</p>
             <div className="space-y-5">
               {positioningData.map(item => (
                 <div key={item.label} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
@@ -225,15 +226,15 @@ export default function Chapter54() {
         {/* Our Advantage */}
         <section className="mb-8">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <Shield className="w-6 h-6 text-blue-500" /> ۵۴-۵ مزیت رقابتی پایدار HCOS
+            <Shield className="w-6 h-6 text-blue-500" /> ۵۴-۵ فرضیه‌های تمایز برای اعتبارسنجی
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
-              { icon: Zap, title: 'بومی‌سازی عمیق', desc: 'تنها پلتفرمی که زبان، فرهنگ، قوانین و زیرساخت پزشکی منطقه را درک می‌کند.', color: 'amber' },
-              { icon: Target, title: 'Health OS نه App', desc: 'ما یک اکوسیستم چندجانبه می‌سازیم، نه یک اپلیکیشن تکی که رقبا بتوانند کپی کنند.', color: 'purple' },
-              { icon: TrendingUp, title: 'اثر شبکه داده', desc: 'هر کاربر جدید داده تولید می‌کند و مدل‌های هوش مصنوعی را بهتر می‌کند. رقیب‌ها به این داده دسترسی ندارند.', color: 'emerald' },
-              { icon: Shield, title: 'انطباق محلی', desc: 'همکاری با وزارت بهداشت و نظام پزشکی یک مزیت دسترسی است که رقبای خارجی نمی‌توانند به‌سرعت به آن برسند.', color: 'blue' },
-            ].map((adv, idx) => {
+              { icon: Zap, title: 'تجربه فارسی و RTL', desc: 'قابلیت مشاهده‌شده در نمایشگر فعلی؛ کیفیت زبان پزشکی و دسترس‌پذیری هنوز باید آزمون شود.', color: 'amber' },
+              { icon: Target, title: 'تمرکز بر تکمیل ارجاع', desc: 'فرضیه ارزش MVP که باید با خط مبنا و نرخ تکمیل مسیر سنجیده شود.', color: 'purple' },
+              { icon: TrendingUp, title: 'تعامل‌پذیری و قابلیت حمل', desc: 'استانداردگرایی می‌تواند هزینه اتصال را کاهش دهد؛ نیازمند پیاده‌سازی و آزمون conformance است.', color: 'emerald' },
+              { icon: Shield, title: 'حاکمیت شفاف', desc: 'ردیابی ادعا، نیاز، آزمون و خطر می‌تواند اعتماد بسازد؛ هنوز فرایند عملیاتی نشده است.', color: 'blue' },
+            ].map((adv) => {
               const IconComp = adv.icon;
               return (
                 <div key={adv.title} className={`glass-panel p-6 rounded-2xl border-t-4 border-t-${adv.color}-500 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group`}>

@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Server, Activity, ArrowRightLeft, Settings, Cpu } from 'lucide-react';
+import { Activity, ArrowRightLeft, Settings, Cpu } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter22.css';
 

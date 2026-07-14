@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import './ThemeToggle.css';
 
 export default function ThemeToggle() {
-  const [isLight, setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(() => localStorage.getItem('theme') === 'light');
 
   useEffect(() => {
-    // Check local storage or system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      setIsLight(true);
-      document.documentElement.classList.add('light-theme');
-    }
-  }, []);
+    const root = document.documentElement;
+    root.classList.toggle('light-theme', isLight);
+    root.classList.toggle('dark', !isLight);
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  }, [isLight]);
 
-  const toggleTheme = () => {
-    if (isLight) {
-      document.documentElement.classList.remove('light-theme');
-      localStorage.setItem('theme', 'dark');
-      setIsLight(false);
-    } else {
-      document.documentElement.classList.add('light-theme');
-      localStorage.setItem('theme', 'light');
-      setIsLight(true);
-    }
-  };
+  const label = isLight ? 'فعال کردن تم تیره' : 'فعال کردن تم روشن';
 
   return (
-    <button className={`theme-toggle-btn ${isLight ? 'light' : 'dark'}`} onClick={toggleTheme} title="تغییر تم">
+    <button
+      type="button"
+      className={`theme-toggle-btn ${isLight ? 'light' : 'dark'}`}
+      onClick={() => setIsLight((current) => !current)}
+      title={label}
+      aria-label={label}
+    >
       {isLight ? <Moon size={20} /> : <Sun size={20} />}
     </button>
   );

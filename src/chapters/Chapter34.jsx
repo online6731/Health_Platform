@@ -55,7 +55,7 @@ export default function Chapter34() {
             <ArrowLeftRight className="agent-comm-arrow" size={24} />
             <div className="agent-comm-node">
               <Microchip size={32} color="#f59e0b" />
-              <span>ایجنت پزشک هوشمند</span>
+              <span>دستیار تصمیم‌یار بالینی</span>
             </div>
             <ArrowLeftRight className="agent-comm-arrow" size={24} />
             <div className="agent-comm-node">

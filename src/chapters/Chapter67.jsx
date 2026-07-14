@@ -28,7 +28,7 @@ const Chapter67 = () => {
           <p className="premium-text-secondary text-sm leading-relaxed relative z-10 m-0 flex items-start gap-2">
             <GitCommit className="w-5 h-5 text-sky-500 shrink-0 mt-0.5" />
             <span>
-              این ماتریس شامل تمامی محصولات، ماژول‌ها و قابلیت‌های (Features) اصلی پلتفرم است که با استفاده از مدل Kano اولویت‌بندی شده‌اند.
+              این ماتریس نمونه اولیه قابلیت‌هاست و کامل یا مصوب نیست. وضعیت Designed فقط به طراحی مفهومی اشاره دارد؛ هیچ ردیف بدون پیوند به نیازمندی، مالک، معیار پذیرش و شاهد آزمون «پیاده‌شده» محسوب نمی‌شود.
             </span>
           </p>
         </div>
@@ -50,7 +50,7 @@ const Chapter67 = () => {
               <tbody>
                 <tr className="hover:bg-[rgba(14,165,233,0.03)] transition-colors group">
                   <td className="font-mono font-bold text-[var(--accent-blue)] pl-4">DOC-01</td>
-                  <td className="font-bold premium-text-primary">AI Doctor</td>
+                  <td className="font-bold premium-text-primary">Clinical Support Assistant</td>
                   <td className="premium-text-secondary text-xs">Triage</td>
                   <td className="premium-text-primary font-medium">تحلیل اولیه علائم و ارجاع</td>
                   <td className="text-center"><span className="badge badge-gray shadow-sm">MVP</span></td>
@@ -59,7 +59,7 @@ const Chapter67 = () => {
                 </tr>
                 <tr className="hover:bg-[rgba(14,165,233,0.03)] transition-colors group">
                   <td className="font-mono font-bold text-[var(--accent-blue)] pl-4">DOC-02</td>
-                  <td className="font-bold premium-text-primary">AI Doctor</td>
+                  <td className="font-bold premium-text-primary">Clinical Support Assistant</td>
                   <td className="premium-text-secondary text-xs">Risk Detection</td>
                   <td className="premium-text-primary font-medium">تشخیص زودهنگام علائم خطر</td>
                   <td className="text-center"><span className="badge badge-gray shadow-sm">MVP</span></td>

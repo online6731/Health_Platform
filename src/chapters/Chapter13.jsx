@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Database, Network, BookOpen, Layers, Target, Stethoscope, Brain, HeartPulse, Activity, BrainCircuit, Link2, BookMarked, Search, History, ShieldCheck, FileText } from 'lucide-react';
+import { Network, BookOpen, Layers, Target, Activity, History, ShieldCheck, FileText } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter13.css';
 
@@ -13,7 +13,7 @@ export default function Chapter13() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۳-۱ مقدمه: فراتر از مدل‌های زبانی</h3>
         <p>
-          اگرچه مدل‌های زبانی بزرگ (LLMs) توانایی درک مطلب بالایی دارند، اما به تنهایی برای حوزه درمان خطرناک‌اند (احتمال توهم یا Hallucination). راهکار پلتفرم ما برای تبدیل هوش مصنوعی عمومی به هوش پزشکی دقیق، استفاده از <strong>سکوی دانش سلامت (Health Knowledge Platform)</strong> است؛ یک پایگاه داده ساخت‌یافته، معتبر و دائماً به‌روز که به عنوان منبع حقیقت (Ground Truth) برای عامل‌های هوشمند عمل می‌کند.
+          LLM می‌تواند خروجی نادرست تولید کند و RAG این خطر را حذف نمی‌کند. سکوی دانش پیشنهادی باید مجموعه‌ای نسخه‌دار از منابع با دامنه، اعتبار، مجوز و تاریخ بازبینی باشد؛ هیچ پایگاه منفردی «حقیقت قطعی» درمان نیست.
         </p>
       </div>
 
@@ -69,7 +69,7 @@ export default function Chapter13() {
           <div className="safety-item">
             <div className="safety-icon"><FileText size={24} color="var(--accent-blue)" /></div>
             <div>
-              <h5>ارجاع‌پذیری کامل (Citation)</h5>
+              <h5>ارجاع‌پذیری و محدودیت منبع</h5>
               <p>هر توصیه‌ای که توسط پلتفرم ارائه می‌شود باید به یک مقاله، راهنمای بالینی یا کتاب مرجع لینک شود. کاربر و پزشک می‌توانند مستندات را بررسی کنند.</p>
             </div>
           </div>
@@ -84,7 +84,7 @@ export default function Chapter13() {
             <div className="safety-icon"><History size={24} color="var(--accent-teal)" /></div>
             <div>
               <h5>به‌روزرسانی پیوسته دانش</h5>
-              <p>پایگاه دانش به صورت خودکار با انتشار گایدلاین‌های جدید پزشکی در جهان آپدیت می‌شود تا استدلال‌های عامل‌ها منسوخ نشود.</p>
+              <p>منابع جدید ابتدا شناسایی و در صف بازبینی قرار می‌گیرند؛ ورود به نسخه منتشرشده فقط پس از ارزیابی اعتبار، دامنه، مجوز، تغییرات و تأیید مالک محتوا انجام می‌شود.</p>
             </div>
           </div>
         </div>

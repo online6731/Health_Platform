@@ -1,5 +1,5 @@
 import React from 'react';
-import { Server, Database, Cloud, ShieldCheck, Box, Network, Lock, Cpu, Blocks, MonitorSmartphone, Share2, Layers } from 'lucide-react';
+import { Database, Cloud, ShieldCheck, Network, Cpu, Blocks, MonitorSmartphone, Share2, Layers } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter6.css';
 
@@ -13,7 +13,7 @@ export default function Chapter6() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۶-۱ فلسفه معماری اکوسیستم</h3>
         <p>
-          برای پشتیبانی از اکوسیستمی که پیشتر معرفی شد، نیازمند معماری فنی پیشرفته، مقیاس‌پذیر و امن هستیم. این زیرساخت باید قادر باشد حجم عظیمی از داده‌های ناهمگن (متن، تصویر پزشکی، سیگنال‌های حیاتی، ژنومیک) را در لحظه پردازش کند، با سخت‌افزارها و سنسورهای مختلف ارتباط برقرار کند و بالاترین سطح امنیت را تضمین نماید.
+          معماری باید از کاربرد و حجم داده تأییدشده شروع شود. متن، تصویر، سیگنال حیاتی و ژنومیک الزامات و خطرهای متفاوت دارند و فقط در صورت نیاز محصول، مبنای قانونی، ظرفیت‌سنجی و کنترل امنیتی وارد دامنه می‌شوند.
         </p>
         <p style={{marginTop: '1rem'}}>
           معماری این سیستم بر اصول زیر بنا شده است: <strong>Human-Centric</strong>, <strong>AI-Native</strong>, <strong>Platform First</strong>, <strong>Cloud Native</strong>, <strong>API First</strong>, <strong>Privacy by Design</strong>, <strong>Security by Design</strong> و <strong>Event Driven</strong>.
@@ -144,7 +144,7 @@ export default function Chapter6() {
         <h3><ShieldCheck className="section-icon" /> ۶-۳ امنیت، حریم خصوصی و استانداردها</h3>
         <p>
           تمام معماری با رویکرد <strong>Security by Design</strong> و <strong>Privacy by Design</strong> توسعه می‌یابد. 
-          کاربران مالکیت کامل داده‌های خود را دارند و هیچ پردازشی بدون رضایت آگاهانه (Informed Consent) انجام نمی‌گیرد. سیستم با استانداردهای جهانی تبادل داده‌های سلامت (مانند HL7 FHIR) سازگاری کامل خواهد داشت.
+          حقوق و نقش‌های کنترل‌کننده/پردازشگر داده به قانون و قرارداد بستگی دارد؛ رضایت تنها یکی از مبانی ممکن و همیشه کافی نیست. FHIR نامزد تعامل‌پذیری است و سازگاری فقط با نسخه، پروفایل و آزمون conformance قابل ادعاست.
         </p>
       </section>
     </ChapterLayout>

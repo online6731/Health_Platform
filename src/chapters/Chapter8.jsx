@@ -1,83 +1,81 @@
 import React from 'react';
-import { DollarSign, Wallet, Building2, Receipt, Target, PieChart, TrendingUp, Users, Activity, HeartPulse, LineChart, Stethoscope, Share2, Network, Code } from 'lucide-react';
+import { Wallet, Building2, Receipt, PieChart, Users, LineChart, Stethoscope, Network } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter8.css';
 
 export default function Chapter8() {
   return (
-    <ChapterLayout 
-      title="فصل ۸: مدل کسب‌وکار و استراتژی تجاری" 
-      englishTitle="Platform Business Model & Revenue Streams"
+    <ChapterLayout
+      title="فصل ۸: مدل کسب‌وکار و استراتژی تجاری"
+      englishTitle="Initial Business Model & Commercial Validation"
     >
-
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
-        <h3>۸-۱ فلسفه مدل کسب‌وکار</h3>
+        <h3>۸-۱ انتخاب تجاری نسخه اول</h3>
         <p>
-          نوآوری فناورانه زمانی به موفقیت پایدار منجر می‌شود که با یک مدل کسب‌وکار مقیاس‌پذیر همراه باشد. این پروژه از ابتدا به‌عنوان یک <strong>پلتفرم (Platform Business)</strong> طراحی شده است، نه صرفاً یک محصول نرم‌افزاری.
+          مدل کسب‌وکار فعلی <strong>یک فرضیه B2B برای یک مرکز درمانی</strong> است: مرکز برای کاهش دوباره‌کاری
+          اطلاعات، شفاف‌شدن وضعیت ارجاع و آماده‌سازی بهتر اطلاعات پیش از مراجعه هزینه می‌پردازد. بیمار کاربر
+          خدمت است، اما در مرحله اول خریدار یا منبع درآمد مستقیم محسوب نمی‌شود.
         </p>
-        <p style={{marginTop: '1rem'}}>
-          مدل کسب‌وکار ما بر سه اصل استوار است: <strong>خلق ارزش برای تمامی ذی‌نفعان</strong>، <strong>ایجاد اثر شبکه‌ای (Network Effect)</strong> و <strong>تنوع جریان‌های درآمدی</strong>. هرچه تعداد کاربران، پزشکان، سازمان‌ها و توسعه‌دهندگان بیشتر شود، ارزش پلتفرم برای همه اعضا افزایش می‌یابد.
+        <p style={{ marginTop: '1rem' }}>
+          این انتخاب هنوز با قرارداد، پایلوت پولی یا داده willingness-to-pay اثبات نشده است. Marketplace،
+          اشتراک B2C، فروش API، سلامت سازمانی و همکاری بیمه‌ای گزینه‌های آینده‌اند و در مدل مالی MVP وارد نمی‌شوند.
         </p>
       </div>
 
       <section className="chapter-section">
-        <h3><Network className="section-icon" /> ۸-۲ بخش‌های مشتری (Customer Segments)</h3>
-        <p>پلتفرم به پنج گروه اصلی از مشتریان خدمات ارائه می‌دهد:</p>
-        
+        <h3><Network className="section-icon" /> ۸-۲ بازیگران و واحد ارزش</h3>
         <div className="segments-grid">
           <div className="segment-card">
-            <h5><Users size={18} /> کاربران نهایی (B2C)</h5>
-            <p>افراد سالم، بیماران دارای بیماری‌های مزمن، سالمندان، خانواده‌ها و ورزشکاران.</p>
+            <h5><Building2 size={18} /> خریدار و صاحب بودجه</h5>
+            <p>مدیر یک کلینیک یا مرکز درمانی که هزینه زمان کارکنان، تماس‌های پیگیری و اطلاعات ناقص را می‌بیند.</p>
           </div>
           <div className="segment-card">
-            <h5><Stethoscope size={18} /> متخصصان سلامت</h5>
-            <p>پزشکان، روان‌شناسان، متخصصان تغذیه، داروسازان و مربیان سلامت.</p>
+            <h5><Users size={18} /> کاربران فرایند</h5>
+            <p>بیمار، پذیرش، هماهنگ‌کننده و درمانگر؛ هرکدام باید ارزش و بار کاری جداگانه‌ای داشته باشند.</p>
           </div>
           <div className="segment-card">
-            <h5><Building2 size={18} /> سازمان‌ها (B2B)</h5>
-            <p>بیمارستان‌ها، کلینیک‌ها، شرکت‌های بیمه، آزمایشگاه‌ها و شرکت‌های متقاضی سلامت سازمانی.</p>
+            <h5><Stethoscope size={18} /> مالک بالینی و ایمنی</h5>
+            <p>دامنه استفاده، مسیر escalation و پذیرش ریسک را تأیید می‌کند و مسئول تصمیم پزشکی باقی می‌ماند.</p>
           </div>
-          <div className="segment-card">
-            <h5><Share2 size={18} /> دولت و حاکمیت (B2G)</h5>
-            <p>وزارت بهداشت، نهادهای بیمه‌گر دولتی و سازمان‌های سلامت عمومی.</p>
-          </div>
-          <div className="segment-card" style={{gridColumn: '1 / -1'}}>
-            <h5><Code size={18} /> شرکای اکوسیستم و توسعه‌دهندگان</h5>
-            <p>استارتاپ‌های سلامت، توسعه‌دهندگان عامل‌های هوشمند (AI Agents) و شرکت‌های تجهیزات پزشکی.</p>
+          <div className="segment-card" style={{ gridColumn: '1 / -1' }}>
+            <h5><Receipt size={18} /> واحد ارزش پیشنهادی</h5>
+            <p>
+              یک مسیر ارجاع واجد شرایط که اطلاعات آن تکمیل، خلاصه آن بازبینی و وضعیت اقدام بعدی آن ثبت شده باشد؛
+              ارزش باید در مقایسه با خط مبنای همان مرکز سنجیده شود.
+            </p>
           </div>
         </div>
       </section>
 
       <section className="chapter-section">
-        <h3><Wallet className="section-icon" /> ۸-۳ جریان‌های درآمدی (Revenue Streams)</h3>
-        
+        <h3><Wallet className="section-icon" /> ۸-۳ پیشنهاد تجاری و قیمت‌گذاری آزمایشی</h3>
         <div className="revenue-grid">
           <div className="revenue-card">
             <div className="revenue-header">
-              <Users size={20} />
-              <h4>الف) مدل اشتراک (Subscription)</h4>
+              <Receipt size={20} />
+              <h4>مرحله ۱: discovery و طراحی پایلوت</h4>
             </div>
             <div className="revenue-body">
-              <p>استراتژی لند اند اکسپند (Land & Expand):</p>
+              <p>قرارداد محدود با خروجی و پایان مشخص:</p>
               <ul>
-                <li><strong>مدل سازمانی (B2B SaaS):</strong> فروش نقطه ورود (Wedge) به کلینیک‌ها جهت مدیریت بیماران مزمن برای تولید درآمد زودهنگام و جمع‌آوری داده.</li>
-                <li><strong>کاربران Premium (B2C):</strong> پس از اعتمادسازی اولیه، ارائه حق‌اشتراک برای دستیار هوشمند پیشرفته و برنامه‌های شخصی‌سازی‌شده.</li>
-                <li><strong>داشبوردهای Corporate Wellness:</strong> قراردادهای سالانه کلان با شرکت‌ها برای پایش سلامت پرسنل.</li>
+                <li>نقشه جریان فعلی و baseline مورد توافق</li>
+                <li>تعریف intended use، معیار موفقیت و مسئولیت‌ها</li>
+                <li>نمونه قابل آزمون و برآورد هزینه اجرای پایلوت</li>
               </ul>
             </div>
           </div>
 
           <div className="revenue-card">
             <div className="revenue-header">
-              <Receipt size={20} />
-              <h4>ب) کارمزد تراکنش‌ها (Marketplace)</h4>
+              <Building2 size={20} />
+              <h4>مرحله ۲: پایلوت پولی محدود</h4>
             </div>
             <div className="revenue-body">
-              <p>موتور درآمدی اصلی با رشد شبکه:</p>
+              <p>هزینه ثابت برای راه‌اندازی و اجرای کنترل‌شده:</p>
               <ul>
-                <li>کارمزد (کمیسیون) از ویزیت‌های آنلاین و مشاوره‌های روان‌شناسی.</li>
-                <li>درصد فروش دارو، مکمل‌ها و تجهیزات پزشکی پوشیدنی.</li>
-                <li>سهم پلتفرم از فروش عامل‌های هوشمند شخص ثالث (Agent Store).</li>
+                <li>یک مرکز، یک جمعیت و یک مسیر غیراضطراری</li>
+                <li>آموزش، پشتیبانی، پایش رخداد و گزارش نتیجه</li>
+                <li>حق توقف و خروج داده در قرارداد</li>
               </ul>
             </div>
           </div>
@@ -85,14 +83,14 @@ export default function Chapter8() {
           <div className="revenue-card">
             <div className="revenue-header">
               <LineChart size={20} />
-              <h4>ج) داده، پژوهش و API (Data & Infra)</h4>
+              <h4>مرحله ۳: اشتراک سازمانی مشروط</h4>
             </div>
             <div className="revenue-body">
-              <p>درآمدهای زیرساختی و کلان:</p>
+              <p>فقط پس از اثبات ایمنی، استفاده و ارزش:</p>
               <ul>
-                <li>فروش دسترسی به داده‌های بی‌نام‌سازی‌شده (De-identified) برای تحقیقات دارویی و دانشگاهی.</li>
-                <li><strong>APIaaS:</strong> دریافت هزینه به ازای هر فراخوانی (API Call) از Health-API و AI-API توسط توسعه‌دهندگان.</li>
-                <li>قراردادهای مبتنی بر ارزش (Value-Based Care) با بیمه‌ها.</li>
+                <li>فرضیه قیمت: مبلغ راه‌اندازی + اشتراک هر مرکز/ماه</li>
+                <li>سطح خدمت، حجم مجاز و هزینه اتصال شفاف</li>
+                <li>قیمت نهایی پس از cost-to-serve و مصاحبه خرید تعیین می‌شود</li>
               </ul>
             </div>
           </div>
@@ -100,38 +98,39 @@ export default function Chapter8() {
       </section>
 
       <section className="chapter-section">
-        <h3><PieChart className="section-icon" /> ۸-۴ شاخص‌های کلیدی عملکرد (KPIs)</h3>
-        <p>برای ارزیابی موفقیت مدل تجاری و سلامت اکوسیستم، متریک‌های زیر به‌طور مستمر پایش می‌شوند:</p>
-        
+        <h3><PieChart className="section-icon" /> ۸-۴ اقتصاد واحد و گیت‌های اثبات</h3>
+        <p>
+          پیش از گزارش LTV، CAC یا حاشیه سود، باید واحد صورتحساب، دوره قرارداد و هزینه واقعی ارائه خدمت مشخص شود.
+          معیارهای زیر برای تصمیم ادامه یا توقف لازم‌اند:
+        </p>
         <div className="kpi-grid">
           <div className="kpi-card">
-            <div className="kpi-label">Network Effect</div>
-            <div className="kpi-value">اثر شبکه‌ای</div>
-            <div className="kpi-desc">نسبت رشد ارگانیک بیماران با ورود پزشکان جدید به پلتفرم</div>
+            <div className="kpi-label">Problem Baseline</div>
+            <div className="kpi-value">هزینه وضعیت موجود</div>
+            <div className="kpi-desc">زمان کارکنان، ورود تکراری، تماس پیگیری و ارجاع ناقص پیش از مداخله</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">LTV / CAC</div>
-            <div className="kpi-value">ارزش طول‌عمر به هزینه جذب</div>
-            <div className="kpi-desc">با توجه به بالا بودن هزینه جذب در سلامت (CAC)، این نسبت باید با تمرکز بر B2B بالاتر از ۳ باشد</div>
+            <div className="kpi-label">Adoption</div>
+            <div className="kpi-value">استفاده واقعی</div>
+            <div className="kpi-desc">نرخ تکمیل، رهاکردن، اصلاح خلاصه و پذیرش فرایند توسط کارکنان</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">Margin / Inference</div>
-            <div className="kpi-value">حاشیه سود به هزینه پردازش</div>
-            <div className="kpi-desc">کنترل دقیق هزینه‌های پردازش هوش مصنوعی (API Calls/GPU) به ازای هر کاربر فعال</div>
+            <div className="kpi-label">Buyer Value</div>
+            <div className="kpi-value">ارزش خریدار</div>
+            <div className="kpi-desc">تغییر زمان چرخه، دوباره‌کاری و تکمیل ارجاع نسبت به baseline</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">GMV</div>
-            <div className="kpi-value">حجم ناخالص کالا/خدمات</div>
-            <div className="kpi-desc">ارزش کل تراکنش‌های انجام‌شده در Marketplace اکوسیستم</div>
+            <div className="kpi-label">Cost to Serve</div>
+            <div className="kpi-value">هزینه ارائه خدمت</div>
+            <div className="kpi-desc">پیاده‌سازی، پشتیبانی، امنیت، نظارت بالینی، زیرساخت و مصرف مدل</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">Retention</div>
-            <div className="kpi-value">نرخ نگهداشت کاربر</div>
-            <div className="kpi-desc">درصد کاربرانی که پس از ۳ و ۶ ماه در اکوسیستم فعال می‌مانند</div>
+            <div className="kpi-label">Commercial Proof</div>
+            <div className="kpi-value">شاهد خرید</div>
+            <div className="kpi-desc">مالک بودجه، فرایند خرید، بازه قیمت پذیرفتنی و قرارداد یا تعهد پایلوت</div>
           </div>
         </div>
       </section>
-
     </ChapterLayout>
   );
 }

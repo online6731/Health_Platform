@@ -11,48 +11,48 @@ const Chapter75 = () => {
       id: 'REF-001',
       type: 'Standard',
       title: 'HL7 FHIR Release 4',
-      useCase: 'طراحی مدل داده بیمار و ویزیت‌ها',
-      link: 'hl7.org/fhir',
+      useCase: 'نامزد مبنا برای پروفایل‌های تعامل‌پذیری؛ Implementation Guide هنوز انتخاب نشده',
+      link: 'https://hl7.org/fhir/R4/',
       color: 'purple'
     },
     {
       id: 'REF-002',
       type: 'Guideline',
       title: 'گایدلاین‌های درمان وزارت بهداشت',
-      useCase: 'تغذیه دیتابیس RAG برای تصمیم‌سازی پزشکی',
-      link: 'behdasht.gov',
+      useCase: 'نیازمند عنوان دقیق، نسخه، ناشر، تاریخ اعتبار و مجوز استفاده',
+      link: null,
       color: 'red'
     },
     {
       id: 'REF-003',
       type: 'Regulatory',
       title: 'FDA: SaMD AI/ML Guidelines',
-      useCase: 'ممیزی الگوریتم‌ها جهت اخذ تاییدیه سلامت',
-      link: 'fda.gov',
+      useCase: 'مرجع پیشنهادی برای تحلیل طبقه‌بندی و مسیر رگولاتوری؛ تأییدیه اخذ نشده',
+      link: 'https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-software-medical-device',
       color: 'green'
     },
     {
       id: 'REF-004',
       type: 'Benchmark',
       title: 'MedQA / PubMedQA Benchmarks',
-      useCase: 'ارزیابی دقت Medical LLM پیش از ریلیز نسخه',
-      link: 'paperswithcode',
+      useCase: 'فقط benchmark پژوهشی؛ جایگزین اعتبارسنجی بالینی و فارسی نیست',
+      link: 'https://pubmedqa.github.io/',
       color: 'yellow'
     },
     {
       id: 'REF-005',
       type: 'Standard',
       title: 'LOINC Codes Standard',
-      useCase: 'استانداردسازی و کدگذاری جواب آزمایش‌ها',
-      link: 'loinc.org',
+      useCase: 'نامزد کدگذاری آزمایش؛ قرارداد، نسخه و نگاشت محلی باید تعیین شود',
+      link: 'https://loinc.org/',
       color: 'purple'
     },
     {
       id: 'REF-006',
       type: 'Guideline',
       title: 'ADA Guidelines (Diabetes Care)',
-      useCase: 'قوانین و استانداردهای پایش بیماران دیابتی',
-      link: 'diabetes.org',
+      useCase: 'مرجع محتوای بالینی پس از تعیین نسخه، دامنه، مالک محتوا و چرخه بازبینی',
+      link: 'https://professional.diabetes.org/standards-of-care',
       color: 'red'
     }
   ];
@@ -96,7 +96,7 @@ const Chapter75 = () => {
           <p className="premium-text-secondary text-sm leading-relaxed relative z-10 m-0 flex items-start gap-2">
             <BookOpen className="w-5 h-5 text-[var(--accent-purple)] shrink-0 mt-0.5" />
             <span>
-              فهرست استانداردها، گایدلاین‌های درمانی، تاییدیه‌های رگولاتوری و بنچمارک‌های علمی که به عنوان مراجع اصلی در معماری و عملکرد هوش مصنوعی پلتفرم مورد استفاده قرار گرفته‌اند.
+              این فهرست «منابع نامزد» است، نه مدرک استفاده عملیاتی یا تأیید رگولاتوری. هر منبع باید نسخه، تاریخ دسترسی، مالک بازبینی، مجوز استفاده، ادعاهای پشتیبانی‌شده و تاریخ بازبینی بعدی داشته باشد.
             </span>
           </p>
         </div>
@@ -178,10 +178,14 @@ const Chapter75 = () => {
                       </td>
                       <td className="premium-text-secondary">{row.useCase}</td>
                       <td className="text-left pr-6">
-                        <a href="#" className="inline-flex items-center gap-1 text-xs font-mono text-[var(--accent-blue)] hover:text-[var(--accent-purple)] transition-colors">
-                          <ExternalLink className="w-3 h-3" /> 
-                          {row.link}
-                        </a>
+                        {row.link ? (
+                          <a href={row.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-mono text-[var(--accent-blue)] hover:text-[var(--accent-purple)] transition-colors">
+                            <ExternalLink className="w-3 h-3" />
+                            مشاهده منبع رسمی
+                          </a>
+                        ) : (
+                          <span className="text-xs text-amber-600 dark:text-amber-400">نیازمند ثبت منبع رسمی</span>
+                        )}
                       </td>
                     </tr>
                   ))}

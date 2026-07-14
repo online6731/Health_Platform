@@ -1,58 +1,58 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { Calendar, CheckCircle2, Circle, Clock, Flame, Milestone, Rocket, ShieldAlert } from 'lucide-react';
+import { Calendar, CheckCircle2, Clock, Flame, Milestone, Rocket, ShieldAlert } from 'lucide-react';
 
 const roadmapData = [
   {
-    phase: 'فاز ۱: راه‌اندازی شالوده سیستم (MVP)',
-    duration: 'ماه‌های ۱ تا ۶',
-    status: 'planned',
+    phase: 'فاز ۱: Discovery و تثبیت دامنه',
+    duration: 'وضعیت: مرحله جاری پیشنهادی',
+    decision: 'تصمیم خروج: آیا مسئله و سایت مناسب برای prototype وجود دارد؟',
     color: 'from-blue-500 to-indigo-500',
     borderColor: 'border-blue-500',
     textColor: 'text-blue-500',
     milestones: [
-      { title: 'طراحی معماری هسته و پایگاه داده یکپارچه', desc: 'توسعه ساختار اصلی پرونده سلامت هوشمند و سیستم هویت واحد کاربران (Health ID)' },
-      { title: 'توسعه موتور عامل پزشک پایه و چت‌بات تشخیصی اولیه', desc: 'راه‌اندازی ایجنت پایه برای تریاژ علائم بیمار با پشتیبانی از زبان فارسی' },
-      { title: 'انتشار نسخه آلفای سوپراپ موبایل (iOS & Android)', desc: 'ارائه قابلیت‌های پایه‌ای پایش قند خون، فشار خون و ثبت پرونده‌های پزشکی سنتی' }
+      { title: 'تثبیت ICP و مسیر خدمت', desc: 'یک مرکز، یک جمعیت، یک جریان غیراضطراری و نقش خریدار/کاربر مشخص' },
+      { title: 'اندازه‌گیری وضعیت موجود', desc: 'baseline زمان، دوباره‌کاری، اطلاعات ناقص، تماس پیگیری و شکست ارجاع' },
+      { title: 'قرارداد دامنه و مسئولیت', desc: 'intended use، خارج از دامنه، مالک محصول، بالینی، عملیات و معیار go/no-go' }
     ]
   },
   {
-    phase: 'فاز ۲: پلتفرم‌سازی و هوش تخصصی',
-    duration: 'ماه‌های ۶ تا ۱۲',
-    status: 'planned',
+    phase: 'فاز ۲: Prototype و آزمون کنترل‌شده',
+    duration: 'مشروط به اثبات مسئله',
+    decision: 'تصمیم خروج: آیا نمونه برای پایلوت واقعی به‌اندازه کافی قابل استفاده و کنترل‌پذیر است؟',
     color: 'from-purple-500 to-fuchsia-500',
     borderColor: 'border-purple-500',
     textColor: 'text-purple-500',
     milestones: [
-      { title: 'یکپارچه‌سازی با ابزارهای پوشیدنی و گجت‌های IoT', desc: 'اتصال هوشمند به ساعت‌های Apple, Samsung, Garmin برای همگام‌سازی بلادرنگ ضربان قلب' },
-      { title: 'رونمایی از عامل‌های تخصصی (روان‌شناس و مربی ورزشی)', desc: 'توسعه عامل‌های بهینه‌سازی‌شده شناختی و تغذیه‌ای جهت ارائه برنامه‌های شخصی‌سازی روزانه' },
-      { title: 'توسعه پنل تحت وب پزشکان (Doctor Portal)', desc: 'ایجاد میز کار هوشمند مجهز به سیستم کمک‌تصمیم‌یار بالینی (CDSS) و همگام با همزادهای دیجیتال' }
+      { title: 'ثبت ساختاریافته و save/resume', desc: 'فرم نسخه‌دار با امکان توقف، بازگشت، اصلاح و عدم ارسال پیش از رضایت' },
+      { title: 'خلاصه منبع‌دار و قابل اصلاح', desc: 'پیش‌نویس بدون تشخیص یا تجویز؛ هر گزاره به پاسخ اصلی و وضعیت تأیید متصل است' },
+      { title: 'وضعیت ارجاع و مسیر شکست', desc: 'اقدام بعدی، مسئول، داده قدیمی، قطع اتصال و escalation انسانی قابل مشاهده' }
     ]
   },
   {
-    phase: 'فاز ۳: گسترش همه‌جانبه اکوسیستم',
-    duration: 'ماه‌های ۱۲ تا ۲۴',
-    status: 'planned',
+    phase: 'فاز ۳: پایلوت محدود در یک مرکز',
+    duration: 'مشروط به آمادگی ایمنی، حقوقی و عملیاتی',
+    decision: 'تصمیم خروج: توقف، اصلاح، تمدید یا برنامه استقرار در مرکز دوم',
     color: 'from-teal-500 to-emerald-500',
     borderColor: 'border-teal-500',
     textColor: 'text-teal-500',
     milestones: [
-      { title: 'اتصال به شبکه آزمایشگاه‌ها، داروخانه‌ها و تصویربرداری‌ها', desc: 'راه‌اندازی جریان خودکار نسخه الکترونیکی، دریافت مستقیم نتایج آزمایشات و تحویل هوشمند دارو' },
-      { title: 'پیاده‌سازی ماژول سلامت سازمانی (HCOS B2B)', desc: 'ارائه داشبوردهای سلامت، انرژی و تاب‌آوری پرسنل به سازمان‌های طرف قرارداد' },
-      { title: 'انطباق با استانداردهای بین‌المللی و HIPAA/GDPR', desc: 'ممیزی‌های نهایی امنیت داده و دریافت تأییدیه رگولاتوری از مراجع عالی بهداشتی' }
+      { title: 'آمادگی پیش از شروع', desc: 'SOW، رضایت و داده، آموزش، support، hazard log، threat model و معیار توقف مصوب' },
+      { title: 'اجرای قابل مشاهده', desc: 'پایش استفاده، رخداد، correction/override، failure ارجاع و بار کاری واقعی' },
+      { title: 'گزارش تصمیم', desc: 'مقایسه با baseline، cost-to-serve، willingness-to-pay و پذیرش ریسک باقی‌مانده' }
     ]
   },
   {
-    phase: 'فاز ۴: اکوسیستم باز و بازار جهانی',
-    duration: 'ماه‌های ۲۴ تا ۳۶',
-    status: 'planned',
+    phase: 'فاز ۴: تکرارپذیری و توسعه انتخابی',
+    duration: 'افق آینده؛ بدون تعهد زمانی',
+    decision: 'تصمیم خروج: آیا یک capability یا بازار جدید پرونده کسب‌وکار مستقل دارد؟',
     color: 'from-orange-500 to-rose-500',
     borderColor: 'border-orange-500',
     textColor: 'text-orange-500',
     milestones: [
-      { title: 'راه‌اندازی بازار اپلیکیشن‌های سلامت هوشمند (App Store)', desc: 'ارائه کیت توسعه نرم‌افزار (SDK) و APIهای غنی به توسعه‌دهندگان شخص ثالث جهت توسعه افزونه‌ها' },
-      { title: 'اتصال به سیستم‌های بیمه پایه و تکمیلی کشور (B2G)', desc: 'تحت پوشش قرار دادن مشاوره‌ها و پایش‌های خودکار پلتفرم در قراردادهای بیمه‌ای سلامت عمومی' },
-      { title: 'آغاز استراتژی توسعه بین‌المللی در منطقه خلیج فارس', desc: 'بومی‌سازی سیستم به زبان عربی و راه‌اندازی شعب فیزیکی/دیجیتالی در کشورهای همسایه' }
+      { title: 'استقرار در مرکز دوم', desc: 'اندازه‌گیری زمان، هزینه، تغییرات و کیفیت بدون تکیه به افراد پایلوت اول' },
+      { title: 'توسعه capability با پرونده مستقل', desc: 'هر اتصال، AI یا گروه کاربر جدید نیازمند intended use، شواهد، ریسک و اقتصاد جداگانه است' },
+      { title: 'حفظ گزینه‌های بلندمدت', desc: 'Marketplace، بیمه، B2C و توسعه کشور فقط پس از اثبات مرحله‌ای بررسی می‌شوند' }
     ]
   }
 ];
@@ -85,7 +85,7 @@ export default function Chapter57() {
             <Clock className="w-5 h-5 text-purple-500" /> ۵۷-۱ تایملاین و اهداف فازبندی شده
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            نقشه راه توسعه HCOS به‌گونه‌ای طراحی شده که با مدیریت بهینه منابع مالی و R&D، در هر فاز ارزش ملموسی را به بازار تحویل دهد و به‌طور مستمر ریسک‌های فنی را کاهش دهد.
+            این فصل منبع واحد نقشه راه محصول است. نقشه راه outcome-based است و تاریخ تعهد ایجاد نمی‌کند؛ شروع هر فاز به مالک، ظرفیت، بودجه، شواهد فاز قبل، بررسی خطر و تصمیم رسمی go/no-go وابسته است.
           </p>
         </div>
 
@@ -128,6 +128,10 @@ export default function Chapter57() {
                 <span className="text-sm font-medium premium-text-secondary mt-1 block">{roadmapData[activePhase].duration}</span>
               </div>
             </div>
+
+            <div className="mb-5 p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)]">
+              <strong className="premium-text-primary text-sm">{roadmapData[activePhase].decision}</strong>
+            </div>
             
             <div className="flex flex-col gap-4">
               {roadmapData[activePhase].milestones.map((milestone, idx) => (
@@ -157,10 +161,10 @@ export default function Chapter57() {
                 <div className="p-2 bg-red-100 rounded-lg dark:bg-red-900/30">
                   <Flame className="w-5 h-5 text-red-600 dark:text-red-400" />
                 </div>
-                <h5 className="font-bold premium-text-primary m-0 text-lg">تأمین منابع پردازش گرافیکی (GPUs)</h5>
+                <h5 className="font-bold premium-text-primary m-0 text-lg">سایت، مالک و baseline</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed relative z-10">
-                آموزش و توسعه مدل‌های زبانی محلی مستلزم دسترسی بدون وقفه به کلاسترهای پردازشی با توان بالاست که جزو اولویت‌های مالی فاز اول محسوب می‌شود.
+                بدون مرکز واجد شرایط، دسترسی به کاربران، مالک بالینی/عملیاتی و baseline مورد توافق، ساخت prototype یا شروع پایلوت توجیه ندارد.
               </p>
             </div>
             
@@ -170,10 +174,10 @@ export default function Chapter57() {
                 <div className="p-2 bg-orange-100 rounded-lg dark:bg-orange-900/30">
                   <Calendar className="w-5 h-5 text-orange-600 dark:text-orange-400" />
                 </div>
-                <h5 className="font-bold premium-text-primary m-0 text-lg">اخذ سریع مجوزهای قانونی پزشکی</h5>
+                <h5 className="font-bold premium-text-primary m-0 text-lg">بودجه، تیم و مجوز شروع</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed relative z-10">
-                تعامل مستقیم با وزارت بهداشت و سازمان نظام پزشکی جهت تأیید الگوریتم‌های تریاژ ایجنت هوشمند، در مسیر بحرانی پیشرفت فاز دوم و سوم قرار دارد.
+                هر فاز به برآورد ظرفیت، مالک پاسخ‌گو، مسیر حقوقی متناسب با intended use و مصوبه go/no-go نیاز دارد؛ فناوری پیش از این تصمیم‌ها انتخاب نمی‌شود.
               </p>
             </div>
           </div>

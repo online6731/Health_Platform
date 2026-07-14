@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Smartphone, Monitor, BrainCircuit, Users, Maximize, Eye } from 'lucide-react';
+import { Smartphone, Monitor, BrainCircuit, Maximize } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter18.css';
 
@@ -29,7 +29,7 @@ export default function Chapter18() {
           <div className="ux-card">
             <Monitor size={32} className="ux-icon"/>
             <h4>داشبوردهای پزشک‌محور</h4>
-            <p>نمایش سریع چکیده‌ی همزاد دیجیتال بیمار در ۳۰ ثانیه، جهت کاهش بار شناختی (Cognitive Load) پزشک در زمان ویزیت.</p>
+            <p>نمایش خلاصه منبع‌دار با امکان اصلاح؛ زمان یافتن اطلاعات و بار شناختی باید در آزمون کاربردپذیری با خط مبنا سنجیده شود و هدف ۳۰ ثانیه هنوز پذیرفته نشده است.</p>
           </div>
         </div>
       </section>

@@ -44,6 +44,18 @@
   z-index: 1;
 }
 
+.proposal-kicker {
+  display: inline-flex;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: 999px;
+  color: var(--accent-teal);
+  background: rgba(0, 240, 255, 0.06);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .dashboard-hero h1 {
   font-size: 3.2rem;
   margin-bottom: 1.25rem;
@@ -106,6 +118,191 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1.5rem;
+}
+
+.audience-paths {
+  margin-bottom: 3.5rem;
+  padding: 1.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.05), rgba(122, 40, 203, 0.04));
+}
+
+.audience-paths-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.audience-paths-icon {
+  display: flex;
+  padding: 0.7rem;
+  color: var(--accent-blue);
+  background: rgba(0, 210, 255, 0.1);
+  border-radius: 12px;
+}
+
+.audience-paths-heading span {
+  color: var(--accent-teal);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.audience-paths-heading h2 {
+  margin: 0.1rem 0 0.35rem;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
+.audience-paths-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.audience-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.audience-path {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.audience-path:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 210, 255, 0.35);
+}
+
+.audience-path-count {
+  color: var(--accent-purple);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.audience-path h3 {
+  margin: 0.45rem 0;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+}
+
+.audience-path p {
+  margin: 0 0 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  flex: 1;
+}
+
+.audience-path strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent-blue);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.document-map {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.document-track {
+  scroll-margin-top: 100px;
+}
+
+.track-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.track-heading span {
+  color: var(--accent-blue);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.track-heading h2 {
+  margin: 0.2rem 0 0;
+  color: var(--text-primary);
+  font-size: 1.55rem;
+}
+
+.track-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.card-status {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 0.55rem;
+  color: #b45309;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.card-status-verification-required {
+  color: #dc2626;
+}
+
+.appendices-section {
+  margin-top: 3.5rem;
+}
+
+.appendices-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.appendices-toggle span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.appendices-grid {
+  margin-top: 1.25rem;
+}
+
+.appendix-card {
+  opacity: 0.9;
+}
+
+.appendix-card .card-icon-wrapper {
+  color: var(--text-secondary);
 }
 
 .dashboard-card {
@@ -208,6 +405,20 @@
   }
   .dashboard-hero {
     padding: 3rem 1.5rem;
+  }
+  .track-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .audience-paths-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  .audience-paths-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

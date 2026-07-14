@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe2, Layers, Activity, Pill, CloudSun, Hospital, Workflow, ActivitySquare, Brain, Network, PlaySquare, ShieldAlert, GitCommit, Users } from 'lucide-react';
+import { Layers, Activity, Hospital, Workflow, Network, PlaySquare, ShieldAlert, GitCommit } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter14.css';
 
@@ -13,7 +13,7 @@ export default function Chapter14() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۴-۱ مقدمه: فراتر از پیش‌بینی، حرکت به سمت شبیه‌سازی</h3>
         <p>
-          پس از ساخت همزاد دیجیتال (Digital Twin) برای تک‌تک کاربران، این پلتفرم با تجمیع داده‌های ناشناس ده‌ها هزار نفر، یک <strong>مدل کلان از جهان سلامت (Health World Model)</strong> می‌سازد. این موتور شبیه‌سازی به سیاست‌گذاران و سازمان‌ها امکان می‌دهد تا پیش از اجرای واقعی یک تصمیم، اثرات آن را در یک محیط دیجیتال و امن بررسی کنند.
+          «همزاد دیجیتال» و «مدل جهان سلامت» در این پروژه مفاهیم پژوهشی و خارج از MVP هستند. هر کاربرد جمعیتی به مبنای قانونی، ارزیابی ریسک بازشناسایی، کیفیت و نمایندگی داده، اعتبارسنجی مدل و نظارت نهاد مسئول نیاز دارد و نباید پیش از آن برای تصمیم سیاستی استفاده شود.
         </p>
       </div>
 

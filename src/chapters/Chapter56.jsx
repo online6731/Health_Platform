@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { User, Activity, ShieldCheck, Heart, Award, Briefcase, Building, Target, AlertCircle, Quote } from 'lucide-react';
+import { User, Users, Activity, ShieldCheck, Heart, Briefcase, Building, Target, AlertCircle, Quote } from 'lucide-react';
 
 const personas = [
   {
@@ -13,16 +13,16 @@ const personas = [
     theme: 'emerald',
     gradient: 'from-emerald-500 to-teal-500',
     avatarChar: 'M',
-    bio: 'مریم به مدت دو سال است که با علائم خستگی مفرط و نوسانات خلق‌وخو مواجه است. او زمان کافی برای ویزیت‌های پی‌درپی حضوری ندارد و به دنبال راه‌حلی مستمر و جامع برای بهبود کیفیت زندگی خود است.',
+    bio: 'این کاربر فرضی برای یک مراجعه غیراضطراری باید اطلاعات خود را چندبار توضیح دهد و بعد از ثبت درخواست، وضعیت و اقدام بعدی را به‌روشنی نمی‌بیند.',
     painPoints: [
-      'سردرگمی میان توصیه‌های متناقض پزشکان مختلف',
-      'نبود سیستم پیگیری و پایش مداوم علائم پس از خروج از مطب',
-      'هزینه‌های گزاف آزمایش‌ها و ویزیت‌های بدون نتیجه مشخص'
+      'ورود یا توضیح چندباره اطلاعات مشابه',
+      'نامشخص‌بودن اطلاعات ناقص پیش از مراجعه',
+      'ابهام درباره وضعیت ارجاع و اقدام بعدی'
     ],
     needs: [
-      'پرونده سلامت یکپارچه که تمام پزشکان به آن دسترسی داشته باشند',
-      'دستیار هوشمند روزانه برای مدیریت تغذیه، استرس و خواب',
-      'امکان ارزیابی‌های شناختی دوره‌ای به زبان فارسی'
+      'فرم روشن با امکان ذخیره، بازگشت و اصلاح',
+      'مشاهده خلاصه قبل از اشتراک با مرکز',
+      'وضعیت، مسئول و مسیر کمک انسانی قابل مشاهده'
     ],
     techSavvy: 'بسیار بالا (استفاده روزانه از ابزارهای دیجیتال و پوشیدنی)'
   },
@@ -36,41 +36,41 @@ const personas = [
     theme: 'blue',
     gradient: 'from-blue-500 to-indigo-500',
     avatarChar: 'A',
-    bio: 'دکتر افشار روزانه بیش از ۳۰ بیمار را ویزیت می‌کند. او از کیفیت پایین داده‌های ارائه‌شده توسط بیماران در مورد علائم روزمره‌شان شاکی است و تمایل دارد تصمیم‌گیری‌های درمانی‌اش بر اساس داده‌های واقعی و پیوسته باشد.',
+    bio: 'این پزشک فرضی با حجم کاری بالا و اطلاعات پراکنده بیمار روبه‌رو است و برای بازبینی منبع، اصلاح خلاصه و تصمیم‌گیری مستقل به رابط کم‌اصطکاک نیاز دارد.',
     painPoints: [
       'اتلاف وقت زیاد برای بررسی کاغذپاره‌ها و نتایج پراکنده آزمایشگاه‌ها',
       'عدم انطباق بیمار با پروتکل‌های درمانی تجویز شده',
       'فشار کاری بالا و زمان محدود برای هر بیمار در مطب'
     ],
     needs: [
-      'داشبورد تخصصی برای مشاهده روند همزاد دیجیتال بیمار (Digital Twin)',
-      'سیستم دستیار تصمیم‌یار بالینی (CDSS) جهت بررسی تداخل‌های دارویی پیچیده',
-      'ارتباط امن و متمرکز با بیمار بدون به اشتراک‌گذاری اطلاعات شخصی'
+      'خلاصه کوتاه با منبع و نمایش داده گمشده',
+      'امکان اصلاح، رد و ثبت دلیل بدون اصطکاک',
+      'مشاهده اینکه AI چه کاری انجام داده و چه کاری انجام نداده است'
     ],
     techSavvy: 'متوسط (علاقه‌مند به ابزارهای کارآمد اما گریزان از سیستم‌های پیچیده)'
   },
   {
     id: 'enterprise',
-    role: 'کارفرمای سازمانی / مدیر منابع انسانی',
+    role: 'خریدار اولیه / مدیر عملیات کلینیک',
     name: 'سارا رادان',
     age: '۴۱ ساله',
-    job: 'مدیر کل منابع انسانی در هلدینگ فناوری (۵۰۰+ پرسنل)',
+    job: 'مدیر عملیات یک کلینیک چندتخصصی',
     location: 'تهران',
     theme: 'purple',
     gradient: 'from-purple-500 to-fuchsia-500',
     avatarChar: 'S',
-    bio: 'سارا متوجه کاهش بهره‌وری کارکنان و افزایش نرخ فرسودگی شغلی (Burnout) در ماه‌های اخیر شده است. او به دنبال راهکاری سازمانی است که بدون نقض حریم خصوصی، به سلامت کلی پرسنل کمک کند.',
+    bio: 'این مدیر فرضی با تماس‌های پیگیری، اطلاعات ناقص و نامشخص‌بودن وضعیت ارجاع روبه‌رو است و قبل از خرید به اثر، هزینه، مسئولیت و بار پشتیبانی نیاز دارد.',
     painPoints: [
-      'هزینه‌های بالای بیمه تکمیلی پرسنل بدون بازدهی ملموس در بهره‌وری',
-      'افزایش مرخصی‌های استعلاجی به علت مشکلات سلامت روان و فرسودگی',
-      'نبود ابزاری برای سنجش سطح رضایت و سلامت عمومی تیم‌ها به‌صورت گمنام'
+      'زمان کارکنان برای ورود مجدد و تماس پیگیری',
+      'نبود دید مشترک از مالک و وضعیت هر ارجاع',
+      'ریسک خرید سامانه‌ای بدون شواهد و هزینه عملیات روشن'
     ],
     needs: [
-      'داشبورد تحلیلی گمنام‌سازی‌شده از وضعیت سلامت کلی سازمان',
-      'برنامه‌های ارتقای پویای سلامت جسمی و روانی برای کارکنان',
-      'یکپارچه‌سازی آسان با سیستم‌های رفاهی و بیمه‌ای شرکت'
+      'پایلوت محدود با baseline و معیار موفقیت',
+      'گزارش فرایندی بدون افشای محتوای بالینی غیرضروری',
+      'هزینه، SLA، آموزش، پشتیبانی و مسیر خروج روشن'
     ],
-    techSavvy: 'بالا (کار با انواع سامانه‌های مدیریت سازمانی و ERP)'
+    techSavvy: 'متوسط تا بالا؛ تصمیم خرید بر پایه اثر عملیاتی و قابلیت یکپارچه‌سازی'
   }
 ];
 
@@ -103,7 +103,7 @@ export default function Chapter56() {
             <Users className="w-5 h-5 text-pink-500" /> ۵۶-۱ مقدمه و اهداف
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            توسعه هر بخش از سیستم‌عامل سلامت HCOS بر پایه شناخت دقیق نیازها، چالش‌ها و رفتارهای سه گروه اصلی از مخاطبان انجام می‌شود. در این بخش، پرسونای مرجع بیماران، پزشکان و خریداران سازمانی را بررسی می‌کنیم.
+            این‌ها proto-personaهای فرضی‌اند و از مصاحبه یا داده میدانی تأییدشده استخراج نشده‌اند. نام، سن، محل و نقل‌قول‌ها ساختگی‌اند و فقط برای طراحی پرسش پژوهش استفاده می‌شوند، نه اثبات نیاز بازار.
           </p>
         </div>
 
@@ -204,15 +204,15 @@ export default function Chapter56() {
         {/* Mapping to HCOS Features */}
         <section className="mb-8">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <ShieldCheck className="w-6 h-6 text-pink-500" /> ۵۶-۳ انطباق نیازها با قابلیت‌های HCOS
+            <ShieldCheck className="w-6 h-6 text-pink-500" /> ۵۶-۳ فرضیه تطبیق نیاز و قابلیت
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="glass-panel p-6 border-t-4 border-t-emerald-500 hover:-translate-y-1 transition-transform duration-300 shadow-sm relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <h5 className="font-bold premium-text-primary text-center mb-4 pb-3 border-b border-[var(--border-color)] relative z-10">برای بیمار (مریم)</h5>
               <ul className="space-y-4 m-0 p-0 list-none relative z-10">
-                <li className="text-sm leading-relaxed"><strong className="text-emerald-600 dark:text-emerald-400 block mb-1">دستیار هوشمند:</strong> پایش ۲۴ ساعته خواب، تغذیه و ورزش با بازخورد پویا.</li>
-                <li className="text-sm leading-relaxed"><strong className="text-emerald-600 dark:text-emerald-400 block mb-1">پرونده سلامت:</strong> یکپارچه‌سازی سوابق در یک هاب امن برای اشتراک آنی با پزشکان.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-emerald-600 dark:text-emerald-400 block mb-1">دستیار:</strong> ثبت اختیاری عادت و یادآوری در بازه توافق‌شده.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-emerald-600 dark:text-emerald-400 block mb-1">پرونده:</strong> نمایش سوابق واردشده و اشتراک کنترل‌شده با درمانگر منتخب.</li>
               </ul>
             </div>
             
@@ -220,17 +220,17 @@ export default function Chapter56() {
               <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <h5 className="font-bold premium-text-primary text-center mb-4 pb-3 border-b border-[var(--border-color)] relative z-10">برای پزشک (دکتر افشار)</h5>
               <ul className="space-y-4 m-0 p-0 list-none relative z-10">
-                <li className="text-sm leading-relaxed"><strong className="text-blue-600 dark:text-blue-400 block mb-1">همزاد دیجیتال:</strong> ارائه روند تغییرات علائم حیاتی و فاکتورهای آزمایشگاهی به‌صورت نموداری.</li>
-                <li className="text-sm leading-relaxed"><strong className="text-blue-600 dark:text-blue-400 block mb-1">سیستم CDSS:</strong> تحلیل هوشمند داده‌ها برای پیشنهاد دقیق‌ترین دوز درمانی و هشدار تداخلات.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-blue-600 dark:text-blue-400 block mb-1">خلاصه پرونده:</strong> روندهای منبع‌دار با امکان اصلاح و مشاهده داده گمشده.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-blue-600 dark:text-blue-400 block mb-1">تصمیم‌یار:</strong> هشدار منبع‌دار در دامنه اعتبارسنجی‌شده؛ بدون پیشنهاد خودکار دوز.</li>
               </ul>
             </div>
             
             <div className="glass-panel p-6 border-t-4 border-t-purple-500 hover:-translate-y-1 transition-transform duration-300 shadow-sm relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <h5 className="font-bold premium-text-primary text-center mb-4 pb-3 border-b border-[var(--border-color)] relative z-10">برای سازمان (سارا)</h5>
+              <h5 className="font-bold premium-text-primary text-center mb-4 pb-3 border-b border-[var(--border-color)] relative z-10">برای مدیر کلینیک (سارا)</h5>
               <ul className="space-y-4 m-0 p-0 list-none relative z-10">
-                <li className="text-sm leading-relaxed"><strong className="text-purple-600 dark:text-purple-400 block mb-1">داشبورد HR:</strong> ارائه گزارش سلامت سازمانی بدون به خطر انداختن هویت افراد.</li>
-                <li className="text-sm leading-relaxed"><strong className="text-purple-600 dark:text-purple-400 block mb-1">بسته‌های ارتقا:</strong> برگزاری مسابقات تندرستی، چالش‌های گروهی و مشاوره آنلاین روانشناختی.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-purple-600 dark:text-purple-400 block mb-1">داشبورد عملیات:</strong> حجم، وضعیت و زمان چرخه ارجاع بدون نمایش محتوای بالینی غیرضروری.</li>
+                <li className="text-sm leading-relaxed"><strong className="text-purple-600 dark:text-purple-400 block mb-1">پایلوت:</strong> baseline، معیار موفقیت، support model و هزینه ارائه خدمت شفاف.</li>
               </ul>
             </div>
           </div>

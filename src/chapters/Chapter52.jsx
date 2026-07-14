@@ -5,10 +5,10 @@ import './Chapter52.css';
 
 export default function Chapter52() {
   const integrationFeatures = [
-    { icon: Lock, title: 'امنیت و احراز هویت (OAuth2)', desc: 'تمامی تبادلات داده‌ای با استفاده از پروتکل‌های امنیتی روز و رمزنگاری End-to-End انجام می‌شود.' },
-    { icon: Plug, title: 'استاندارد FHIR', desc: 'پشتیبانی کامل از استاندارد تبادل اطلاعات پزشکی (FHIR) برای یکپارچگی سریع با بیمارستان‌ها.' },
-    { icon: Webhook, title: 'Webhooks', desc: 'ارسال بلادرنگ رویدادها (مانند ثبت نسخه جدید، هشدار افت فشار) به سیستم‌های ثالث.' },
-    { icon: Code, title: 'SDKs و کتابخانه‌ها', desc: 'ارائه SDK رسمی برای زبان‌های Python، Node.js، Java و C# جهت اتصال آسان به پلتفرم.' }
+    { icon: Lock, title: 'امنیت و احراز هویت', desc: 'OAuth/OIDC، scope، مدیریت کلید و رمزنگاری گزینه‌های طراحی‌اند و پس از threat model و آزمون انتخاب می‌شوند.' },
+    { icon: Plug, title: 'FHIR نامزد تعامل‌پذیری', desc: 'نسخه و پروفایل باید تعیین و با capability statement و آزمون conformance اثبات شود.' },
+    { icon: Webhook, title: 'Webhooks پیشنهادی', desc: 'اعلان تغییر وضعیت ارجاع با امضا، retry، idempotency و امکان reconciliation؛ هیچ رویداد بالینی خودکار در MVP تعریف نشده است.' },
+    { icon: Code, title: 'SDK و sandbox', desc: 'SDK رسمی هنوز وجود ندارد. ابتدا OpenAPI نسخه‌دار، داده ساختگی، آزمون قرارداد و محیط sandbox لازم است.' }
   ];
 
   return (
@@ -18,9 +18,9 @@ export default function Chapter52() {
     >
       <div className="api-container">
         <div className="api-hero">
-          <h3>توسعه‌پذیری بی‌نهایت برای بیمارستان‌ها و استارتاپ‌ها</h3>
+          <h3>API پیشنهادی برای یکپارچه‌سازی کنترل‌شده</h3>
           <p>
-            پلتفرم سلامت ما صرفاً یک اپلیکیشن نیست، بلکه یک بستر API-First است. تمامی قابلیت‌های پلتفرم از طریق APIهای قدرتمند و مستندسازی شده در اختیار سایر کسب‌وکارها، بیمارستان‌ها (HIS) و توسعه‌دهندگان قرار دارد.
+            API-first یک جهت طراحی است، نه وضعیت فعلی. فقط قابلیت‌های مصوب با قرارداد نسخه‌دار، حداقل scope، sandbox، audit و فرایند deprecation منتشر می‌شوند.
           </p>
         </div>
 
@@ -43,26 +43,25 @@ export default function Chapter52() {
         </section>
 
         <section className="code-section">
-          <h3><Braces size={24} /> نمونه فراخوانی API (تریاژ بیمار)</h3>
-          <p>توسعه‌دهندگان می‌توانند به سادگی ماژول تریاژ هوشمند را به اپلیکیشن خود اضافه کنند:</p>
+          <h3><Braces size={24} /> نمونه قرارداد پیشنهادی: وضعیت ارجاع</h3>
+          <p>این مثال فقط شکل قرارداد MVP را نشان می‌دهد؛ endpoint، دامنه و کلید زیر ساختگی‌اند و API عملیاتی وجود ندارد.</p>
           <div className="code-block">
-            <span className="code-comment">// POST /v1/ai-triage/analyze</span><br />
-            <span className="code-keyword">const</span> response = <span className="code-keyword">await</span> <span className="code-function">fetch</span>(<span className="code-string">'https://api.healthplatform.com/v1/ai-triage/analyze'</span>, {'{'}<br />
-            &nbsp;&nbsp;method: <span className="code-string">'POST'</span>,<br />
+            <span className="code-comment">// GET /v0/referrals/ref_demo_001 — illustrative sandbox only</span><br />
+            <span className="code-keyword">const</span> response = <span className="code-keyword">await</span> <span className="code-function">fetch</span>(<span className="code-string">'https://sandbox.example.invalid/v0/referrals/ref_demo_001'</span>, {'{'}<br />
+            &nbsp;&nbsp;method: <span className="code-string">'GET'</span>,<br />
             &nbsp;&nbsp;headers: {'{'}<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">'Authorization'</span>: <span className="code-string">'Bearer YOUR_API_KEY'</span>,<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">'Content-Type'</span>: <span className="code-string">'application/json'</span><br />
-            &nbsp;&nbsp;{'}'},<br />
-            &nbsp;&nbsp;body: <span className="code-function">JSON.stringify</span>({'{'}<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;patientId: <span className="code-string">"12345"</span>,<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;symptoms: [<span className="code-string">"chest_pain"</span>, <span className="code-string">"shortness_of_breath"</span>]<br />
-            &nbsp;&nbsp;{'}'})<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">'Authorization'</span>: <span className="code-string">'Bearer SANDBOX_TOKEN'</span>,<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">'X-Tenant-Id'</span>: <span className="code-string">'clinic_demo'</span><br />
+            &nbsp;&nbsp;{'}'}<br />
             {'}'});<br /><br />
             <span className="code-comment">/* Response:<br />
             {'{'}<br />
-            &nbsp;&nbsp;"risk_level": "CRITICAL",<br />
-            &nbsp;&nbsp;"action": "DISPATCH_AMBULANCE",<br />
-            &nbsp;&nbsp;"confidence_score": 0.98<br />
+            &nbsp;&nbsp;"referralId": "ref_demo_001",<br />
+            &nbsp;&nbsp;"status": "RECEIVED",<br />
+            &nbsp;&nbsp;"updatedAt": "2026-07-14T08:30:00Z",<br />
+            &nbsp;&nbsp;"responsibleRole": "CLINIC_INTAKE",<br />
+            &nbsp;&nbsp;"nextAction": "WAIT_FOR_CLINIC_CONTACT",<br />
+            &nbsp;&nbsp;"isStale": false<br />
             {'}'}<br />
             */</span>
           </div>

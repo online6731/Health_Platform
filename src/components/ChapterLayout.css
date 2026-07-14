@@ -51,7 +51,123 @@
   gap: 2rem;
 }
 
+.document-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: -0.5rem 0 2rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(245, 158, 11, 0.34);
+  border-radius: 16px;
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--text-primary);
+}
+
+.document-status-verification-required {
+  border-color: rgba(239, 68, 68, 0.34);
+  background: rgba(239, 68, 68, 0.07);
+}
+
+.document-status-icon {
+  color: #d97706;
+  display: flex;
+  margin-top: 0.1rem;
+}
+
+.document-status-verification-required .document-status-icon {
+  color: #ef4444;
+}
+
+.document-status-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.document-status-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.document-status p {
+  margin: 0.35rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.document-status .document-status-secondary {
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+.document-role {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.document-role-core {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.document-role-appendix {
+  color: #475569;
+  background: rgba(100, 116, 139, 0.12);
+}
+
+.reader-guide {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: -0.75rem 0 2rem;
+}
+
+.reader-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--bg-card);
+  color: var(--accent-blue);
+}
+
+.reader-guide-item svg {
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+}
+
+.reader-guide-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.reader-guide-item span {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+}
+
+.reader-guide-item strong {
+  color: var(--text-primary);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 768px) {
+  .reader-guide {
+    grid-template-columns: 1fr;
+  }
   .chapter-header {
     flex-direction: column;
     align-items: flex-start;

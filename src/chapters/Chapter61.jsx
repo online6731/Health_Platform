@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { DollarSign, Percent, BarChart4, TrendingUp, PieChart, Info, HelpCircle } from 'lucide-react';
+import { DollarSign, Percent, BarChart4, TrendingUp, PieChart, Info } from 'lucide-react';
 
 const projections = [
-  { metric: 'تعداد کاربران نهایی فعال (B2C)', y1: '۵۰,۰۰۰', y2: '۲۵۰,۰۰۰', y3: '۱,۲۰۰,۰۰۰' },
-  { metric: 'سازمان‌های عضو (B2B)', y1: '۵', y2: '۲۵', y3: '۱۲۰' },
-  { metric: 'کل درآمد ناخالص (هزار دلار)', y1: '$۴۵۰', y2: '$۲,۸۰۰', y3: '$۱۲,۵۰۰' },
-  { metric: 'هزینه‌های زیرساخت و هوش مصنوعی', y1: '$۱۸۰', y2: '$۶50', y3: '$۲,۱۰۰' },
-  { metric: 'هزینه‌های بازاریابی و فروش', y1: '$۱۲۰', y2: '$۵۰۰', y3: '$۱,۸۰۰' },
-  { metric: 'هزینه‌های پرسنلی و R&D', y1: '$۲۵۰', y2: '$۸۰۰', y3: '$۲,۵۰۰' },
-  { metric: 'سود خالص (هزار دلار)', y1: '-$۱۰۰', y2: '+$۸۵۰', y3: '+$۶,۱۰۰' }
+  { metric: 'قراردادهای discovery / پایلوت پولی', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'مراکز دارای اشتراک یا تمدید', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'درآمد قراردادی (ارز و واحد TBD)', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'هزینه مستقیم ارائه خدمت', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'محصول، مهندسی و اعتبارسنجی', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'فروش، عملیات و هزینه‌های عمومی', y1: 'TBD', y2: 'TBD', y3: 'TBD' },
+  { metric: 'جریان نقدی خالص و runway', y1: 'TBD', y2: 'TBD', y3: 'TBD' }
 ];
 
 const unitEconomics = [
-  { label: 'هزینه جذب کاربر (CAC)', value: '$۸.۵', desc: 'میانگین هزینه صرف شده برای جذب یک کاربر اشتراکی فعال از طریق کمپین‌ها و کانال‌های ارجاع.' },
-  { label: 'ارزش طول عمر کاربر (LTV)', value: '$۴۸.۰', desc: 'کل سود حاصل از پرداخت‌های ماهانه کاربر در مدت زمان متوسط حضور در پلتفرم (۲۴ ماه).' },
-  { label: 'نسبت LTV به CAC', value: '۵.۶x', desc: 'نسبت کلیدی نشان‌دهنده سودآوری عالی مدل بازاریابی و رشد (معیار سالم > ۳x است).' },
-  { label: 'نرخ ریزش کاربران (Churn)', value: '۲.۴٪', desc: 'درصد لغو اشتراک ماهانه کاربران که نشان‌دهنده وفاداری بالای بیماران به ابزارهای روزانه است.' }
+  { label: 'هزینه جذب مرکز واجد شرایط', value: 'TBD', desc: 'هزینه founder-led sales، ارزیابی فنی/امنیتی و زمان فروش تا قرارداد پولی.' },
+  { label: 'ارزش قرارداد هر مرکز', value: 'TBD', desc: 'مبلغ discovery، راه‌اندازی، پایلوت و اشتراک/تمدید باید جدا گزارش شود.' },
+  { label: 'حاشیه مشارکت هر مرکز/ماه', value: 'TBD', desc: 'درآمد منهای پیاده‌سازی مستهلک‌شده، پشتیبانی، بالینی، زیرساخت و مصرف مدل.' },
+  { label: 'تمدید و توسعه قرارداد', value: 'TBD', desc: 'پس از تعریف دوره قرارداد، دلیل تمدید/عدم تمدید و توسعه دامنه اندازه‌گیری می‌شود.' }
 ];
 
 const capTable = [
-  { holder: 'تیم موسسان (Founders)', preSeed: '۸۵٪', seed: '۶۸٪', seriesA: '۵۱٪' },
-  { holder: 'سرمایه‌گذار پیش‌بذری (Pre-Seed)', preSeed: '۱۵٪', seed: '۱۲٪', seriesA: '۹٪' },
-  { holder: 'سرمایه‌گذار بذری (Seed)', preSeed: '—', seed: '۲۰٪', seriesA: '۱۵٪' },
-  { holder: 'سرمایه‌گذار سری آ (Series A)', preSeed: '—', seed: '—', seriesA: '۲۵٪' }
+  { holder: 'تیم موسسان (Founders)', preSeed: 'TBD', seed: 'TBD', seriesA: 'TBD' },
+  { holder: 'سرمایه‌گذار پیش‌بذری (Pre-Seed)', preSeed: 'TBD', seed: 'TBD', seriesA: 'TBD' },
+  { holder: 'سرمایه‌گذار بذری (Seed)', preSeed: '—', seed: 'TBD', seriesA: 'TBD' },
+  { holder: 'سرمایه‌گذار سری آ (Series A)', preSeed: '—', seed: '—', seriesA: 'TBD' }
 ];
 
 export default function Chapter61() {
@@ -42,7 +42,7 @@ export default function Chapter61() {
           </div>
           <div>
             <h2 className="text-3xl font-black m-0 bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-600">
-              صورت‌های مالی و پیش‌بینی‌ها
+              مدل مالی و سناریوهای تأمین سرمایه
             </h2>
             <p className="text-sm premium-text-secondary mt-1 mb-0 font-medium tracking-wide">Financial Projections & Cap Table</p>
           </div>
@@ -50,9 +50,9 @@ export default function Chapter61() {
 
         <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-teal)] relative overflow-hidden group hover:shadow-xl transition-all duration-300">
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
-          <h3 className="text-xl font-bold premium-text-primary mb-3 mt-0 relative z-10">۶۱-۱ درآمدزایی و رشد در ابعاد مالی</h3>
+          <h3 className="text-xl font-bold premium-text-primary mb-3 mt-0 relative z-10">۶۱-۱ وضعیت و قواعد مدل مالی</h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            توسعه یک مدل مالی پایدار مبتنی بر سود ناخالص بالا (بیش از ۸۰٪ در فازهای بلوغ)، مشخصه اصلی مدل نرم‌افزاری HCOS است که ارزش‌آفرینی بلندمدت برای سرمایه‌گذاران را تضمین می‌کند.
+            جدول‌های این فصل قالب مدل مالی هستند، نه پیش‌بینی مصوب. اعداد پس از تعیین ارز، قیمت، cohort، کانال فروش، هزینه زیرساخت/بالینی، مالیات، تورم و سناریوهای پایه/بدبینانه/خوش‌بینانه وارد می‌شوند و هیچ بازدهی تضمین نمی‌شود.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function Chapter61() {
             onClick={() => setActiveTab('projections')}
           >
             <TrendingUp className="w-5 h-5" />
-            <span>پیش‌بینی‌های مالی ۳ ساله</span>
+            <span>سناریوی سه مرحله‌ای</span>
           </button>
           <button 
             className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm
@@ -94,7 +94,7 @@ export default function Chapter61() {
         {activeTab === 'projections' && (
           <section className="animate-fade-in mb-8">
             <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-              <TrendingUp className="w-6 h-6 text-emerald-500" /> پیش‌بینی درآمدها و هزینه‌ها (Years 1-3)
+              <TrendingUp className="w-6 h-6 text-emerald-500" /> مدل جریان نقدی بر اساس گیت‌های پروژه
             </h3>
             <div className="glass-panel p-1 border border-[var(--border-color)] rounded-2xl shadow-lg mb-4">
               <div className="premium-table-container rounded-xl overflow-hidden bg-[var(--bg-primary)]">
@@ -102,14 +102,14 @@ export default function Chapter61() {
                   <thead>
                     <tr className="bg-gradient-to-r from-transparent to-[rgba(16,185,129,0.05)]">
                       <th className="py-4 pl-4 w-1/3">شاخص مالی / عملیاتی</th>
-                      <th>سال اول (توسعه و MVP)</th>
-                      <th>سال دوم (رشد شتابان)</th>
-                      <th className="pr-4">سال سوم (سودآوری نمایی)</th>
+                      <th>مرحله ۱: discovery / prototype</th>
+                      <th>مرحله ۲: پایلوت محدود</th>
+                      <th className="pr-4">مرحله ۳: تکرارپذیری مشروط</th>
                     </tr>
                   </thead>
                   <tbody>
                     {projections.map((p, idx) => {
-                      const isHighlight = p.metric.includes('سود خالص');
+                      const isHighlight = p.metric.includes('جریان نقدی');
                       return (
                         <tr key={idx} className={`hover:bg-[rgba(16,185,129,0.03)] transition-colors group ${isHighlight ? 'bg-[rgba(16,185,129,0.08)] border-y border-emerald-500/20' : ''}`}>
                           <td className={`pl-4 ${isHighlight ? 'font-black text-emerald-600 dark:text-emerald-400' : 'font-bold premium-text-primary'}`}>{p.metric}</td>
@@ -126,7 +126,7 @@ export default function Chapter61() {
             <div className="flex items-start gap-2 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50">
               <Info className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
               <p className="text-sm text-blue-700 dark:text-blue-300 m-0 leading-relaxed">
-                مبالغ ارزی بر اساس هزار دلار محاسبه شده و هزینه‌های ابری مربوط به پردازش و آموزش مجدد مدل‌های هوش مصنوعی اختصاصی است.
+                هنوز ارز، دوره هر مرحله و واحد گزارش تعیین نشده است. تا تکمیل مفروضات و برآورد پایین‌به‌بالا، این جدول فقط قالب مدل است و هیچ عدد یا زمان سودآوری را القا نمی‌کند.
               </p>
             </div>
           </section>
@@ -136,7 +136,7 @@ export default function Chapter61() {
         {activeTab === 'economics' && (
           <section className="animate-fade-in mb-8">
             <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-              <DollarSign className="w-6 h-6 text-blue-500" /> اقتصاد واحد بیمار (B2C Segment)
+              <DollarSign className="w-6 h-6 text-blue-500" /> اقتصاد واحد مرکز درمانی (B2B Pilot)
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {unitEconomics.map((item, idx) => (

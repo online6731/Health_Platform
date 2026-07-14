@@ -7,10 +7,6 @@ const files = fs.readdirSync(chaptersDir).filter(f => f.endsWith('.jsx'));
 for (const file of files) {
   const content = fs.readFileSync(path.join(chaptersDir, file), 'utf-8');
   
-  // extract lucide-react imports
-  const importMatch = content.match(/import\s+{([^}]+)}\s+from\s+['"]lucide-react['"]/);
-  const lucideImports = importMatch ? importMatch[1].split(',').map(s => s.trim()).filter(Boolean) : [];
-  
   // extract all JSX tags that start with uppercase (Component usage)
   const tagRegex = /<([A-Z][a-zA-Z0-9]*)/g;
   let match;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, LineChart, Users, ShieldCheck, Activity, Briefcase, FileSpreadsheet } from 'lucide-react';
+import { Building2, LineChart, ShieldCheck, Activity, Briefcase } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter38.css';
 

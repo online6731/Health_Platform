@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { DollarSign, Briefcase, TrendingUp, Users, Server, FileDigit, Link, ArrowDownCircle, Network, Share2 } from 'lucide-react';
+import { DollarSign, Users, FileDigit, Link, ArrowDownCircle, Network, Share2 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter19.css';
 
@@ -13,7 +13,7 @@ export default function Chapter19() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۹-۱ اکوسیستم چندوجهی (Multi-Sided Platform)</h3>
         <p>
-          این پلتفرم تنها یک نرم‌افزار سلامت یا سامانه مشاوره نیست، بلکه یک اقتصاد دیجیتالِ پررونق است که بیماران، متخصصان، توسعه‌دهندگان شخص ثالث و سیستم‌های بیمه‌ای را در یک چرخه ارزش‌آفرینی به هم متصل می‌کند. ما زیرساختی (Infrastructure) هستیم که همه بازیگران در آن برنده خواهند بود.
+          اقتصاد چندسویه یک سناریوی آینده است. MVP باید ابتدا ارزش، هزینه و توزیع منافع یک رابطه خریدار/کاربر را اثبات کند؛ هیچ طراحی‌ای برنده‌بودن همه ذی‌نفعان را تضمین نمی‌کند.
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export default function Chapter19() {
             <ArrowDownCircle className="cycle-arrow" size={24} />
             <div className="cycle-step">تولید حجم انبوهی از داده‌های سلامت (Real-World Data)</div>
             <ArrowDownCircle className="cycle-arrow" size={24} />
-            <div className="cycle-step">آموزش و بهبود دقت مدل‌های هوش مصنوعی و همزاد دیجیتال</div>
+            <div className="cycle-step">بازخورد کنترل‌شده، تحلیل کیفیت و تصمیم مستقل درباره تغییر مدل</div>
             <ArrowDownCircle className="cycle-arrow" size={24} />
             <div className="cycle-step">ارائه خدمات شخصی‌سازی‌شده و هوشمندتر به بیماران</div>
             <ArrowDownCircle className="cycle-arrow" size={24} />
@@ -42,7 +42,7 @@ export default function Chapter19() {
             <div className="revenue-icon-wrapper"><Users size={28} /></div>
             <div className="revenue-content">
               <h4>اقتصاد اشتراکی (B2C Subscriptions)</h4>
-              <p>طرح‌های رایگان (پایه)، Plus، Premium و Elite. دسترسی به امکانات پیشرفته‌ی همزاد دیجیتال، پایشگرهای سلامت و مشاوره‌های شخصی با پرداخت ماهانه.</p>
+              <p>بسته‌بندی و قیمت هنوز TBD است. قابلیت سلامت نباید صرفاً بر پایه tier تجاری از کنترل ایمنی یا نظارت لازم محروم شود.</p>
             </div>
           </div>
           <div className="revenue-item">

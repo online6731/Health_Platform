@@ -47,7 +47,7 @@ export default function Chapter50() {
         <section className="fraud-detection-section">
           <h3><Fingerprint className="section-icon" style={{ color: '#ef4444' }} /> موتور تشخیص تقلب (Fraud Detection Engine)</h3>
           <p className="section-desc">
-            سیستم با استفاده از الگوریتم‌های یادگیری ماشین، الگوهای مشکوک در نسخه‌ها و صورت‌حساب‌های بیمارستانی را در زمان واقعی شناسایی می‌کند:
+            شناسایی الگوهای مشکوک در نسخه و صورتحساب یک سناریوی آینده است؛ به داده مجاز، تعریف تقلب، معیار خطا، فرایند اعتراض و بازبینی انسانی نیاز دارد و در نسخه فعلی پیاده‌سازی نشده است:
           </p>
           <div className="fraud-steps">
             <div className="fraud-step">

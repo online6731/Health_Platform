@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { AlertCircle, Cpu, FileWarning, Scale, Watch, BrainCircuit, Key, FileSignature, Search, RefreshCw, Layers, CheckCircle2, AlertOctagon } from 'lucide-react';
+import { AlertCircle, Cpu, FileWarning, Scale, Watch, BrainCircuit, Key, FileSignature, Search, CheckCircle2, AlertOctagon } from 'lucide-react';
 
 const Chapter73 = () => {
   const [activeTab, setActiveTab] = useState('All');
@@ -20,7 +20,7 @@ const Chapter73 = () => {
       id: 2,
       category: 'Technical',
       title: 'مدل زبانی پزشکی فارسی (Medical LLM)',
-      desc: 'نیاز به ساخت مدل اختصاصی (Fine-tuned) برای کاهش شدید خطاهای اصطلاحات تخصصی فارسی است.',
+      desc: 'باید خط مبنای فارسی، RAG، prompting و Fine-tuning روی مجموعه آزمون نماینده مقایسه شوند؛ هنوز راهکار فنی انتخاب نشده است.',
       status: 'Open',
       icon: BrainCircuit
     },
@@ -28,8 +28,8 @@ const Chapter73 = () => {
       id: 3,
       category: 'Technical',
       title: 'کاهش تاخیر ماژول RAG (Latency Optimization)',
-      desc: 'تاخیر پاسخگویی ایجنت در زمان لود همزمان بالا، در سناریوهای آزمایشی اولیه هنوز بیش از ۲ ثانیه است.',
-      status: 'In Progress',
+      desc: 'هنوز محیط آزمون، بار نماینده، SLO و داده اندازه‌گیری ثبت نشده است؛ هر عدد latency تا آن زمان فرضی است.',
+      status: 'Open',
       icon: Cpu
     },
     {
@@ -52,8 +52,8 @@ const Chapter73 = () => {
       id: 6,
       category: 'Regulatory',
       title: 'تعرفه پزشکان همکار (Physician Pricing Schema)',
-      desc: 'ابهام در مدل تسویه حساب و سهم پلتفرم از ویزیت‌های فوری تخصصی.',
-      status: 'Resolved',
+      desc: 'مدل تسویه، مالیات، بازپرداخت، سهم پلتفرم و محدودیت‌های حرفه‌ای هنوز تصویب و مستند نشده است.',
+      status: 'Open',
       icon: Scale
     }
   ]);
@@ -124,7 +124,7 @@ const Chapter73 = () => {
           <p className="premium-text-secondary text-sm leading-relaxed relative z-10 m-0 flex items-start gap-2">
             <FileWarning className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
             <span>
-              فهرستی از چالش‌های فعلی معماری، اعم از فنی و تجاری که در نسخه‌های بعدی باید برای آن‌ها راهکار قطعی پیدا شود. شما می‌توانید با کلیک روی نشانگر وضعیت هر شکاف، وضعیت آن را تغییر دهید.
+              فهرستی از شکاف‌های فنی، حقوقی و تجاری که به مالک، تصمیم و شاهد نیاز دارند. تغییر وضعیت در این رابط فقط نمایشی است و بدون مدرک یا صورت‌جلسه وضعیت پروژه را تغییر نمی‌دهد.
             </span>
           </p>
         </div>

@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { ShieldCheck, Lock, Users, FileText, CheckSquare, Square, ShieldAlert, Cpu, CheckCircle } from 'lucide-react';
+import { ShieldCheck, Lock, FileText, CheckSquare, Square, ShieldAlert, Cpu, CheckCircle } from 'lucide-react';
 
 const checklist = [
   {
     category: 'قوانین HIPAA (صنعت سلامت)',
     items: [
-      { id: 'h1', text: 'رمزنگاری کامل داده‌های سلامت در حالت سکون و انتقال (AES-256 / TLS 1.3)', checked: true },
-      { id: 'h2', text: 'ردیابی و لاگینگ تغییرات پرونده‌های پزشکی (Audit Trail)', checked: true },
-      { id: 'h3', text: 'کنترل دسترسی مبتنی بر نقش پزشک، بیمار و پرستار (RBAC)', checked: true },
-      { id: 'h4', text: 'امضای توافق‌نامه با همکاران تجاری (Business Associate Agreement)', checked: true }
+      { id: 'h1', text: 'طراحی و آزمون رمزنگاری داده در حالت سکون و انتقال، همراه با مدیریت کلید و بازیابی', checked: false },
+      { id: 'h2', text: 'تعریف Audit Trail تغییرناپذیر، دوره نگهداری و فرایند بازبینی رویدادها', checked: false },
+      { id: 'h3', text: 'تعریف RBAC/ABAC، حداقل دسترسی، بازبینی دوره‌ای و دسترسی اضطراری', checked: false },
+      { id: 'h4', text: 'تعیین دامنه HIPAA و امضای BAA فقط در صورت احراز نقش Business Associate', checked: false }
     ]
   },
   {
     category: 'قوانین GDPR (حریم خصوصی عمومی)',
     items: [
-      { id: 'g1', text: 'حق فراموش شدن (امکان حذف کامل سوابق و پرونده از سرورها)', checked: true },
-      { id: 'g2', text: 'رضایت صریح و آگاهانه در هنگام ثبت‌نام برای هر نوع پردازش داده', checked: true },
-      { id: 'g3', text: 'گمنام‌سازی و De-identification داده‌های سلامت برای آموزش هوش مصنوعی', checked: true },
-      { id: 'g4', text: 'قابلیت خروجی گرفتن از تمام داده‌های کاربر به صورت ساختاریافته (Data Portability)', checked: true }
+      { id: 'g1', text: 'تعریف فرایند درخواست حذف با درنظرگرفتن استثناهای نگهداری قانونی و سوابق درمانی', checked: false },
+      { id: 'g2', text: 'مستندسازی مبنای قانونی هر پردازش؛ رضایت فقط در مواردی که مبنای مناسب است', checked: false },
+      { id: 'g3', text: 'ارزیابی ریسک بازشناسایی و تفکیک ناشناس‌سازی، مستعارسازی و داده آموزشی', checked: false },
+      { id: 'g4', text: 'تعریف خروجی ساختاریافته، دامنه داده، احراز هویت و زمان پاسخ به درخواست دسترسی/انتقال', checked: false }
     ]
   }
 ];
@@ -42,8 +42,8 @@ export default function Chapter60() {
 
   return (
     <ChapterLayout
-      title="فصل ۶۰: سیاست امنیت داده و انطباق با استانداردها"
-      englishTitle="HIPAA & GDPR Regulatory Compliance"
+      title="فصل ۶۰: برنامه امنیت داده و انطباق"
+      englishTitle="Security & Compliance Readiness Plan"
     >
       <div className="prose prose-lg max-w-none text-right" dir="rtl">
 
@@ -65,16 +65,16 @@ export default function Chapter60() {
             <ShieldCheck className="w-5 h-5 text-red-500" /> ۶۰-۱ رویکرد پیش‌فرضِ حریم خصوصی (Privacy-by-Design)
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            حفاظت از حساس‌ترین لایه اطلاعاتی کاربران (داده‌های سلامت جسم، روان و شناخت) مبنای اصلی تصمیم‌گیری‌های مهندسی HCOS است. معماری ما برای هماهنگی با سخت‌گیرانه‌ترین قوانین بین‌المللی و ملی طراحی شده است.
+            حفاظت از داده‌های سلامت باید از مرحله تعریف کاربرد و جریان داده وارد طراحی شود. دامنه قانون قابل اعمال به حوزه استقرار، نقش حقوقی سازمان، نوع داده و قراردادهای واقعی وابسته است و باید توسط مسئول امنیت و مشاور حقوقی تأیید شود.
           </p>
         </div>
 
         {/* Interactive Checklist mapping standards to implementations */}
         <section className="mb-12">
           <h3 className="font-bold text-2xl premium-text-primary mb-6 flex items-center gap-3">
-            <CheckSquare className="w-6 h-6 text-red-500" /> ۶۰-۲ وضعیت انطباق با استانداردهای جهانی
+            <CheckSquare className="w-6 h-6 text-red-500" /> ۶۰-۲ چک‌لیست آمادگی و شواهد موردنیاز
           </h3>
-          <p className="premium-text-secondary text-sm mb-6">عناصر کلیدی استانداردهای HIPAA و GDPR که در هسته HCOS به صورت بومی پیاده‌سازی شده‌اند:</p>
+          <p className="premium-text-secondary text-sm mb-6">همه موارد به‌صورت پیش‌فرض باز هستند. تیک زدن فقط یک خودارزیابی موقت در مرورگر است و ادعای انطباق ایجاد نمی‌کند؛ بسته شدن هر مورد به مالک، مدرک و تاریخ بازبینی نیاز دارد.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {checklist.map((cat, idx) => (
@@ -122,7 +122,7 @@ export default function Chapter60() {
                 <h5 className="font-bold premium-text-primary m-0 text-base">رمزنگاری و مدیریت کلیدها (KMS)</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed">
-                استفاده از سیستم مدیریت کلید سخت‌افزاری (HSM) برای تفکیک کلیدهای رمزنگاری هر کاربر. داده‌های همزاد دیجیتال به‌گونه‌ای رمزنگاری می‌شوند که بدون کلید اختصاصی کاربر حتی برای مدیران سیستم غیرقابل خواندن هستند.
+                گزینه هدف، استفاده از KMS/HSM، تفکیک وظایف، چرخش کلید و ثبت دسترسی است. مدل کلید باید با نیاز مراقبت، بازیابی حساب، دسترسی اضطراری و الزامات نگهداری داده سازگار و پیش از اجرا threat-model شود.
               </p>
             </div>
 
@@ -134,7 +134,7 @@ export default function Chapter60() {
                 <h5 className="font-bold premium-text-primary m-0 text-base">تیم پاسخ به بحران امنیتی (SIRT)</h5>
               </div>
               <p className="text-sm premium-text-secondary m-0 leading-relaxed">
-                تدوین پروتکل‌های فوری در صورت بروز هرگونه تلاش برای نفوذ، شامل قرنطینه کردن گره‌های آلوده و اطلاع‌رسانی خودکار به نهادهای ناظر و کاربران تحت تأثیر در کمتر از ۷۲ ساعت طبق بندهای GDPR.
+                برنامه پاسخ به رخداد باید نقش‌ها، طبقه‌بندی شدت، حفظ شواهد، مهار، بازیابی و ارزیابی الزام اطلاع‌رسانی را مشخص کند. در GDPR، اطلاع به نهاد ناظر در صورت احراز شرایط، بدون تأخیر ناموجه و در صورت امکان حداکثر ظرف ۷۲ ساعت انجام می‌شود؛ اطلاع به اشخاص تابع ارزیابی ریسک بالاست.
               </p>
             </div>
           </div>

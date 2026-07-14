@@ -190,6 +190,17 @@
   background: rgba(10, 10, 15, 0.9);
 }
 
+.chatbot-privacy-notice {
+  margin: 0;
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--border-color);
+  background: rgba(245, 158, 11, 0.08);
+  color: #fbbf24;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .chatbot-input input {
   flex: 1;
   background: rgba(255, 255, 255, 0.05);

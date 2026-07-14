@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Brain, Cpu, Bot, Settings, GitPullRequest, Search, CheckCircle, Activity, BrainCircuit, ScanEye, Network, MessageSquare, LineChart, ShieldCheck, Microscope, Database, Sparkles, Layers } from 'lucide-react';
+import { Bot, GitPullRequest, Activity, BrainCircuit, ScanEye, Network, MessageSquare, ShieldCheck, Database, Sparkles, Layers } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter7.css';
 
@@ -13,8 +13,7 @@ export default function Chapter7() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۷-۱ پارادایم جدید هوش مصنوعی در سلامت</h3>
         <p>
-          در این پلتفرم، هوش مصنوعی یک امکان جانبی (Add-on) نیست، بلکه دقیقاً <strong>«هسته مرکزی»</strong> تمام پردازش‌ها محسوب می‌شود. 
-          برخلاف سامانه‌هایی که تنها از یک مدل زبانی عمومی (General LLM) استفاده می‌کنند، این معماری بر پایه <strong>خانواده‌ای از مدل‌های تخصصی سلامت (Health Foundation Models)</strong> و معماری <strong>چندعاملی (Multi-Agent Architecture)</strong> طراحی شده است.
+          هوش مصنوعی یک جزء اختیاری و کنترل‌شده در کنار قواعد، گردش‌کار و نظارت انسانی است؛ نباید نقطه شکست همه پردازش‌ها باشد. معماری چندعاملی، RAG، مدل عمومی یا مدل تخصصی گزینه‌هایی هستند که باید با کار پایه ساده‌تر، هزینه، ایمنی و قابلیت آزمون مقایسه شوند.
         </p>
       </div>
 
@@ -114,7 +113,7 @@ export default function Chapter7() {
           <div className="reasoning-item">
             <h4><Sparkles size={18} /> یادگیری مستمر (Continuous Learning)</h4>
             <p>
-              سیستم با دریافت بازخورد از پزشکان (RLHF) و تحلیل خروجی‌های واقعی (Real-World Evidence)، به‌طور پیوسته دقت خود را افزایش می‌دهد.
+              بازخورد پزشک و داده محیط واقعی فقط از مسیر مصوب، با رضایت/مبنای قانونی، کنترل کیفیت و change control استفاده می‌شود. مدل نباید به‌صورت خودکار و پیوسته از تعاملات بالینی یاد بگیرد یا بدون اعتبارسنجی نسخه جدید منتشر کند.
             </p>
           </div>
         </div>
@@ -123,7 +122,7 @@ export default function Chapter7() {
       <div className="conclusion-box">
         <h3>۷-۵ جمع‌بندی فصل</h3>
         <p>
-          طراحی <strong>چندعاملی (Multi-Agent)</strong> در کنار استفاده از <strong>مدل‌های بومی‌سازی‌شده (Foundation Models)</strong>، این اکوسیستم را از یک ابزار ساده به یک <strong>تیم پزشکی و مشاوره مجازی</strong> تبدیل می‌کند که با بالاترین سطح دقت، امنیت و سرعت، خدمات شخصی‌سازی‌شده ارائه می‌دهد.
+          تصمیم معماری پس از benchmark روی کاربرد محدود گرفته می‌شود. خروجی AI ابزار کمکی است، نه «تیم پزشکی مجازی»؛ دقت، ایمنی، سرعت و هزینه باید با داده و محیط نماینده گزارش شوند.
         </p>
       </div>
 

@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import ChapterLayout from '../components/ChapterLayout';
-import { TrendingUp, TrendingDown, Shield, AlertTriangle, CheckCircle, Zap, Target, Globe, Lock, Cpu, Lightbulb } from 'lucide-react';
+import { TrendingUp, TrendingDown, Shield, AlertTriangle, Zap, Target, Globe, Lock, Cpu, Lightbulb } from 'lucide-react';
 
 const swotData = {
   strengths: [
-    { icon: Cpu, text: 'معماری Health OS و همزاد دیجیتال سلامت – اول در منطقه' },
-    { icon: Globe, text: 'تیم بین‌رشته‌ای: پزشک، علوم اعصاب، هوش مصنوعی و نرم‌افزار' },
-    { icon: Shield, text: 'پوشش کامل اکوسیستم سلامت در یک پلتفرم' },
-    { icon: Target, text: 'پشتیبانی RTL و بومی‌سازی برای بازار ایران و خاورمیانه' },
-    { icon: Zap, text: 'معماری Multi-Agent با قابلیت ارکستراسیون خودکار' },
-    { icon: CheckCircle, text: 'مدل داده غنی: ترکیب داده جسمی، روانی و شناختی' },
+    { icon: Cpu, text: 'پروپوزال تعاملی با پوشش محصول، فنی، ایمنی و کسب‌وکار' },
+    { icon: Globe, text: 'رابط فارسی و RTL قابل مشاهده در نمونه فعلی' },
+    { icon: Shield, text: 'تعریف صریح وضعیت سند و الزام اتصال ادعا به شاهد' },
+    { icon: Target, text: 'MVP محدود و خارج‌ازدامنه‌های پزشکی پرخطر مشخص شده است' },
   ],
   weaknesses: [
-    { icon: AlertTriangle, text: 'نیاز به سرمایه اولیه بالا برای R&D مدل‌های پایه (Foundation Models)' },
+    { icon: AlertTriangle, text: 'نبود تیم، اسپانسر، بودجه، پایلوت و محصول عملیاتی مستند' },
     { icon: AlertTriangle, text: 'وابستگی اولیه به جذب پزشکان و متخصصان برای اعتبارسنجی' },
     { icon: AlertTriangle, text: 'چرخه فروش B2B طولانی در سیستم‌های بهداشتی دولتی' },
     { icon: AlertTriangle, text: 'زمانبر بودن اخذ تأییدیه‌های بالینی و رگولاتوری' },
   ],
   opportunities: [
-    { icon: TrendingUp, text: 'بازار سلامت دیجیتال خاورمیانه ۲۰ میلیارد دلار تا ۲۰۲۸ (CAGR ۲۶٪)' },
-    { icon: TrendingUp, text: 'خلأ کامل Health OS بومی در ایران، عراق، افغانستان و سایر کشورهای فارسی‌زبان' },
-    { icon: Globe, text: 'تمایل دولت‌ها به دیجیتالی‌سازی سیستم‌های بهداشتی پس از کووید' },
-    { icon: Zap, text: 'پیشرفت سریع LLMهای تخصصی پزشکی (MedPaLM, BioGPT)' },
-    { icon: Target, text: 'ورود بیمه‌های خصوصی به دیجیتال‌هلث – بازار B2B2C جدید' },
-    { icon: CheckCircle, text: 'جمعیت جوان ایران (میانگین ۳۲ سال) – آمادگی بالا برای پذیرش فناوری' },
+    { icon: TrendingUp, text: 'رشد بالقوه بازار سلامت دیجیتال منطقه؛ اندازه، سال مبنا و CAGR نیازمند منبع معتبر و تعریف دامنه است' },
+    { icon: TrendingUp, text: 'کاهش دوباره‌کاری در گردآوری شرح حال؛ نیازمند پژوهش و اندازه‌گیری بازار' },
+    { icon: Globe, text: 'بهبود تجربه فارسی در مسیرهای سلامت؛ نیازمند مقایسه رقابتی منبع‌دار' },
+    { icon: Zap, text: 'استفاده محدود از AI برای خلاصه‌سازی و بازیابی منبع‌دار پس از benchmark' },
+    { icon: Target, text: 'همکاری پایلوت با یک مرکز برای سنجش تکمیل ارجاع و زمان آماده‌سازی اطلاعات' },
   ],
   threats: [
     { icon: Lock, text: 'ورود غول‌های فناوری (Google Health, Apple Health) به بازار' },
@@ -43,7 +40,7 @@ const quadrantConfig = {
 const strategies = [
   {
     title: 'SO – رشد تهاجمی',
-    desc: 'از قدرت معماری هوش مصنوعی برای تسخیر سریع بازار خاورمیانه قبل از ورود رقبای خارجی استفاده کنیم.',
+    desc: 'یک مسئله محدود و قابل اعتبارسنجی را در بازار اولیه حل کنیم و توسعه منطقه‌ای را به شواهد محصول و الزامات هر کشور وابسته کنیم.',
     theme: 'teal',
   },
   {
@@ -53,7 +50,7 @@ const strategies = [
   },
   {
     title: 'ST – دفاع استراتژیک',
-    desc: 'ایجاد اثر قفل‌شدگی (Lock-in) از طریق Health ID و داده‌های تاریخی کاربران که رقبا نمی‌توانند آن را تکثیر کنند.',
+    desc: 'اعتماد، تعامل‌پذیری و کیفیت تجربه را مزیت رقابتی کنیم و قابلیت حمل داده و حق انتخاب کاربر را حفظ کنیم.',
     theme: 'purple',
   },
   {
@@ -91,7 +88,7 @@ export default function Chapter55() {
             <Lightbulb className="w-5 h-5 text-emerald-500" /> ۵۵-۱ مقدمه: چارچوب استراتژیک
           </h3>
           <p className="premium-text-secondary leading-relaxed m-0 relative z-10 text-sm">
-            تحلیل SWOT یک ارزیابی صادقانه از موقعیت استراتژیک HCOS در لحظه حاضر است. این تحلیل مبنای تصمیم‌گیری‌های اجرایی در ۱۸ ماه اول است.
+            این SWOT پیش‌نویس داخلی بر پایه وضعیت مستند مخزن است، نه تحقیق بازار نهایی. هر مورد بیرونی باید مالک، منبع، تاریخ و روش اعتبارسنجی داشته باشد و پیش از تصمیم سرمایه‌گذاری بازبینی شود.
           </p>
         </div>
 

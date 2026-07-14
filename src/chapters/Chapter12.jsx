@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Network, Bot, Settings, Users, Brain, Activity, ShieldCheck, Stethoscope, Briefcase, FileCode, CheckCircle, Database } from 'lucide-react';
+import { Network, Bot, Settings, Users, ShieldCheck, CheckCircle, Database } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter12.css';
 
@@ -13,7 +13,7 @@ export default function Chapter12() {
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
         <h3>۱۲-۱ مقدمه: مغز متفکر اکوسیستم</h3>
         <p>
-          در پلتفرم‌های نوین هوش مصنوعی، یک عامل منفرد (Single Agent) پاسخگوی پیچیدگی‌های پزشکی و درمانی نیست. اکوسیستم ما متشکل از ده‌ها <strong>عامل تخصصی (Specialized Agents)</strong> است که هرکدام در حوزه‌ای خاص تبحر دارند.
+          تعداد عامل‌ها معیار کیفیت نیست. این فصل یک الگوی مفهومی برای جداسازی وظایف است؛ MVP باید ابتدا با کمترین مؤلفه و کنترل روشن ساخته و با معماری تک‌عامل/غیرعامل مقایسه شود.
         </p>
         <p style={{marginTop: '1rem'}}>
           <strong>AI Orchestrator (عامل ارکستراتور)</strong>، به‌عنوان لایه حاکمیت و هماهنگ‌کننده کل سیستم عمل می‌کند تا مطمئن شود بیمار پاسخی دقیق، ایمن و جامع دریافت می‌کند.
@@ -46,7 +46,7 @@ export default function Chapter12() {
             <ul>
               <li>تشخیص موارد پرخطر (Red Flags)</li>
               <li>توقف زنجیره هوش مصنوعی و ارجاع به پزشک انسان</li>
-              <li>ثبت کامل فرآیند استدلال (Audit Trail) جهت ممیزی</li>
+              <li>ثبت ورودی، خروجی، منبع، نسخه و اقدام کاربر؛ chain-of-thought داخلی سند ممیزی قابل اتکا نیست</li>
               <li>یادگیری از بازخوردهای اصلاحی پزشکان</li>
             </ul>
           </div>
@@ -62,7 +62,7 @@ export default function Chapter12() {
             <div className="step-number">۱</div>
             <div className="step-content">
               <h5>تحلیل اولیه (Coordinator)</h5>
-              <p>تشخیص می‌دهد که این سؤال همزمان به تخصص‌های <strong>غدد، قلب، دارو و تغذیه</strong> مرتبط است. سوابق بیمار از پرونده سلامت خوانده می‌شود.</p>
+              <p>موضوعات احتمالی را برای بازبینی انسان برچسب می‌زند و فقط با مجوز و purpose-of-use مشخص به سوابق لازم دسترسی می‌گیرد.</p>
             </div>
           </div>
           <div className="flow-step">

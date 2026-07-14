@@ -5,10 +5,10 @@ import './Chapter42.css';
 
 export default function Chapter42() {
   const engineeringPillars = [
-    { icon: GitMerge, title: 'CI/CD Pipeline', desc: 'استقرار مستمر روزانه (Daily Deployments) با تست‌های خودکار یکپارچه جهت تضمین پایداری سیستم در هر تغییر.' },
-    { icon: Code2, title: 'Developer Experience (DX)', desc: 'محیط توسعه بومی‌سازی شده، مستندات پویا (Swagger/OpenAPI) و SDK‌های آماده برای زبان‌های مختلف.' },
-    { icon: ActivitySquare, title: 'Observability & SRE', desc: 'مانیتورینگ جامع (Prometheus/Grafana) و لاگ‌گیری متمرکز (ELK) با هدف رسیدن به آپتایم ۹۹.۹۹٪.' },
-    { icon: Lock, title: 'DevSecOps', desc: 'تست‌های امنیتی خودکار در تمام مراحل توسعه، از آنالیز استاتیک کد تا اسکن کانتینرها.' }
+    { icon: GitMerge, title: 'CI/CD Pipeline', desc: 'خط لوله هدف با تست، تأیید تغییرات پرخطر، rollback و جداسازی محیط‌ها؛ تناوب انتشار هنوز تعیین نشده است.' },
+    { icon: Code2, title: 'Developer Experience (DX)', desc: 'هدف: راه‌اندازی قابل تکرار، مستندات نسخه‌دار و داده آزمایشی؛ CLI، SDK و پورتال داخلی هنوز وجود ندارند.' },
+    { icon: ActivitySquare, title: 'Observability & SRE', desc: 'تعریف telemetry، SLI/SLO، بودجه خطا و alerting؛ مقدار uptime پس از تحلیل نیاز و ظرفیت‌سنجی تعیین می‌شود.' },
+    { icon: Lock, title: 'DevSecOps', desc: 'هدف: SAST، dependency/secret scanning و کنترل release متناسب با threat model؛ ابزار و شواهد اجرا TBD هستند.' }
   ];
 
   return (
@@ -18,9 +18,9 @@ export default function Chapter42() {
     >
       <div className="engineering-container">
         <div className="engineering-hero">
-          <h3>پشت‌صحنه‌ای قدرتمند برای توسعه‌دهندگان</h3>
+          <h3>طرح اولیه توانمندی‌های مهندسی</h3>
           <p>
-            توسعه یک پلتفرم سلامت نیازمند تیمی چابک و زیرساختی پایدار است. پلتفرم مهندسی ما (Internal Developer Platform) به مهندسان اجازه می‌دهد تا بدون درگیری با پیچیدگی‌های زیرساختی، صرفاً روی تولید ارزش و منطق کسب‌وکار تمرکز کنند.
+            Internal Developer Platform، CLI اختصاصی و زیرساخت اجرایی در مخزن اثبات نشده‌اند. این فصل فقط نتیجه مطلوب و کنترل‌های لازم را توصیف می‌کند؛ انتخاب ابزار باید پس از معماری MVP، اندازه تیم و نیاز عملیات انجام شود.
           </p>
         </div>
 
@@ -43,9 +43,9 @@ export default function Chapter42() {
         </section>
 
         <section className="chapter-section">
-          <h3><Terminal className="section-icon" style={{ color: '#84cc16' }} /> تجربه توسعه‌دهنده (Infrastructure as Code)</h3>
+          <h3><Terminal className="section-icon" style={{ color: '#84cc16' }} /> workflow مفهومی تحویل تغییر</h3>
           <p className="section-desc">
-            ما زیرساخت را به عنوان کد (IaC) مدیریت می‌کنیم. با استفاده از ابزارهایی مانند Terraform، توسعه‌دهندگان می‌توانند محیط‌های ایزوله را در چند ثانیه ایجاد کنند:
+            نمونه زیر pseudocode برای بحث معماری است؛ دستور، محیط، تعداد تست و زمان واقعی را نمایش نمی‌دهد. IaC و orchestrator فقط پس از ADR مصوب انتخاب می‌شوند.
           </p>
           <div className="terminal-mockup">
             <div className="terminal-header">
@@ -54,17 +54,17 @@ export default function Chapter42() {
               <div className="terminal-btn btn-max"></div>
             </div>
             <div className="terminal-body">
-              <div className="term-line"><span className="prompt">dev@health-platform:~$</span> <span className="cmd">health-cli env create --name "staging-v2"</span></div>
-              <div className="term-line output">Provisioning Kubernetes cluster...</div>
-              <div className="term-line output">Configuring secure VPC...</div>
-              <div className="term-line output">Deploying microservices helm charts...</div>
-              <div className="term-line success">✓ Environment "staging-v2" is successfully running at https://staging-v2.health.local</div>
+              <div className="term-line output">[Illustrative only — no health-cli or staging environment exists]</div>
+              <div className="term-line"><span className="prompt">developer@project:~$</span> <span className="cmd">project validate change-set</span></div>
+              <div className="term-line output">Validate schema, contract, security and traceability...</div>
+              <div className="term-line output">Run approved test suites in an isolated environment...</div>
+              <div className="term-line success">✓ Result requires linked evidence and release approval</div>
               
-              <div className="term-line" style={{ marginTop: '1rem' }}><span className="prompt">dev@health-platform:~$</span> <span className="cmd">health-cli test --all</span></div>
-              <div className="term-line output">Running 1,245 unit tests...</div>
-              <div className="term-line output">Running 320 integration tests...</div>
-              <div className="term-line success">✓ All tests passed successfully (4.2s)</div>
-              <div className="term-line"><span className="prompt">dev@health-platform:~$</span> <span className="cmd cursor" style={{ borderRight: '8px solid #a1a1aa', paddingRight: '2px', animation: 'blink 1s step-end infinite' }}> </span></div>
+              <div className="term-line" style={{ marginTop: '1rem' }}><span className="prompt">developer@project:~$</span> <span className="cmd">project release --candidate</span></div>
+              <div className="term-line output">Check owner, hazard controls, rollback and change approval...</div>
+              <div className="term-line output">Test count, coverage, duration and environment: TBD</div>
+              <div className="term-line success">✓ No production release is implied by this mockup</div>
+              <div className="term-line"><span className="prompt">developer@project:~$</span> <span className="cmd cursor" style={{ borderRight: '8px solid #a1a1aa', paddingRight: '2px', animation: 'blink 1s step-end infinite' }}> </span></div>
             </div>
           </div>
         </section>

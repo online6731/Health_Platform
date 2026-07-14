@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share2, Network, Globe, Blocks, Store, Link2, Users } from 'lucide-react';
+import { Share2, Network, Blocks, Store, Users } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter40.css';
 

@@ -7,10 +7,10 @@ import './Chapter29.css';
 
 export default function Chapter29() {
   const securityFeatures = [
-    { icon: Lock, title: 'رمزنگاری E2E', desc: 'تمامی داده‌ها از مبدا تا مقصد با الگوریتم‌های پیشرفته (AES-256) رمزنگاری می‌شوند.' },
-    { icon: ShieldBan, title: 'حفظ حریم خصوصی', desc: 'تطابق کامل با استانداردهای HIPAA و GDPR جهت تضمین امنیت داده‌های بیماران.' },
-    { icon: FileKey, title: 'مدیریت دسترسی (IAM)', desc: 'دسترسی مبتنی بر نقش (RBAC) با احراز هویت دو مرحله‌ای برای تمام پرسنل پزشکی.' },
-    { icon: Activity, title: 'پایش مستمر', desc: 'نظارت ۲۴/۷ بر ترافیک شبکه جهت تشخیص و دفع خودکار حملات سایبری (DDoS/Intrusion).' }
+    { icon: Lock, title: 'رمزنگاری هدف', desc: 'TLS برای انتقال و رمزنگاری سکون همراه KMS، چرخش کلید و آزمون بازیابی باید طراحی و پیاده‌سازی شود؛ E2E بودن به جریان دسترسی وابسته است.' },
+    { icon: ShieldBan, title: 'حریم خصوصی', desc: 'دامنه قوانین قابل اعمال، حداقل‌سازی داده، نگهداری و حقوق کاربر باید پیش از استقرار تعیین و ممیزی شود.' },
+    { icon: FileKey, title: 'مدیریت دسترسی (IAM)', desc: 'RBAC/ABAC، MFA، حداقل دسترسی، دسترسی اضطراری و بازبینی دوره‌ای جزو الزامات هدف هستند.' },
+    { icon: Activity, title: 'پایش و پاسخ', desc: 'پایش، alerting، پاسخ به رخداد و مسئولیت شیفت باید در برنامه عملیات و با SLO مصوب تعریف شود.' }
   ];
 
   return (
@@ -19,11 +19,10 @@ export default function Chapter29() {
       englishTitle="Deployment, Security & SLA"
     >
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
-        <h3>تضمین پایداری و امنیت داده‌های حیاتی</h3>
+        <h3>اهداف پایداری و امنیت داده‌های حیاتی</h3>
         <p>
           داده‌های حوزه سلامت از حساس‌ترین نوع داده‌ها هستند. معماری زیرساخت پلتفرم ما به گونه‌ای طراحی شده 
-          که علاوه بر پایداری ۹۹.۹۹٪ (High Availability)، از بالاترین سطوح امنیتی برای محافظت از 
-          پرونده‌های الکترونیک و اطلاعات بیماران برخوردار باشد.
+          که اهداف دسترس‌پذیری، محرمانگی و بازیابی آن بر پایه تحلیل خطر و ظرفیت واقعی تعیین شود. در وضعیت فعلی SLA عملیاتی، ظرفیت‌سنجی و شواهد امنیتی وجود ندارد.
         </p>
       </div>
 
@@ -38,10 +37,10 @@ export default function Chapter29() {
             </div>
             <p>مناسب برای مطب‌ها، کلینیک‌های کوچک و استارتاپ‌ها.</p>
             <ul>
-              <li>هزینه اولیه صفر (Pay-as-you-go)</li>
+              <li>هزینه متناسب با مصرف پس از برآورد و قرارداد</li>
               <li>بروزرسانی خودکار</li>
-              <li>مقیاس‌پذیری آنی</li>
-              <li>بکاپ‌گیری اتوماتیک</li>
+              <li>مقیاس‌پذیری مبتنی بر ظرفیت‌سنجی</li>
+              <li>بکاپ و آزمون بازیابی طبق RPO/RTO</li>
             </ul>
           </div>
           
@@ -53,7 +52,7 @@ export default function Chapter29() {
             <p>مناسب برای بیمارستان‌های بزرگ، وزارت بهداشت و سازمان‌های دولتی.</p>
             <ul>
               <li>نصب روی سرورهای داخلی سازمان</li>
-              <li>کنترل ۱۰۰٪ بر روی داده‌ها</li>
+              <li>کنترل سازمانی بیشتر همراه مسئولیت عملیاتی بیشتر</li>
               <li>امکان سفارشی‌سازی عمیق</li>
               <li>انطباق با قوانین امنیتی سخت‌گیرانه</li>
             </ul>
@@ -84,23 +83,23 @@ export default function Chapter29() {
             <Clock size={32} />
             <div>
               <h4>تفاهم‌نامه سطح خدمات (SLA)</h4>
-              <span>تضمین دسترسی‌پذیری و پایداری سرویس</span>
+              <span>مقادیر نیازمند اندازه‌گیری، ظرفیت‌سنجی و قرارداد</span>
             </div>
           </div>
           <div className="sla-stats">
             <div className="sla-stat">
-              <div className="sla-value">۹۹.۹۹٪</div>
-              <div className="sla-label">Uptime تضمین‌شده</div>
+              <div className="sla-value">TBD</div>
+              <div className="sla-label">هدف Uptime</div>
             </div>
             <div className="sla-divider"></div>
             <div className="sla-stat">
-              <div className="sla-value">&lt; ۵۰ms</div>
-              <div className="sla-label">تأخیر شبکه (Latency)</div>
+              <div className="sla-value">TBD</div>
+              <div className="sla-label">SLO تأخیر به تفکیک سرویس</div>
             </div>
             <div className="sla-divider"></div>
             <div className="sla-stat">
-              <div className="sla-value">۲۴/۷</div>
-              <div className="sla-label">پشتیبانی ومانیتورینگ</div>
+              <div className="sla-value">TBD</div>
+              <div className="sla-label">ساعات پشتیبانی و مانیتورینگ</div>
             </div>
           </div>
         </div>

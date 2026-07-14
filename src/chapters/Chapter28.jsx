@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Cpu, Brain, Network, Zap, Eye, MessagesSquare, BarChart, ServerCog
+  Brain, Network, Zap, Eye, MessagesSquare, BarChart, ServerCog
 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter28.css';
@@ -11,8 +11,8 @@ export default function Chapter28() {
       id: 1,
       title: 'موتور تصمیم‌یار بالینی (CDSS)',
       icon: Network,
-      desc: 'هسته اصلی هوش مصنوعی که با تحلیل علائم، سوابق و دانش پزشکی، به پزشکان در تشخیص و درمان کمک می‌کند.',
-      features: ['تشخیص افتراقی', 'بررسی تداخلات دارویی', 'پیش‌بینی روند بیماری']
+      desc: 'مفهوم تصمیم‌یار برای نمایش اطلاعات و هشدار منبع‌دار در دامنه اعتبارسنجی‌شده.',
+      features: ['فهرست موضوعات برای بازبینی', 'هشدار دارویی منبع‌دار', 'نمایش روند؛ بدون پیش‌بینی درمانی در MVP']
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ export default function Chapter28() {
       title: 'موتور بینایی ماشین (Medical Imaging AI)',
       icon: Eye,
       desc: 'تحلیل دقیق تصاویر پزشکی اعم از MRI، CT-Scan و X-Ray برای یافتن ناهنجاری‌ها و تومورها.',
-      features: ['تشخیص خودکار تومور', 'حاشیه‌نویسی تصاویر', 'مقایسه با تصاویر قبلی']
+      features: ['پژوهش جداگانه تصویربرداری', 'حاشیه‌نویسی با متخصص', 'خارج از MVP و نیازمند مجوز']
     },
     {
       id: 4,
@@ -87,7 +87,7 @@ export default function Chapter28() {
           <p>
             موتورهای هوش مصنوعی ما ایستا نیستند. با استفاده از تکنیک‌های <strong>Federated Learning</strong> 
             و <strong>Active Learning</strong>، مدل‌ها به طور مداوم با دریافت بازخورد از پزشکان متخصص 
-            (Human-in-the-Loop) بهبود می‌یابند، در حالی که حریم خصوصی داده‌های بیماران کاملاً حفظ می‌شود.
+            (Human-in-the-Loop) ارزیابی می‌شوند؛ استفاده از بازخورد و داده به مبنای قانونی، کنترل تغییر و ارزیابی خطر حریم خصوصی نیاز دارد.
           </p>
         </div>
       </section>

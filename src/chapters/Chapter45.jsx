@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, ShieldAlert, FileKey, UserCheck, Eye, ScrollText } from 'lucide-react';
+import { Scale, ShieldAlert, UserCheck, Eye, ScrollText } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter45.css';
 
@@ -19,7 +19,7 @@ export default function Chapter45() {
         <div className="ethics-hero">
           <h3>اخلاق پزشکی در عصر الگوریتم‌ها</h3>
           <p>
-            هوش مصنوعی قدرتمند است، اما در حوزه سلامت، <strong>اعتماد</strong> از قدرت مهم‌تر است. ما یک «قانون اساسی» غیرقابل تغییر برای سیستم‌عامل خود تدوین کرده‌ایم تا تضمین کنیم که تمام تصمیمات بر پایه اخلاق پزشکی (Bioethics) اتخاذ می‌شوند.
+            اصول حاکمیت AI باید نسخه‌دار، قابل ممیزی و دارای مالک باشند. این اصول جایگزین کنترل فنی، اعتبارسنجی بالینی یا پاسخ‌گویی انسانی نیستند و با تغییر قانون یا شواهد باید از مسیر کنترل‌شده بازبینی شوند.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function Chapter45() {
               <div className="rule-number">۰۳</div>
               <div className="rule-content">
                 <h5>حق فراموش شدن (Right to be Forgotten)</h5>
-                <p>کاربر حق دارد در هر لحظه درخواست حذف کامل و برگشت‌ناپذیر تمامی داده‌ها، سوابق و همزاد دیجیتال خود را از تمامی لایه‌های سیستم صادر کند.</p>
+                <p>کاربر می‌تواند درخواست دسترسی، اصلاح، محدودسازی، انتقال یا حذف را طبق قانون قابل اعمال ثبت کند؛ دامنه اجرا به الزامات نگهداری سوابق، سلامت عمومی، دعاوی و سایر استثناهای قانونی وابسته است.</p>
               </div>
             </div>
           </div>

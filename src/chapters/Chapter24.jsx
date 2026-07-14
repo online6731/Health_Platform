@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, TrendingUp, BarChart4, Target, Activity, Zap } from 'lucide-react';
+import { PieChart, TrendingUp, Target, Activity, Zap } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter24.css';
 
@@ -7,55 +7,55 @@ export default function Chapter24() {
   return (
     <ChapterLayout 
       title="فصل ۲۴: پیش‌بینی‌های مالی" 
-      englishTitle="Financial Projections & ROI"
+      englishTitle="Budget Readiness & Scenario Framework"
     >
 
       <div className="glass-panel p-6 mb-8 border-r-4 border-r-[var(--accent-blue)]">
-        <h3>۲۴-۱ ساختار هزینه‌ها و مقیاس‌پذیری</h3>
+        <h3>۲۴-۱ نقش این فصل</h3>
         <p>
-          با توجه به استفاده گسترده از پردازش‌های هوش مصنوعی (GenAI)، مدیریت هزینه سرور (Inference Cost) به ازای هر کاربر نیازمند استراتژی دقیق است. سرمایه‌گذاری اولیه معطوف به توسعه مدل‌های بومی (R&D)، زیرساخت‌های پردازشی عظیم (GPU Clusters) و همچنین رعایت سخت‌گیرانه‌ترین استانداردهای حقوقی و امنیتی داده‌های پزشکی (Compliance) خواهد بود تا یک خندق دفاعی (Moat) قوی شکل بگیرد.
+          این فصل مشخص می‌کند چه بودجه و مفروضاتی برای رسیدن به گیت شواهد بعدی لازم است؛ صورت مالی و Cap Table در فصل ۶۱ و بسته/روش قیمت‌گذاری در فصل ۵۳ نگهداری می‌شوند. در وضعیت فعلی مبلغ جذب، ارز، runway و تاریخ سر‌به‌سر مصوب نیستند.
         </p>
       </div>
 
       <section className="chapter-section">
-        <h3><PieChart className="section-icon" /> ۲۴-۲ تخصیص سرمایه (Fund Allocation)</h3>
+        <h3><PieChart className="section-icon" /> ۲۴-۲ سرفصل‌های برآورد پایین‌به‌بالا</h3>
         <div className="financial-stats">
           <div className="stat-card">
-            <div className="stat-value">۴۵٪</div>
-            <div className="stat-label">R&D و آموزش هوش مصنوعی</div>
+            <div className="stat-value">TBD</div>
+            <div className="stat-label">پژوهش کاربر، محصول و طراحی</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">۲۵٪</div>
-            <div className="stat-label">زیرساخت ابری و سرورها</div>
+            <div className="stat-value">TBD</div>
+            <div className="stat-label">مهندسی نمونه و زیرساخت حداقلی</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">۲۰٪</div>
-            <div className="stat-label">بازاریابی و توسعه بازار</div>
+            <div className="stat-value">TBD</div>
+            <div className="stat-label">ایمنی بالینی، حقوقی، حریم خصوصی و امنیت</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">۱۰٪</div>
-            <div className="stat-label">حقوقی، انطباق و امنیت</div>
+            <div className="stat-value">TBD</div>
+            <div className="stat-label">عملیات پایلوت، پشتیبانی و ذخیره ریسک</div>
           </div>
         </div>
       </section>
 
       <section className="chapter-section">
-        <h3><TrendingUp className="section-icon" /> ۲۴-۳ پیش‌بینی بازگشت سرمایه (ROI)</h3>
+        <h3><TrendingUp className="section-icon" /> ۲۴-۳ خروجی‌های مالی لازم برای تصمیم</h3>
         <div className="roi-grid">
           <div className="roi-item">
             <Target className="roi-icon"/>
-            <h4>سال ۱ و ۲: زیرساخت، داده و اعتبارسنجی</h4>
-            <p>تمرکز بر توسعه MVP (یک نیچ متمرکز B2B)، جمع‌آوری داده‌های یونیک، و طی کردن فرآیندهای طولانی تاییدیه‌های بالینی و رگولاتوری.</p>
+            <h4>بودجه discovery و prototype</h4>
+            <p>تعداد/نقش افراد، نرخ و مدت تعهد، هزینه پژوهش و بالینی، ابزار، امنیت و contingency با خروجی و سقف هزینه روشن.</p>
           </div>
           <div className="roi-item">
             <Zap className="roi-icon"/>
-            <h4>سال سوم: مقیاس‌پذیری (Scaling)</h4>
-            <p>گسترش به بازار B2C پس از جلب اعتماد. رشد سریع پایگاه کاربری، همزمان با مدیریت هزینه‌های سنگین پردازش AI (Compute Costs).</p>
+            <h4>اقتصاد پایلوت</h4>
+            <p>قیمت یا روش قیمت‌گذاری، هزینه راه‌اندازی، پشتیبانی، نظارت بالینی، زیرساخت و حاشیه مشارکت هر مرکز/ماه.</p>
           </div>
           <div className="roi-item">
             <Activity className="roi-icon"/>
-            <h4>سال ۴ به بعد: سر‌به‌سر (Break-even) و سودآوری</h4>
-            <p>با فعال‌شدن اکوسیستم Marketplace و بهینه‌سازی مدل‌های هوش مصنوعی، اثر شبکه‌ای کامل شده و شرکت به نقطه‌ی سر‌به‌سر و سپس سودآوری کلان می‌رسد.</p>
+            <h4>runway و تحلیل حساسیت</h4>
+            <p>سناریوهای بدبینانه، پایه و خوش‌بینانه بر اساس زمان فروش، تأخیر پایلوت، قیمت، burn و cost-to-serve؛ تاریخ سر‌به‌سر فقط خروجی مدل تکمیل‌شده است.</p>
           </div>
         </div>
       </section>

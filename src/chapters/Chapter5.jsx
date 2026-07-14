@@ -1,8 +1,7 @@
 ﻿import React from 'react';
 import { 
-  Package, FileText, Bot, Activity, BrainCircuit, Brain, Apple, 
-  Dumbbell, Microscope, MonitorSpeaker, Building2, Code, Share2, Route,
-  Sparkles, Layers, Users, Library, Blocks, Network, Server
+  Package, Bot, Activity, BrainCircuit,
+  Microscope, Building2, Code, Share2, Users, Library, Blocks, Network, Server
 } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter5.css';
@@ -20,7 +19,7 @@ export default function Chapter5() {
           یکی از تفاوت‌های بنیادین این پروژه با راهکارهای موجود آن است که به‌جای توسعه یک نرم‌افزار واحد، مجموعه‌ای از پلتفرم‌های تخصصی را بر روی یک هسته مشترک ارائه می‌کند. این محصولات اگرچه برای گروه‌های مختلف کاربران طراحی شده‌اند، اما همگی از یک مدل داده، یک هویت سلامت، یک زیرساخت امنیتی و یک موتور هوش مصنوعی مشترک استفاده می‌کنند.
         </p>
         <p style={{marginTop: '1rem'}}>
-          طراحی محصولات این اکوسیستم بر سه اصل استوار است: <strong>یک کاربر، یک اکوسیستم، یک تجربه</strong> | <strong>هر محصول مستقل، اما متصل</strong> | <strong>هوش مصنوعی در مرکز تمامی محصولات</strong>.
+          این کاتالوگ نقشه گزینه‌های آینده است. اصل اجرایی MVP: <strong>یک مسئله، یک مسیر، حداقل داده</strong>؛ هر ماژول و استفاده از AI فقط با نیاز، مالک و معیار پذیرش وارد دامنه می‌شود.
         </p>
       </div>
 

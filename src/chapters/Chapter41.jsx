@@ -1,5 +1,5 @@
 import React from 'react';
-import { Server, LayoutTemplate, Database, Shield, Blocks, Cpu, Link } from 'lucide-react';
+import { Server, LayoutTemplate, Database, Blocks, Cpu, Link } from 'lucide-react';
 import ChapterLayout from '../components/ChapterLayout';
 import './Chapter41.css';
 
@@ -32,7 +32,7 @@ export default function Chapter41() {
     { 
       icon: Cpu, 
       title: 'لایه پردازش رویداد (Event-Driven Bus)', 
-      desc: 'تضمین ارتباط غیرهمزمان و بلادرنگ بین سرویس‌ها. به عنوان مثال، ثبت یک آزمایش جدید، یک Event صادر می‌کند که توسط سرویس AI برای تحلیل دریافت می‌شود.',
+      desc: 'گزینه ارتباط غیرهمزمان بین سرویس‌ها با تعریف delivery، ordering، retry، idempotency و dead-letter queue.',
       techs: ['Apache Kafka', 'RabbitMQ']
     }
   ];
@@ -46,7 +46,7 @@ export default function Chapter41() {
         <div className="architecture-hero">
           <h3>زیرساخت ابری، ماژولار و مقیاس‌پذیر</h3>
           <p>
-            برای مدیریت میلیون‌ها کاربر و پردازش حجم عظیمی از داده‌های حساس سلامت، نیازمند معماری مدرن و Cloud-Native هستیم. ما از معماری Microservices رویدادمحور استفاده می‌کنیم تا حداکثر پایداری (High Availability) و توسعه‌پذیری را تضمین کنیم.
+            معماری باید متناسب با بار واقعی، اندازه تیم و الزامات عملیاتی انتخاب شود. Microservices و event-driven گزینه‌های پیشنهادی هستند و قبل از ظرفیت‌سنجی و مقایسه با معماری ساده‌تر، مقیاس یا پایداری مشخصی را تضمین نمی‌کنند.
           </p>
         </div>
 
