@@ -1,7 +1,8 @@
 {
-  "name": "health-platform-proposal",
+  "name": "health-platform-blueprint",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
+  "description": "Service-first product blueprint for a phased AI-enabled health platform",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +10,7 @@
     "lint": "oxlint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check": "npm run lint && npm test && npm run build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist -t --nojekyll -v \"**/{*,.[!.]*,..?*}\""
@@ -17,8 +19,7 @@
     "lucide-react": "^1.23.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.1",
-    "recharts": "^3.9.2"
+    "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -26,12 +27,9 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "autoprefixer": "^10.4.21",
     "gh-pages": "^6.3.0",
     "jsdom": "^26.1.0",
     "oxlint": "^1.71.0",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17",
     "vite": "^6.4.3",
     "vitest": "^3.2.4"
   },
