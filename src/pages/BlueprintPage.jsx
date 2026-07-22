@@ -4,6 +4,7 @@ import PageIntro from '../components/PageIntro'
 import SectionHeader from '../components/SectionHeader'
 import StatusBadge from '../components/StatusBadge'
 import { selectionCriteria } from '../content/siteContent'
+import { scorecardServices, wedgeScorecard } from '../content/investorContent'
 
 const inScope = [
   'بزرگسالان کم‌خطر',
@@ -32,11 +33,18 @@ const openDecisions = [
   ['مدل داروخانه', 'مالکیت یا همکاری فقط پس از بررسی مقررات و مجوز قابل تعریف است.'],
 ]
 
+function getWeightedScore(serviceKey) {
+  const scoredRows = wedgeScorecard.filter((row) => typeof row[serviceKey] === 'number')
+  const totalWeight = scoredRows.reduce((sum, row) => sum + row.weight, 0)
+  if (!totalWeight) return null
+  return scoredRows.reduce((sum, row) => sum + row[serviceKey] * row.weight, 0) / totalWeight
+}
+
 export default function BlueprintPage() {
   return (
     <>
       <PageIntro
-        eyebrow="طرح اجرایی نسخه ۲"
+        eyebrow="انتخاب نقطه ورود · نسخه ۳"
         title="از ایده گسترده به مجموعه‌ای از تصمیم‌های قابل آزمون."
         description="این صفحه فرضیه‌ها، دامنه، شرط‌های عبور و تصمیم‌های باز را روشن می‌کند تا پروژه برای پژوهش اولیه واقعی آماده شود."
       >
@@ -46,7 +54,52 @@ export default function BlueprintPage() {
         </div>
       </PageIntro>
 
-      <section className="section">
+      <section className="section wedge-scorecard-section">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Scorecard تصمیم"
+            title="امتیاز بدون شاهد، فقط فرضیه میز کار است."
+            description="وزن‌ها و امتیازهای زیر برای شروع Discovery پیشنهاد شده‌اند. ردیف مزیت توزیع عمداً خالی است چون فقط بنیان‌گذار می‌تواند دسترسی واقعی به کاربر، متخصص یا کانال را مشخص کند."
+          />
+          <div className="score-summary-grid">
+            {scorecardServices.map((service) => (
+              <article key={service.key}>
+                <span className="claim-tag claim-tag--hypothesis">امتیاز فرضی</span>
+                <h3>{service.label}</h3>
+                <strong>{getWeightedScore(service.key)?.toLocaleString('fa-IR', { maximumFractionDigits: 2 }) ?? '—'} <small>از ۵</small></strong>
+                <p>پیش از اعمال مزیت توزیع بنیان‌گذار</p>
+              </article>
+            ))}
+          </div>
+          <div className="responsive-table scorecard-table" role="region" aria-label="جدول امتیازدهی گزینه‌های سرویس اول" tabIndex="0">
+            <table>
+              <thead>
+                <tr><th>معیار</th><th>وزن</th>{scorecardServices.map((service) => <th key={service.key}>{service.label}</th>)}</tr>
+              </thead>
+              <tbody>
+                {wedgeScorecard.map((row) => (
+                  <tr key={row.criterion}>
+                    <th>{row.criterion}</th>
+                    <td>{row.weight.toLocaleString('fa-IR')}٪</td>
+                    {scorecardServices.map((service) => <td key={service.key}>{row[service.key] === null ? <span className="score-missing">داده لازم</span> : `${row[service.key].toLocaleString('fa-IR')} / ۵`}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="scorecard-rules">
+            <strong>قواعد حذف فوری</strong>
+            <ul>
+              <li>مسیر حقوقی یا مسئول متخصص قابل تعریف نباشد.</li>
+              <li>موارد منع استفاده و علائم هشدار قابل کنترل نباشند.</li>
+              <li>نتیجه اصلی در حداکثر هشت هفته قابل‌اندازه‌گیری نباشد.</li>
+              <li>اقتصاد حتی در سناریوی بهینه یا بدون تصمیم بالینی خودکار قابل دفاع نباشد.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tinted">
         <div className="container candidate-grid">
           <div>
             <SectionHeader

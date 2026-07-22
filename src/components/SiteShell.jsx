@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpLeft, Menu, Moon, ShieldCheck, Sun, X } from 'lucide-react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { navItems } from '../content/siteContent'
+import { footerNavItems, navItems } from '../content/siteContent'
 import BrandMark from './BrandMark'
 
 function getInitialTheme() {
@@ -48,12 +48,16 @@ export default function SiteShell() {
       document.getElementById('main-content')?.focus({ preventScroll: true })
     }
     const pageTitles = {
-      '/': 'پلتفرم سلامت | محصول عمودی اول، پلتفرم بعداً',
+      '/': 'پلتفرم سلامت | پروپوزال سرمایه‌گذاری Pre-seed',
+      '/investor': 'پرونده سرمایه‌گذاری | پلتفرم سلامت',
       '/model': 'مدل محصول | پلتفرم سلامت',
       '/services': 'خانواده سرویس‌ها | پلتفرم سلامت',
       '/roadmap': 'نقشه راه | پلتفرم سلامت',
       '/trust': 'ایمنی و اعتماد | پلتفرم سلامت',
       '/blueprint': 'طرح اجرایی | پلتفرم سلامت',
+      '/financials': 'مدل مالی و بازار | پلتفرم سلامت',
+      '/dataroom': 'دیتا روم | پلتفرم سلامت',
+      '/print': 'نسخه چاپ کامل | پلتفرم سلامت',
     }
     document.title = pageTitles[location.pathname] ?? 'صفحه پیدا نشد | پلتفرم سلامت'
   }, [location.pathname])
@@ -84,15 +88,15 @@ export default function SiteShell() {
                 {item.label}
               </NavLink>
             ))}
-            <Link className="mobile-nav-cta" to="/blueprint">
-              تصمیم‌های باز پروژه
+            <Link className="mobile-nav-cta" to="/investor">
+              پرونده کامل سرمایه‌گذاری
               <ArrowUpLeft size={17} aria-hidden="true" />
             </Link>
           </nav>
           <div className="header-actions">
             <span className="concept-chip">
               <span aria-hidden="true" />
-              پروپوزال مفهومی
+              پروپوزال Pre-seed
             </span>
             <button
               className="icon-button"
@@ -125,12 +129,12 @@ export default function SiteShell() {
         <div className="container footer-grid">
           <div className="footer-brand">
             <BrandMark />
-            <p>یک برند؛ هر بار یک مسئله؛ هر سرویس با مرز، شواهد و مسئولیت روشن.</p>
+            <p>یک عمودی قابل‌دفاع؛ سپس مزیت پلتفرمی بر پایه شواهد، اقتصاد و اعتماد.</p>
           </div>
           <div>
             <strong className="footer-title">مسیر مطالعه</strong>
             <nav aria-label="ناوبری پایین صفحه">
-              {navItems.slice(1).map((item) => (
+              {footerNavItems.map((item) => (
                 <Link key={item.to} to={item.to}>{item.label}</Link>
               ))}
             </nav>
@@ -139,7 +143,7 @@ export default function SiteShell() {
             <ShieldCheck size={22} aria-hidden="true" />
             <div>
               <strong>وضعیت پروژه</strong>
-              <p>این نسخه، سند بازتعریف محصول است؛ خدمت پزشکی عملیاتی یا ابزار تشخیص و درمان نیست.</p>
+              <p>این نسخه، پرونده سرمایه‌گذاری Pre-seed و مدل سناریویی است؛ خدمت پزشکی عملیاتی یا عملکرد واقعی نیست.</p>
             </div>
           </div>
         </div>

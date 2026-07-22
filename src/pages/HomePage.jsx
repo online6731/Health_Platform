@@ -1,9 +1,10 @@
-import { ArrowLeft, Check, Layers3, Route, ShieldCheck, Sparkles, Waypoints } from 'lucide-react'
+import { ArrowLeft, Check, CircleDollarSign, FileCheck2, Layers3, Route, ShieldCheck, Sparkles, Waypoints } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SectionHeader from '../components/SectionHeader'
 import ServiceIcon from '../components/ServiceIcon'
 import StatusBadge from '../components/StatusBadge'
 import { buildPrinciples, faqs, services, trustPrinciples } from '../content/siteContent'
+import { investorSnapshot } from '../content/investorContent'
 
 export default function HomePage() {
   return (
@@ -15,31 +16,31 @@ export default function HomePage() {
           <div className="hero-copy">
             <div className="hero-kicker">
               <Sparkles size={16} aria-hidden="true" />
-              پروپوزال تعاملی · نسخه بازتعریف‌شده · تیر ۱۴۰۵
+              پروپوزال سرمایه‌گذاری Pre-seed · مرداد ۱۴۰۵
             </div>
             <h1>
-              هر بار روی <span>یک مسئله سلامت</span> تمرکز می‌کنیم.
+              اول یک کسب‌وکار سلامت قابل‌دفاع؛ <span>بعد یک پلتفرم.</span>
             </h1>
             <p className="hero-lead">
-              «پلتفرم سلامت» خانواده‌ای از سرویس‌های تخصصی و مستقل است؛ هر سرویس جداگانه ساخته،
-              سنجیده و بهتر می‌شود—و فقط وقتی اتصال واقعاً به نفع کاربر باشد، با اجازه او به سرویس‌های دیگر وصل خواهد شد.
+              سرمایه برای ساخت یک سوپراپ بزرگ مصرف نمی‌شود. یک سرویس عمودی، کم‌خطر و پولی را انتخاب می‌کنیم؛
+              تقاضا، نتیجه، ایمنی و اقتصادش را اثبات می‌کنیم؛ سپس فقط دارایی‌های واقعاً تکرارشونده را به هسته مشترک تبدیل می‌کنیم.
             </p>
             <p className="hero-ai-line">
               <Sparkles size={17} aria-hidden="true" />
               در هر سرویس، هوش مصنوعی موتور ساختاردهی و شخصی‌سازی در دامنه مجاز است؛ نه مرجع مستقل تصمیم بالینی.
             </p>
             <div className="hero-actions">
-              <Link className="button button--primary" to="/model">
-                مدل مرحله‌ای را ببینید
+              <Link className="button button--primary" to="/investor">
+                پرونده کامل سرمایه‌گذاری
                 <ArrowLeft size={18} aria-hidden="true" />
               </Link>
-              <Link className="button button--secondary" to="/services">
-                مرور خانواده سرویس‌ها
+              <Link className="button button--secondary" to="/roadmap">
+                مسیر دقیق ۲۴ماهه
               </Link>
             </div>
             <div className="hero-trust-note">
               <ShieldCheck size={20} aria-hidden="true" />
-              <span><strong>وضعیت شفاف:</strong> این پروژه در فاز تعریف محصول است و هنوز خدمت پزشکی عملیاتی نیست.</span>
+              <span><strong>افشای مرحله:</strong> پروژه پیش از MVP است؛ محصول عملیاتی، کاربر و درآمدی در این نسخه ادعا نمی‌شود.</span>
             </div>
           </div>
 
@@ -70,6 +71,29 @@ export default function HomePage() {
               <span><i className="legend-dot legend-dot--solid" /> مستقل در شروع</span>
               <span><i className="legend-dot legend-dot--outline" /> اتصال اختیاری در آینده</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-investor-snapshot">
+        <div className="container">
+          <div className="home-investor-snapshot__header">
+            <div><span className="eyebrow">خلاصه دور</span><h2>سرمایه چه چیزی می‌خرد؟</h2></div>
+            <Link className="text-link" to="/financials">فرض‌ها و فرمول‌های مالی <ArrowLeft size={16} /></Link>
+          </div>
+          <div className="investor-status-grid investor-status-grid--home">
+            {investorSnapshot.map((item, index) => (
+              <article key={item.label}>
+                <span className={`claim-tag claim-tag--${item.tone}`}>{item.tone === 'current' ? 'واقعیت فعلی' : item.tone === 'target' ? 'هدف' : item.tone === 'scenario' ? 'سناریو' : 'فرضیه'}</span>
+                <span className="snapshot-icon">{index === 0 ? <FileCheck2 /> : index === 3 ? <CircleDollarSign /> : <Route />}</span>
+                <small>{item.label}</small>
+                <strong>{item.value}</strong>
+                <p>{item.note}</p>
+              </article>
+            ))}
+          </div>
+          <div className="home-round-line">
+            <span>Wedge</span><i>←</i><span>تقاضای پولی</span><i>←</i><span>پایلوت ایمن</span><i>←</i><span>اقتصاد cohort</span><i>←</i><span>تصمیم سرویس دوم</span>
           </div>
         </div>
       </section>

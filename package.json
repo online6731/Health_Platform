@@ -1,8 +1,8 @@
 {
   "name": "health-platform-blueprint",
   "private": true,
-  "version": "2.0.0",
-  "description": "Service-first product blueprint for a phased AI-enabled health platform",
+  "version": "3.0.0",
+  "description": "Investor-ready pre-seed proposal for a service-first AI-enabled health platform",
   "type": "module",
   "scripts": {
     "dev": "vite",

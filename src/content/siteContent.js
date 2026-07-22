@@ -1,10 +1,18 @@
 export const navItems = [
-  { to: '/', label: 'خانه' },
-  { to: '/model', label: 'مدل محصول' },
-  { to: '/services', label: 'سرویس‌ها' },
-  { to: '/roadmap', label: 'نقشه راه' },
-  { to: '/trust', label: 'ایمنی و اعتماد' },
-  { to: '/blueprint', label: 'طرح اجرایی' },
+  { to: '/', label: 'خلاصه' },
+  { to: '/investor', label: 'پرونده سرمایه' },
+  { to: '/blueprint', label: 'نقطه ورود' },
+  { to: '/roadmap', label: 'مسیر اجرا' },
+  { to: '/financials', label: 'مدل مالی' },
+  { to: '/trust', label: 'ایمنی' },
+  { to: '/dataroom', label: 'دیتا روم' },
+]
+
+export const footerNavItems = [
+  ...navItems.slice(1),
+  { to: '/model', label: 'معماری محصول' },
+  { to: '/services', label: 'سبد سرویس‌ها' },
+  { to: '/print', label: 'نسخه چاپ کامل' },
 ]
 
 export const services = [

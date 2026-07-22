@@ -1,16 +1,21 @@
 # حاکمیت محتوای پلتفرم سلامت
 
-تاریخ بازتعریف: تیر ۱۴۰۵ (ژوئیه ۲۰۲۶)
+تاریخ بازتعریف: مرداد ۱۴۰۵ (ژوئیه ۲۰۲۶)
 وضعیت: `Concept — not an operational medical service`
 
 ## منبع حقیقت
 
 ترتیب اعتبار اسناد این مخزن:
 
-1. `docs/PRODUCT_BLUEPRINT.md`
-2. محتوای منتشرشده در `src/content/siteContent.js`
-3. `docs/CONTENT_MIGRATION.md`
-4. README و صفحات رابط
+1. `docs/INVESTMENT_MEMO.md` برای روایت سرمایه‌گذاری و وضعیت واقعی
+2. `docs/EXECUTION_PLAN.md` برای زمان، گیت و حق تصمیم
+3. `docs/FINANCIAL_MODEL_ASSUMPTIONS.md` و توابع `src/content/investorContent.js` برای عدد و فرمول
+4. `docs/PRODUCT_BLUEPRINT.md` برای معماری محصول
+5. `docs/INVESTOR_DUE_DILIGENCE.md` برای ساختار شواهد و دسترسی
+6. محتوای منتشرشده در `src/content/` و صفحات رابط
+7. `docs/CONTENT_MIGRATION.md` برای ردیابی محتوای پیشین
+
+در تعارض عددی، خروجی تابع تست‌شده مرجع محاسبات است و سند باید هم‌زمان به‌روزرسانی شود. در تعارض وضعیت ادعا، برچسب محافظه‌کارانه‌تر معتبر است.
 
 خروجی‌های خام گفتگو، فصل‌های ۷۸گانه و معماری قدیمی از نسخه فعال حذف شده‌اند و منبع تصمیم محصول نیستند.
 
