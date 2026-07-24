@@ -77,7 +77,7 @@ export default function InvestorPrintPage() {
             <div><small>مرحله</small><strong>پیش از MVP و پیش از درآمد</strong></div>
             <div><small>طبقه‌بندی</small><strong>عمومی · فرض‌های سناریویی</strong></div>
           </div>
-          <aside><strong>افشای مهم:</strong> این سند محصول، کاربر، درآمد، قرارداد، مجوز یا traction عملیاتی ادعا نمی‌کند. عددهای مالی ورودی یا خروجی سناریو هستند؛ تغذیه کم‌خطر فقط Candidate پژوهش است.</aside>
+          <aside><strong>افشای مهم:</strong> این سند محصول، کاربر، درآمد، قرارداد، مجوز یا traction عملیاتی ادعا نمی‌کند. عددهای مالی ورودی یا خروجی سناریو هستند؛ تغذیه و عادت‌های سلامت برای اعتبارسنجی به‌عنوان سرویس اول انتخاب شده، اما هنوز محصول فعال یا بازار اثبات‌شده نیست.</aside>
         </header>
 
         <PrintSection number="۰۱" title="خلاصه سرمایه‌گذاری">
@@ -100,7 +100,7 @@ export default function InvestorPrintPage() {
         </PrintSection>
 
         <PrintSection number="۰۳" title="نقطه ورود، محصول و مرز AI">
-          <div className="print-callout"><strong>Candidate، نه تصمیم نهایی:</strong> برنامه شش‌هفته‌ای عادت‌های غذایی برای بزرگسالان کم‌خطر؛ یک تا سه رفتار مشخص، پیگیری و ارجاع.</div>
+          <div className="print-callout"><strong>سرویس اول منتخب، پیش از MVP:</strong> برنامه شش‌هفته‌ای عادت‌های غذایی برای بزرگسالان کم‌خطر؛ یک تا سه رفتار مشخص، پیگیری و ارجاع.</div>
           <div className="print-two-column">
             <article><h3>داخل دامنه پیشنهادی</h3><ul><li>غربال شرایط و رضایت</li><li>شناخت هدف و عادت</li><li>برنامه از محتوای تأییدشده</li><li>check-in و اصلاح محدود</li><li>بازبینی انسانی، توقف و ارجاع</li></ul></article>
             <article><h3>خارج از دامنه</h3><ul><li>تشخیص، تجویز و رژیم‌درمانی</li><li>دارو یا مکمل</li><li>کودک، بارداری و اختلال خوردن</li><li>شرایط مزمن پرخطر</li><li>پاسخ اورژانسی یا تصمیم بالینی مستقل</li></ul></article>
@@ -139,7 +139,7 @@ export default function InvestorPrintPage() {
             <tbody>{executionGates.map((gate) => <tr key={gate.gate}><th scope="row">{gate.gate}</th><td>{gate.timing}</td><td>{gate.criteria.join('؛ ')}</td></tr>)}</tbody>
           </table>
           <div className="print-callout"><strong>قاعده:</strong> تقویم مجوز عبور نیست. رخداد بحرانی، نشت داده، شکست ارجاع یا مانع حقوقی جذب را متوقف می‌کند. دو Pivot ناموفق روی یک مسئله به Stop می‌رسد.</div>
-          <h3>Outcome رفتاری Candidate</h3>
+          <h3>Outcome رفتاری سرویس اول</h3>
           <p>حداقل یک عادت انتخابی در چهار روز هر هفته و در حداقل سه هفته از چهار هفته پایانی؛ baseline هفته اول، سنجش هفته ۴ و ۶ و پیگیری هفته ۸. این معیار اثر بیماری، کاهش وزن یا رابطه علّی را ثابت نمی‌کند.</p>
         </PrintSection>
 

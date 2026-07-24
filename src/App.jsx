@@ -9,6 +9,7 @@ import InvestorMemoPage from './pages/InvestorMemoPage'
 import InvestorPrintPage from './pages/InvestorPrintPage'
 import ModelPage from './pages/ModelPage'
 import NotFoundPage from './pages/NotFoundPage'
+import NutritionServicePage from './pages/NutritionServicePage'
 import RoadmapPage from './pages/RoadmapPage'
 import ServicesPage from './pages/ServicesPage'
 import TrustPage from './pages/TrustPage'
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="investor" element={<InvestorMemoPage />} />
         <Route path="print" element={<InvestorPrintPage />} />
         <Route path="model" element={<ModelPage />} />
+        <Route path="nutrition" element={<NutritionServicePage />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="trust" element={<TrustPage />} />

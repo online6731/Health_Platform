@@ -215,17 +215,17 @@ export default function InvestorMemoPage() {
       <MemoSection
         id="wedge"
         eyebrow="04 · نقطه ورود و محصول"
-        title="تغذیه کم‌خطر یک Candidate برای پژوهش است؛ نه تصمیم نهایی."
-        description="نقطه ورود باید یک پرسونای مشخص، نتیجه قابل‌اندازه‌گیری، دامنه کم‌خطر، مسیر متخصص و اقتصاد بالقوه داشته باشد. مزیت دسترسی بنیان‌گذار می‌تواند رتبه گزینه‌ها را تغییر دهد."
+        title="تغذیه و عادت‌های سلامت، سرویس اول منتخب برای اعتبارسنجی است."
+        description="این انتخاب راهبردی ثبت شده، اما عرضه عمومی یا اعتبار بازار را ثابت نمی‌کند. پرسونای دقیق، نتیجه، دامنه کم‌خطر، مسیر متخصص و اقتصاد باید در Discovery و پایلوت تأیید یا بازتعریف شوند."
         tinted
       >
         <div className="wedge-case-grid">
           <article className="wedge-case-card">
-            <span className="claim-tag claim-tag--open">تصمیم باز</span>
+            <span className="claim-tag claim-tag--current">تصمیم بنیان‌گذار</span>
             <Target size={28} aria-hidden="true" />
-            <h3>Candidate: عادت‌های غذایی بزرگسالان کم‌خطر</h3>
+            <h3>سرویس اول: عادت‌های غذایی بزرگسالان کم‌خطر</h3>
             <p>شناخت الگو، ساخت برنامه قابل‌اجرا، پیگیری و ارجاع—بدون رژیم‌درمانی بیماری، بارداری، کودک، اختلال خوردن یا تجویز مکمل.</p>
-            <Link className="text-link" to="/blueprint">scorecard انتخاب سرویس <ArrowLeft size={16} /></Link>
+            <Link className="text-link" to="/nutrition">پرونده کامل سرویس اول <ArrowLeft size={16} /></Link>
           </article>
           <article className="product-flow-card">
             <span className="claim-tag claim-tag--hypothesis">فرضیه تجربه</span>

@@ -517,7 +517,7 @@ export const dataroomSections = [
   {
     title: 'بالینی، حقوقی و داده',
     items: [
-      { name: 'clinical scope', status: 'Candidate؛ بدون امضا' },
+      { name: 'clinical scope', status: 'سرویس اول منتخب؛ بدون امضای تخصصی' },
       { name: 'پروتکل ارجاع و رخداد', status: 'الگو موجود' },
       { name: 'legal memo بازار هدف', status: 'مفقود' },
       { name: 'privacy impact assessment و رضایت', status: 'مفقود؛ پیش از پایلوت' },
@@ -539,7 +539,7 @@ export const dataroomSections = [
 export const claimRegister = [
   { claim: 'پروژه در مرحله Pre-seed و پیش از MVP است.', label: 'وضعیت فعلی', source: 'مخزن عمومی و README نسخه ۳', owner: 'CEO', asOf: '۱۴۰۵/۰۵/۰۱', confidence: 'بالا' },
   { claim: 'محصول، کاربر، درآمد و قرارداد عملیاتی در مخزن ادعا نشده‌اند.', label: 'وضعیت فعلی', source: 'ممیزی محتوای مخزن', owner: 'CEO / Product', asOf: '۱۴۰۵/۰۵/۰۱', confidence: 'بالا' },
-  { claim: 'تغذیه کم‌خطر Candidate پژوهش است.', label: 'تصمیم باز', source: 'scorecard مفهومی؛ بدون پژوهش بازار', owner: 'Product / Clinical', asOf: '۱۴۰۵/۰۵/۰۱', confidence: 'پایین' },
+  { claim: 'تغذیه و عادت‌های سلامت برای اعتبارسنجی به‌عنوان سرویس اول انتخاب شده است.', label: 'وضعیت فعلی', source: 'تصمیم بنیان‌گذار؛ دامنه و بازار هنوز بدون پژوهش', owner: 'CEO / Product', asOf: '۱۴۰۵/۰۵/۰۲', confidence: 'بالا درباره انتخاب؛ پایین درباره اعتبار بازار' },
   { claim: 'افق اجرا ۲۴ ماه است.', label: 'هدف پیشنهادی', source: 'docs/EXECUTION_PLAN.md', owner: 'CEO / Board', asOf: '۱۴۰۵/۰۵/۰۱', confidence: 'متوسط' },
   { claim: 'سناریوی پایه حدود ۸۵ میلیارد تومان سرمایه با ذخیره ۲۵٪ نیاز دارد.', label: 'سناریوی محاسباتی', source: 'calculateGrowthProjection(base)', owner: 'Finance', asOf: '۱۴۰۵/۰۵/۰۱', confidence: 'پایین تا دریافت بودجه واقعی' },
   { claim: 'راهبرد جهانی سلامت دیجیتال WHO تا ۲۰۲۷ تمدید شده است.', label: 'وضعیت فعلی', source: 'WHO، ۲۳ مه ۲۰۲۵', owner: 'Research', asOf: '۱۴۰۴/۰۳/۰۲', confidence: 'بالا' },
@@ -553,7 +553,7 @@ export const founderInputs = [
   'مصاحبه‌ها، LOIها، کاربران یا درآمد موجود خارج از مخزن',
   'نوع ابزار سرمایه‌گذاری و سقف رقیق‌شدن قابل‌قبول',
   'حقوق و هزینه‌های واقعی تیم در بازار هدف',
-  'انتخاب نهایی Wedge پس از Discovery',
+  'تأیید یا بازتعریف پرسونای دقیق، دامنه و وعده Wedge تغذیه پس از Discovery',
 ]
 
 export const externalReferences = [

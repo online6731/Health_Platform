@@ -27,6 +27,7 @@ describe('rebuilt health platform proposal', () => {
 
   it.each([
     ['/model', 'محصول عمودی اول؛ پلتفرم بعداً.'],
+    ['/nutrition', 'تغذیه و عادت‌های سلامت؛ از توصیه پراکنده تا رفتار ماندگار.'],
     ['/services', 'هر سرویس قرار است یک مسیر مستقل باشد؛ نه صرفاً ماژولی در یک سوپراپ.'],
     ['/investor', 'سرمایه برای خریدن شواهد؛ نه ساختن یک سوپراپ اثبات‌نشده.'],
     ['/roadmap', 'هر ریال برای حذف یک ریسک آزاد می‌شود.'],
@@ -51,6 +52,29 @@ describe('rebuilt health platform proposal', () => {
     expect(mentalHealthButton.getAttribute('aria-pressed')).toBe('true')
     expect(screen.getByRole('heading', { level: 2, name: 'سلامت روان و تراپی' })).not.toBeNull()
     expect(screen.getByText(/بحران، خودآسیبی، روان‌پریشی/)).not.toBeNull()
+  })
+
+  it('defines nutrition as the selected first service without presenting it as operational', () => {
+    renderRoute('/nutrition')
+
+    expect(screen.getByText(/منتخب برای طراحی و اعتبارسنجی · هنوز فعال نیست/)).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /شش هفته برای ساخت عادت/ })).not.toBeNull()
+    expect(screen.getByText(/این تعریف، تشخیص، تجویز، رژیم‌درمانی/)).not.toBeNull()
+    expect(screen.getByText(/قیمت‌ها ابزار آزمایش‌اند/)).not.toBeNull()
+    expect(screen.queryByText(/کاهش وزن تضمینی است/)).toBeNull()
+  })
+
+  it('lets readers inspect every week without changing the HashRouter route', () => {
+    window.location.hash = '#/nutrition'
+    render(
+      <HashRouter>
+        <App />
+      </HashRouter>,
+    )
+
+    fireEvent.click(screen.getByRole('tab', { name: 'هفته ۶ استقلال' }))
+    expect(screen.getByRole('heading', { name: 'پایان برنامه بدون ساخت وابستگی' })).not.toBeNull()
+    expect(window.location.hash).toBe('#/nutrition')
   })
 
   it('keeps independent diagnosis and prescribing outside the AI role', () => {

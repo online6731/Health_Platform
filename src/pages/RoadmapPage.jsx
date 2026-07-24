@@ -16,7 +16,7 @@ const discoveryWeeks = [
 
 const outcomePlan = [
   {
-    title: 'Outcome اصلی Candidate تغذیه',
+    title: 'Outcome اصلی سرویس اول تغذیه',
     definition: 'حداقل یک عادت انتخابی در چهار روز هر هفته، طی حداقل سه هفته از چهار هفته پایانی انجام شود.',
     method: 'baseline هفته اول؛ ثبت کوتاه روزانه؛ سنجش هفته ۴، ۶ و پیگیری هفته ۸؛ تحلیل فقط روی cohort از پیش تعریف‌شده.',
   },
@@ -140,7 +140,7 @@ export default function RoadmapPage() {
           <SectionHeader
             eyebrow="طرح اندازه‌گیری نتیجه"
             title="نتیجه قبل از پایلوت تعریف می‌شود؛ نه بعد از دیدن داده."
-            description="تعریف زیر برای Candidate تغذیه یک نقطه شروع است و باید توسط مسئول تخصصی، پژوهش و حقوقی بازار هدف تأیید شود."
+            description="تعریف زیر برای سرویس اول تغذیه یک نقطه شروع است و باید توسط مسئول تخصصی، پژوهش و حقوقی بازار هدف تأیید شود."
           />
           <div className="outcome-plan-grid">
             {outcomePlan.map((item) => (

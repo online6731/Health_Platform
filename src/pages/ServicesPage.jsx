@@ -16,10 +16,10 @@ export default function ServicesPage() {
       <PageIntro
         eyebrow="خانواده سرویس‌ها"
         title="هر سرویس قرار است یک مسیر مستقل باشد؛ نه صرفاً ماژولی در یک سوپراپ."
-        description="سبد زیر چند مسیر نمونه و غیرجامع را نشان می‌دهد؛ تغذیه فقط برای نمایش روش دامنه‌بندی آمده و سرویس اول هنوز انتخاب نشده است. حوزه‌هایی مانند سلامت زنان، کودک، سالمند، خواب و مراقبت در منزل نیز فقط پس از اعتبارسنجی مستقل بررسی می‌شوند."
+        description="تغذیه و عادت‌های سلامت برای طراحی و اعتبارسنجی به‌عنوان سرویس اول انتخاب شده است؛ مسیرهای دیگر مفهومی‌اند و تنها پس از اثبات مستقل ارزش، ایمنی و اقتصاد سرویس اول بررسی می‌شوند."
       >
         <div className="status-legend" aria-label="راهنمای وضعیت سرویس‌ها">
-          <StatusBadge tone="candidate">نمونه مفهومی</StatusBadge>
+          <StatusBadge tone="candidate">سرویس اول · پیش از MVP</StatusBadge>
           <StatusBadge tone="future">مفهومی · مسیر آینده</StatusBadge>
           <StatusBadge tone="regulated">مفهومی · وابسته به مجوز</StatusBadge>
         </div>
@@ -83,8 +83,14 @@ export default function ServicesPage() {
             {activeService.whyIllustrative && (
               <div className="candidate-reason">
                 <Check size={19} />
-                <span><strong>چرا برای نمایش روش مناسب است؟</strong> {activeService.whyIllustrative}</span>
+                <span><strong>وضعیت تصمیم:</strong> {activeService.whyIllustrative}</span>
               </div>
+            )}
+            {activeService.id === 'nutrition' && (
+              <Link className="button button--primary service-detail__cta" to="/nutrition">
+                پرونده کامل سرویس اول
+                <ArrowLeft size={17} aria-hidden="true" />
+              </Link>
             )}
           </article>
         </div>

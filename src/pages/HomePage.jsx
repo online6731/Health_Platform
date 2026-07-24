@@ -22,8 +22,8 @@ export default function HomePage() {
               اول یک کسب‌وکار سلامت قابل‌دفاع؛ <span>بعد یک پلتفرم.</span>
             </h1>
             <p className="hero-lead">
-              سرمایه برای ساخت یک سوپراپ بزرگ مصرف نمی‌شود. یک سرویس عمودی، کم‌خطر و پولی را انتخاب می‌کنیم؛
-              تقاضا، نتیجه، ایمنی و اقتصادش را اثبات می‌کنیم؛ سپس فقط دارایی‌های واقعاً تکرارشونده را به هسته مشترک تبدیل می‌کنیم.
+              سرمایه برای ساخت یک سوپراپ بزرگ مصرف نمی‌شود. سرویس اول—تغذیه و عادت‌های سلامت—برای اعتبارسنجی انتخاب شده است؛
+              تقاضا، نتیجه، ایمنی و اقتصادش را اثبات یا رد می‌کنیم؛ سپس فقط دارایی‌های واقعاً تکرارشونده را به هسته مشترک تبدیل می‌کنیم.
             </p>
             <p className="hero-ai-line">
               <Sparkles size={17} aria-hidden="true" />
@@ -36,6 +36,9 @@ export default function HomePage() {
               </Link>
               <Link className="button button--secondary" to="/roadmap">
                 مسیر دقیق ۲۴ماهه
+              </Link>
+              <Link className="button button--secondary" to="/nutrition">
+                پرونده سرویس اول
               </Link>
             </div>
             <div className="hero-trust-note">
@@ -180,6 +183,9 @@ export default function HomePage() {
                   <span>برای چه کسی؟</span>
                   {service.audience}
                 </div>
+                {service.id === 'nutrition' && (
+                  <Link className="text-link" to="/nutrition">دیدن پرونده کامل <ArrowLeft size={16} /></Link>
+                )}
               </article>
             ))}
           </div>
@@ -256,11 +262,11 @@ export default function HomePage() {
         <div className="container final-cta">
           <div>
             <span className="eyebrow">گام بعدی</span>
-            <h2>اولین محصول را با شواهد انتخاب کنیم، نه با وسعت رؤیا.</h2>
-            <p>معیارها، تصمیم‌های باز و تعریف دقیق پایلوت پیشنهادی در طرح اجرایی ثبت شده‌اند.</p>
+            <h2>انتخاب سرویس اول را به شواهد بازار و پایلوت تبدیل کنیم.</h2>
+            <p>تغذیه انتخاب شده است؛ اما دامنه، قیمت، ایمنی و اقتصاد آن باید با کاربر واقعی تأیید یا اصلاح شوند.</p>
           </div>
-          <Link className="button button--primary" to="/blueprint">
-            باز کردن طرح اجرایی
+          <Link className="button button--primary" to="/nutrition">
+            باز کردن پرونده سرویس اول
             <ArrowLeft size={18} />
           </Link>
         </div>

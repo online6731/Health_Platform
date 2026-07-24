@@ -13,7 +13,7 @@ export default function ModelPage() {
         description="پلتفرم نتیجه بلوغ چند سرویس موفق است، نه پیش‌نیاز ساخت نخستین سرویس. این تفاوت، ترتیب سرمایه‌گذاری، معماری و یادگیری را عوض می‌کند."
       >
         <div className="page-intro__meta">
-          <span><CircleDot size={16} /> اکنون: تعریف و انتخاب سرویس اول</span>
+          <span><CircleDot size={16} /> اکنون: اعتبارسنجی سرویس اول تغذیه</span>
           <span><Network size={16} /> افق: اتصال انتخابی سرویس‌های بالغ</span>
         </div>
       </PageIntro>
