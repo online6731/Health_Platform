@@ -24,6 +24,7 @@
 - `/` — خلاصه مدیریتی و وضعیت دور
 - `/investor` — یادداشت کامل سرمایه‌گذاری: مسئله، شواهد، بازار، رقابت، درآمد، GTM، moat، تیم، ریسک، سرمایه و منطق بازده
 - `/nutrition` — پرونده کامل سرویس اول: مسئله، ICP، journey، برنامه شش‌هفته‌ای، MVP، ایمنی، اقتصاد، عملیات و مسیر اعتبارسنجی
+- `/nutrition-market` — گزارش تعاملی بازار تغذیه و رژیم ایران: روش پژوهش، سرشماری منبع‌دار، فیلتر، قیمت، الگوهای رقابتی، ریسک ادعا و فضای خالی
 - `/blueprint` — scorecard مقایسه، دامنه اولیه Wedge و تصمیم‌های باز برای تأیید یا بازتعریف
 - `/roadmap` — برنامه دقیق ۲۴ماهه، ده هفته کشف/Concierge، گیت‌ها، outcome، KPI و حاکمیت
 - `/financials` — ماشین‌حساب اقتصاد واحد مشتق از مدل رشد، SOM ظرفیت‌محور، سه سناریوی ۲۴ماهه، حساسیت و سرمایه
@@ -42,6 +43,7 @@ Routing با `HashRouter` انجام می‌شود تا روی GitHub Pages بد
 - [Financial assumptions](./docs/FINANCIAL_MODEL_ASSUMPTIONS.md)
 - [Investor due diligence](./docs/INVESTOR_DUE_DILIGENCE.md)
 - [Product blueprint](./docs/PRODUCT_BLUEPRINT.md)
+- [Iran nutrition market report](./docs/IRAN_NUTRITION_MARKET_REPORT.md)
 - [Content migration](./docs/CONTENT_MIGRATION.md)
 
 ## اجرای محلی و کنترل کیفیت

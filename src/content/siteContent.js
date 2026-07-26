@@ -2,6 +2,7 @@ export const navItems = [
   { to: '/', label: 'خلاصه' },
   { to: '/investor', label: 'پرونده سرمایه' },
   { to: '/nutrition', label: 'سرویس اول' },
+  { to: '/nutrition-market', label: 'بازار ایران' },
   { to: '/blueprint', label: 'نقطه ورود' },
   { to: '/roadmap', label: 'مسیر اجرا' },
   { to: '/financials', label: 'مدل مالی' },

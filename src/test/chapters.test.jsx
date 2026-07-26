@@ -1,7 +1,16 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
 import App from '../App'
+import {
+  featureLabels,
+  featureMatrixProductIds,
+  marketInventory,
+  marketMeta,
+  marketSignals,
+  marketTaxonomy,
+  regulatoryMap,
+} from '../content/iranNutritionMarketContent'
 import { calculateFinancialModel, calculateGrowthProjection, executionStages, financialScenarios, growthScenarios, useOfFunds } from '../content/investorContent'
 
 function renderRoute(route = '/') {
@@ -28,6 +37,7 @@ describe('rebuilt health platform proposal', () => {
   it.each([
     ['/model', 'محصول عمودی اول؛ پلتفرم بعداً.'],
     ['/nutrition', 'تغذیه و عادت‌های سلامت؛ از توصیه پراکنده تا رفتار ماندگار.'],
+    ['/nutrition-market', 'بازار رژیم شلوغ است؛ بازار «تغییر رفتارِ ایمن و سنجش‌پذیر» هنوز نه.'],
     ['/services', 'هر سرویس قرار است یک مسیر مستقل باشد؛ نه صرفاً ماژولی در یک سوپراپ.'],
     ['/investor', 'سرمایه برای خریدن شواهد؛ نه ساختن یک سوپراپ اثبات‌نشده.'],
     ['/roadmap', 'هر ریال برای حذف یک ریسک آزاد می‌شود.'],
@@ -36,9 +46,9 @@ describe('rebuilt health platform proposal', () => {
     ['/financials', 'عددها را از فرض‌ها مشتق می‌کنیم؛ نه از اندازه رؤیا.'],
     ['/dataroom', 'پروپوزال ادعا می‌کند؛ دیتا روم باید اثبات کند.'],
     ['/print', 'پلتفرم سلامت'],
-  ])('renders the %s route with its primary heading', (route, heading) => {
+  ])('renders the %s route with its primary heading', async (route, heading) => {
     renderRoute(route)
-    expect(screen.getByRole('heading', { level: 1, name: heading })).not.toBeNull()
+    expect(await screen.findByRole('heading', { level: 1, name: heading }, { timeout: 5000 })).not.toBeNull()
   })
 
   it('switches service details without presenting future services as active', () => {
@@ -63,6 +73,65 @@ describe('rebuilt health platform proposal', () => {
     expect(screen.getByText(/قیمت‌ها ابزار آزمایش‌اند/)).not.toBeNull()
     expect(screen.queryByText(/کاهش وزن تضمینی است/)).toBeNull()
   })
+
+  it('keeps the Iran nutrition market dataset traceable and internally consistent', () => {
+    const categoryIds = new Set(marketTaxonomy.map((category) => category.id))
+    const productIds = new Set(marketInventory.map((product) => product.id))
+    const allowedStatuses = new Set(['active', 'likely', 'uncertain', 'legacy', 'inactive'])
+    const allowedConfidences = new Set(['high', 'medium', 'low'])
+    const allowedModes = new Set(['self-serve', 'hybrid', 'human', 'marketplace', 'b2b', 'commerce'])
+    const allowedLayers = new Set(['direct', 'budget', 'infrastructure', 'adjacent'])
+    const allowedFeatureValues = new Set(['yes', 'partial', 'claimed', 'no', 'unclear'])
+    const featureIds = featureLabels.map((feature) => feature.id)
+
+    expect(marketMeta.observedAtIso).toBe('2026-07-26')
+    expect(marketInventory.length).toBeGreaterThanOrEqual(80)
+    expect(productIds.size).toBe(marketInventory.length)
+    expect(marketInventory.every((product) => categoryIds.has(product.category))).toBe(true)
+    expect(marketInventory.every((product) => (
+      [product.name, product.parent, product.summary, product.categoryLabel, product.modeLabel, product.businessModel]
+        .every((value) => typeof value === 'string' && value.trim())
+      && allowedStatuses.has(product.status)
+      && allowedConfidences.has(product.confidence)
+      && allowedModes.has(product.mode)
+      && allowedLayers.has(product.layer)
+      && Array.isArray(product.evidence)
+      && product.evidence.length > 0
+      && product.evidence.every((source) => source.url.startsWith('https://'))
+    ))).toBe(true)
+    expect(marketInventory.every((product) => (
+      featureIds.every((featureId) => allowedFeatureValues.has(product.features[featureId]))
+    ))).toBe(true)
+    expect(featureMatrixProductIds.every((id) => productIds.has(id))).toBe(true)
+    expect(marketSignals.every((signal) => signal.sources.length > 0)).toBe(true)
+    expect(regulatoryMap.every((item) => item.sources.length > 0)).toBe(true)
+  })
+
+  it('filters the Iran nutrition market census and can restore the complete inventory', async () => {
+    renderRoute('/nutrition-market')
+
+    const searchInput = await screen.findByLabelText(
+      'جست‌وجوی نام، شرکت، مدل و قابلیت',
+      {},
+      { timeout: 5000 },
+    )
+    const census = within(screen.getByRole('region', { name: 'جدول محصولات تغذیه و رژیم ایران' }))
+
+    fireEvent.change(searchInput, { target: { value: 'لیمومی' } })
+    expect(census.getByText('لیمومی')).not.toBeNull()
+    expect(census.queryByText('به‌اندام / رژیم آنلاین دکتر کرمانی')).toBeNull()
+
+    fireEvent.change(searchInput, { target: { value: 'رکورد-ناموجود-برای-تست' } })
+    expect(screen.getByRole('heading', { name: 'رکوردی با این ترکیب پیدا نشد.' })).not.toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'نمایش همه محصولات' }))
+    expect(searchInput.value).toBe('')
+    expect(census.getByText('به‌اندام / رژیم آنلاین دکتر کرمانی')).not.toBeNull()
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'مدل ارائه' }), { target: { value: 'commerce' } })
+    expect(census.getByText('پروکالری')).not.toBeNull()
+    expect(census.queryByText('کرفس')).toBeNull()
+  }, 15000)
 
   it('lets readers inspect every week without changing the HashRouter route', () => {
     window.location.hash = '#/nutrition'

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import SiteShell from './components/SiteShell'
@@ -14,6 +15,8 @@ import RoadmapPage from './pages/RoadmapPage'
 import ServicesPage from './pages/ServicesPage'
 import TrustPage from './pages/TrustPage'
 
+const IranNutritionMarketPage = lazy(() => import('./pages/IranNutritionMarketPage'))
+
 export default function App() {
   return (
     <Routes>
@@ -23,6 +26,14 @@ export default function App() {
         <Route path="print" element={<InvestorPrintPage />} />
         <Route path="model" element={<ModelPage />} />
         <Route path="nutrition" element={<NutritionServicePage />} />
+        <Route
+          path="nutrition-market"
+          element={(
+            <Suspense fallback={<div className="container section" role="status">در حال آماده‌سازی گزارش بازار…</div>}>
+              <IranNutritionMarketPage />
+            </Suspense>
+          )}
+        />
         <Route path="services" element={<ServicesPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="trust" element={<TrustPage />} />
