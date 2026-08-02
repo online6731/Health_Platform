@@ -53,6 +53,7 @@ describe('ServiceOS product proposal', () => {
 
   it('searches and filters the service opportunity map', () => {
     renderRoute('/services')
+    fireEvent.click(screen.getByRole('button', { name: /نمای کارت‌ها/ }))
     const search = screen.getByPlaceholderText(/مثلاً پزشکی/)
     fireEvent.change(search, { target: { value: 'پوست' } })
 
@@ -66,6 +67,29 @@ describe('ServiceOS product proposal', () => {
     fireEvent.click(screen.getByRole('button', { name: 'ابزار کسب‌وکار' }))
     expect(screen.getByText('ویترین و کانال‌ساز هوشمند')).not.toBeNull()
     expect(screen.queryByText('تغذیه و رژیم')).toBeNull()
+  })
+
+  it('shows every product family on one connected network and inspects a selected service', () => {
+    renderRoute('/services')
+
+    expect(screen.getByRole('button', { name: /نمای شبکه/ }).getAttribute('aria-pressed')).toBe('true')
+    for (const category of serviceCategories.filter((item) => item.id !== 'all')) {
+      expect(screen.getByRole('heading', { name: category.label })).not.toBeNull()
+    }
+
+    fireEvent.click(screen.getByRole('button', { name: 'انتخاب دستیار پوست، مو و زیبایی' }))
+    expect(screen.getByRole('heading', { name: 'دستیار پوست، مو و زیبایی' })).not.toBeNull()
+    expect(screen.getByRole('button', { name: 'اعتماد و اعتبارسنجی' })).not.toBeNull()
+  })
+
+  it('starts bright and persists the night mode choice', () => {
+    renderRoute()
+    expect(document.documentElement.dataset.theme).toBe('light')
+
+    fireEvent.click(screen.getByRole('button', { name: 'فعال کردن حالت شب' }))
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(localStorage.getItem('serviceos-theme')).toBe('dark')
+    expect(screen.getByRole('button', { name: 'فعال کردن حالت روشن' })).not.toBeNull()
   })
 
   it('documents two-level delivery and safety for the medical service', () => {

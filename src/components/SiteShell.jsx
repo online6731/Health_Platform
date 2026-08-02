@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpLeft, Menu, Radio, X } from 'lucide-react'
+import { ArrowUpLeft, Menu, Moon, Radio, Sun, X } from 'lucide-react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import BrandMark from './BrandMark'
 
@@ -20,8 +20,18 @@ const titles = {
   '/trust': 'اعتماد، ایمنی و داده | ServiceOS',
 }
 
+function getInitialTheme() {
+  try {
+    const storedTheme = window.localStorage.getItem('serviceos-theme')
+    return storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light'
+  } catch {
+    return 'light'
+  }
+}
+
 export default function SiteShell() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [theme, setTheme] = useState(getInitialTheme)
   const location = useLocation()
   const menuRef = useRef(null)
 
@@ -44,6 +54,15 @@ export default function SiteShell() {
     return () => document.removeEventListener('keydown', onEscape)
   }, [menuOpen])
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('serviceos-theme', theme)
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      'content',
+      theme === 'dark' ? '#070810' : '#f8f9ff',
+    )
+  }, [theme])
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
@@ -61,6 +80,15 @@ export default function SiteShell() {
               سرویس اول
               <ArrowUpLeft size={16} aria-hidden="true" />
             </Link>
+            <button
+              className="theme-button"
+              type="button"
+              aria-label={theme === 'light' ? 'فعال کردن حالت شب' : 'فعال کردن حالت روشن'}
+              title={theme === 'light' ? 'حالت شب' : 'حالت روشن'}
+              onClick={() => setTheme((value) => (value === 'light' ? 'dark' : 'light'))}
+            >
+              {theme === 'light' ? <Moon size={19} aria-hidden="true" /> : <Sun size={19} aria-hidden="true" />}
+            </button>
             <button
               ref={menuRef}
               className="menu-button"

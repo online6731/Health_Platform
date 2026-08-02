@@ -7,10 +7,37 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --bg: #f8f9ff;
+  --bg-deep: #eef1fb;
+  --surface: #ffffff;
+  --surface-2: #f3f1ff;
+  --surface-3: #eafff9;
+  --paper: #ffffff;
+  --paper-2: #f1f3fa;
+  --ink: #171927;
+  --ink-dark: #11131b;
+  --muted: #676e83;
+  --muted-dark: #5e6370;
+  --line: rgba(25, 28, 45, 0.11);
+  --line-dark: rgba(13, 16, 27, 0.12);
+  --violet: #7656e9;
+  --violet-strong: #6040df;
+  --cyan: #19cdb0;
+  --amber: #ffcf6e;
+  --red: #ff6f83;
+  --green: #35c98b;
+  --container: 1240px;
+  --radius-sm: 14px;
+  --radius-md: 24px;
+  --radius-lg: 38px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
   --bg: #070810;
   --bg-deep: #03040a;
   --surface: #0d101b;
@@ -27,13 +54,7 @@
   --violet: #9b7cff;
   --violet-strong: #7c57ff;
   --cyan: #46f0d1;
-  --amber: #ffcf6e;
-  --red: #ff6f83;
   --green: #67ebb1;
-  --container: 1240px;
-  --radius-sm: 14px;
-  --radius-md: 24px;
-  --radius-lg: 38px;
 }
 
 * { box-sizing: border-box; }
@@ -50,9 +71,10 @@ body {
   min-height: 100vh;
   color: var(--ink);
   background:
-    radial-gradient(circle at 80% -10%, rgba(124, 87, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 80% -10%, rgba(118, 86, 233, 0.13), transparent 28%),
     var(--bg);
   line-height: 1.8;
+  transition: color 220ms ease, background-color 220ms ease;
 }
 
 body, button, input, select { font-family: inherit; }

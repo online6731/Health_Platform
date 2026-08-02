@@ -4,6 +4,7 @@ import { cleanup } from '@testing-library/react';
 afterEach(() => {
   cleanup();
   document.documentElement.className = '';
+  document.documentElement.dataset.theme = 'light';
   localStorage.clear();
 });
 
