@@ -1,274 +1,242 @@
-import { ArrowLeft, Check, CircleDollarSign, FileCheck2, Layers3, Route, ShieldCheck, Sparkles, Waypoints } from 'lucide-react'
+import {
+  ArrowLeft,
+  ArrowUpLeft,
+  Bot,
+  BriefcaseBusiness,
+  Check,
+  CircleDollarSign,
+  HeartPulse,
+  Layers3,
+  MessageSquareMore,
+  Network,
+  ShieldCheck,
+  Sparkles,
+  Store,
+  Zap,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
-import SectionHeader from '../components/SectionHeader'
-import ServiceIcon from '../components/ServiceIcon'
-import StatusBadge from '../components/StatusBadge'
-import { buildPrinciples, faqs, services, trustPrinciples } from '../content/siteContent'
-import { investorSnapshot } from '../content/investorContent'
+import SectionTitle from '../components/SectionTitle'
+import ServiceCard from '../components/ServiceCard'
+import { launchRoadmap, platformPillars, revenueStreams, services } from '../content/platformContent'
+
+const featuredServices = services.filter((service) => service.featured).slice(0, 6)
 
 export default function HomePage() {
   return (
     <>
       <section className="hero">
-        <div className="hero-orb hero-orb--one" aria-hidden="true" />
-        <div className="hero-orb hero-orb--two" aria-hidden="true" />
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <div className="hero-kicker">
-              <Sparkles size={16} aria-hidden="true" />
-              پروپوزال سرمایه‌گذاری Pre-seed · مرداد ۱۴۰۵
-            </div>
-            <h1>
-              اول یک کسب‌وکار سلامت قابل‌دفاع؛ <span>بعد یک پلتفرم.</span>
-            </h1>
-            <p className="hero-lead">
-              سرمایه برای ساخت یک سوپراپ بزرگ مصرف نمی‌شود. سرویس اول—تغذیه و عادت‌های سلامت—برای اعتبارسنجی انتخاب شده است؛
-              تقاضا، نتیجه، ایمنی و اقتصادش را اثبات یا رد می‌کنیم؛ سپس فقط دارایی‌های واقعاً تکرارشونده را به هسته مشترک تبدیل می‌کنیم.
+        <div className="hero__noise" aria-hidden="true" />
+        <div className="container hero__grid">
+          <div className="hero__copy">
+            <span className="hero__badge"><Sparkles size={15} aria-hidden="true" /> AI SERVICE NETWORK · TELEGRAM FIRST</span>
+            <h1>هر خدمت، یک دستیار هوشمند.<br /><em>هر نیاز، یک مسیر تا انجام.</em></h1>
+            <p>
+              ServiceOS فقط یک چت‌بات نیست؛ شبکه‌ای توسعه‌پذیر از عامل‌های عمومی و تخصصی است که پاسخ اولیه را مستقیم می‌دهند و در لحظه درست، کاربر را به متخصص یا کسب‌وکار واقعی متصل می‌کنند.
             </p>
-            <p className="hero-ai-line">
-              <Sparkles size={17} aria-hidden="true" />
-              در هر سرویس، هوش مصنوعی موتور ساختاردهی و شخصی‌سازی در دامنه مجاز است؛ نه مرجع مستقل تصمیم بالینی.
-            </p>
-            <div className="hero-actions">
-              <Link className="button button--primary" to="/investor">
-                پرونده کامل سرمایه‌گذاری
+            <div className="hero__actions">
+              <Link className="button button--primary" to="/services">
+                دیدن نقشه سرویس‌ها
                 <ArrowLeft size={18} aria-hidden="true" />
               </Link>
-              <Link className="button button--secondary" to="/roadmap">
-                مسیر دقیق ۲۴ماهه
-              </Link>
-              <Link className="button button--secondary" to="/nutrition">
-                پرونده سرویس اول
+              <Link className="button button--glass" to="/services/1">
+                کالبدشکافی Omni Agent
+                <ArrowUpLeft size={18} aria-hidden="true" />
               </Link>
             </div>
-            <div className="hero-trust-note">
-              <ShieldCheck size={20} aria-hidden="true" />
-              <span><strong>افشای مرحله:</strong> پروژه پیش از MVP است؛ محصول عملیاتی، کاربر و درآمدی در این نسخه ادعا نمی‌شود.</span>
+            <div className="hero__proof">
+              <div><strong>۱</strong><span>هویت مشترک</span></div>
+              <div><strong>۲</strong><span>سطح ارائه خدمت</span></div>
+              <div><strong>۳</strong><span>سطح محصول</span></div>
+              <div><strong>∞</strong><span>سرویس قابل توسعه</span></div>
             </div>
           </div>
 
-          <div className="platform-visual" aria-label="نمای مفهومی برند مادر و سرویس‌های مستقل">
-            <div className="platform-visual__header">
-              <span>معماری برند</span>
-              <StatusBadge tone="candidate">عمودی اول، پلتفرم بعداً</StatusBadge>
+          <div className="hero-console" aria-label="نمای مفهومی شبکه سرویس‌ها">
+            <div className="hero-console__top">
+              <span><i /> SERVICEOS / LIVE ROUTER</span>
+              <span className="mono">FA · 10:24</span>
             </div>
-            <div className="service-orbit">
-              <div className="orbit-ring orbit-ring--outer" aria-hidden="true" />
-              <div className="orbit-ring orbit-ring--inner" aria-hidden="true" />
-              <div className="mother-brand-card">
-                <span className="mother-brand-card__icon"><Waypoints size={26} /></span>
-                <strong>برند مادر</strong>
-                <small>قول، طراحی و اصول مشترک</small>
+            <div className="hero-console__chat">
+              <div className="chat-row chat-row--user">
+                <span>برای ریزش مو و خارش پوست سر باید از کجا شروع کنم؟</span>
               </div>
-              {services.slice(0, 5).map((service, index) => (
-                <div
-                  key={service.id}
-                  className={`orbit-service orbit-service--${index + 1} service-color--${service.color}`}
-                >
-                  <ServiceIcon serviceId={service.id} size={19} />
-                  <span>{service.shortName}</span>
-                </div>
-              ))}
+              <div className="router-state">
+                <span><Zap size={14} /> Intent detected</span>
+                <strong>Health › Skin & Hair</strong>
+                <small>confidence 0.94</small>
+              </div>
+              <div className="chat-row chat-row--ai">
+                <span className="ai-avatar"><Bot size={17} /></span>
+                <p>اول چند سؤال کوتاه درباره مدت علائم و محصولات مصرفی می‌پرسم. اگر نشانه خطر وجود داشته باشد، مسیر مراجعه را جلوتر از هر پیشنهاد دیگری نشان می‌دهم.</p>
+              </div>
+              <div className="handoff-card">
+                <div className="handoff-card__icon"><HeartPulse size={20} /></div>
+                <div><small>NEXT BEST ACTION</small><strong>ادامه در دستیار پوست و مو</strong><span>پروفایل و متن گفتگو منتقل می‌شود</span></div>
+                <ArrowUpLeft size={19} />
+              </div>
             </div>
-            <div className="platform-visual__footer">
-              <span><i className="legend-dot legend-dot--solid" /> مستقل در شروع</span>
-              <span><i className="legend-dot legend-dot--outline" /> اتصال اختیاری در آینده</span>
+            <div className="hero-console__dock">
+              <span><MessageSquareMore size={16} /> Text</span>
+              <span>Voice</span>
+              <span>Vision</span>
+              <span>Files</span>
             </div>
+            <div className="orbit orbit--one" aria-hidden="true" />
+            <div className="orbit orbit--two" aria-hidden="true" />
           </div>
+        </div>
+        <div className="signal-strip" aria-hidden="true">
+          <span>GENERAL AI</span><i />
+          <span>VERTICAL AGENTS</span><i />
+          <span>BUSINESS OS</span><i />
+          <span>SEMANTIC SEARCH</span><i />
+          <span>HUMAN HANDOFF</span>
         </div>
       </section>
 
-      <section className="home-investor-snapshot">
-        <div className="container">
-          <div className="home-investor-snapshot__header">
-            <div><span className="eyebrow">خلاصه دور</span><h2>سرمایه چه چیزی می‌خرد؟</h2></div>
-            <Link className="text-link" to="/financials">فرض‌ها و فرمول‌های مالی <ArrowLeft size={16} /></Link>
+      <section className="section section--light">
+        <div className="container thesis-grid">
+          <div className="thesis-statement">
+            <span className="eyebrow">تز اصلی محصول</span>
+            <h2>از «جواب گرفتن» تا <em>«کار انجام‌شده»</em></h2>
           </div>
-          <div className="investor-status-grid investor-status-grid--home">
-            {investorSnapshot.map((item, index) => (
-              <article key={item.label}>
-                <span className={`claim-tag claim-tag--${item.tone}`}>{item.tone === 'current' ? 'واقعیت فعلی' : item.tone === 'target' ? 'هدف' : item.tone === 'scenario' ? 'سناریو' : 'فرضیه'}</span>
-                <span className="snapshot-icon">{index === 0 ? <FileCheck2 /> : index === 3 ? <CircleDollarSign /> : <Route />}</span>
-                <small>{item.label}</small>
-                <strong>{item.value}</strong>
-                <p>{item.note}</p>
-              </article>
-            ))}
-          </div>
-          <div className="home-round-line">
-            <span>Wedge</span><i>←</i><span>تقاضای پولی</span><i>←</i><span>پایلوت ایمن</span><i>←</i><span>اقتصاد cohort</span><i>←</i><span>تصمیم سرویس دوم</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="principles section">
-        <div className="container">
-          <SectionHeader
-            eyebrow="روش ساخت"
-            title="تمرکز قبل از یکپارچگی"
-            description="چشم‌انداز بزرگ حفظ می‌شود؛ اما مسیر رسیدن به آن از محصول کوچک، روشن و قابل‌سنجش می‌گذرد."
-            align="center"
-          />
-          <div className="principle-grid">
-            {buildPrinciples.map((principle) => (
-              <article className="principle-card" key={principle.number}>
-                <span>{principle.number}</span>
-                <h3>{principle.title}</h3>
-                <p>{principle.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tinted">
-        <div className="container split-story">
-          <div className="split-story__content">
-            <span className="eyebrow">تصمیم بنیادی</span>
-            <h2>یک برند مشترک؛ چند کسب‌وکار سلامت مستقل.</h2>
-            <p>
-              آنچه از ابتدا مشترک است، زبان برند، استاندارد تجربه، اصول ایمنی و حریم خصوصی است.
-              پرونده سلامت واحد، هسته فنی بزرگ و اشتراک خودکار داده از ابتدا ساخته نمی‌شوند.
-            </p>
-            <ul className="check-list">
-              <li><Check size={18} /> هر سرویس یک مسئله و مخاطب اصلی دارد.</li>
-              <li><Check size={18} /> هر سرویس عملیات و اقتصاد خودش را اثبات می‌کند.</li>
-              <li><Check size={18} /> زیرساخت مشترک از نیاز واقعی استخراج می‌شود.</li>
-              <li><Check size={18} /> اتصال داده همیشه انتخابی، محدود و قابل لغو است.</li>
-            </ul>
-            <Link className="text-link" to="/model">
-              جزئیات مدل محصول
-              <ArrowLeft size={17} />
-            </Link>
-          </div>
-          <div className="then-now-card">
-            <div className="comparison-block comparison-block--muted">
-              <span>فرض قبلی</span>
-              <h3>اول پلتفرم کامل</h3>
-              <p>ساخت پرونده الکترونیک سلامت، هسته AI و ده‌ها سرویس پیش از یادگیری از یک بازار واقعی.</p>
+          <div className="thesis-copy">
+            <p>بیشتر دستیارهای AI در پاسخ متوقف می‌شوند و بیشتر مارکت‌پلیس‌ها پیش از ایجاد ارزش، کاربر را به فروشنده تحویل می‌دهند. مدل ما این فاصله را پر می‌کند.</p>
+            <div className="two-level-flow">
+              <article><span>LEVEL 01</span><strong>انجام مستقیم توسط AI</strong><p>پاسخ، تحلیل، ساخت برنامه، خلاصه سند و آماده‌سازی تصمیم.</p></article>
+              <ArrowLeft aria-hidden="true" />
+              <article><span>LEVEL 02</span><strong>تکمیل توسط انسان</strong><p>معاینه، وکالت، معامله، ارسال کالا یا اجرای خدمت فیزیکی.</p></article>
             </div>
-            <div className="comparison-arrow" aria-hidden="true"><ArrowLeft size={22} /></div>
-            <div className="comparison-block comparison-block--active">
-              <span>راهبرد جدید</span>
-              <h3>اول محصول عمودی</h3>
-              <p>حل کامل یک نیاز، اثبات ارزش و سپس توسعه سبد و اتصال انتخابی.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section services-preview">
-        <div className="container">
-          <div className="section-heading-row">
-            <SectionHeader
-              eyebrow="خانواده آینده"
-              title="سرویس‌هایی با هویت مشترک و مسئولیت مستقل"
-              description="هیچ کارت زیر به‌معنای محصول فعال نیست؛ وضعیت هر مسیر صریحاً نمایش داده شده است."
-            />
-            <Link className="button button--secondary button--small" to="/services">
-              همه سرویس‌ها
-              <ArrowLeft size={17} />
-            </Link>
-          </div>
-          <div className="service-card-grid">
-            {services.slice(0, 4).map((service) => (
-              <article className={`service-card service-color--${service.color}`} key={service.id}>
-                <div className="service-card__top">
-                  <span className="service-icon"><ServiceIcon serviceId={service.id} /></span>
-                  <StatusBadge tone={service.statusTone}>{service.status}</StatusBadge>
-                </div>
-                <h3>{service.name}</h3>
-                <p>{service.promise}</p>
-                <div className="service-card__audience">
-                  <span>برای چه کسی؟</span>
-                  {service.audience}
-                </div>
-                {service.id === 'nutrition' && (
-                  <Link className="text-link" to="/nutrition">دیدن پرونده کامل <ArrowLeft size={16} /></Link>
-                )}
-              </article>
-            ))}
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="container vertical-journey">
-          <div className="vertical-journey__intro">
-            <span className="eyebrow">الگوی هر سرویس</span>
-            <h2>از نیاز تا اقدام بعدی؛ یک مسیر کامل، نه یک چت‌بات تنها.</h2>
-            <p>
-              هوش مصنوعی بخشی از جریان خدمت است، نه خودِ خدمت. ارزش واقعی وقتی ساخته می‌شود که ارزیابی،
-              اقدام، متخصص و پیگیری به یک تجربه قابل اتکا تبدیل شوند.
-            </p>
+        <div className="container">
+          <SectionTitle
+            eyebrow="چهار موتور یک شبکه"
+            title="محصولی که از چهار لایه هم‌زمان رشد می‌کند"
+            description="هر لایه به‌تنهایی ارزش دارد؛ کنار هم، چرخه داده، تقاضا، عرضه و درآمد را می‌سازند."
+          />
+          <div className="pillar-grid">
+            {platformPillars.map((pillar, index) => {
+              const icons = [Bot, Layers3, Store, Network]
+              const Icon = icons[index]
+              return (
+                <article className="pillar-card" key={pillar.number}>
+                  <div><span>{pillar.number}</span><Icon size={24} aria-hidden="true" /></div>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.text}</p>
+                </article>
+              )
+            })}
           </div>
-          <ol className="journey-steps">
-            <li><span>۱</span><div><strong>شناخت نیاز</strong><small>ورودی روشن و کمینه</small></div></li>
-            <li><span>۲</span><div><strong>بررسی دامنه و ریسک</strong><small>توقف یا ارجاع در صورت نیاز</small></div></li>
-            <li><span>۳</span><div><strong>پیشنهاد یا برنامه</strong><small>محدود، قابل توضیح و قابل اصلاح</small></div></li>
-            <li><span>۴</span><div><strong>اتصال به انسان</strong><small>هرجا تصمیم تخصصی لازم است</small></div></li>
-            <li><span>۵</span><div><strong>پیگیری</strong><small>یادگیری از نتیجه واقعی</small></div></li>
-          </ol>
         </div>
       </section>
 
-      <section className="section section--dark">
-        <div className="container trust-section">
-          <div>
-            <span className="eyebrow eyebrow--light">اصل اعتماد</span>
-            <h2>سیستم باید بداند کجا متوقف شود.</h2>
-            <p>
-              هرجا پاسخ مطمئن و در محدوده تعریف‌شده نیست، رفتار درست توقف، توضیح عدم قطعیت و ارجاع است—نه حدس‌زدن.
-            </p>
-            <Link className="button button--on-dark" to="/trust">
-              چارچوب ایمنی و داده
-              <ArrowLeft size={18} />
-            </Link>
+      <section className="section service-preview">
+        <div className="container">
+          <div className="section-heading-row">
+            <SectionTitle
+              eyebrow="کاتالوگ زنده، نه عدد ثابت"
+              title="سرویس‌ها با شواهد رشد می‌کنند"
+              description="نقشه فعلی یک فهرست اولیه از فرصت‌هاست؛ تعداد نهایی را تقاضا، ایمنی و اقتصاد هر سرویس تعیین می‌کند."
+              invert
+            />
+            <Link className="button button--glass" to="/services">مشاهده کاتالوگ کامل <ArrowLeft size={17} /></Link>
           </div>
-          <div className="trust-principle-grid">
-            {trustPrinciples.map((principle, index) => (
-              <article key={principle.title}>
-                {index === 0 && <Route size={22} />}
-                {index === 1 && <ShieldCheck size={22} />}
-                {index === 2 && <Layers3 size={22} />}
-                {index === 3 && <Sparkles size={22} />}
-                <h3>{principle.title}</h3>
-                <p>{principle.description}</p>
+          <div className="service-grid service-grid--preview">
+            {featuredServices.map((service) => <ServiceCard key={service.id} service={service} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--light">
+        <div className="container telegram-grid">
+          <div>
+            <SectionTitle
+              eyebrow="استراتژی کانال"
+              title="تلگرام نقطه شروع است؛ نه محدودیت آینده"
+              description="شروع از جایی که کاربر حضور دارد، با هسته‌ای مستقل از کانال که بعداً بدون بازنویسی روی وب و اپ قرار می‌گیرد."
+            />
+            <div className="check-list">
+              {['ربات برای تعامل سریع و بازگشت روزانه', 'Mini App برای فرم، رزرو، پرداخت و داشبورد', 'Backend مشترک برای هویت، حافظه و داده', 'وب برای کشف، اعتماد و پنل حرفه‌ای', 'اپ اختصاصی پس از اثبات رفتار و اقتصاد'].map((item) => (
+                <div key={item}><Check size={17} />{item}</div>
+              ))}
+            </div>
+          </div>
+          <div className="channel-stack" aria-label="مسیر توسعه کانال‌ها">
+            <article className="channel-card channel-card--active"><small>NOW</small><strong>Telegram</strong><span>Bot + Mini App</span></article>
+            <article className="channel-card"><small>NEXT</small><strong>Web</strong><span>Discovery + Business Console</span></article>
+            <article className="channel-card"><small>SCALE</small><strong>Mobile</strong><span>Persistent Service OS</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container revenue-layout">
+          <div className="revenue-intro">
+            <span className="eyebrow">مدل درآمد ترکیبی</span>
+            <h2>درآمد قبل از ارجاع شروع می‌شود</h2>
+            <p>AI خودش ارزش قابل پرداخت ایجاد می‌کند؛ شبکه کسب‌وکار، درآمد دوم و سوم را به آن اضافه می‌کند.</p>
+            <Link className="text-link" to="/investor">منطق اقتصادی و شاخص‌ها <ArrowUpLeft size={17} /></Link>
+          </div>
+          <div className="revenue-grid">
+            {revenueStreams.map((stream) => (
+              <article key={stream.label}>
+                <span>{stream.label}</span>
+                <CircleDollarSign size={22} aria-hidden="true" />
+                <h3>{stream.title}</h3>
+                <p>{stream.description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section faq-section">
-        <div className="container faq-grid">
-          <SectionHeader
-            eyebrow="پرسش‌های کلیدی"
-            title="چیزهایی که باید از ابتدا روشن باشند"
-            description="شفافیت درباره وضعیت، محدودیت و تصمیم‌های باز بخشی از خود محصول است."
+      <section className="section roadmap-preview">
+        <div className="container">
+          <SectionTitle
+            eyebrow="ساخت مرحله‌ای"
+            title="هر فاز باید حق ساخت فاز بعد را به دست بیاورد"
+            description="تعداد سرویس‌ها KPI نیست؛ کیفیت استفاده، پرداخت و تحویل موفق خدمت معیار توسعه شبکه است."
+            invert
           />
-          <div className="faq-list">
-            {faqs.map((item) => (
-              <details key={item.question}>
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
+          <div className="roadmap-track">
+            {launchRoadmap.slice(0, 4).map((item) => (
+              <article key={item.phase}>
+                <span>{item.phase}</span>
+                <small>{item.time}</small>
+                <h3>{item.title}</h3>
+                <p>{item.outcome}</p>
+              </article>
             ))}
           </div>
+          <Link className="button button--glass roadmap-preview__cta" to="/roadmap">مشاهده نقشه اجرای کامل <ArrowLeft size={17} /></Link>
         </div>
       </section>
 
-      <section className="section final-cta-section">
-        <div className="container final-cta">
+      <section className="section">
+        <div className="container safety-banner">
+          <div className="safety-banner__icon"><ShieldCheck size={34} /></div>
           <div>
-            <span className="eyebrow">گام بعدی</span>
-            <h2>انتخاب سرویس اول را به شواهد بازار و پایلوت تبدیل کنیم.</h2>
-            <p>تغذیه انتخاب شده است؛ اما دامنه، قیمت، ایمنی و اقتصاد آن باید با کاربر واقعی تأیید یا اصلاح شوند.</p>
+            <span className="eyebrow">اعتماد بخشی از محصول است</span>
+            <h2>تبلیغ هرگز نباید مسیر ایمن را تغییر دهد.</h2>
+            <p>در حوزه‌های سلامت، حقوق و مالی، پاسخ، هشدار و ارجاع بر اساس ریسک و صلاحیت رتبه‌بندی می‌شوند؛ پرداخت فقط بعد از عبور از این گیت‌ها اثر می‌گذارد و همیشه برچسب می‌خورد.</p>
           </div>
-          <Link className="button button--primary" to="/nutrition">
-            باز کردن پرونده سرویس اول
-            <ArrowLeft size={18} />
-          </Link>
+          <Link className="button button--dark" to="/trust">چارچوب اعتماد <ArrowUpLeft size={17} /></Link>
+        </div>
+      </section>
+
+      <section className="section final-cta">
+        <div className="container final-cta__inner">
+          <div className="final-cta__icons" aria-hidden="true"><Bot /><BriefcaseBusiness /></div>
+          <span>THE SERVICE LAYER FOR THE AI ERA</span>
+          <h2>اول یک دستیار مفید.<br />بعد یک شبکه غیرقابل جایگزین.</h2>
+          <div>
+            <Link className="button button--primary" to="/services/1">شروع از سرویس اول <ArrowLeft size={18} /></Link>
+            <Link className="button button--glass" to="/business">دیدن موتور کسب‌وکار <ArrowUpLeft size={18} /></Link>
+          </div>
         </div>
       </section>
     </>

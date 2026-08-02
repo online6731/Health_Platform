@@ -1,117 +1,89 @@
-import { useState } from 'react'
-import { AlertCircle, ArrowLeft, Bot, Check, UserRoundCheck } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import PageIntro from '../components/PageIntro'
-import SectionHeader from '../components/SectionHeader'
-import ServiceIcon from '../components/ServiceIcon'
-import StatusBadge from '../components/StatusBadge'
-import { services } from '../content/siteContent'
+import { useMemo, useState } from 'react'
+import { Search, SlidersHorizontal } from 'lucide-react'
+import PageHero from '../components/PageHero'
+import ServiceCard from '../components/ServiceCard'
+import { serviceCategories, services } from '../content/platformContent'
 
 export default function ServicesPage() {
-  const [activeServiceId, setActiveServiceId] = useState('nutrition')
-  const activeService = services.find(({ id }) => id === activeServiceId) ?? services[0]
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('all')
+  const [phase, setPhase] = useState('all')
+
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase('fa')
+    return services.filter((service) => {
+      const matchesQuery = !normalized || [service.name, service.en, service.summary, service.capability, service.human]
+        .join(' ')
+        .toLocaleLowerCase('fa')
+        .includes(normalized)
+      const matchesCategory = category === 'all' || service.category === category
+      const matchesPhase = phase === 'all' || String(service.phase) === phase
+      return matchesQuery && matchesCategory && matchesPhase
+    })
+  }, [category, phase, query])
 
   return (
     <>
-      <PageIntro
-        eyebrow="خانواده سرویس‌ها"
-        title="هر سرویس قرار است یک مسیر مستقل باشد؛ نه صرفاً ماژولی در یک سوپراپ."
-        description="تغذیه و عادت‌های سلامت برای طراحی و اعتبارسنجی به‌عنوان سرویس اول انتخاب شده است؛ مسیرهای دیگر مفهومی‌اند و تنها پس از اثبات مستقل ارزش، ایمنی و اقتصاد سرویس اول بررسی می‌شوند."
+      <PageHero
+        eyebrow="SERVICE OPPORTUNITY MAP"
+        title="نقشه باز سرویس‌ها"
+        lead="این فهرست سقف یا تعهد عددی نیست؛ نقشه اولیه فرصت‌هایی است که با داده واقعی اولویت‌بندی، ادغام یا حذف می‌شوند. هر سرویس فقط وقتی ساخته می‌شود که مسئله، ایمنی و اقتصادش قابل دفاع باشد."
       >
-        <div className="status-legend" aria-label="راهنمای وضعیت سرویس‌ها">
-          <StatusBadge tone="candidate">سرویس اول · پیش از MVP</StatusBadge>
-          <StatusBadge tone="future">مفهومی · مسیر آینده</StatusBadge>
-          <StatusBadge tone="regulated">مفهومی · وابسته به مجوز</StatusBadge>
+        <div className="page-hero__stats">
+          <div><strong>{services.length.toLocaleString('fa-IR')}</strong><span>فرصت در کاتالوگ فعلی</span></div>
+          <div><strong>{serviceCategories.length - 1}</strong><span>خانواده محصول</span></div>
+          <div><strong>۲</strong><span>سطح ارائه خدمت</span></div>
         </div>
-      </PageIntro>
+      </PageHero>
 
-      <section className="section">
-        <div className="container service-explorer">
-          <div className="service-selector" role="group" aria-label="انتخاب سرویس برای مشاهده جزئیات">
-            {services.map((service) => (
+      <section className="section services-section">
+        <div className="container">
+          <div className="filters" aria-label="فیلتر سرویس‌ها">
+            <label className="search-field">
+              <Search size={18} aria-hidden="true" />
+              <span className="sr-only">جستجوی سرویس</span>
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="مثلاً پزشکی، قرارداد، املاک یا CRM..." />
+            </label>
+            <label className="select-field">
+              <SlidersHorizontal size={17} aria-hidden="true" />
+              <span className="sr-only">فاز اجرا</span>
+              <select value={phase} onChange={(event) => setPhase(event.target.value)}>
+                <option value="all">همه فازها</option>
+                {[1, 2, 3, 4].map((number) => <option key={number} value={number}>فاز {number}</option>)}
+              </select>
+            </label>
+          </div>
+
+          <div className="category-tabs" role="group" aria-label="دسته‌بندی سرویس‌ها">
+            {serviceCategories.map((item) => (
               <button
                 type="button"
-                key={service.id}
-                className={`service-selector__item service-color--${service.color} ${activeServiceId === service.id ? 'is-active' : ''}`}
-                onClick={() => setActiveServiceId(service.id)}
-                aria-pressed={activeServiceId === service.id}
+                key={item.id}
+                className={category === item.id ? 'is-active' : ''}
+                onClick={() => setCategory(item.id)}
               >
-                <span className="service-icon"><ServiceIcon serviceId={service.id} /></span>
-                <span>
-                  <strong>{service.name}</strong>
-                  <small>{service.status}</small>
-                </span>
-                <ArrowLeft size={17} aria-hidden="true" />
+                {item.label}
               </button>
             ))}
           </div>
 
-          <article className={`service-detail service-color--${activeService.color}`} aria-live="polite">
-            <div className="service-detail__header">
-              <span className="service-detail__icon"><ServiceIcon serviceId={activeService.id} size={30} /></span>
-              <div>
-                <StatusBadge tone={activeService.statusTone}>{activeService.status}</StatusBadge>
-                <h2>{activeService.name}</h2>
-              </div>
-            </div>
-            <p className="service-detail__promise">{activeService.promise}</p>
-            <div className="service-detail__audience">
-              <span>مخاطب نخست</span>
-              <p>{activeService.audience}</p>
-            </div>
-            <div className="responsibility-grid">
-              <div>
-                <span className="responsibility-icon responsibility-icon--ai"><Bot size={20} /></span>
-                <h3>نقش پیشنهادی هوش مصنوعی</h3>
-                <p>{activeService.aiRole}</p>
-              </div>
-              <div>
-                <span className="responsibility-icon responsibility-icon--human"><UserRoundCheck size={20} /></span>
-                <h3>مسئولیت انسانی لازم</h3>
-                <p>{activeService.humanRole}</p>
-              </div>
-            </div>
-            <div className="boundary-note">
-              <AlertCircle size={20} />
-              <div><strong>مرز سرویس</strong><p>{activeService.boundary}</p></div>
-            </div>
-            <ol className="service-flow">
-              {activeService.steps.map((step, index) => (
-                <li key={step}><span>{index + 1}</span>{step}</li>
-              ))}
-            </ol>
-            {activeService.whyIllustrative && (
-              <div className="candidate-reason">
-                <Check size={19} />
-                <span><strong>وضعیت تصمیم:</strong> {activeService.whyIllustrative}</span>
-              </div>
+          <div className="results-line" aria-live="polite">
+            <strong>{filtered.length.toLocaleString('fa-IR')}</strong> سرویس مطابق فیلتر
+            {(query || category !== 'all' || phase !== 'all') && (
+              <button type="button" onClick={() => { setQuery(''); setCategory('all'); setPhase('all') }}>پاک‌کردن فیلترها</button>
             )}
-            {activeService.id === 'nutrition' && (
-              <Link className="button button--primary service-detail__cta" to="/nutrition">
-                پرونده کامل سرویس اول
-                <ArrowLeft size={17} aria-hidden="true" />
-              </Link>
-            )}
-          </article>
-        </div>
-      </section>
-
-      <section className="section section--tinted">
-        <div className="container portfolio-rules">
-          <SectionHeader
-            eyebrow="قواعد سبد محصول"
-            title="سرویس بعدی با تاریخ تقویم شروع نمی‌شود؛ با تحقق شرط عبور شروع می‌شود."
-            description="تصمیم افزودن سرویس جدید باید بر پایه شواهد محصول فعلی گرفته شود."
-          />
-          <div className="portfolio-rule-grid">
-            <article><span>۱</span><h3>ارزش روشن</h3><p>کاربر باید مسئله اصلی را حل‌شده بداند، نه اینکه فقط از رابط خوشش آمده باشد.</p></article>
-            <article><span>۲</span><h3>ایمنی قابل دفاع</h3><p>دامنه، توقف، ارجاع و مسئول پاسخ‌گو باید در عملیات واقعی آزموده شده باشند.</p></article>
-            <article><span>۳</span><h3>اقتصاد پایدار</h3><p>هزینه جذب و ارائه خدمت با درآمد و حفظ کاربر سازگار باشد.</p></article>
           </div>
-          <Link className="text-link" to="/roadmap">
-            دیدن شرط‌های عبور نقشه راه
-            <ArrowLeft size={17} />
-          </Link>
+
+          {filtered.length > 0 ? (
+            <div className="service-grid">
+              {filtered.map((service) => <ServiceCard key={service.id} service={service} />)}
+            </div>
+          ) : (
+            <div className="empty-state" role="status">
+              <strong>سرویسی با این ترکیب پیدا نشد.</strong>
+              <p>عبارت یا فیلترها را تغییر دهید.</p>
+            </div>
+          )}
         </div>
       </section>
     </>

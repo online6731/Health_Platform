@@ -1,8 +1,8 @@
 {
-  "name": "health-platform-blueprint",
+  "name": "serviceos-platform-blueprint",
   "private": true,
-  "version": "3.0.0",
-  "description": "Investor-ready pre-seed proposal for a service-first AI-enabled health platform",
+  "version": "4.0.0",
+  "description": "Telegram-first AI service network, business storefront platform, and hybrid SaaS marketplace proposal",
   "type": "module",
   "scripts": {
     "dev": "vite",

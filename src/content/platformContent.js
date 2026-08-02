@@ -1,0 +1,169 @@
+export const platformMeta = {
+  workingName: 'ServiceOS',
+  persianName: 'شبکه خدمات هوشمند',
+  thesis: 'هوش مصنوعی پاسخ اولیه را می‌دهد؛ شبکه متخصصان و کسب‌وکارها کار را به نتیجه می‌رساند.',
+  catalogMode: 'open-and-evidence-led',
+  launchSurface: 'Telegram Bot + Mini App',
+}
+
+export const serviceCategories = [
+  { id: 'all', label: 'همه سرویس‌ها' },
+  { id: 'core', label: 'هسته هوشمند' },
+  { id: 'health', label: 'سلامت و سبک زندگی' },
+  { id: 'professional', label: 'خدمات حرفه‌ای' },
+  { id: 'local', label: 'زندگی و خدمات محلی' },
+  { id: 'business', label: 'ابزار کسب‌وکار' },
+  { id: 'network', label: 'زیرساخت شبکه' },
+]
+
+export const services = [
+  { id: 1, slug: 'omni-agent', name: 'دستیار چندوجهی عمومی', en: 'Omni Agent', category: 'core', phase: 1, featured: true, summary: 'دروازه ورود شبکه برای چت، صدا، تصویر، فایل و انجام کار با مدل مناسب.', capability: 'مسیریابی مدل، حافظه، ابزارها و تشخیص نیت', human: 'ارجاع به سرویس تخصصی یا متخصص واقعی', monetization: 'اشتراک عمومی و بسته مصرف' },
+  { id: 2, slug: 'skin-beauty', name: 'دستیار پوست، مو و زیبایی', en: 'Derma Agent', category: 'health', phase: 1, featured: true, summary: 'راهنمای مراقبتی، تحلیل تصویر و ساخت روتین با مرزبندی روشن پزشکی.', capability: 'Vision، تحلیل ترکیبات و ردیابی روتین', human: 'متخصص پوست، کلینیک یا داروخانه معتبر', monetization: 'پرمیوم تخصصی، فروش و ارجاع' },
+  { id: 3, slug: 'medical-check', name: 'مشاوره اولیه پزشکی و آزمایش', en: 'MedCheck', category: 'health', phase: 2, featured: true, summary: 'شرح‌حال ساختاریافته، تریاژ و توضیح قابل‌فهم آزمایش بدون تشخیص قطعی.', capability: 'Triage، OCR اسناد و خلاصه پرونده', human: 'پزشک، آزمایشگاه یا اورژانس', monetization: 'اشتراک تخصصی و نوبت/لید' },
+  { id: 4, slug: 'mental-wellbeing', name: 'سلامت روان و تراپی', en: 'Mind Agent', category: 'health', phase: 2, summary: 'گفت‌وگوی حمایتی، تمرین‌های خودیاری و ارجاع ایمن در شرایط پرخطر.', capability: 'گفت‌وگوی همدلانه، ارزیابی و تمرین', human: 'روان‌شناس یا روان‌پزشک', monetization: 'اشتراک و جلسه تخصصی' },
+  { id: 5, slug: 'nutrition', name: 'تغذیه و رژیم', en: 'Nutrition Agent', category: 'health', phase: 2, summary: 'برنامه غذایی، ثبت وعده، تحلیل عادت و پیگیری هدف‌های تغذیه‌ای.', capability: 'برنامه‌ساز، Vision غذا و مربی عادت', human: 'متخصص تغذیه یا فروشگاه منتخب', monetization: 'اشتراک، مشاوره و تجارت' },
+  { id: 6, slug: 'pharmacy', name: 'داروخانه و دارو', en: 'Pharma Agent', category: 'health', phase: 2, summary: 'اطلاعات دارویی معتبر، یادآوری و ثبت سفارش اقلام مجاز از داروخانه.', capability: 'جستجوی دارو، تداخل و مدیریت سفارش', human: 'داروساز و داروخانه دارای مجوز', monetization: 'اشتراک B2B و کارمزد سفارش' },
+  { id: 7, slug: 'fitness', name: 'ورزش و تناسب‌اندام', en: 'Fit Agent', category: 'health', phase: 3, summary: 'برنامه تمرینی شخصی، پایش اجرا و اصلاح تدریجی بر اساس بازخورد.', capability: 'برنامه‌ساز و تحلیل فرم تمرین', human: 'مربی یا فیزیوتراپیست', monetization: 'اشتراک و مربیگری' },
+  { id: 8, slug: 'sleep', name: 'خواب و سبک زندگی', en: 'Sleep Agent', category: 'health', phase: 3, summary: 'پایش خواب، انرژی و عادت‌های روزمره با برنامه‌های رفتاری کوتاه.', capability: 'دفترچه خواب و مداخله رفتاری', human: 'پزشک یا درمانگر خواب', monetization: 'اشتراک تخصصی' },
+  { id: 9, slug: 'women-health', name: 'سلامت زنان', en: 'Her Health', category: 'health', phase: 3, summary: 'چرخه، باروری، بارداری و سلامت زنان با مسیر ارجاع حساس و محرمانه.', capability: 'پایش چرخه، آموزش و تریاژ', human: 'ماما یا متخصص زنان', monetization: 'اشتراک و نوبت' },
+  { id: 10, slug: 'child-family', name: 'کودک و خانواده', en: 'Family Agent', category: 'health', phase: 3, summary: 'رشد، تغذیه، واکسن و راهنمای والدین با حساب خانوادگی.', capability: 'پروفایل رشد و یادآوری', human: 'متخصص اطفال یا مشاور خانواده', monetization: 'اشتراک خانوادگی' },
+  { id: 11, slug: 'senior-care', name: 'سالمند و مراقب', en: 'Care Agent', category: 'health', phase: 4, summary: 'هماهنگی دارو، مراقبت و گزارش روزانه برای سالمند و خانواده.', capability: 'یادآوری، پایش و گزارش مراقب', human: 'پزشک، پرستار یا مراقب', monetization: 'اشتراک خانوادگی و خدمات' },
+  { id: 12, slug: 'dental', name: 'سلامت دهان و دندان', en: 'Dental Agent', category: 'health', phase: 3, summary: 'ارزیابی اولیه درد و مراقبت روزانه و هدایت به دندان‌پزشک مناسب.', capability: 'شرح‌حال، آموزش و پیگیری', human: 'دندان‌پزشک یا کلینیک', monetization: 'لید، نوبت و اشتراک کلینیک' },
+  { id: 13, slug: 'chronic-care', name: 'مدیریت بیماری‌های مزمن', en: 'Chronic Care', category: 'health', phase: 4, summary: 'پیگیری شاخص‌ها، عادت‌ها و برنامه مراقبتی برای بیماری‌های طولانی‌مدت.', capability: 'پایش روند و هشدار انحراف', human: 'تیم درمان', monetization: 'اشتراک بیمار و قرارداد سازمانی' },
+  { id: 14, slug: 'home-care', name: 'مراقبت و درمان در منزل', en: 'Home Care', category: 'health', phase: 4, summary: 'ثبت نیاز، تطبیق با ارائه‌دهنده و پیگیری اجرای خدمت در منزل.', capability: 'نیازسنجی و زمان‌بندی', human: 'پرستار، پزشک یا فیزیوتراپیست', monetization: 'کارمزد خدمت و SaaS' },
+  { id: 15, slug: 'lab-imaging', name: 'آزمایش و تصویربرداری', en: 'Lab Agent', category: 'health', phase: 3, summary: 'رزرو، نمونه‌گیری منزل، دریافت امن نتیجه و توضیح روند تغییرات.', capability: 'OCR، مقایسه و هماهنگی', human: 'آزمایشگاه یا مرکز تصویربرداری', monetization: 'کارمزد سفارش و اشتراک مرکز' },
+  { id: 16, slug: 'doctor-connect', name: 'پزشک و مشاور تخصصی', en: 'Doctor Connect', category: 'health', phase: 3, summary: 'انتخاب تخصص، رزرو ویزیت و آماده‌سازی خلاصه پیش از مراجعه.', capability: 'Matching، نوبت و خلاصه پرونده', human: 'پزشک و متخصص تأییدشده', monetization: 'کارمزد نوبت و اشتراک B2B' },
+  { id: 17, slug: 'health-record', name: 'پرونده سلامت هوشمند', en: 'Health Vault', category: 'health', phase: 4, summary: 'مرکز امن نسخه، آزمایش، حساسیت و سابقه سلامت قابل کنترل توسط کاربر.', capability: 'استخراج، ساختاردهی و اشتراک امن', human: 'ارائه‌دهندگان مجاز با رضایت کاربر', monetization: 'اشتراک ذخیره‌سازی و B2B' },
+  { id: 18, slug: 'legal', name: 'مشاور حقوقی', en: 'Legal Agent', category: 'professional', phase: 1, featured: true, summary: 'پاسخ اولیه حقوقی، جمع‌آوری اطلاعات و ساخت پیش‌نویس‌های قابل بازبینی.', capability: 'RAG قوانین، فرم‌ساز و تحلیل سند', human: 'وکیل یا مؤسسه حقوقی', monetization: 'اشتراک، سند و لید' },
+  { id: 19, slug: 'contracts', name: 'قرارداد و اسناد', en: 'Contract Agent', category: 'professional', phase: 2, summary: 'ساخت، مقایسه و علامت‌گذاری ریسک قرارداد برای افراد و کسب‌وکارها.', capability: 'تحلیل بند، مقایسه و نسخه‌بندی', human: 'وکیل متخصص قرارداد', monetization: 'پرداخت به‌ازای سند و اشتراک' },
+  { id: 20, slug: 'tax-accounting', name: 'مالیات و حسابداری', en: 'Tax Agent', category: 'professional', phase: 3, summary: 'راهنمای فرایندها، چک‌لیست مدارک و اتصال به حسابدار یا مشاور مالیاتی.', capability: 'محاسبه اولیه و مدیریت مدارک', human: 'حسابدار یا مشاور مالیاتی', monetization: 'اشتراک و پرونده' },
+  { id: 21, slug: 'business-advisor', name: 'مشاور کسب‌وکار', en: 'Business Agent', category: 'professional', phase: 2, summary: 'تحلیل مسئله، برنامه اقدام و تولید اسناد اولیه برای کسب‌وکارهای کوچک.', capability: 'برنامه‌ریزی، تحلیل و گزارش', human: 'مشاور تخصصی', monetization: 'اشتراک حرفه‌ای' },
+  { id: 22, slug: 'career', name: 'شغل و رزومه', en: 'Career Agent', category: 'professional', phase: 2, summary: 'ساخت رزومه، آمادگی مصاحبه و تطبیق مهارت با فرصت‌های شغلی.', capability: 'رزومه، تمرین و Matching', human: 'منتور یا استخدام‌کننده', monetization: 'اشتراک و استخدام موفق' },
+  { id: 23, slug: 'education', name: 'آموزش و معلم خصوصی', en: 'Tutor Agent', category: 'professional', phase: 3, summary: 'یادگیری شخصی‌سازی‌شده، تمرین و اتصال به مدرس برای ادامه مسیر.', capability: 'درس‌یار، آزمون و برنامه مطالعه', human: 'مدرس یا آموزشگاه', monetization: 'اشتراک و کلاس' },
+  { id: 24, slug: 'language-writing', name: 'زبان، ترجمه و نگارش', en: 'Language Agent', category: 'professional', phase: 2, summary: 'ترجمه، بازنویسی، مکالمه و تولید متن حرفه‌ای در یک دستیار.', capability: 'متن، صدا و بازخورد زبانی', human: 'مترجم یا ویراستار', monetization: 'اشتراک و بسته مصرف' },
+  { id: 25, slug: 'research-docs', name: 'پژوهش و تحلیل اسناد', en: 'Research Agent', category: 'professional', phase: 2, summary: 'جستجو، خلاصه‌سازی و ساخت گزارش منبع‌دار از فایل‌ها و منابع.', capability: 'Web، RAG و گزارش‌ساز', human: 'پژوهشگر یا مشاور', monetization: 'اعتبار پردازش و تیمی' },
+  { id: 26, slug: 'real-estate', name: 'املاک و مسکن', en: 'Estate Agent', category: 'local', phase: 1, featured: true, summary: 'کشف نیاز ملک، جستجوی معنایی فایل‌ها و ارتباط با مشاور تأییدشده.', capability: 'Matching، مقایسه و تحلیل منطقه', human: 'مشاور املاک یا مالک', monetization: 'اشتراک آژانس، لید و موفقیت' },
+  { id: 27, slug: 'insurance', name: 'بیمه', en: 'Insurance Agent', category: 'local', phase: 3, summary: 'مقایسه پوشش‌ها، جمع‌آوری مدارک و هدایت کاربر به نماینده مناسب.', capability: 'مقایسه، چک‌لیست و پیگیری', human: 'نماینده یا کارشناس بیمه', monetization: 'لید و کارمزد فروش' },
+  { id: 28, slug: 'travel-visa', name: 'سفر و ویزا', en: 'Travel Agent', category: 'local', phase: 3, summary: 'طراحی سفر، چک‌لیست مدارک و اتصال به ارائه‌دهندگان معتبر.', capability: 'برنامه سفر و مدیریت مدارک', human: 'آژانس یا مشاور ویزا', monetization: 'اشتراک و کارمزد رزرو' },
+  { id: 29, slug: 'personal-finance', name: 'مالی شخصی و بودجه', en: 'Money Agent', category: 'local', phase: 3, summary: 'بودجه‌بندی و آموزش مالی عمومی بدون فروش یا توصیه سرمایه‌گذاری قطعی.', capability: 'دسته‌بندی هزینه و سناریوسازی', human: 'مشاور مالی دارای صلاحیت', monetization: 'اشتراک' },
+  { id: 30, slug: 'auto', name: 'خودرو و عیب‌یابی اولیه', en: 'Auto Agent', category: 'local', phase: 2, summary: 'تحلیل شرح، صدا یا تصویر مشکل و معرفی تعمیرگاه یا قطعه مناسب.', capability: 'تحلیل چندوجهی و برآورد اولیه', human: 'تعمیرگاه یا امداد خودرو', monetization: 'لید، اشتراک و تجارت' },
+  { id: 31, slug: 'home-services', name: 'تعمیرات و خدمات منزل', en: 'Home Services', category: 'local', phase: 2, summary: 'تشخیص نوع خدمت، برآورد دامنه کار و تطبیق با متخصص محلی.', capability: 'نیازسنجی، قیمت اولیه و Matching', human: 'تکنسین یا شرکت خدماتی', monetization: 'لید و کارمزد خدمت' },
+  { id: 32, slug: 'beauty-booking', name: 'رزرو خدمات زیبایی', en: 'Beauty Booking', category: 'local', phase: 2, summary: 'کشف خدمت، مقایسه نمونه‌کار و رزرو مرکز زیبایی مناسب.', capability: 'جستجوی تصویری و زمان‌بندی', human: 'سالن یا کلینیک', monetization: 'رزرو و اشتراک مرکز' },
+  { id: 33, slug: 'smart-shopping', name: 'خرید و انتخاب محصول', en: 'Shop Agent', category: 'local', phase: 3, summary: 'مقایسه نیازمحور محصولات و اتصال شفاف به فروشندگان منتخب.', capability: 'مقایسه، نقد و جستجوی قیمت', human: 'فروشنده یا کارشناس محصول', monetization: 'افیلیت و اشتراک فروشنده' },
+  { id: 34, slug: 'food-local', name: 'غذا و خدمات پذیرایی', en: 'Food Agent', category: 'local', phase: 3, summary: 'انتخاب غذا، برنامه سفارش و معرفی رستوران یا تهیه‌کننده محلی.', capability: 'پیشنهاد شخصی و سفارش', human: 'رستوران یا کترینگ', monetization: 'کارمزد سفارش و تبلیغ' },
+  { id: 35, slug: 'events', name: 'رویداد و تشریفات', en: 'Event Agent', category: 'local', phase: 4, summary: 'تعریف نیاز رویداد و هماهنگی سالن، خدمات و تأمین‌کنندگان.', capability: 'برنامه‌ریز و تطبیق تأمین‌کننده', human: 'مجری یا مجموعه خدماتی', monetization: 'لید و کارمزد پروژه' },
+  { id: 36, slug: 'pet-care', name: 'حیوانات خانگی', en: 'Pet Agent', category: 'local', phase: 4, summary: 'مراقبت عمومی، یادآوری و اتصال به دامپزشک یا خدمات حیوانات.', capability: 'پروفایل حیوان و تریاژ اولیه', human: 'دامپزشک یا مرکز خدمات', monetization: 'اشتراک و رزرو' },
+  { id: 37, slug: 'outsourcing', name: 'برون‌سپاری و فریلنسر', en: 'Talent Agent', category: 'local', phase: 4, summary: 'تبدیل مسئله به شرح کار و تطبیق با نیروی متخصص یا تیم اجرایی.', capability: 'Brief، Matching و کنترل تحویل', human: 'فریلنسر یا آژانس', monetization: 'کارمزد پروژه' },
+  { id: 38, slug: 'local-search', name: 'جستجوی خدمات محلی', en: 'Near Agent', category: 'local', phase: 2, summary: 'جستجوی یکپارچه و محاوره‌ای میان تمام ویترین‌های ثبت‌شده شبکه.', capability: 'جستجوی معنایی، مکان و رتبه‌بندی', human: 'کسب‌وکار محلی', monetization: 'اشتراک فهرست و لید' },
+  { id: 39, slug: 'business-onboarding', name: 'ثبت و احراز کسب‌وکار', en: 'Business Onboarding', category: 'business', phase: 1, featured: true, summary: 'ثبت خودکار اطلاعات، مدارک و محدوده خدمت برای ورود به شبکه.', capability: 'فرم هوشمند، OCR و احراز', human: 'تیم کنترل کیفیت', monetization: 'هزینه راه‌اندازی و اشتراک' },
+  { id: 40, slug: 'storefront-builder', name: 'ویترین و کانال‌ساز هوشمند', en: 'Storefront Studio', category: 'business', phase: 1, featured: true, summary: 'ساخت Mini App و کانال استاندارد از اطلاعات خام یک کسب‌وکار.', capability: 'تولید محتوا، کاتالوگ و انتشار', human: 'صاحب کسب‌وکار', monetization: 'اشتراک SaaS' },
+  { id: 41, slug: 'lead-crm', name: 'مدیریت لید و مشتری', en: 'Lead CRM', category: 'business', phase: 2, summary: 'دریافت، امتیازدهی و پیگیری مشتریانی که از دستیارها آمده‌اند.', capability: 'Lead scoring و گردش کار', human: 'فروش یا پذیرش', monetization: 'اشتراک صندلی/شعبه' },
+  { id: 42, slug: 'booking', name: 'رزرو و نوبت‌دهی', en: 'Booking OS', category: 'business', phase: 2, summary: 'تقویم، ظرفیت، یادآوری و پرداخت رزرو برای تمام ارائه‌دهندگان.', capability: 'زمان‌بندی و اتوماسیون', human: 'پذیرش کسب‌وکار', monetization: 'اشتراک و کارمزد تراکنش' },
+  { id: 43, slug: 'content-studio', name: 'استودیوی محتوای کسب‌وکار', en: 'Content Studio', category: 'business', phase: 2, summary: 'تولید برنامه محتوایی، پست، پاسخ و کاتالوگ سازگار با برند.', capability: 'تولید چندرسانه‌ای و تقویم', human: 'مدیر محتوا', monetization: 'اشتراک و اعتبار تولید' },
+  { id: 44, slug: 'support-desk', name: 'پشتیبانی هوشمند', en: 'Support Agent', category: 'business', phase: 2, summary: 'پاسخ‌گویی اولیه، مدیریت درخواست و تحویل مکالمه به اپراتور.', capability: 'RAG کسب‌وکار و ticketing', human: 'اپراتور پشتیبانی', monetization: 'اشتراک بر اساس مصرف' },
+  { id: 45, slug: 'sales-assistant', name: 'فروش و پیشنهاد هوشمند', en: 'Sales Agent', category: 'business', phase: 3, summary: 'کشف نیاز، پاسخ محصول و ساخت پیشنهاد شخصی بدون مزاحمت تبلیغاتی.', capability: 'Qualification و پیشنهاددهی', human: 'کارشناس فروش', monetization: 'اشتراک و موفقیت' },
+  { id: 46, slug: 'unified-search', name: 'جستجوی معنایی یکپارچه', en: 'Service Search', category: 'network', phase: 1, summary: 'لایه مشترک کشف متخصص، کسب‌وکار و خدمت در تمام ربات‌ها.', capability: 'Vector search، فیلتر و رتبه‌بندی', human: 'تیم کیفیت داده', monetization: 'زیرساخت درآمد شبکه' },
+  { id: 47, slug: 'identity-wallet', name: 'هویت، کیف پول و اشتراک', en: 'Identity & Wallet', category: 'network', phase: 1, summary: 'یک حساب برای تمام ربات‌ها، اعتبار مصرف، پرداخت و کنترل رضایت.', capability: 'SSO، billing و consent', human: 'پشتیبانی مالی', monetization: 'توانمندساز همه پلن‌ها' },
+  { id: 48, slug: 'trust-reputation', name: 'اعتماد و اعتبارسنجی', en: 'Trust Layer', category: 'network', phase: 1, summary: 'احراز صلاحیت، بازخورد معتبر و پایش کیفیت ارائه‌دهندگان.', capability: 'Verification، reputation و moderation', human: 'بازبین تخصصی', monetization: 'اشتراک تأییدشده' },
+  { id: 49, slug: 'referral-ads', name: 'ارجاع و تبلیغات بومی', en: 'Referral Engine', category: 'network', phase: 2, summary: 'معرفی شفاف و مرتبط کسب‌وکار پس از پاسخ AI و فقط در زمان نیاز.', capability: 'Intent matching، auction و attribution', human: 'تیم سیاست‌گذاری تبلیغ', monetization: 'لید، موفقیت و جایگاه ویژه' },
+  { id: 50, slug: 'orchestrator-analytics', name: 'ارکستریتور و تحلیل شبکه', en: 'Network Brain', category: 'network', phase: 1, summary: 'مدیریت مدل‌ها، حافظه، هزینه، ایمنی و شاخص‌های تمام سرویس‌ها.', capability: 'Routing، observability و evaluation', human: 'تیم محصول و ایمنی', monetization: 'کاهش هزینه و بهبود حاشیه سود' },
+]
+
+export const platformPillars = [
+  { number: '01', title: 'دستیار پرچمدار', text: 'یک ورودی چندوجهی برای جذب کاربر، شناخت نیاز و انجام کارهای عمومی.' },
+  { number: '02', title: 'عامل‌های تخصصی', text: 'پنجاه سرویس با تجربه، دانش، ابزار و مرز ایمنی متناسب با هر حوزه.' },
+  { number: '03', title: 'سیستم‌عامل کسب‌وکار', text: 'ثبت، ویترین، محتوا، رزرو و CRM برای آوردن خدمات فیزیکی به شبکه.' },
+  { number: '04', title: 'موتور تطبیق و ارجاع', text: 'اتصال درخواست واقعی به ارائه‌دهنده مناسب با منطق کیفیت و شفافیت.' },
+]
+
+export const launchRoadmap = [
+  { phase: 'فاز ۰', time: '۴ هفته', title: 'هسته و اعتبارسنجی', outcome: 'ربات عمومی، حساب مشترک، سنجش تقاضا و کنترل هزینه', gate: 'حداقل ۳۰۰ کاربر آزمایشی و نرخ بازگشت هفتگی قابل دفاع' },
+  { phase: 'فاز ۱', time: '۸ تا ۱۲ هفته', title: 'Telegram-first MVP', outcome: 'Omni Agent، پوست، حقوقی، ویترین‌ساز و جستجوی اولیه', gate: 'اثبات پرداخت B2C و ثبت ۳۰ کسب‌وکار باکیفیت' },
+  { phase: 'فاز ۲', time: '۳ تا ۶ ماه', title: 'شبکه و درآمد', outcome: 'اشتراک‌ها، رزرو، CRM لید و تبلیغات بومی شفاف', gate: 'تکرارپذیری جذب و نرخ تبدیل ارجاع' },
+  { phase: 'فاز ۳', time: '۶ تا ۱۲ ماه', title: 'وب و توسعه عمودی‌ها', outcome: 'پنل وب، ۱۰ تا ۱۵ سرویس فعال و API مشترک', gate: 'اقتصاد واحد مثبت در چند عمودی منتخب' },
+  { phase: 'فاز ۴', time: '۱۲ تا ۲۴ ماه', title: 'اپ و مقیاس شبکه', outcome: 'اپ اختصاصی، ۵۰ سرویس و پوشش چندشهر/چندبازار', gate: 'مزیت شبکه‌ای و کیفیت پایدار ارائه‌دهنده' },
+]
+
+export const revenueStreams = [
+  { label: 'B2C Free', title: 'جذب و عادت', description: 'استفاده محدود از مدل پایه برای ورود آسان و ساخت رفتار روزانه.' },
+  { label: 'B2C Premium', title: 'اشتراک عمومی و تخصصی', description: 'مدل‌های قوی‌تر، صدا، تصویر، فایل و قابلیت‌های هر دستیار تخصصی.' },
+  { label: 'B2B SaaS', title: 'اشتراک کسب‌وکار', description: 'ویترین، کانال، رزرو، CRM، محتوا و حضور تأییدشده در جستجو.' },
+  { label: 'Transaction', title: 'لید و موفقیت', description: 'کارمزد شفاف برای رزرو، سفارش یا نتیجه قابل انتساب به شبکه.' },
+]
+
+export const serviceBlueprints = {
+  1: {
+    promise: 'یک گفت‌وگو برای فکرکردن، ساختن، جستجوکردن و رسیدن به خدمت واقعی.',
+    audience: ['کاربر عمومی فارسی‌زبان', 'کاربر پرمصرف AI', 'فردی که نمی‌داند از کدام سرویس شروع کند', 'کسب‌وکار نیازمند دستیار تیمی'],
+    jobs: ['پاسخ و ایده‌پردازی سریع', 'تحلیل عکس، صدا، فایل و سند', 'انتخاب خودکار مدل بهینه', 'انجام اقدام یا ارجاع به سرویس درست'],
+    levelOne: ['چت فارسی و انگلیسی', 'ورودی و خروجی صوتی', 'تحلیل تصویر', 'پرسش از فایل و RAG شخصی', 'ترجمه، نگارش و خلاصه‌سازی', 'ساخت تصویر', 'حافظه اختیاری و قابل کنترل', 'انتخاب خودکار یا دستی مدل'],
+    levelTwo: ['ورود بی‌اصطکاک به عامل تخصصی', 'نمایش متخصص یا کسب‌وکار مرتبط بعد از تشخیص نیاز', 'رزرو یا ارسال درخواست بدون تکرار اطلاعات', 'بازگشت نتیجه خدمت به تاریخچه مرکزی'],
+    screens: ['خانه و اقدام‌های سریع', 'گفت‌وگوی چندوجهی', 'انتخاب مدل و حالت کار', 'فایل‌ها و حافظه', 'کیف پول و مصرف', 'پیشنهادهای خدمت با برچسب شفاف'],
+    tiers: [
+      ['رایگان', 'پیام محدود، مدل پایه، بدون حافظه بلندمدت'],
+      ['Plus', 'سقف بیشتر، صدا و تصویر، تاریخچه و ابزارهای اصلی'],
+      ['Pro', 'مدل‌های قوی، فایل بزرگ، Research و اولویت پردازش'],
+      ['Team', 'فضای مشترک، دانش سازمانی، کنترل و گزارش مصرف'],
+    ],
+    guardrails: ['تشخیص حوزه حساس پیش از پاسخ', 'عدم نمایش تبلیغ در وضعیت اورژانسی یا تصمیم پرخطر', 'جداسازی حافظه شخصی از داده تبلیغاتی', 'اعلام روشن مدل، محدودیت و منبع هنگام نیاز', 'امکان حذف تاریخچه و حافظه توسط کاربر'],
+    metrics: ['فعال‌سازی در اولین جلسه', 'کاربران فعال هفتگی', 'هزینه هر کار موفق', 'نرخ حل در سطح ۱', 'نرخ ارجاع مفید و بدون مزاحمت', 'تبدیل Free به Plus'],
+    plan: [['هفته ۱–۲', 'Telegram Bot، حساب و چت متنی'], ['هفته ۳–۴', 'Router مدل، محدودیت مصرف و پرداخت'], ['هفته ۵–۶', 'صدا، تصویر و فایل'], ['هفته ۷–۸', 'Mini App، تاریخچه و کیف پول'], ['هفته ۹–۱۰', 'Intent و ارجاع به دو سرویس تخصصی'], ['هفته ۱۱–۱۲', 'Evaluation، ایمنی و بتای کنترل‌شده']],
+  },
+  2: {
+    promise: 'مربی مراقبت شخصی پوست و مو که می‌داند کجا باید متوقف شود و کاربر را به پزشک بسپارد.',
+    audience: ['افراد دارای دغدغه مراقبتی روزمره', 'خریداران محصولات پوستی', 'متقاضیان خدمات زیبایی', 'کلینیک‌ها و داروخانه‌ها'],
+    jobs: ['شناخت نوع و نیاز پوست', 'ساخت روتین قابل اجرا', 'بررسی ترکیبات محصول', 'ثبت و مقایسه روند', 'تشخیص زمان مراجعه حضوری'],
+    levelOne: ['آنبوردینگ نوع پوست و بودجه', 'راهنمای ثبت تصویر استاندارد', 'ارزیابی ظاهری غیرتشخیصی', 'روتین صبح و شب', 'OCR و تحلیل ترکیبات', 'بررسی هم‌زمانی محصولات', 'یادآوری و ثبت پایبندی', 'گزارش پیشرفت دوره‌ای'],
+    levelTwo: ['ارجاع ضایعات پرخطر به متخصص پوست', 'رزرو کلینیک بر اساس نیاز و موقعیت', 'خرید از داروخانه یا فروشگاه تأییدشده', 'انتقال خلاصه روتین و تصاویر با رضایت کاربر'],
+    screens: ['اسکن هدایت‌شده', 'پروفایل پوست و مو', 'روتین امروز', 'اسکن محصول', 'تایم‌لاین پیشرفت', 'کلینیک‌ها و فروشگاه‌های مرتبط'],
+    tiers: [
+      ['رایگان', 'پروفایل و روتین پایه، دو بررسی در ماه'],
+      ['Skin Plus', 'تحلیل بیشتر، روتین پویا و ردیاب روزانه'],
+      ['Expert Review', 'بازبینی دوره‌ای توسط متخصص'],
+      ['Clinic SaaS', 'ویترین، رزرو، CRM و دریافت لید'],
+    ],
+    guardrails: ['عدم تشخیص بیماری از تصویر', 'عدم تجویز داروی نسخه‌ای', 'توقف جریان در علائم خطر، خال مشکوک یا التهاب شدید', 'عدم رتبه‌دهی درمانی بر مبنای مبلغ تبلیغ', 'رضایت جداگانه برای ذخیره تصویر چهره'],
+    metrics: ['تکمیل پروفایل', 'پایبندی هفتگی به روتین', 'بهبود گزارش‌شده توسط کاربر', 'نرخ ارجاع بالینی مناسب', 'خرید تکراری بدون شکایت', 'نرخ حفظ اشتراک'],
+    plan: [['هفته ۱–۲', 'پرسش‌نامه و روتین متنی'], ['هفته ۳–۴', 'پایگاه ترکیبات و اسکن محصول'], ['هفته ۵–۶', 'ثبت عکس و کنترل کیفیت ورودی'], ['هفته ۷–۸', 'ردیاب و گزارش پیشرفت'], ['هفته ۹–۱۰', 'شبکه آزمایشی متخصص و فروشگاه'], ['هفته ۱۱–۱۲', 'بتای پولی و ممیزی ایمنی']],
+  },
+  3: {
+    promise: 'کمک می‌کند کاربر بفهمد مسئله چقدر فوری است و برای مراجعه آماده‌تر شود؛ نه اینکه جای پزشک را بگیرد.',
+    audience: ['افراد دارای علائم اولیه', 'دارندگان نتیجه آزمایش یا گزارش تصویربرداری', 'بیماران پیگیر روند شاخص‌ها', 'پزشکان و مراکز پاراکلینیکی'],
+    jobs: ['شرح‌حال منظم', 'تشخیص فوریت', 'فهم نتیجه آزمایش', 'ساخت خلاصه برای پزشک', 'رزرو مسیر بعدی'],
+    levelOne: ['شرح‌حال تطبیقی', 'تریاژ سبز/زرد/قرمز', 'شناسایی علائم خطر', 'OCR آزمایش', 'توضیح شاخص‌ها با دامنه مرجع همان آزمایشگاه', 'خلاصه گزارش رادیولوژی', 'مقایسه روند نتایج', 'چک‌لیست پرسش از پزشک'],
+    levelTwo: ['تماس فوری با مسیر اورژانس در وضعیت قرمز', 'انتخاب تخصص مناسب', 'رزرو پزشک یا آزمایشگاه', 'نمونه‌گیری منزل', 'اشتراک خلاصه ساختاریافته با رضایت کاربر'],
+    screens: ['شروع تریاژ', 'شرح‌حال مرحله‌ای', 'اسکن آزمایش', 'تایم‌لاین شاخص‌ها', 'خلاصه قابل ارائه به پزشک', 'انتخاب و رزرو ارائه‌دهنده'],
+    tiers: [
+      ['رایگان', 'تریاژ پایه و یک سند در ماه'],
+      ['Med Plus', 'اسناد بیشتر، روندها و پرونده شخصی'],
+      ['Care Plan', 'پیگیری شاخص‌ها و بازبینی انسانی'],
+      ['Provider SaaS', 'نوبت، دریافت پرونده و پیگیری بیمار'],
+    ],
+    guardrails: ['عدم تشخیص قطعی و عدم تجویز یا تغییر دوز', 'نمایش فوری اقدام اورژانسی پیش از هر پیشنهاد تجاری', 'اعتبارسنجی واحد و دامنه مرجع هر آزمایش', 'عدم تحلیل مستقل تصویر پزشکی برای تشخیص', 'ثبت منشأ هر داده و رضایت صریح اشتراک‌گذاری'],
+    metrics: ['دقت طبقه‌بندی فوریت در ارزیابی بالینی', 'نرخ تکمیل شرح‌حال', 'زمان تا مسیر مناسب', 'کاهش تکرار اطلاعات در ویزیت', 'نرخ خطای استخراج آزمایش', 'رضایت پزشک و بیمار'],
+    plan: [['هفته ۱–۲', 'دامنه بالینی محدود و پروتکل خطر'], ['هفته ۳–۴', 'شرح‌حال و موتور قواعد'], ['هفته ۵–۶', 'OCR آزمایش و کنترل انسانی'], ['هفته ۷–۸', 'خلاصه پزشک و تاریخچه'], ['هفته ۹–۱۰', 'رزرو دو شریک پایلوت'], ['هفته ۱۱–۱۲', 'ارزیابی بالینی و انتشار محدود']],
+  },
+}
+
+export const businessFlow = [
+  ['ثبت', 'صاحب کسب‌وکار اطلاعات، محدوده خدمت و مدارک را وارد می‌کند.'],
+  ['ساخت', 'AI متن معرفی، خدمات، پرسش‌های متداول، کاتالوگ و ویترین را می‌سازد.'],
+  ['تأیید', 'هویت، صلاحیت و ادعاهای حساس پیش از انتشار کنترل می‌شوند.'],
+  ['کشف', 'ویترین در جستجوی معنایی و ربات‌های مرتبط قابل پیدا شدن می‌شود.'],
+  ['تبدیل', 'کاربر رزرو، سفارش یا درخواست مشاوره را بدون خروج از مسیر ثبت می‌کند.'],
+  ['رشد', 'کسب‌وکار لید، نرخ تبدیل، رضایت و عملکرد محتوای خود را می‌بیند.'],
+]
+
+export const businessPlans = [
+  { name: 'Starter', target: 'حضور پایه', features: ['ویترین استاندارد', 'پروفایل تأیید اولیه', 'لید محدود', 'آمار پایه'] },
+  { name: 'Growth', target: 'رشد و عملیات', features: ['Mini App اختصاصی', 'نوبت و CRM', 'محتوای AI', 'لید بیشتر'] },
+  { name: 'Scale', target: 'چندشعبه و تیم', features: ['چند شعبه/اپراتور', 'API و گزارش', 'اتوماسیون', 'پشتیبانی اولویت‌دار'] },
+]
+
+export const architectureLayers = [
+  { label: 'Experience', items: ['Telegram Bots', 'Telegram Mini Apps', 'Web', 'Mobile'] },
+  { label: 'Agents', items: ['Omni Agent', 'Vertical Agents', 'Business Agents', 'Human Handoff'] },
+  { label: 'Intelligence', items: ['Model Router', 'RAG', 'Vision & Voice', 'Safety Policies'] },
+  { label: 'Network', items: ['Identity', 'Wallet', 'Search', 'Referral', 'Reputation'] },
+  { label: 'Operations', items: ['Observability', 'Evaluation', 'Cost Control', 'Audit Trail'] },
+]

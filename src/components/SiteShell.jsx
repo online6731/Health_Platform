@@ -1,123 +1,75 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpLeft, Menu, Moon, ShieldCheck, Sun, X } from 'lucide-react'
+import { ArrowUpLeft, Menu, Radio, X } from 'lucide-react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { footerNavItems, navItems } from '../content/siteContent'
 import BrandMark from './BrandMark'
 
-function getInitialTheme() {
-  try {
-    const savedTheme = localStorage.getItem('health-platform-theme')
-    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
-  } catch {
-    // Storage can be unavailable in hardened or private browser contexts.
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+const navigation = [
+  { to: '/', label: 'چشم‌انداز' },
+  { to: '/services', label: 'نقشه سرویس‌ها' },
+  { to: '/business', label: 'پلتفرم کسب‌وکار' },
+  { to: '/roadmap', label: 'نقشه اجرا' },
+  { to: '/investor', label: 'مدل سرمایه‌گذاری' },
+]
+
+const titles = {
+  '/': 'ServiceOS | شبکه خدمات هوشمند، تلگرام‌اول',
+  '/services': 'نقشه سرویس‌ها | ServiceOS',
+  '/business': 'پلتفرم کسب‌وکار | ServiceOS',
+  '/roadmap': 'نقشه اجرا | ServiceOS',
+  '/investor': 'مدل سرمایه‌گذاری | ServiceOS',
+  '/trust': 'اعتماد، ایمنی و داده | ServiceOS',
 }
 
 export default function SiteShell() {
-  const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [theme, setTheme] = useState(getInitialTheme)
-  const menuButtonRef = useRef(null)
-  const initialRouteRef = useRef(true)
-
-  const skipToContent = (event) => {
-    event.preventDefault()
-    const main = document.getElementById('main-content')
-    main?.focus({ preventScroll: true })
-    main?.scrollIntoView({ block: 'start' })
-  }
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    try {
-      localStorage.setItem('health-platform-theme', theme)
-    } catch {
-      // The selected theme still applies for the current page session.
-    }
-    const themeMeta = document.querySelector('meta[name="theme-color"]')
-    themeMeta?.setAttribute('content', theme === 'dark' ? '#071613' : '#f4f7f2')
-  }, [theme])
+  const location = useLocation()
+  const menuRef = useRef(null)
 
   useEffect(() => {
     setMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
-    if (initialRouteRef.current) {
-      initialRouteRef.current = false
-    } else {
-      document.getElementById('main-content')?.focus({ preventScroll: true })
-    }
-    const pageTitles = {
-      '/': 'پلتفرم سلامت | پروپوزال سرمایه‌گذاری Pre-seed',
-      '/investor': 'پرونده سرمایه‌گذاری | پلتفرم سلامت',
-      '/model': 'مدل محصول | پلتفرم سلامت',
-      '/nutrition': 'تغذیه و عادت‌های سلامت | سرویس اول پلتفرم سلامت',
-      '/nutrition-market': 'بازار تغذیه و رژیم ایران | پلتفرم سلامت',
-      '/services': 'خانواده سرویس‌ها | پلتفرم سلامت',
-      '/roadmap': 'نقشه راه | پلتفرم سلامت',
-      '/trust': 'ایمنی و اعتماد | پلتفرم سلامت',
-      '/blueprint': 'طرح اجرایی | پلتفرم سلامت',
-      '/financials': 'مدل مالی و بازار | پلتفرم سلامت',
-      '/dataroom': 'دیتا روم | پلتفرم سلامت',
-      '/print': 'نسخه چاپ کامل | پلتفرم سلامت',
-    }
-    document.title = pageTitles[location.pathname] ?? 'صفحه پیدا نشد | پلتفرم سلامت'
+    document.title = titles[location.pathname]
+      ?? (location.pathname.startsWith('/services/') ? 'شناسنامه سرویس | ServiceOS' : 'ServiceOS')
   }, [location.pathname])
 
   useEffect(() => {
     if (!menuOpen) return undefined
-
-    const closeOnEscape = (event) => {
+    const onEscape = (event) => {
       if (event.key === 'Escape') {
         setMenuOpen(false)
-        menuButtonRef.current?.focus()
+        menuRef.current?.focus()
       }
     }
-
-    document.addEventListener('keydown', closeOnEscape)
-    return () => document.removeEventListener('keydown', closeOnEscape)
+    document.addEventListener('keydown', onEscape)
+    return () => document.removeEventListener('keydown', onEscape)
   }, [menuOpen])
 
   return (
-    <div className="site-shell">
-      <a className="skip-link" href="#main-content" onClick={skipToContent}>رفتن به محتوای اصلی</a>
-      <header className="site-header">
-        <div className="container header-inner">
+    <div className="app-shell">
+      <a className="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+      <header className="topbar">
+        <div className="container topbar__inner">
           <BrandMark />
-          <nav id="mobile-navigation" className={`primary-nav ${menuOpen ? 'is-open' : ''}`} aria-label="ناوبری اصلی">
-            {navItems.map((item) => (
-              <NavLink key={item.to} end={item.to === '/'} to={item.to}>
-                {item.label}
-              </NavLink>
+          <nav className={`nav ${menuOpen ? 'nav--open' : ''}`} aria-label="ناوبری اصلی">
+            {navigation.map((item) => (
+              <NavLink key={item.to} end={item.to === '/'} to={item.to}>{item.label}</NavLink>
             ))}
-            <Link className="mobile-nav-cta" to="/investor">
-              پرونده کامل سرمایه‌گذاری
-              <ArrowUpLeft size={17} aria-hidden="true" />
-            </Link>
           </nav>
-          <div className="header-actions">
-            <span className="concept-chip">
-              <span aria-hidden="true" />
-              پروپوزال Pre-seed
-            </span>
+          <div className="topbar__actions">
+            <span className="live-chip"><Radio size={14} aria-hidden="true" /> Telegram-first</span>
+            <Link className="button button--small button--ghost desktop-cta" to="/services/1">
+              سرویس اول
+              <ArrowUpLeft size={16} aria-hidden="true" />
+            </Link>
             <button
-              className="icon-button"
+              ref={menuRef}
+              className="menu-button"
               type="button"
-              onClick={() => setTheme((current) => (current === 'light' ? 'dark' : 'light'))}
-              aria-label={theme === 'light' ? 'فعال کردن تم تاریک' : 'فعال کردن تم روشن'}
-            >
-              {theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}
-            </button>
-            <button
-              ref={menuButtonRef}
-              className="icon-button menu-button"
-              type="button"
-              onClick={() => setMenuOpen((current) => !current)}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-navigation"
               aria-label={menuOpen ? 'بستن منو' : 'باز کردن منو'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((value) => !value)}
             >
-              {menuOpen ? <X size={21} /> : <Menu size={21} />}
+              {menuOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
@@ -127,31 +79,27 @@ export default function SiteShell() {
         <Outlet />
       </main>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <div className="footer-brand">
-            <BrandMark />
-            <p>یک عمودی قابل‌دفاع؛ سپس مزیت پلتفرمی بر پایه شواهد، اقتصاد و اعتماد.</p>
-          </div>
+      <footer className="footer">
+        <div className="container footer__grid">
           <div>
-            <strong className="footer-title">مسیر مطالعه</strong>
-            <nav aria-label="ناوبری پایین صفحه">
-              {footerNavItems.map((item) => (
-                <Link key={item.to} to={item.to}>{item.label}</Link>
-              ))}
-            </nav>
+            <BrandMark />
+            <p>یک هسته هوشمند، چندین عامل تخصصی و شبکه‌ای از ارائه‌دهندگان واقعی.</p>
           </div>
-          <div className="footer-notice">
-            <ShieldCheck size={22} aria-hidden="true" />
-            <div>
-              <strong>وضعیت پروژه</strong>
-              <p>این نسخه، پرونده سرمایه‌گذاری Pre-seed و مدل سناریویی است؛ خدمت پزشکی عملیاتی یا عملکرد واقعی نیست.</p>
-            </div>
+          <nav aria-label="دسترسی سریع">
+            <strong>محصول</strong>
+            <Link to="/services">نقشه سرویس‌ها</Link>
+            <Link to="/business">ویترین و جستجوی کسب‌وکار</Link>
+            <Link to="/trust">اعتماد و ایمنی</Link>
+          </nav>
+          <div className="footer__status">
+            <span>وضعیت</span>
+            <strong>طرح محصول و نقشه اجرای Pre-seed</strong>
+            <p>نام ServiceOS هویت کاری پروژه است و نام تجاری نهایی محسوب نمی‌شود.</p>
           </div>
         </div>
-        <div className="container footer-bottom">
-          <span>© ۲۰۲۶ پلتفرم سلامت — نام و هویت تجاری در انتظار تصمیم بنیان‌گذار</span>
-          <Link to="/trust">اصول ایمنی و داده</Link>
+        <div className="container footer__bottom">
+          <span>© ۲۰۲۶ شبکه خدمات هوشمند</span>
+          <span>AI پاسخ می‌دهد · انسان نتیجه را کامل می‌کند</span>
         </div>
       </footer>
     </div>
