@@ -59,7 +59,7 @@ export default function SiteShell() {
     window.localStorage.setItem('serviceos-theme', theme)
     document.querySelector('meta[name="theme-color"]')?.setAttribute(
       'content',
-      theme === 'dark' ? '#070810' : '#f8f9ff',
+      theme === 'dark' ? '#080a13' : '#f7f8fd',
     )
   }, [theme])
 
