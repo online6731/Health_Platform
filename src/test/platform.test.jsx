@@ -40,7 +40,7 @@ describe('ServiceOS product proposal', () => {
     const slugs = new Set(services.map((service) => service.slug))
     const categoryIds = new Set(serviceCategories.map((category) => category.id))
 
-    expect(services.length).toBeGreaterThanOrEqual(40)
+    expect(services.length).toBeGreaterThanOrEqual(70)
     expect(ids.size).toBe(services.length)
     expect(slugs.size).toBe(services.length)
     expect(services.every((service) => (
@@ -49,6 +49,21 @@ describe('ServiceOS product proposal', () => {
       && service.phase >= 1 && service.phase <= 4
     ))).toBe(true)
     expect(Object.keys(serviceBlueprints)).toEqual(['1', '2', '3'])
+  })
+
+  it('covers language, research, media discovery and everyday assistant opportunities', () => {
+    const serviceNames = new Set(services.map((service) => service.name))
+    for (const name of [
+      'مترجم و ترجمه زنده',
+      'نگارش مقاله و ویراستاری',
+      'دستیار پژوهشی و مرور منابع',
+      'کشف موسیقی و ساخت پلی‌لیست',
+      'پیداکردن فیلم و سریال',
+      'آشپزی و دستور غذای هوشمند',
+    ]) {
+      expect(serviceNames.has(name)).toBe(true)
+    }
+    expect(serviceCategories.some((category) => category.id === 'media')).toBe(true)
   })
 
   it('searches and filters the service opportunity map', () => {

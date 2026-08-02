@@ -506,16 +506,17 @@
 .network-core__node span { font-size: .65rem; font-weight: 800; }
 .network-core__node small { color: #858ca2; font-family: ui-monospace, Consolas, monospace; font-size: .5rem; direction: ltr; }
 .network-core__node.is-selected small { color: rgba(7,17,15,.65); }
-.network-atlas__trunk { height: 54px; display: grid; grid-template-columns: repeat(6, 1fr); align-items: end; padding-inline: 5%; position: relative; }
+.network-atlas__trunk { height: 54px; display: grid; grid-template-columns: repeat(var(--lane-count), 1fr); align-items: end; padding-inline: 5%; position: relative; }
 .network-atlas__trunk span { position: absolute; width: 1px; height: 28px; inset: 0 50% auto auto; background: linear-gradient(var(--violet), rgba(118,86,233,.25)); }
 .network-atlas__trunk::after { position: absolute; height: 1px; inset: 27px 8.5% auto; background: linear-gradient(90deg, transparent, rgba(118,86,233,.38) 8%, rgba(25,205,176,.45) 50%, rgba(118,86,233,.38) 92%, transparent); content: ''; }
 .network-atlas__trunk i { width: 8px; height: 8px; z-index: 1; justify-self: center; margin-bottom: -4px; border: 2px solid var(--surface); border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 3px color-mix(in srgb, var(--violet) 12%, transparent); }
-.network-atlas__lanes { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 9px; }
+.network-atlas__lanes { display: grid; grid-template-columns: repeat(var(--lane-count), minmax(0, 1fr)); gap: 9px; }
 .network-lane { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--surface) 93%, var(--lane-color) 7%); }
 .network-lane--core { --lane-color: #7957eb; }
 .network-lane--health { --lane-color: #f2608a; }
 .network-lane--professional { --lane-color: #597ee8; }
 .network-lane--local { --lane-color: #f0a13e; }
+.network-lane--media { --lane-color: #e34f98; }
 .network-lane--business { --lane-color: #21b99f; }
 .network-lane--network { --lane-color: #8d62da; }
 .network-lane > header { min-height: 84px; display: flex; align-items: center; gap: 9px; padding: 13px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--lane-color) 11%, transparent); }

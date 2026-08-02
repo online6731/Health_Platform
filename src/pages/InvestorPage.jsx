@@ -95,7 +95,7 @@ export default function InvestorPage() {
       <section className="section">
         <div className="container investor-cta">
           <BarChart3 size={42} />
-          <div><span>سرمایه برای ساخت ۵۰ ربات نیست</span><h2>برای اثبات یک موتور تکرارپذیر ساخت، توزیع و درآمد است.</h2></div>
+          <div><span>سرمایه برای ساخت انبوه ربات‌ها نیست</span><h2>برای اثبات یک موتور تکرارپذیر ساخت، توزیع و درآمد است.</h2></div>
           <Link className="button button--primary" to="/roadmap">دیدن گیت‌های اجرا <ArrowLeft size={18} /></Link>
         </div>
       </section>

@@ -5,6 +5,7 @@ import {
   BriefcaseBusiness,
   Building2,
   ChevronLeft,
+  Clapperboard,
   HeartPulse,
   Network,
   Search,
@@ -21,6 +22,7 @@ const categoryIcons = {
   health: HeartPulse,
   professional: BriefcaseBusiness,
   local: Building2,
+  media: Clapperboard,
   business: Store,
   network: Network,
 }
@@ -42,6 +44,12 @@ const explicitRelations = {
   26: [1, 18, 27, 38, 39, 40, 41, 42, 46, 48, 49],
   39: [1, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
   40: [38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+  51: [1, 24, 25, 52, 53, 54, 46, 47, 50],
+  52: [1, 25, 51, 53, 54, 63, 46, 48, 50],
+  53: [1, 25, 51, 52, 54, 56, 62, 46, 48, 50],
+  59: [1, 60, 61, 62, 66, 67, 46, 47, 49, 50],
+  60: [1, 59, 61, 62, 63, 65, 67, 68, 46, 47, 49, 50],
+  69: [5, 33, 34, 70, 73, 74, 46, 47, 49, 50],
 }
 
 const sharedByCategory = {
@@ -49,6 +57,7 @@ const sharedByCategory = {
   health: [46, 47, 48, 49, 50],
   professional: [46, 47, 48, 49, 50],
   local: [46, 47, 48, 49, 50],
+  media: [46, 47, 48, 49, 50],
   business: [46, 47, 48, 49, 50],
   network: [46, 47, 48, 49, 50],
 }
@@ -74,6 +83,7 @@ export default function ServiceNetworkMap() {
     [selected],
   )
   const selectedCategory = serviceCategories.find((item) => item.id === selected.category)
+  const catalogCategories = serviceCategories.filter((category) => category.id !== 'all')
 
   return (
     <div className="network-atlas">
@@ -118,10 +128,13 @@ export default function ServiceNetworkMap() {
         </div>
       </section>
 
-      <div className="network-atlas__trunk" aria-hidden="true"><span /><i /><i /><i /><i /><i /><i /></div>
+      <div className="network-atlas__trunk" style={{ '--lane-count': catalogCategories.length }} aria-hidden="true">
+        <span />
+        {catalogCategories.map((category) => <i key={category.id} />)}
+      </div>
 
-      <div className="network-atlas__lanes">
-        {serviceCategories.filter((category) => category.id !== 'all').map((category) => {
+      <div className="network-atlas__lanes" style={{ '--lane-count': catalogCategories.length }}>
+        {catalogCategories.map((category) => {
           const Icon = categoryIcons[category.id]
           const categoryServices = services.filter((service) => service.category === category.id)
           return (
