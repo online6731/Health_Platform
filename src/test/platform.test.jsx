@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
 import App from '../App'
+import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 
 function renderRoute(route = '/') {
@@ -30,9 +31,33 @@ describe('ServiceOS product proposal', () => {
     ['/services/1', 'دستیار چندوجهی عمومی'],
     ['/services/2', 'دستیار پوست، مو و زیبایی'],
     ['/services/3', 'مشاوره اولیه پزشکی و آزمایش'],
+    ['/docs', 'کاتالوگ اجرایی ServiceOS'],
+    ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
+    ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', (route, heading) => {
     renderRoute(route)
     expect(screen.getByRole('heading', { level: 1, name: heading })).not.toBeNull()
+  })
+
+  it('publishes a multi-hundred-page implementation catalog', () => {
+    const stats = getDocumentationStats()
+    expect(stats.serviceCount).toBe(services.length)
+    expect(stats.servicePages).toBe(services.length * serviceDocVolumes.length)
+    expect(stats.platformPages).toBe(platformChapters.length)
+    expect(stats.totalPages).toBeGreaterThan(300)
+
+    const document = getServiceDocument(services[0], 'engineering')
+    expect(document.sections.length).toBeGreaterThanOrEqual(10)
+    expect(document.sections.some((section) => section.title.includes('قرارداد API'))).toBe(true)
+    expect(document.sections.some((section) => section.title.includes('مدل داده'))).toBe(true)
+  })
+
+  it('searches the implementation catalog and links every service volume', () => {
+    renderRoute('/docs')
+    fireEvent.change(screen.getByPlaceholderText(/جستجوی نام، قابلیت/), { target: { value: 'ترجمه زنده' } })
+    expect(screen.getByRole('heading', { name: 'مترجم و ترجمه زنده' })).not.toBeNull()
+    expect(screen.queryByRole('heading', { name: 'مشاور حقوقی' })).toBeNull()
+    expect(screen.getAllByRole('link', { name: 'مهندسی' }).length).toBe(1)
   })
 
   it('keeps the opportunity catalog structured without treating the count as a product promise', () => {

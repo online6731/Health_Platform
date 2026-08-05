@@ -126,6 +126,15 @@ export default function ServiceDetailPage() {
             {previous ? <Link to={`/services/${previous.id}`}><ArrowRight size={17} /><span><small>قبلی</small>{previous.name}</span></Link> : <span />}
             {next ? <Link to={`/services/${next.id}`}><span><small>بعدی</small>{next.name}</span><ArrowLeft size={17} /></Link> : <span />}
           </nav>
+
+          <div className="service-docs-cta">
+            <div>
+              <span className="eyebrow">IMPLEMENTATION CATALOG</span>
+              <h2>برای ساخت این سرویس آماده‌اید؟</h2>
+              <p>تعریف محصول، تجربه، معماری، داده، API، ایمنی، آزمون و نقشه تحویل این سرویس در چهار جلد اجرایی مستند شده است.</p>
+            </div>
+            <Link className="button button--primary" to={`/docs/services/${service.slug}/product`}>مطالعه سند اجرایی کامل <ArrowLeft size={17} /></Link>
+          </div>
         </div>
       </section>
     </>

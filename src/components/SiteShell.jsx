@@ -6,6 +6,7 @@ import BrandMark from './BrandMark'
 const navigation = [
   { to: '/', label: 'چشم‌انداز' },
   { to: '/services', label: 'نقشه سرویس‌ها' },
+  { to: '/docs', label: 'کاتالوگ اجرایی' },
   { to: '/business', label: 'پلتفرم کسب‌وکار' },
   { to: '/roadmap', label: 'نقشه اجرا' },
   { to: '/investor', label: 'مدل سرمایه‌گذاری' },
@@ -14,6 +15,7 @@ const navigation = [
 const titles = {
   '/': 'ServiceOS | شبکه خدمات هوشمند، تلگرام‌اول',
   '/services': 'نقشه سرویس‌ها | ServiceOS',
+  '/docs': 'کاتالوگ اجرایی محصول و مهندسی | ServiceOS',
   '/business': 'پلتفرم کسب‌وکار | ServiceOS',
   '/roadmap': 'نقشه اجرا | ServiceOS',
   '/investor': 'مدل سرمایه‌گذاری | ServiceOS',
@@ -39,7 +41,9 @@ export default function SiteShell() {
     setMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
     document.title = titles[location.pathname]
-      ?? (location.pathname.startsWith('/services/') ? 'شناسنامه سرویس | ServiceOS' : 'ServiceOS')
+      ?? (location.pathname.startsWith('/docs/')
+        ? 'مستندات اجرایی | ServiceOS'
+        : (location.pathname.startsWith('/services/') ? 'شناسنامه سرویس | ServiceOS' : 'ServiceOS'))
   }, [location.pathname])
 
   useEffect(() => {
@@ -116,6 +120,7 @@ export default function SiteShell() {
           <nav aria-label="دسترسی سریع">
             <strong>محصول</strong>
             <Link to="/services">نقشه سرویس‌ها</Link>
+            <Link to="/docs">کاتالوگ اجرایی</Link>
             <Link to="/business">ویترین و جستجوی کسب‌وکار</Link>
             <Link to="/trust">اعتماد و ایمنی</Link>
           </nav>
