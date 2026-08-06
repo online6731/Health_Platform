@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowLeft, BookOpen, Boxes, Braces, FileStack, Search, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, BookOpen, Bot, Boxes, Braces, FileStack, Search, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import {
   documentationMeta,
@@ -53,6 +53,18 @@ export default function DocsHomePage() {
           <article><Braces /><strong>قابل اجرا توسط تیم یا AI</strong><p>شناسه نیازمندی، قراردادهای پیشنهادی و Definition of Done برای حذف ابهام.</p></article>
           <article><ShieldCheck /><strong>ایمنی در طراحی</strong><p>کنترل ریسک، رضایت، تحویل انسانی و ممیزی بخشی از معماری پایه است.</p></article>
           <article><FileStack /><strong>مرجع زنده</strong><p>هر تصمیم باید همراه با تغییر محصول و کد به‌روزرسانی و نسخه‌گذاری شود.</p></article>
+        </div>
+      </section>
+
+      <section className="docs-codex-bridge-section">
+        <div className="container docs-codex-bridge">
+          <Bot size={32} />
+          <div>
+            <span>FROM CATALOG TO CODE</span>
+            <h2>این کاتالوگ را چطور به Codex بدهیم تا همه سرویس‌ها را مرحله‌به‌مرحله بسازد؟</h2>
+            <p>نقشه ظرفیت هر پرامپت، ترتیب دقیق فازها، گیت‌های تحویل و صدها پرامپت اختصاصی برای کل کاتالوگ در یک راهنمای مستقل آماده است.</p>
+          </div>
+          <Link className="button button--primary" to="/codex-execution">نقشه اجرای Codex <ArrowLeft size={18} /></Link>
         </div>
       </section>
 
@@ -112,4 +124,3 @@ export default function DocsHomePage() {
     </div>
   )
 }
-

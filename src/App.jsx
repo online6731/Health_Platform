@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import SiteShell from './components/SiteShell'
 import BusinessPage from './pages/BusinessPage'
+import CodexExecutionPage from './pages/CodexExecutionPage'
 import DocsHomePage from './pages/DocsHomePage'
 import HomePage from './pages/HomePage'
 import InvestorPage from './pages/InvestorPage'
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="docs" element={<DocsHomePage />} />
         <Route path="docs/platform/:chapterId" element={<PlatformDocsPage />} />
         <Route path="docs/services/:serviceId/:volumeId?" element={<ServiceDocsPage />} />
+        <Route path="codex-execution" element={<CodexExecutionPage />} />
         <Route path="business" element={<BusinessPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="investor" element={<InvestorPage />} />

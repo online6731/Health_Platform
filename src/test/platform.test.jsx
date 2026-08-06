@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
 import App from '../App'
+import { buildServicePrompts, controlPrompts, servicePromptStages, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 
@@ -32,6 +33,7 @@ describe('ServiceOS product proposal', () => {
     ['/services/2', 'دستیار پوست، مو و زیبایی'],
     ['/services/3', 'مشاوره اولیه پزشکی و آزمایش'],
     ['/docs', 'کاتالوگ اجرایی ServiceOS'],
+    ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', (route, heading) => {
@@ -50,6 +52,28 @@ describe('ServiceOS product proposal', () => {
     expect(document.sections.length).toBeGreaterThanOrEqual(10)
     expect(document.sections.some((section) => section.title.includes('قرارداد API'))).toBe(true)
     expect(document.sections.some((section) => section.title.includes('مدل داده'))).toBe(true)
+  })
+
+  it('publishes a capacity-aware Codex execution program for every service', () => {
+    const generated = services.flatMap((service) => buildServicePrompts(service))
+    const promptIds = new Set(generated.map((item) => item.promptId))
+
+    expect(sharedPrompts.length).toBeGreaterThanOrEqual(35)
+    expect(controlPrompts).toHaveLength(4)
+    expect(servicePromptStages).toHaveLength(7)
+    expect(generated).toHaveLength(services.length * servicePromptStages.length)
+    expect(promptIds.size).toBe(generated.length)
+    expect(generated.every((item) => item.body.length > 200 && item.promptId)).toBe(true)
+  })
+
+  it('lets the execution guide select a service and exposes its prompt sequence', () => {
+    renderRoute('/codex-execution')
+    expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
+    fireEvent.change(screen.getByRole('combobox', { name: 'انتخاب از کل کاتالوگ' }), { target: { value: '18' } })
+    expect(screen.getByText('مشاور حقوقی')).not.toBeNull()
+    expect(screen.getByText('SVC-01-18')).not.toBeNull()
+    expect(screen.getByRole('link', { name: /کاتالوگ این سرویس/ }).getAttribute('href')).toContain('/docs/services/legal/product')
   })
 
   it('searches the implementation catalog and links every service volume', () => {

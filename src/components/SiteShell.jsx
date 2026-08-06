@@ -7,6 +7,7 @@ const navigation = [
   { to: '/', label: 'چشم‌انداز' },
   { to: '/services', label: 'نقشه سرویس‌ها' },
   { to: '/docs', label: 'کاتالوگ اجرایی' },
+  { to: '/codex-execution', label: 'ساخت با Codex' },
   { to: '/business', label: 'پلتفرم کسب‌وکار' },
   { to: '/roadmap', label: 'نقشه اجرا' },
   { to: '/investor', label: 'مدل سرمایه‌گذاری' },
@@ -16,6 +17,7 @@ const titles = {
   '/': 'ServiceOS | شبکه خدمات هوشمند، تلگرام‌اول',
   '/services': 'نقشه سرویس‌ها | ServiceOS',
   '/docs': 'کاتالوگ اجرایی محصول و مهندسی | ServiceOS',
+  '/codex-execution': 'نقشه اجرای ServiceOS با Codex',
   '/business': 'پلتفرم کسب‌وکار | ServiceOS',
   '/roadmap': 'نقشه اجرا | ServiceOS',
   '/investor': 'مدل سرمایه‌گذاری | ServiceOS',
@@ -121,6 +123,7 @@ export default function SiteShell() {
             <strong>محصول</strong>
             <Link to="/services">نقشه سرویس‌ها</Link>
             <Link to="/docs">کاتالوگ اجرایی</Link>
+            <Link to="/codex-execution">راهنمای ساخت با Codex</Link>
             <Link to="/business">ویترین و جستجوی کسب‌وکار</Link>
             <Link to="/trust">اعتماد و ایمنی</Link>
           </nav>
