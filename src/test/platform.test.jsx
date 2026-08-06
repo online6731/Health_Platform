@@ -2,8 +2,16 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
 import App from '../App'
-import { buildServicePrompts, controlPrompts, servicePromptStages, sharedPrompts } from '../content/codexExecutionContent'
+import { controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
+import {
+  buildConditionalServicePrompts,
+  buildServiceImplementationProfile,
+  executionProfileValidationRules,
+  implementationAreas,
+  releaseEnvironments,
+  serviceExecutionPromptStages,
+} from '../content/implementationDetailsContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 
 function renderRoute(route = '/') {
@@ -55,24 +63,74 @@ describe('ServiceOS product proposal', () => {
   })
 
   it('publishes a capacity-aware Codex execution program for every service', () => {
-    const generated = services.flatMap((service) => buildServicePrompts(service))
+    const promptsPerService = services.map((service) => buildConditionalServicePrompts(service))
+    const generated = promptsPerService.flat()
     const promptIds = new Set(generated.map((item) => item.promptId))
 
     expect(sharedPrompts.length).toBeGreaterThanOrEqual(35)
     expect(controlPrompts).toHaveLength(4)
-    expect(servicePromptStages).toHaveLength(7)
-    expect(generated).toHaveLength(services.length * servicePromptStages.length)
+    expect(serviceExecutionPromptStages).toHaveLength(23)
+    expect(promptsPerService.every((prompts) => prompts.length >= 13 && prompts.length <= 23)).toBe(true)
+    expect(new Set(promptsPerService.map((prompts) => prompts.length)).size).toBeGreaterThan(1)
     expect(promptIds.size).toBe(generated.length)
-    expect(generated.every((item) => item.body.length > 200 && item.promptId)).toBe(true)
+    expect(generated.every((item) => (
+      item.body.length > 200
+      && item.promptId
+      && item.body.includes('پیش‌شرط:')
+      && item.body.includes('معیار پذیرش:')
+      && item.body.includes('Rollback:')
+    ))).toBe(true)
+
+    const networkService = services.find((service) => service.category === 'network')
+    const networkStageIds = buildConditionalServicePrompts(networkService).map((prompt) => prompt.id)
+    expect(networkStageIds).not.toContain('EP-10')
+    expect(networkStageIds).not.toContain('EP-11')
+  })
+
+  it('defines an isolated beta-to-production release path and complete implementation registry', () => {
+    const environmentIds = releaseEnvironments.map((environment) => environment.id)
+
+    expect(environmentIds).toEqual(['local', 'preview', 'integration', 'alpha', 'beta', 'canary', 'ga'])
+    expect(environmentIds).toEqual(expect.arrayContaining(['beta', 'canary', 'ga']))
+    expect(implementationAreas.length).toBeGreaterThanOrEqual(25)
+    expect(implementationAreas.every((area) => (
+      area.id
+      && area.title
+      && area.summary
+      && area.decisions.length > 0
+      && area.inventory.length > 0
+      && area.contracts.length > 0
+      && area.operations.length > 0
+      && area.failures.length > 0
+      && area.tests.length > 0
+      && area.done
+    ))).toBe(true)
+  })
+
+  it('builds a service implementation profile and validates release blockers', () => {
+    const service = services.find((item) => item.id === 18)
+    const profile = buildServiceImplementationProfile(service)
+
+    expect(profile.serviceId).toBe(service.id)
+    expect(profile.title).toBe(service.name)
+    expect(profile.fleet).toHaveLength(4)
+    expect(profile.requiredRegistries).toContain('ReleaseManifest')
+    expect(profile.mandatoryGates).toContain('Closed Beta Evidence')
+    expect(profile.openDecisions.length).toBeGreaterThanOrEqual(4)
+    expect(executionProfileValidationRules.length).toBeGreaterThanOrEqual(10)
+    expect(executionProfileValidationRules.every(([ruleId, rule]) => ruleId && rule)).toBe(true)
+    expect(executionProfileValidationRules.some(([ruleId]) => ruleId === 'REL-001')).toBe(true)
   })
 
   it('lets the execution guide select a service and exposes its prompt sequence', () => {
     renderRoute('/codex-execution')
     expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /مسیر انتشار/ })).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /رجیستری جزئیات اجرایی/ })).not.toBeNull()
     fireEvent.change(screen.getByRole('combobox', { name: 'انتخاب از کل کاتالوگ' }), { target: { value: '18' } })
-    expect(screen.getByText('مشاور حقوقی')).not.toBeNull()
-    expect(screen.getByText('SVC-01-18')).not.toBeNull()
+    expect(screen.getAllByText('مشاور حقوقی').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByText('EP-01-18')).not.toBeNull()
     expect(screen.getByRole('link', { name: /کاتالوگ این سرویس/ }).getAttribute('href')).toContain('/docs/services/legal/product')
   })
 
