@@ -55,6 +55,12 @@ import {
   telegramOfficialReferences,
   telegramOwnershipModels,
 } from '../content/implementationDetailsContent'
+import {
+  autonomyGroups,
+  ownerHandoffMeta,
+  ownerInputTemplate,
+  telegramAutomationFacts,
+} from '../content/ownerHandoffContent'
 import { services } from '../content/platformContent'
 
 const phaseFilters = ['همه', ...new Set(sharedPrompts.map((item) => item.phase))]
@@ -138,6 +144,7 @@ export default function CodexExecutionPage() {
         <div className="container">
           {[
             ['#autopilot', 'شروع خیلی ساده'],
+            ['#owner-handoff', 'فایل ورودی مالک'],
             ['#method', 'روش اجرا'],
             ['#capacity', 'ظرفیت هر پرامپت'],
             ['#phases', 'فازها و گیت‌ها'],
@@ -154,11 +161,11 @@ export default function CodexExecutionPage() {
 
       <section className="codex-plan__section codex-plan__section--dark codex-autopilot" id="autopilot">
         <div className="container">
-          <PlanHeading eyebrow="SERVICEOS AUTOPILOT" title="یک‌بار Master Prompt؛ بعد فقط «ادامه بده»" description="تو دیگر شناسه پرامپت، ترتیب فاز یا گیت را مدیریت نمی‌کنی. دستور اول، حافظه اجرایی را داخل مخزن می‌سازد و از آن به بعد Codex در هر نوبت فقط یک Next Action معتبر را اجرا می‌کند." invert />
+          <PlanHeading eyebrow="SERVICEOS AUTOPILOT" title="یک‌بار فایل ورودی و Master Prompt؛ بعد فقط «ادامه بده»" description="تو دیگر شناسه پرامپت، ترتیب فاز، دسترسی یا گیت را نوبت‌به‌نوبت مدیریت نمی‌کنی. دستور اول، فایل واحد مالک و حافظه اجرایی را می‌خواند و از آن به بعد Codex در هر نوبت فقط یک Next Action معتبر را اجرا می‌کند." invert />
           <div className="codex-autopilot__grid">
             <article className="codex-autopilot__start">
               <header><span>فقط یک‌بار</span><strong>Master Prompt را به Codex بده</strong></header>
-              <p>این دستور مخزن را می‌خواند، قواعد دائمی را در AGENTS.md ثبت می‌کند، ممیزی و STATE/BACKLOG را می‌سازد و نقطه ادامه را مشخص می‌کند.</p>
+              <p>این دستور مخزن و فایل محلی Owner Inputs را می‌خواند، قواعد دائمی را در AGENTS.md ثبت می‌کند، همه نیازهای انسانی را یک‌جا گزارش می‌دهد و STATE/BACKLOG را می‌سازد.</p>
               <details>
                 <summary>مشاهده متن کامل Master Prompt <ArrowLeft size={17} /></summary>
                 <pre>{autopilotExecution.startPrompt}</pre>
@@ -180,7 +187,52 @@ export default function CodexExecutionPage() {
               ['۴', 'STATE را ثبت و منتظر «ادامه بده» می‌ماند'],
             ].map(([number, text]) => <div key={number}><span>{number}</span><p>{text}</p></div>)}
           </div>
-          <div className="codex-autopilot__guard"><ShieldCheck size={22} /><p><strong>اتوپایلوت به معنی بی‌احتیاطی نیست.</strong> هر بار فقط یک واحد قابل بازگشت اجرا می‌شود. Codex فقط برای Secret، هزینه بیرونی، اقدام Production یا تصمیم برگشت‌ناپذیر واقعاً متوقف می‌شود.</p></div>
+          <div className="codex-autopilot__guard"><ShieldCheck size={22} /><p><strong>اتوپایلوت به معنی بی‌احتیاطی نیست.</strong> هر بار فقط یک واحد قابل بازگشت اجرا می‌شود. کمبود دسترسی Production جلوی کار Local/Test را نمی‌گیرد؛ توقف فقط در همان گیتی رخ می‌دهد که واقعاً به حضور یا تأیید مالک نیاز دارد.</p></div>
+        </div>
+      </section>
+
+      <section className="codex-plan__section codex-owner-handoff" id="owner-handoff">
+        <div className="container">
+          <PlanHeading eyebrow="ONE-TIME OWNER HANDOFF" title="همه چیزهایی که ممکن است کار را متوقف کنند، یک‌جا" description="یک فایل محلی و خارج از Git را یک‌بار کامل کن. Codex در شروع همه کمبودها را برای Alpha، Beta و Production یک‌جا گزارش می‌کند، مقادیر قابل‌کشف را خودش پر می‌کند و تا گیت واقعی با Mock و Adapter جلو می‌رود." />
+
+          <div className="codex-owner-file">
+            <div className="codex-owner-file__icon"><FileCode2 size={28} /></div>
+            <div>
+              <span>{ownerHandoffMeta.version}</span>
+              <h3>فایل واحد تحویل مالک</h3>
+              <code dir="ltr">{ownerHandoffMeta.localPath}</code>
+              <p>Template آن در <code dir="ltr">{ownerHandoffMeta.templatePath}</code> داخل مخزن است؛ نسخه محلی در <code>.gitignore</code> قرار دارد و نباید Commit، Upload، Screenshot یا داخل چت Paste شود.</p>
+            </div>
+            <div className="codex-owner-file__actions">
+              <button type="button" onClick={() => copyPrompt('OWNER-INPUTS', ownerInputTemplate)}>{copiedId === 'OWNER-INPUTS' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'OWNER-INPUTS' ? 'فایل کپی شد' : 'کپی فایل Owner Inputs'}</button>
+              <a href="https://github.com/online6731/Health_Platform/blob/main/docs/templates/OWNER_INPUTS.example.yaml" target="_blank" rel="noreferrer">مشاهده Template در GitHub <ExternalLink size={14} /></a>
+            </div>
+          </div>
+
+          <div className="codex-owner-steps" aria-label="چهار قدم شروع خودکار">
+            {[
+              ['۱', 'Template را کپی کن', 'فقط مقادیر مالک، دسترسی‌ها و حساب‌های واقعاً مورد استفاده را پر کن.'],
+              ['۲', 'فایل را محلی نگه دار', 'مسیر ثابت است و Secret خام هرگز وارد Git یا گزارش‌ها نمی‌شود.'],
+              ['۳', 'Master Prompt را بده', 'Codex تمام dependencyها و اقدام‌های انسانی آینده را همان ابتدا دسته‌بندی می‌کند.'],
+              ['۴', 'فقط بگو ادامه بده', 'هر اختیار موجود خودکار مصرف می‌شود و فقط گیت اجتناب‌ناپذیر به مالک برمی‌گردد.'],
+            ].map(([number, title, text]) => <article key={number}><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></article>)}
+          </div>
+
+          <div className="codex-autonomy-grid">
+            {autonomyGroups.map((group) => (
+              <article className={`codex-autonomy-card codex-autonomy-card--${group.tone}`} key={group.id}>
+                <header><span>{group.id}</span><h3>{group.title}</h3></header>
+                <ul>{group.items.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul>
+              </article>
+            ))}
+          </div>
+
+          <div className="codex-telegram-automation">
+            <header><Bot size={28} /><div><span>TELEGRAM AUTOMATION · OFFICIAL PATH</span><h3>API Hash به‌تنهایی کافی نیست؛ بعد از Bootstrap، ساخت ربات و Token خودکار می‌شود</h3></div></header>
+            <dl>{telegramAutomationFacts.map(([term, description]) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}</dl>
+            <div className="codex-telegram-automation__note"><KeyRound size={20} /><p>OTP، رمز 2FA، Recovery Code و Session String خام را داخل این فایل یا چت نگذار. Codex اسکریپت Login تعاملی می‌سازد تا این موارد فقط مستقیم در Terminal وارد شوند؛ Session نهایی هم باید در Secret Store بماند.</p></div>
+            <div className="codex-owner-sources"><span>منابع رسمی</span><a href="https://core.telegram.org/api/bots/managed-bots" target="_blank" rel="noreferrer">Managed Bots <ExternalLink size={13} /></a><a href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noreferrer">API ID / Hash <ExternalLink size={13} /></a><a href="https://core.telegram.org/bots/features" target="_blank" rel="noreferrer">Bot Features <ExternalLink size={13} /></a></div>
+          </div>
         </div>
       </section>
 

@@ -1,0 +1,147 @@
+# ServiceOS Owner Inputs — EXAMPLE ONLY
+# Copy this file to .codex/owner-inputs.local.yaml and fill it locally.
+# The local file is gitignored. Never store OTP, Telegram 2FA password,
+# recovery codes, raw Telegram session strings, or real user health data here.
+
+meta:
+  version: 1
+  completed_by_owner: false
+  reviewed_at: ""
+  owner_timezone: "Asia/Tehran"
+
+project:
+  product_name: "ServiceOS"
+  legal_entity_name: ""
+  country_of_operation: "IR"
+  primary_language: "fa"
+  root_domain: ""
+  support_email: ""
+  privacy_email: ""
+  first_wave_service_ids: [1, 2, 18]
+  beta_user_limit: 50
+  beta_allowlist_telegram_user_ids: []
+
+authority:
+  create_branch: true
+  edit_repository: true
+  run_local_commands: true
+  install_dependencies: true
+  commit_owned_changes: true
+  push_feature_branches: true
+  open_pull_requests: true
+  merge_pull_requests: false
+  deploy_preview_and_test: true
+  deploy_alpha_and_beta: true
+  deploy_production: false
+  create_external_resources: true
+  send_external_messages: false
+  create_managed_telegram_bots: false
+  rotate_managed_bot_tokens: true
+  execute_paid_operations: false
+  monthly_external_spend_limit_usd: 0
+
+github:
+  repository_url: "https://github.com/online6731/Health_Platform"
+  default_branch: "main"
+  organization: "online6731"
+  credential_source: "existing-gh-session"
+
+telegram:
+  provisioning_mode: "managed-bots"
+  owner_telegram_user_id: ""
+  owner_phone_e164: ""
+  owner_has_premium: false
+  bot_username_prefix: "serviceos"
+  environments_to_provision: [test, alpha, beta, production]
+  max_bots_to_create_now: 4
+  auto_generate_available_usernames: true
+  api_id: ""
+  api_hash: ""
+  interactive_login_completed: false
+  mtproto_session_secret_ref: ""
+  manager_bot_username: ""
+  manager_bot_token: ""
+  bot_management_mode_enabled: false
+  never_store_otp_or_2fa_here: true
+
+ai:
+  primary_provider: "openai"
+  openai_api_key: ""
+  allowed_monthly_budget_usd: 0
+  allow_external_training_on_user_data: false
+  secondary_provider: ""
+  secondary_provider_api_key: ""
+
+infrastructure:
+  local_runtime: "docker-compose"
+  cloud_provider: ""
+  cloud_region: ""
+  cloud_project_id: ""
+  cloud_access_token: ""
+  database_provider: "postgres"
+  database_url_test: ""
+  database_url_beta: ""
+  database_url_production: ""
+  object_storage_provider: ""
+  object_storage_access_key: ""
+  object_storage_secret_key: ""
+  secret_manager: "local-encrypted-then-cloud-vault"
+
+domain_and_dns:
+  domain_already_purchased: false
+  dns_provider: ""
+  dns_zone_id: ""
+  dns_api_token: ""
+  allow_codex_dns_changes: false
+
+payments:
+  telegram_stars_for_digital_goods: true
+  stars_support_ready: false
+  physical_payment_provider: ""
+  merchant_id: ""
+  payment_api_key: ""
+  payment_webhook_secret: ""
+  kyc_completed: false
+  refund_authority_limit: 0
+
+notifications:
+  email_provider: ""
+  email_api_key: ""
+  sms_provider: ""
+  sms_api_key: ""
+  sender_id: ""
+
+legal_and_safety:
+  minimum_user_age: 18
+  terms_approved: false
+  privacy_policy_approved: false
+  health_disclaimer_approved: false
+  legal_disclaimer_approved: false
+  medical_risk_owner_name: ""
+  legal_risk_owner_name: ""
+  emergency_number_by_country:
+    IR: "115"
+  human_reviewers: []
+  prohibited_use_cases: []
+
+brand:
+  logo_file_path: ""
+  primary_color: ""
+  public_support_telegram: ""
+  reserved_bot_usernames: []
+
+mobile_later:
+  apple_developer_account_ready: false
+  google_play_account_ready: false
+  signing_secret_refs: []
+
+manual_actions_status:
+  create_initial_manager_bot_in_botfather: "pending"
+  enable_bot_management_mode: "pending"
+  obtain_telegram_api_id_hash: "pending"
+  complete_interactive_telegram_login: "pending"
+  purchase_or_connect_domain: "pending"
+  complete_payment_kyc: "pending"
+  approve_legal_documents: "pending"
+  approve_production_go_live: "pending"
+

@@ -1,7 +1,7 @@
 export const codexExecutionMeta = {
   title: 'نقشه اجرای ServiceOS با Codex',
-  subtitle: 'یک دستور شروع؛ بعد فقط «ادامه بده». Codex خودش وضعیت، گیت، پرامپت بعدی، تست و ثبت پیشرفت را از داخل مخزن مدیریت می‌کند.',
-  version: 'Execution Playbook v1.2 · Autopilot',
+  subtitle: 'یک فایل ورودی مالک و یک دستور شروع؛ بعد فقط «ادامه بده». Codex خودش وضعیت، گیت، دسترسی، پرامپت بعدی، تست و ثبت پیشرفت را از داخل مخزن مدیریت می‌کند.',
+  version: 'Execution Playbook v1.3 · Owner Handoff',
   servicePromptCount: '۱۳ تا ۲۳ پرامپت شرطی',
 }
 
@@ -199,16 +199,30 @@ https://github.com/online6731/Health_Platform
 قواعد راه‌اندازی اولیه:
 1. اگر مخزن در Workspace باز است از همان استفاده کن؛ اگر Workspace خالی است مخزن مرجع را Clone و باز کن. مخزن موجود را دوباره Clone نکن.
 2. وضعیت Git، شاخه، آخرین Commit، فایل‌های تغییرکرده و دستورهای واقعی lint/test/build را بررسی کن. هیچ تغییر متعلق به کاربر را حذف، reset یا بازنویسی نکن.
-3. این منابع را کامل بخوان و منبع حقیقت بدان:
+3. پیش از هر کار، فایل docs/templates/OWNER_INPUTS.example.yaml را بخوان. اگر .codex/owner-inputs.local.yaml وجود ندارد، آن را از همین Template بساز، مقادیر امن و قابل‌کشف مثل repository URL، branch و نام پروژه را خودت پر کن و بقیه را خالی بگذار. این فایل باید در .gitignore بماند و در صورت امکان permission محلی آن محدود شود.
+4. در هر نوبت .codex/owner-inputs.local.yaml را بخوان و فلگ‌های بخش authority را مجوز پایدار همان پروژه بدان. Secret خام را هرگز در پاسخ، Log، Commit، Issue، Screenshot، STATE یا فایل Status چاپ نکن؛ فقط missing/present/invalid و Secret Reference را گزارش کن.
+5. در اولین نوبت docs/execution/OWNER_INPUTS_STATUS.md را بساز یا به‌روز کن. این گزارش نباید Secret داشته باشد و باید تمام نیازهای انسانی را از همان ابتدا، نه قطره‌ای و مرحله‌به‌مرحله، در چهار گیت required_now، required_before_alpha، required_before_beta و required_before_production فهرست کند. برای هر مورد field، دلیل، آخرین زمان لازم، اقدام دقیق مالک و اینکه کار فعلی با mock/default ادامه می‌یابد یا نه را بنویس.
+6. نبود credential یا تأیید مربوط به Alpha/Beta/Production نباید معماری، کدنویسی، تست محلی، mock، adapter یا مستندسازی فعلی را متوقف کند. تا نزدیک‌ترین گیت ممکن با داده ساختگی و provider adapter ادامه بده و Blocker را فقط در گیت واقعی خودش فعال کن.
+7. این منابع را کامل بخوان و منبع حقیقت بدان:
    - AGENTS.md و AGENTS.override.mdهای موجود
+   - .codex/owner-inputs.local.yaml و docs/execution/OWNER_INPUTS_STATUS.md
    - src/content/codexExecutionContent.js
+   - src/content/ownerHandoffContent.js
    - src/content/implementationDetailsContent.js
    - کاتالوگ docs و صفحات سرویس‌ها
-4. اگر AGENTS.md وجود ندارد آن را ایجاد کن؛ اگر وجود دارد فقط یک بخش «ServiceOS Autopilot» به آن اضافه یا به‌روز کن و محتوای موجود را حفظ کن. در این بخش ثبت کن که عبارت «ادامه بده» یعنی اجرای دقیق پروتکل ادامه زیر.
-5. پوشه docs/execution را در صورت نبود ایجاد کن.
-6. اگر docs/execution/BASELINE_AUDIT.md وجود ندارد، در همین نوبت محتوای CTRL-01 را اجرا کن.
-7. اگر docs/execution/STATE.md یا BACKLOG.md وجود ندارد، بعد از ممیزی در همین نوبت CTRL-02 را اجرا و هر دو را بساز. STATE باید دقیقاً یک Next Action و شناسه پرامپت بعدی داشته باشد.
-8. اگر این فایل‌ها از قبل معتبرند، ممیزی یا کار انجام‌شده را تکرار نکن؛ وضعیت واقعی آن‌ها را مبنا قرار بده.
+8. اگر AGENTS.md وجود ندارد آن را ایجاد کن؛ اگر وجود دارد فقط یک بخش «ServiceOS Autopilot» به آن اضافه یا به‌روز کن و محتوای موجود را حفظ کن. در این بخش ثبت کن که عبارت «ادامه بده» یعنی اجرای دقیق پروتکل ادامه زیر و Owner Inputs منبع دائمی اختیار و وابستگی بیرونی است.
+9. پوشه docs/execution را در صورت نبود ایجاد کن.
+10. اگر docs/execution/BASELINE_AUDIT.md وجود ندارد، در همین نوبت محتوای CTRL-01 را اجرا کن و نقاط توقف فنی، حسابی، حقوقی، مالی، امنیتی و عملیاتی را هم ممیزی کن.
+11. اگر docs/execution/STATE.md یا BACKLOG.md وجود ندارد، بعد از ممیزی در همین نوبت CTRL-02 را اجرا و هر دو را بساز. STATE باید دقیقاً یک Next Action و شناسه پرامپت بعدی داشته باشد.
+12. اگر این فایل‌ها از قبل معتبرند، ممیزی یا کار انجام‌شده را تکرار نکن؛ وضعیت واقعی آن‌ها را مبنا قرار بده.
+
+قواعد اختصاصی اتوماسیون Telegram:
+- API ID و API Hash فقط credential اپلیکیشن MTProto هستند و به‌تنهایی مجوز حساب نیستند. Login حساب مالک باید یک‌بار به‌صورت تعاملی در Terminal محلی با شماره، OTP و در صورت وجود 2FA تکمیل شود. OTP، رمز 2FA، Recovery Code و Session String خام را هرگز در Chat یا Owner Inputs درخواست یا ذخیره نکن.
+- اگر نشست امن MTProto آماده نیست، اسکریپت Setup تعاملی و دستور دقیق اجرا را بساز و فقط برای ورود مستقیم OTP/2FA در Terminal متوقف شو؛ سپس Session را در Secret Store نگه دار و فقط Reference آن را ثبت کن.
+- Bootstrap نخستین Manager Bot و فعال‌کردن Bot Management Mode در BotFather اقدام اجتناب‌ناپذیر مالک است. همه نیازهای همین Bootstrap را یک‌جا در OWNER_INPUTS_STATUS گزارش کن.
+- وقتی authority.create_managed_telegram_bots=true، Manager Bot آماده، API ID/API Hash present و نشست امن معتبر است، از مسیر رسمی Managed Bots با bots.checkUsername و bots.createBot استفاده کن؛ سپس Token را با getManagedBotToken یا bots.exportBotToken بگیر، فوراً به Secret Store منتقل کن و فقط Secret Reference را ثبت کن.
+- Token را در source، YAML Commit‌شونده، STATE، Log یا خروجی چاپ نکن. Rotation/Revoke، profile، commands، menu button، webhook secret، Mini App URL، health check و audit را در همان Provisioning flow پیاده کن.
+- همه ۷۸ سرویس و چهار محیط را از روز اول نساز. فقط سرویس‌های موج فعال و محیط‌های مجاز را تا سقف telegram.max_bots_to_create_now Provision کن. محدودیت مالکیت Bot، username اشغال‌شده یا نیاز requestChat/Telegram Business را به‌عنوان Gate واقعی ثبت کن.
 
 پروتکل دائمی «ادامه بده» که باید در AGENTS.md ثبت شود:
 - ابتدا AGENTS، STATE، BACKLOG، آخرین Commitها، تغییرات Git و شواهد گیت قبلی را بخوان.
@@ -218,7 +232,9 @@ https://github.com/online6731/Health_Platform
 - اگر شناسه EP است، پرامپت شرطی همان سرویس را با buildConditionalServicePrompts در implementationDetailsContent.js تولید و اجرا کن.
 - اگر واحد X یا بیش از ظرفیت یک نوبت است، آن را به S/M/L بشکن، اولین واحد مستقل را اجرا و بقیه را در BACKLOG نگه دار.
 - برای تصمیم‌های برگشت‌پذیر و کم‌ریسک، امن‌ترین پیش‌فرض را انتخاب و در Decision Log ثبت کن؛ سؤال غیرضروری نپرس.
-- Secret واقعی، هزینه بیرونی، حساب ارائه‌دهنده، اقدام حقوقی/بالینی، حذف داده، تغییر Production یا عمل برگشت‌ناپذیر را بدون اختیار موجود انجام نده؛ فقط Blocker دقیق و یک اقدام لازم از مالک ثبت کن.
+- تمام سؤال‌ها و اقدام‌های لازم مالک را در OWNER_INPUTS_STATUS یک‌جا تجمیع کن؛ سؤال‌های دسترسی را نوبت‌به‌نوبت تکرار نکن. اگر مالک فایل را به‌روز کرد، وضعیت را خودت دوباره ارزیابی کن.
+- Secret واقعی، هزینه بیرونی، حساب ارائه‌دهنده، اقدام حقوقی/بالینی، حذف داده، تغییر Production یا عمل برگشت‌ناپذیر را بدون فلگ اختیار متناظر انجام نده؛ اما کارهای مستقل Local/Test را متوقف نکن و با mock/adapter ادامه بده.
+- هرجا Owner Inputs اختیار روشن داده و credential معتبر موجود است، اقدام را خودت انجام بده و فقط نتیجه redact‌شده و شاهد قابل ممیزی ارائه کن؛ دوباره برای همان اختیار سؤال نپرس.
 - تست‌های متناسب، lint، build، contract test، E2E یا Eval لازم را اجرا کن. تست یا آستانه ایمنی را برای سبزشدن دور نزن.
 - Diff را برای رگرسیون، Secret و تغییر نامرتبط بررسی کن.
 - فقط پس از تکمیل معیار پذیرش، STATE و BACKLOG را با شاهد به‌روز کن و دقیقاً یک Next Action جدید قرار بده.
@@ -226,13 +242,14 @@ https://github.com/online6731/Health_Platform
 - اگر کل برنامه واقعاً تمام شده است، Next Action را COMPLETE کن و گزارش نهایی بده؛ مرحله ساختگی جدید تولید نکن.
 
 محدوده این نوبت اولیه:
-- فقط راه‌اندازی Autopilot، ممیزی اولیه و ساخت/ترمیم STATE و BACKLOG.
+- راه‌اندازی Owner Handoff و Autopilot، ممیزی اولیه، ساخت/ترمیم OWNER_INPUTS_STATUS، STATE و BACKLOG.
 - هنوز Next Action محصولی بعد از Bootstrap را اجرا نکن.
 
 خروجی پایان این نوبت:
 - وضعیت راه‌اندازی Autopilot
 - فایل‌های ساخته یا تغییرکرده
 - نتیجه ممیزی و گیت‌ها
+- مسیر فایل واحد Owner Inputs و خلاصه همه اقدام‌های انسانی لازم در تمام گیت‌ها، بدون نمایش Secret
 - Next Action ثبت‌شده
 - ریسک یا Blocker واقعی
 - و در آخر دقیقاً این جمله: «برای اجرای مرحله بعد فقط بنویس: ادامه بده»`,

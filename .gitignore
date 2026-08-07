@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.codex/owner-inputs.local.yaml
 
 # Local environment files may contain credentials.
 .env

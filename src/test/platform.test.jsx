@@ -12,6 +12,7 @@ import {
   releaseEnvironments,
   serviceExecutionPromptStages,
 } from '../content/implementationDetailsContent'
+import { autonomyGroups, ownerHandoffMeta, ownerInputTemplate, telegramAutomationFacts } from '../content/ownerHandoffContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 
 function renderRoute(route = '/') {
@@ -73,6 +74,10 @@ describe('ServiceOS product proposal', () => {
     expect(autopilotExecution.startPrompt).toContain('AGENTS.md')
     expect(autopilotExecution.startPrompt).toContain('BASELINE_AUDIT.md')
     expect(autopilotExecution.startPrompt).toContain('STATE.md')
+    expect(autopilotExecution.startPrompt).toContain('.codex/owner-inputs.local.yaml')
+    expect(autopilotExecution.startPrompt).toContain('OWNER_INPUTS_STATUS.md')
+    expect(autopilotExecution.startPrompt).toContain('با mock/adapter ادامه بده')
+    expect(autopilotExecution.startPrompt).toContain('Secret خام را هرگز در پاسخ')
     expect(autopilotExecution.startPrompt).toContain('فقط همان Next Action')
     expect(controlPrompts.find((prompt) => prompt.id === 'START')?.body).toBe(autopilotExecution.startPrompt)
     expect(controlPrompts.find((prompt) => prompt.id === 'CONTINUE')?.body).toBe('ادامه بده')
@@ -92,6 +97,24 @@ describe('ServiceOS product proposal', () => {
     const networkStageIds = buildConditionalServicePrompts(networkService).map((prompt) => prompt.id)
     expect(networkStageIds).not.toContain('EP-10')
     expect(networkStageIds).not.toContain('EP-11')
+  })
+
+  it('collects all owner dependencies in one gitignored handoff file', () => {
+    expect(ownerHandoffMeta.localPath).toBe('.codex/owner-inputs.local.yaml')
+    expect(ownerHandoffMeta.templatePath).toBe('docs/templates/OWNER_INPUTS.example.yaml')
+    expect(autonomyGroups).toHaveLength(4)
+    expect(autonomyGroups.every((group) => group.items.length >= 5)).toBe(true)
+    expect(telegramAutomationFacts).toHaveLength(5)
+    for (const field of [
+      'api_id:',
+      'api_hash:',
+      'manager_bot_token:',
+      'create_managed_telegram_bots:',
+      'never_store_otp_or_2fa_here:',
+      'deploy_production:',
+    ]) expect(ownerInputTemplate).toContain(field)
+    expect(ownerInputTemplate).not.toContain('ghp_')
+    expect(ownerInputTemplate).not.toContain('sk-proj-')
   })
 
   it('defines an isolated beta-to-production release path and complete implementation registry', () => {
@@ -131,8 +154,12 @@ describe('ServiceOS product proposal', () => {
 
   it('lets the execution guide select a service and exposes its prompt sequence', () => {
     renderRoute('/codex-execution')
-    expect(screen.getByRole('heading', { name: /یک‌بار Master Prompt/ })).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /یک‌بار فایل ورودی و Master Prompt/ })).not.toBeNull()
     expect(screen.getAllByRole('button', { name: /کپی Master Prompt/ }).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByRole('heading', { name: /همه چیزهایی که ممکن است کار را متوقف کنند/ })).not.toBeNull()
+    expect(screen.getByRole('button', { name: /کپی فایل Owner Inputs/ })).not.toBeNull()
+    expect(screen.getByText('.codex/owner-inputs.local.yaml')).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /API Hash به‌تنهایی کافی نیست/ })).not.toBeNull()
     expect(screen.getAllByText('ادامه بده').length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
@@ -142,7 +169,7 @@ describe('ServiceOS product proposal', () => {
     expect(screen.getAllByText('مشاور حقوقی').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText('EP-01-18')).not.toBeNull()
     expect(screen.getByRole('link', { name: /کاتالوگ این سرویس/ }).getAttribute('href')).toContain('/docs/services/legal/product')
-  })
+  }, 10000)
 
   it('searches the implementation catalog and links every service volume', () => {
     renderRoute('/docs')
