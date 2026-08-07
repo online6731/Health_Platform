@@ -1,8 +1,79 @@
 export const ownerHandoffMeta = {
-  version: 'Owner Handoff v1.0 · 2026-08-07',
+  version: 'Owner Handoff v1.1 · 2026-08-07',
   localPath: '.codex/owner-inputs.local.yaml',
   templatePath: 'docs/templates/OWNER_INPUTS.example.yaml',
 }
+
+export const quickStartSteps = [
+  ['۱', 'فایل را کامل کن', 'فقط بخش‌های required_now و تصمیم‌های موج اول؛ اطلاعات مراحل بعد می‌تواند فعلاً خالی بماند.'],
+  ['۲', 'Bootstrap تلگرام', 'یک Manager Bot بساز و Bot Management Mode را فعال کن؛ مسیر پیش‌فرض دیگر API Hash نمی‌خواهد.'],
+  ['۳', 'Master Prompt را بده', 'Codex اعتبار فایل، قابلیت‌های Runtime و همه گیت‌های آینده را یک‌جا ممیزی می‌کند.'],
+  ['۴', 'فقط ادامه بده', 'Codex تا نزدیک‌ترین گیت واقعی پیش می‌رود و کارهای انسانی را در یک Checkpoint تجمیع می‌کند.'],
+]
+
+export const authorityLayers = [
+  ['قصد و اختیار مالک', 'فلگ‌های Owner Inputs مشخص می‌کنند مالک چه اقدام‌هایی را از نظر کسب‌وکار مجاز کرده است.'],
+  ['توان Runtime کدکس', 'Sandbox، Network، Approval Policy و ابزارهای نصب‌شده تعیین می‌کنند Codex در همان نشست واقعاً چه کاری می‌تواند انجام دهد.'],
+  ['رضایت سرویس بیرونی', 'Telegram، GitHub، Payment، KYC یا Connector ممکن است حتی با اختیار مالک یک تأیید UI یا Login مستقل بخواهند.'],
+]
+
+export const readinessGates = [
+  {
+    id: 'now',
+    label: 'همین حالا',
+    owner: 'نام محصول، موج اول، سقف هزینه، حدود اختیار، Manager Bot و حساب‌های موجود',
+    codex: 'ممیزی، معماری، Mock، Adapter، Local/Test، STATE و Backlog',
+    stop: 'فقط اگر فایل محلی وجود نداشته باشد یا تصمیم موج اول مشخص نباشد',
+  },
+  {
+    id: 'alpha',
+    label: 'قبل از Alpha',
+    owner: 'کاربران Allowlist، Provider آزمایشی و تأیید ساخت/اتصال Botهای همان موج',
+    codex: 'محیط Alpha، Bot Registry، Webhook، مشاهده‌پذیری و تست امنیت',
+    stop: 'نبود حساب یا تأیید همان Provider؛ توسعه Local همچنان ادامه دارد',
+  },
+  {
+    id: 'beta',
+    label: 'قبل از Beta',
+    owner: 'دامنه، متن‌های حقوقی اولیه، پشتیبانی، بودجه واقعی و مسئول ریسک',
+    codex: 'Closed Beta، Feature Flag، Cohort، داده جدا و Rollback Drill',
+    stop: 'نبود مسئول ایمنی یا مسیر پاسخ‌گویی به رخداد واقعی',
+  },
+  {
+    id: 'production',
+    label: 'قبل از Production',
+    owner: 'KYC، قرارداد، سیاست‌های نهایی، تأیید انتشار و هزینه برگشت‌ناپذیر',
+    codex: 'Canary، Promotion، Smoke Test، Monitoring و Rollback',
+    stop: 'هر تأیید قانونی، مالی، امنیتی یا Production که هنوز ثبت نشده است',
+  },
+]
+
+export const telegramProvisioningPaths = [
+  {
+    id: 'manager-link',
+    title: 'مسیر پیش‌فرض و پیشنهادی',
+    use: 'Managed Bot مشتری یا کسب‌وکار',
+    apiHash: 'لازم نیست',
+    human: 'کاربر صفحه رسمی Telegram را باز و ساخت Bot را تأیید می‌کند.',
+    automation: 'Codex لینک/دکمه را می‌سازد؛ Manager Bot Token را می‌گیرد و Bot را کامل Provision می‌کند.',
+  },
+  {
+    id: 'owner-mtproto',
+    title: 'مسیر اختیاری اپراتوری',
+    use: 'Botهای محدود متعلق به حساب مالک پلتفرم',
+    apiHash: 'API ID/Hash + Login یک‌باره لازم است',
+    human: 'مالک فقط OTP/2FA را مستقیم در Terminal وارد می‌کند.',
+    automation: 'Codex با حساب مالک username را بررسی و bots.createBot را اجرا می‌کند؛ استفاده باید کم‌حجم و مطابق Terms باشد.',
+  },
+  {
+    id: 'byot',
+    title: 'فقط برای مهاجرت',
+    use: 'Bot موجود که از قبل Token دارد',
+    apiHash: 'لازم نیست',
+    human: 'مالک Bot انتقال Token را صریحاً تأیید می‌کند.',
+    automation: 'Codex getMe، انتقال فوری Token به Vault، پاک‌سازی ورودی و Rotation را انجام می‌دهد.',
+  },
+]
 
 export const autonomyGroups = [
   {
@@ -13,7 +84,7 @@ export const autonomyGroups = [
       'ممیزی مخزن، معماری، برنامه‌ریزی و انتخاب امن پیش‌فرض‌های برگشت‌پذیر',
       'ساخت کد، تست، migration، mock، CI/CD، Preview و محیط‌های Local/Test',
       'ساخت Bot Control Plane، Registry، Webhook، Mini App و جریان Managed Bots',
-      'تولید username پیشنهادی، بررسی availability و ساخت Managed Bot پس از آماده‌بودن نشست رسمی',
+      'تولید username، ساخت لینک رسمی Managed Bot و تکمیل خودکار Provisioning پس از تأیید کاربر',
       'دریافت، انتقال به Vault، چرخش و revoke کردن Tokenهای Managed Bot در محدوده مجاز',
       'تنظیم profile، commands، menu، webhook، health check و monitoring ربات‌ها',
       'استقرار، smoke test، rollback و به‌روزرسانی مستندات در محدوده Authority فایل مالک',
@@ -26,8 +97,8 @@ export const autonomyGroups = [
     items: [
       'پرکردن فایل محلی Owner Inputs و تعیین اختیار Commit، Push، Deploy و سقف هزینه',
       'ساخت اولین Manager Bot و فعال‌کردن Bot Management Mode در BotFather',
-      'گرفتن Telegram API ID/API Hash از my.telegram.org در صورت انتخاب اتوماسیون MTProto',
-      'انجام Login تعاملی حساب مالک با OTP و در صورت وجود 2FA؛ این دو مقدار در فایل ذخیره نمی‌شوند',
+      'فقط در صورت انتخاب مسیر اختیاری owner-mtproto: گرفتن API ID/API Hash از my.telegram.org',
+      'فقط برای همان مسیر اختیاری: Login تعاملی با OTP/2FA مستقیم در Terminal، بدون ذخیره این دو مقدار',
       'ارائه یا اتصال حساب‌های GitHub، دامنه/DNS، Cloud، AI و Payment که واقعاً قرار است استفاده شوند',
       'تأیید نام برند، دامنه اصلی، prefix ربات‌ها، کشور، زبان، موج اول و سقف کاربران Beta',
     ],
@@ -60,10 +131,10 @@ export const autonomyGroups = [
 ]
 
 export const telegramAutomationFacts = [
-  ['API ID و API Hash', 'مجوز اپلیکیشن MTProto هستند؛ به‌تنهایی کافی نیستند و حساب مالک باید یک‌بار با OTP/2FA به‌صورت تعاملی Login شود.'],
-  ['ساخت Managed Bot', 'پس از Login رسمی، Codex می‌تواند bots.checkUsername و bots.createBot را برای حساب مالک اجرا کند؛ محدودیت تعداد Bot و اشغال username همچنان اعمال می‌شود.'],
+  ['مسیر پیشنهادی', 'Manager Bot یک لینک یا request_managed_bot می‌دهد؛ کاربر در UI رسمی Telegram تأیید می‌کند و برای این مسیر API ID/API Hash لازم نیست.'],
+  ['مسیر MTProto', 'برای ساخت Botهای متعلق به حساب مالک اختیاری است؛ API ID/Hash و Login تعاملی لازم دارد و باید کم‌حجم و مطابق Terms استفاده شود.'],
   ['Manager Bot', 'باید از قبل وجود داشته و Bot Management Mode آن در BotFather فعال شده باشد؛ این Bootstrap اولیه اقدام مالک است.'],
-  ['گرفتن Token', 'Manager Bot می‌تواند Token Managed Bot را با getManagedBotToken/bots.exportBotToken دریافت و با replaceManagedBotToken یا revoke تعویض کند.'],
+  ['گرفتن Token', 'Manager Bot پس از تأیید ساخت، Token را با getManagedBotToken دریافت و با replaceManagedBotToken تعویض می‌کند؛ Token فقط وارد Secret Store می‌شود.'],
   ['Channel و Business', 'ایجاد/انتخاب Channel با requestChat و اتصال Telegram Business نیازمند تأیید داخل حساب کاربر است و کاملاً server-side نیست.'],
 ]
 
@@ -73,10 +144,18 @@ export const ownerInputTemplate = `# ServiceOS Owner Inputs — LOCAL SECRET FIL
 # Autopilot باید مقدار Secretها را redact کند و فقط وضعیت presence/validity را گزارش دهد.
 
 meta:
-  version: 1
+  version: 2
   completed_by_owner: false
   reviewed_at: ""
   owner_timezone: "Asia/Tehran"
+
+execution:
+  surface: "codex-desktop"
+  interaction_mode: "batched-owner-checkpoints"
+  continue_phrase: "ادامه بده"
+  consolidate_owner_questions: true
+  proceed_with_mocks_until_real_gate: true
+  note: "Owner authority does not bypass Codex runtime permissions or provider confirmations."
 
 project:
   product_name: "ServiceOS"
@@ -116,7 +195,8 @@ github:
   credential_source: "existing-gh-session"
 
 telegram:
-  provisioning_mode: "managed-bots" # managed-bots | request-managed-bot | byot-legacy
+  provisioning_mode: "manager-link" # manager-link | owner-mtproto | byot-legacy
+  enable_owner_mtproto_automation: false
   owner_telegram_user_id: ""
   owner_phone_e164: ""
   owner_has_premium: false
@@ -125,7 +205,7 @@ telegram:
   max_bots_to_create_now: 4
   auto_generate_available_usernames: true
 
-  # برای اتوماسیون رسمی MTProto؛ Secret محسوب می‌شوند.
+  # فقط برای مسیر اختیاری owner-mtproto؛ Secret محسوب می‌شوند.
   api_id: ""
   api_hash: ""
   interactive_login_completed: false
@@ -138,6 +218,17 @@ telegram:
 
   # OTP، رمز 2FA و Recovery Code هرگز در این فایل ذخیره نشوند.
   never_store_otp_or_2fa_here: true
+
+secret_refs:
+  manager_bot_token: ""
+  mtproto_session: ""
+  openai_api_key: ""
+  cloud_credential: ""
+  dns_credential: ""
+  payment_credential: ""
+  notification_credential: ""
+  migrate_raw_secrets_after_validation: true
+  clear_raw_values_after_migration: true
 
 ai:
   primary_provider: "openai"
@@ -213,11 +304,11 @@ mobile_later:
 manual_actions_status:
   create_initial_manager_bot_in_botfather: "pending"
   enable_bot_management_mode: "pending"
-  obtain_telegram_api_id_hash: "pending"
-  complete_interactive_telegram_login: "pending"
+  obtain_telegram_api_id_hash_if_owner_mtproto: "not-required"
+  complete_interactive_telegram_login_if_owner_mtproto: "not-required"
+  confirm_managed_bot_creation_in_telegram: "pending-at-alpha"
   purchase_or_connect_domain: "pending"
   complete_payment_kyc: "pending"
   approve_legal_documents: "pending"
   approve_production_go_live: "pending"
 `
-

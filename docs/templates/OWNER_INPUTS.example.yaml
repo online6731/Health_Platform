@@ -4,10 +4,18 @@
 # recovery codes, raw Telegram session strings, or real user health data here.
 
 meta:
-  version: 1
+  version: 2
   completed_by_owner: false
   reviewed_at: ""
   owner_timezone: "Asia/Tehran"
+
+execution:
+  surface: "codex-desktop"
+  interaction_mode: "batched-owner-checkpoints"
+  continue_phrase: "ادامه بده"
+  consolidate_owner_questions: true
+  proceed_with_mocks_until_real_gate: true
+  note: "Owner authority does not bypass Codex runtime permissions or provider confirmations."
 
 project:
   product_name: "ServiceOS"
@@ -47,7 +55,8 @@ github:
   credential_source: "existing-gh-session"
 
 telegram:
-  provisioning_mode: "managed-bots"
+  provisioning_mode: "manager-link" # manager-link | owner-mtproto | byot-legacy
+  enable_owner_mtproto_automation: false
   owner_telegram_user_id: ""
   owner_phone_e164: ""
   owner_has_premium: false
@@ -63,6 +72,17 @@ telegram:
   manager_bot_token: ""
   bot_management_mode_enabled: false
   never_store_otp_or_2fa_here: true
+
+secret_refs:
+  manager_bot_token: ""
+  mtproto_session: ""
+  openai_api_key: ""
+  cloud_credential: ""
+  dns_credential: ""
+  payment_credential: ""
+  notification_credential: ""
+  migrate_raw_secrets_after_validation: true
+  clear_raw_values_after_migration: true
 
 ai:
   primary_provider: "openai"
@@ -138,10 +158,10 @@ mobile_later:
 manual_actions_status:
   create_initial_manager_bot_in_botfather: "pending"
   enable_bot_management_mode: "pending"
-  obtain_telegram_api_id_hash: "pending"
-  complete_interactive_telegram_login: "pending"
+  obtain_telegram_api_id_hash_if_owner_mtproto: "not-required"
+  complete_interactive_telegram_login_if_owner_mtproto: "not-required"
+  confirm_managed_bot_creation_in_telegram: "pending-at-alpha"
   purchase_or_connect_domain: "pending"
   complete_payment_kyc: "pending"
   approve_legal_documents: "pending"
   approve_production_go_live: "pending"
-

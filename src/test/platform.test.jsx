@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
+import { readFileSync } from 'node:fs'
 import App from '../App'
 import { autopilotExecution, controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
@@ -12,7 +13,16 @@ import {
   releaseEnvironments,
   serviceExecutionPromptStages,
 } from '../content/implementationDetailsContent'
-import { autonomyGroups, ownerHandoffMeta, ownerInputTemplate, telegramAutomationFacts } from '../content/ownerHandoffContent'
+import {
+  autonomyGroups,
+  authorityLayers,
+  ownerHandoffMeta,
+  ownerInputTemplate,
+  quickStartSteps,
+  readinessGates,
+  telegramAutomationFacts,
+  telegramProvisioningPaths,
+} from '../content/ownerHandoffContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 
 function renderRoute(route = '/') {
@@ -45,9 +55,9 @@ describe('ServiceOS product proposal', () => {
     ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
-  ])('renders %s with its primary heading', (route, heading) => {
+  ])('renders %s with its primary heading', async (route, heading) => {
     renderRoute(route)
-    expect(screen.getByRole('heading', { level: 1, name: heading })).not.toBeNull()
+    expect(await screen.findByRole('heading', { level: 1, name: heading }, { timeout: 5000 })).not.toBeNull()
   })
 
   it('publishes a multi-hundred-page implementation catalog', () => {
@@ -77,7 +87,9 @@ describe('ServiceOS product proposal', () => {
     expect(autopilotExecution.startPrompt).toContain('.codex/owner-inputs.local.yaml')
     expect(autopilotExecution.startPrompt).toContain('OWNER_INPUTS_STATUS.md')
     expect(autopilotExecution.startPrompt).toContain('با mock/adapter ادامه بده')
-    expect(autopilotExecution.startPrompt).toContain('Secret خام را هرگز در پاسخ')
+    expect(autopilotExecution.startPrompt).toContain('owner_authority، runtime_capability و provider_consent')
+    expect(autopilotExecution.startPrompt).toContain('manager-link')
+    expect(autopilotExecution.startPrompt).toContain('به API ID/API Hash یا Login حساب مالک نیاز ندارد')
     expect(autopilotExecution.startPrompt).toContain('فقط همان Next Action')
     expect(controlPrompts.find((prompt) => prompt.id === 'START')?.body).toBe(autopilotExecution.startPrompt)
     expect(controlPrompts.find((prompt) => prompt.id === 'CONTINUE')?.body).toBe('ادامه بده')
@@ -104,6 +116,11 @@ describe('ServiceOS product proposal', () => {
     expect(ownerHandoffMeta.templatePath).toBe('docs/templates/OWNER_INPUTS.example.yaml')
     expect(autonomyGroups).toHaveLength(4)
     expect(autonomyGroups.every((group) => group.items.length >= 5)).toBe(true)
+    expect(quickStartSteps).toHaveLength(4)
+    expect(authorityLayers).toHaveLength(3)
+    expect(readinessGates.map((gate) => gate.id)).toEqual(['now', 'alpha', 'beta', 'production'])
+    expect(telegramProvisioningPaths.map((path) => path.id)).toEqual(['manager-link', 'owner-mtproto', 'byot'])
+    expect(telegramProvisioningPaths.find((path) => path.id === 'manager-link')?.apiHash).toBe('لازم نیست')
     expect(telegramAutomationFacts).toHaveLength(5)
     for (const field of [
       'api_id:',
@@ -112,7 +129,17 @@ describe('ServiceOS product proposal', () => {
       'create_managed_telegram_bots:',
       'never_store_otp_or_2fa_here:',
       'deploy_production:',
+      'interaction_mode: "batched-owner-checkpoints"',
+      'provisioning_mode: "manager-link"',
+      'enable_owner_mtproto_automation: false',
+      'migrate_raw_secrets_after_validation: true',
     ]) expect(ownerInputTemplate).toContain(field)
+    const committedTemplate = readFileSync('docs/templates/OWNER_INPUTS.example.yaml', 'utf8')
+    const normalizeTemplate = (value) => value.slice(value.indexOf('meta:')).split('\n')
+      .filter((line) => line.trim() && !line.trim().startsWith('#'))
+      .map((line) => line.replace(/\s+#.*$/, '').trimEnd())
+      .join('\n').trim()
+    expect(normalizeTemplate(committedTemplate)).toBe(normalizeTemplate(ownerInputTemplate))
     expect(ownerInputTemplate).not.toContain('ghp_')
     expect(ownerInputTemplate).not.toContain('sk-proj-')
   })
@@ -152,14 +179,16 @@ describe('ServiceOS product proposal', () => {
     expect(executionProfileValidationRules.some(([ruleId]) => ruleId === 'REL-001')).toBe(true)
   })
 
-  it('lets the execution guide select a service and exposes its prompt sequence', () => {
+  it('lets the execution guide select a service and exposes its prompt sequence', async () => {
     renderRoute('/codex-execution')
-    expect(screen.getByRole('heading', { name: /یک‌بار فایل ورودی و Master Prompt/ })).not.toBeNull()
+    expect(await screen.findByRole('heading', { name: /یک‌بار فایل ورودی و Master Prompt/ }, { timeout: 5000 })).not.toBeNull()
     expect(screen.getAllByRole('button', { name: /کپی Master Prompt/ }).length).toBeGreaterThanOrEqual(1)
     expect(screen.getByRole('heading', { name: /همه چیزهایی که ممکن است کار را متوقف کنند/ })).not.toBeNull()
     expect(screen.getByRole('button', { name: /کپی فایل Owner Inputs/ })).not.toBeNull()
-    expect(screen.getByText('.codex/owner-inputs.local.yaml')).not.toBeNull()
-    expect(screen.getByRole('heading', { name: /API Hash به‌تنهایی کافی نیست/ })).not.toBeNull()
+    expect(screen.getAllByText('.codex/owner-inputs.local.yaml').length).toBeGreaterThanOrEqual(2)
+    expect(screen.getByRole('heading', { name: /مسیر پیشنهادی API Hash نمی‌خواهد/ })).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /اجازه دارم.*در این نشست می‌توانم/ })).not.toBeNull()
+    expect(screen.getByText('Managed Bot مشتری یا کسب‌وکار')).not.toBeNull()
     expect(screen.getAllByText('ادامه بده').length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
@@ -169,7 +198,7 @@ describe('ServiceOS product proposal', () => {
     expect(screen.getAllByText('مشاور حقوقی').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText('EP-01-18')).not.toBeNull()
     expect(screen.getByRole('link', { name: /کاتالوگ این سرویس/ }).getAttribute('href')).toContain('/docs/services/legal/product')
-  }, 10000)
+  }, 15000)
 
   it('searches the implementation catalog and links every service volume', () => {
     renderRoute('/docs')

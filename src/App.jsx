@@ -1,8 +1,8 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import SiteShell from './components/SiteShell'
 import BusinessPage from './pages/BusinessPage'
-import CodexExecutionPage from './pages/CodexExecutionPage'
 import DocsHomePage from './pages/DocsHomePage'
 import HomePage from './pages/HomePage'
 import InvestorPage from './pages/InvestorPage'
@@ -14,6 +14,8 @@ import ServiceDocsPage from './pages/ServiceDocsPage'
 import ServicesPage from './pages/ServicesPage'
 import TrustPage from './pages/TrustPage'
 
+const CodexExecutionPage = lazy(() => import('./pages/CodexExecutionPage'))
+
 export default function App() {
   return (
     <Routes>
@@ -24,7 +26,7 @@ export default function App() {
         <Route path="docs" element={<DocsHomePage />} />
         <Route path="docs/platform/:chapterId" element={<PlatformDocsPage />} />
         <Route path="docs/services/:serviceId/:volumeId?" element={<ServiceDocsPage />} />
-        <Route path="codex-execution" element={<CodexExecutionPage />} />
+        <Route path="codex-execution" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن نقشه اجرایی…</p></div>}><CodexExecutionPage /></Suspense>} />
         <Route path="business" element={<BusinessPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="investor" element={<InvestorPage />} />

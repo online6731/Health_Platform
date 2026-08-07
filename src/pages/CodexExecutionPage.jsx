@@ -57,9 +57,13 @@ import {
 } from '../content/implementationDetailsContent'
 import {
   autonomyGroups,
+  authorityLayers,
   ownerHandoffMeta,
   ownerInputTemplate,
+  quickStartSteps,
+  readinessGates,
   telegramAutomationFacts,
+  telegramProvisioningPaths,
 } from '../content/ownerHandoffContent'
 import { services } from '../content/platformContent'
 
@@ -124,7 +128,7 @@ export default function CodexExecutionPage() {
             <h1>{codexExecutionMeta.title}</h1>
             <p>{codexExecutionMeta.subtitle}</p>
             <div className="codex-plan__hero-actions">
-              <a className="button button--primary" href="#autopilot">کپی Master Prompt <ArrowLeft size={18} /></a>
+              <a className="button button--primary" href="#autopilot">شروع چهارمرحله‌ای <ArrowLeft size={18} /></a>
               <a className="button button--ghost" href="#release-system">مسیر Test تا Production</a>
             </div>
           </div>
@@ -163,8 +167,14 @@ export default function CodexExecutionPage() {
         <div className="container">
           <PlanHeading eyebrow="SERVICEOS AUTOPILOT" title="یک‌بار فایل ورودی و Master Prompt؛ بعد فقط «ادامه بده»" description="تو دیگر شناسه پرامپت، ترتیب فاز، دسترسی یا گیت را نوبت‌به‌نوبت مدیریت نمی‌کنی. دستور اول، فایل واحد مالک و حافظه اجرایی را می‌خواند و از آن به بعد Codex در هر نوبت فقط یک Next Action معتبر را اجرا می‌کند." invert />
           <div className="codex-autopilot__grid">
+            <article className="codex-autopilot__owner">
+              <header><span>مرحله ۱ · فقط یک‌بار</span><strong>Owner Inputs را آماده کن</strong></header>
+              <code dir="ltr">{ownerHandoffMeta.localPath}</code>
+              <p>همه تصمیم‌ها، حدود اختیار و Credentialهای لازم در یک فایل محلیِ خارج از Git جمع می‌شوند. فعلاً فقط بخش‌های لازم برای شروع را کامل کن.</p>
+              <button type="button" onClick={() => copyPrompt('AUTOPILOT-OWNER', ownerInputTemplate)}>{copiedId === 'AUTOPILOT-OWNER' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-OWNER' ? 'فایل کپی شد' : 'کپی Owner Inputs'}</button>
+            </article>
             <article className="codex-autopilot__start">
-              <header><span>فقط یک‌بار</span><strong>Master Prompt را به Codex بده</strong></header>
+              <header><span>مرحله ۲ · فقط یک‌بار</span><strong>Master Prompt را به Codex بده</strong></header>
               <p>این دستور مخزن و فایل محلی Owner Inputs را می‌خواند، قواعد دائمی را در AGENTS.md ثبت می‌کند، همه نیازهای انسانی را یک‌جا گزارش می‌دهد و STATE/BACKLOG را می‌سازد.</p>
               <details>
                 <summary>مشاهده متن کامل Master Prompt <ArrowLeft size={17} /></summary>
@@ -173,7 +183,7 @@ export default function CodexExecutionPage() {
               <button type="button" onClick={() => copyPrompt('AUTOPILOT-START', autopilotExecution.startPrompt)}>{copiedId === 'AUTOPILOT-START' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-START' ? 'Master Prompt کپی شد' : 'کپی Master Prompt'}</button>
             </article>
             <article className="codex-autopilot__continue">
-              <header><span>از نوبت دوم به بعد</span><strong>فقط همین دو کلمه</strong></header>
+              <header><span>مرحله ۳ · از نوبت دوم</span><strong>فقط همین دو کلمه</strong></header>
               <blockquote>{autopilotExecution.continuePhrase}</blockquote>
               <p>حتی در یک Task تازه روی همان مخزن هم قواعد AGENTS و STATE به Codex می‌گویند دقیقاً از کجا ادامه دهد.</p>
               <button type="button" onClick={() => copyPrompt('AUTOPILOT-CONTINUE', autopilotExecution.continuePhrase)}>{copiedId === 'AUTOPILOT-CONTINUE' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-CONTINUE' ? 'کپی شد' : 'کپی «ادامه بده»'}</button>
@@ -181,10 +191,10 @@ export default function CodexExecutionPage() {
           </div>
           <div className="codex-autopilot__flow" aria-label="چرخه ساده Autopilot">
             {[
-              ['۱', 'Codex وضعیت واقعی مخزن را می‌خواند'],
-              ['۲', 'فقط Next Action را اجرا می‌کند'],
-              ['۳', 'تست، Diff و گیت‌ها را بررسی می‌کند'],
-              ['۴', 'STATE را ثبت و منتظر «ادامه بده» می‌ماند'],
+              ['۱', 'فایل مالک، Runtime و Provider جداگانه سنجیده می‌شوند'],
+              ['۲', 'Codex فقط Next Action مستقل را اجرا می‌کند'],
+              ['۳', 'تست، Diff، ایمنی و هزینه بررسی می‌شوند'],
+              ['۴', 'STATE ثبت و اقدام‌های انسانی هم‌گیت یک‌جا ارائه می‌شوند'],
             ].map(([number, text]) => <div key={number}><span>{number}</span><p>{text}</p></div>)}
           </div>
           <div className="codex-autopilot__guard"><ShieldCheck size={22} /><p><strong>اتوپایلوت به معنی بی‌احتیاطی نیست.</strong> هر بار فقط یک واحد قابل بازگشت اجرا می‌شود. کمبود دسترسی Production جلوی کار Local/Test را نمی‌گیرد؛ توقف فقط در همان گیتی رخ می‌دهد که واقعاً به حضور یا تأیید مالک نیاز دارد.</p></div>
@@ -210,28 +220,34 @@ export default function CodexExecutionPage() {
           </div>
 
           <div className="codex-owner-steps" aria-label="چهار قدم شروع خودکار">
-            {[
-              ['۱', 'Template را کپی کن', 'فقط مقادیر مالک، دسترسی‌ها و حساب‌های واقعاً مورد استفاده را پر کن.'],
-              ['۲', 'فایل را محلی نگه دار', 'مسیر ثابت است و Secret خام هرگز وارد Git یا گزارش‌ها نمی‌شود.'],
-              ['۳', 'Master Prompt را بده', 'Codex تمام dependencyها و اقدام‌های انسانی آینده را همان ابتدا دسته‌بندی می‌کند.'],
-              ['۴', 'فقط بگو ادامه بده', 'هر اختیار موجود خودکار مصرف می‌شود و فقط گیت اجتناب‌ناپذیر به مالک برمی‌گردد.'],
-            ].map(([number, title, text]) => <article key={number}><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></article>)}
+            {quickStartSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></article>)}
+          </div>
+
+          <div className="codex-authority-layers">
+            <header><ShieldCheck size={24} /><div><span>THREE DISTINCT LAYERS</span><h3>«اجازه دارم» با «در این نشست می‌توانم» یکی نیست</h3></div></header>
+            <div>{authorityLayers.map(([title, text], index) => <article key={title}><i>{index + 1}</i><strong>{title}</strong><p>{text}</p></article>)}</div>
+          </div>
+
+          <div className="codex-readiness">
+            <header><Flag size={24} /><div><span>READINESS BY GATE</span><h3>همه اطلاعات در یک فایل؛ تکمیل فقط در زمان لازم</h3></div></header>
+            <div>{readinessGates.map((gate) => <article className={`codex-readiness__card codex-readiness__card--${gate.id}`} key={gate.id}><span>{gate.label}</span><dl><div><dt>کار مالک</dt><dd>{gate.owner}</dd></div><div><dt>کار Codex</dt><dd>{gate.codex}</dd></div><div><dt>توقف واقعی</dt><dd>{gate.stop}</dd></div></dl></article>)}</div>
           </div>
 
           <div className="codex-autonomy-grid">
             {autonomyGroups.map((group) => (
-              <article className={`codex-autonomy-card codex-autonomy-card--${group.tone}`} key={group.id}>
-                <header><span>{group.id}</span><h3>{group.title}</h3></header>
+              <details className={`codex-autonomy-card codex-autonomy-card--${group.tone}`} open={group.id === 'owner-now'} key={group.id}>
+                <summary><span>{group.id}</span><h3>{group.title}</h3><ArrowLeft size={17} /></summary>
                 <ul>{group.items.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}</ul>
-              </article>
+              </details>
             ))}
           </div>
 
           <div className="codex-telegram-automation">
-            <header><Bot size={28} /><div><span>TELEGRAM AUTOMATION · OFFICIAL PATH</span><h3>API Hash به‌تنهایی کافی نیست؛ بعد از Bootstrap، ساخت ربات و Token خودکار می‌شود</h3></div></header>
+            <header><Bot size={28} /><div><span>TELEGRAM AUTOMATION · THREE CLEAR PATHS</span><h3>مسیر پیشنهادی API Hash نمی‌خواهد؛ MTProto فقط یک انتخاب اپراتوری است</h3></div></header>
+            <div className="codex-telegram-paths">{telegramProvisioningPaths.map((path) => <article className={`codex-telegram-path codex-telegram-path--${path.id}`} key={path.id}><span>{path.title}</span><h4>{path.use}</h4><dl><div><dt>API Hash</dt><dd>{path.apiHash}</dd></div><div><dt>کار انسان</dt><dd>{path.human}</dd></div><div><dt>کار خودکار</dt><dd>{path.automation}</dd></div></dl></article>)}</div>
             <dl>{telegramAutomationFacts.map(([term, description]) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}</dl>
-            <div className="codex-telegram-automation__note"><KeyRound size={20} /><p>OTP، رمز 2FA، Recovery Code و Session String خام را داخل این فایل یا چت نگذار. Codex اسکریپت Login تعاملی می‌سازد تا این موارد فقط مستقیم در Terminal وارد شوند؛ Session نهایی هم باید در Secret Store بماند.</p></div>
-            <div className="codex-owner-sources"><span>منابع رسمی</span><a href="https://core.telegram.org/api/bots/managed-bots" target="_blank" rel="noreferrer">Managed Bots <ExternalLink size={13} /></a><a href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noreferrer">API ID / Hash <ExternalLink size={13} /></a><a href="https://core.telegram.org/bots/features" target="_blank" rel="noreferrer">Bot Features <ExternalLink size={13} /></a></div>
+            <div className="codex-telegram-automation__note"><KeyRound size={20} /><p>در مسیر manager-link، مشتری فقط تأیید رسمی Telegram را انجام می‌دهد و بقیه Provisioning خودکار است. OTP، رمز 2FA، Recovery Code و Session String خام فقط به مسیر اختیاری owner-mtproto مربوط‌اند و هرگز داخل فایل یا چت قرار نمی‌گیرند.</p></div>
+            <div className="codex-owner-sources"><span>منابع رسمی</span><a href="https://core.telegram.org/api/bots/managed-bots" target="_blank" rel="noreferrer">Managed Bots <ExternalLink size={13} /></a><a href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noreferrer">API ID / Hash <ExternalLink size={13} /></a><a href="https://core.telegram.org/bots/features" target="_blank" rel="noreferrer">Bot Features <ExternalLink size={13} /></a><a href="https://core.telegram.org/bots/api-changelog" target="_blank" rel="noreferrer">Bot API Changelog <ExternalLink size={13} /></a></div>
           </div>
         </div>
       </section>
@@ -382,7 +398,7 @@ export default function CodexExecutionPage() {
 
       <section className="codex-plan__section codex-plan__section--dark" id="start">
         <div className="container">
-          <PlanHeading eyebrow="AUTOPILOT INTERNAL CONTROLS" title="این چهار کنترل را Codex مدیریت می‌کند، نه تو" description="در استفاده عادی فقط Master Prompt و سپس «ادامه بده» لازم است. START، Repair و Release برای موتور داخلی و شرایط خاص نگه داشته شده‌اند." invert />
+          <PlanHeading eyebrow="AUTOPILOT INTERNAL CONTROLS" title="این چهار کنترل را Codex مدیریت می‌کند، نه تو" description="در استفاده عادی Owner Inputs را یک‌بار کامل می‌کنی، Master Prompt را می‌دهی و سپس فقط «ادامه بده» لازم است. START، Repair و Release برای موتور داخلی و شرایط خاص نگه داشته شده‌اند." invert />
           <div className="codex-control-grid">
             {controlPrompts.map((item) => (
               <PromptCard item={{ ...item, size: 'S', purpose: item.title }} copiedId={copiedId} onCopy={copyPrompt} dark key={item.id} />
@@ -471,7 +487,7 @@ export default function CodexExecutionPage() {
 
           <div className="codex-final-cta">
             <Sparkles size={32} />
-            <div><span>تنها دستور شروع</span><h2>Master Prompt را یک‌بار بده؛ بعد فقط بگو «ادامه بده»</h2><p>تمام شناسه‌ها، گیت‌ها و جزئیات فنی برای Codex باقی می‌مانند و تو فقط پیشرفت هر واحد را می‌بینی.</p></div>
+            <div><span>ترتیب نهایی شروع</span><h2>Owner Inputs، سپس Master Prompt؛ بعد فقط «ادامه بده»</h2><p>Codex وضعیت فنی، اختیار مالک و تأیید Provider را جدا نگه می‌دارد و فقط اقدام‌های انسانی واقعاً لازم را در Checkpoint همان گیت ارائه می‌کند.</p></div>
             <button className="button button--primary" type="button" onClick={() => copyPrompt('AUTOPILOT-CTA', autopilotExecution.startPrompt)}>{copiedId === 'AUTOPILOT-CTA' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-CTA' ? 'کپی شد' : 'کپی Master Prompt'}</button>
           </div>
         </div>
