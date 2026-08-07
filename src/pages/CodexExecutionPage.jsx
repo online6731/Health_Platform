@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import {
+  autopilotExecution,
   capacityTiers,
   codexExecutionMeta,
   controlPrompts,
@@ -117,8 +118,8 @@ export default function CodexExecutionPage() {
             <h1>{codexExecutionMeta.title}</h1>
             <p>{codexExecutionMeta.subtitle}</p>
             <div className="codex-plan__hero-actions">
-              <a className="button button--primary" href="#release-system">مسیر Test تا Production <ArrowLeft size={18} /></a>
-              <a className="button button--ghost" href="#detail-registry">رجیستری جزئیات</a>
+              <a className="button button--primary" href="#autopilot">کپی Master Prompt <ArrowLeft size={18} /></a>
+              <a className="button button--ghost" href="#release-system">مسیر Test تا Production</a>
             </div>
           </div>
           <aside className="codex-command-card" aria-label="خلاصه برنامه اجرا">
@@ -136,6 +137,7 @@ export default function CodexExecutionPage() {
       <nav className="codex-plan__toc" aria-label="فهرست نقشه اجرای Codex">
         <div className="container">
           {[
+            ['#autopilot', 'شروع خیلی ساده'],
             ['#method', 'روش اجرا'],
             ['#capacity', 'ظرفیت هر پرامپت'],
             ['#phases', 'فازها و گیت‌ها'],
@@ -149,6 +151,38 @@ export default function CodexExecutionPage() {
           ].map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         </div>
       </nav>
+
+      <section className="codex-plan__section codex-plan__section--dark codex-autopilot" id="autopilot">
+        <div className="container">
+          <PlanHeading eyebrow="SERVICEOS AUTOPILOT" title="یک‌بار Master Prompt؛ بعد فقط «ادامه بده»" description="تو دیگر شناسه پرامپت، ترتیب فاز یا گیت را مدیریت نمی‌کنی. دستور اول، حافظه اجرایی را داخل مخزن می‌سازد و از آن به بعد Codex در هر نوبت فقط یک Next Action معتبر را اجرا می‌کند." invert />
+          <div className="codex-autopilot__grid">
+            <article className="codex-autopilot__start">
+              <header><span>فقط یک‌بار</span><strong>Master Prompt را به Codex بده</strong></header>
+              <p>این دستور مخزن را می‌خواند، قواعد دائمی را در AGENTS.md ثبت می‌کند، ممیزی و STATE/BACKLOG را می‌سازد و نقطه ادامه را مشخص می‌کند.</p>
+              <details>
+                <summary>مشاهده متن کامل Master Prompt <ArrowLeft size={17} /></summary>
+                <pre>{autopilotExecution.startPrompt}</pre>
+              </details>
+              <button type="button" onClick={() => copyPrompt('AUTOPILOT-START', autopilotExecution.startPrompt)}>{copiedId === 'AUTOPILOT-START' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-START' ? 'Master Prompt کپی شد' : 'کپی Master Prompt'}</button>
+            </article>
+            <article className="codex-autopilot__continue">
+              <header><span>از نوبت دوم به بعد</span><strong>فقط همین دو کلمه</strong></header>
+              <blockquote>{autopilotExecution.continuePhrase}</blockquote>
+              <p>حتی در یک Task تازه روی همان مخزن هم قواعد AGENTS و STATE به Codex می‌گویند دقیقاً از کجا ادامه دهد.</p>
+              <button type="button" onClick={() => copyPrompt('AUTOPILOT-CONTINUE', autopilotExecution.continuePhrase)}>{copiedId === 'AUTOPILOT-CONTINUE' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-CONTINUE' ? 'کپی شد' : 'کپی «ادامه بده»'}</button>
+            </article>
+          </div>
+          <div className="codex-autopilot__flow" aria-label="چرخه ساده Autopilot">
+            {[
+              ['۱', 'Codex وضعیت واقعی مخزن را می‌خواند'],
+              ['۲', 'فقط Next Action را اجرا می‌کند'],
+              ['۳', 'تست، Diff و گیت‌ها را بررسی می‌کند'],
+              ['۴', 'STATE را ثبت و منتظر «ادامه بده» می‌ماند'],
+            ].map(([number, text]) => <div key={number}><span>{number}</span><p>{text}</p></div>)}
+          </div>
+          <div className="codex-autopilot__guard"><ShieldCheck size={22} /><p><strong>اتوپایلوت به معنی بی‌احتیاطی نیست.</strong> هر بار فقط یک واحد قابل بازگشت اجرا می‌شود. Codex فقط برای Secret، هزینه بیرونی، اقدام Production یا تصمیم برگشت‌ناپذیر واقعاً متوقف می‌شود.</p></div>
+        </div>
+      </section>
 
       <section className="codex-plan__section" id="method">
         <div className="container">
@@ -296,7 +330,7 @@ export default function CodexExecutionPage() {
 
       <section className="codex-plan__section codex-plan__section--dark" id="start">
         <div className="container">
-          <PlanHeading eyebrow="CONTROL PROMPTS" title="چهار پرامپتی که برنامه را هدایت می‌کنند" description="در گفتگوهای بعدی لازم نیست کل کاتالوگ دوباره فرستاده شود. یکی از این چهار پرامپت همراه با دسترسی به مخزن کافی است." invert />
+          <PlanHeading eyebrow="AUTOPILOT INTERNAL CONTROLS" title="این چهار کنترل را Codex مدیریت می‌کند، نه تو" description="در استفاده عادی فقط Master Prompt و سپس «ادامه بده» لازم است. START، Repair و Release برای موتور داخلی و شرایط خاص نگه داشته شده‌اند." invert />
           <div className="codex-control-grid">
             {controlPrompts.map((item) => (
               <PromptCard item={{ ...item, size: 'S', purpose: item.title }} copiedId={copiedId} onCopy={copyPrompt} dark key={item.id} />
@@ -385,8 +419,8 @@ export default function CodexExecutionPage() {
 
           <div className="codex-final-cta">
             <Sparkles size={32} />
-            <div><span>پرامپت پیشنهادی بعدی</span><h2>با CTRL-01 شروع کن؛ نه با ساخت هم‌زمان همه ربات‌ها</h2><p>اول خط مبنا، سپس Control Plane و مسیر Test/Beta، بعد یک Vertical Slice و در نهایت کارخانه سرویس‌ها.</p></div>
-            <button className="button button--primary" type="button" onClick={() => copyPrompt('CTRL-01-CTA', sharedPrompts[0].body)}>{copiedId === 'CTRL-01-CTA' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'CTRL-01-CTA' ? 'کپی شد' : 'کپی CTRL-01'}</button>
+            <div><span>تنها دستور شروع</span><h2>Master Prompt را یک‌بار بده؛ بعد فقط بگو «ادامه بده»</h2><p>تمام شناسه‌ها، گیت‌ها و جزئیات فنی برای Codex باقی می‌مانند و تو فقط پیشرفت هر واحد را می‌بینی.</p></div>
+            <button className="button button--primary" type="button" onClick={() => copyPrompt('AUTOPILOT-CTA', autopilotExecution.startPrompt)}>{copiedId === 'AUTOPILOT-CTA' ? <Check size={18} /> : <Copy size={18} />}{copiedId === 'AUTOPILOT-CTA' ? 'کپی شد' : 'کپی Master Prompt'}</button>
           </div>
         </div>
       </section>

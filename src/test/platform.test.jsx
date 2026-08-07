@@ -2,7 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
 import App from '../App'
-import { controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
+import { autopilotExecution, controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
 import {
   buildConditionalServicePrompts,
@@ -69,6 +69,13 @@ describe('ServiceOS product proposal', () => {
 
     expect(sharedPrompts.length).toBeGreaterThanOrEqual(35)
     expect(controlPrompts).toHaveLength(4)
+    expect(autopilotExecution.continuePhrase).toBe('ادامه بده')
+    expect(autopilotExecution.startPrompt).toContain('AGENTS.md')
+    expect(autopilotExecution.startPrompt).toContain('BASELINE_AUDIT.md')
+    expect(autopilotExecution.startPrompt).toContain('STATE.md')
+    expect(autopilotExecution.startPrompt).toContain('فقط همان Next Action')
+    expect(controlPrompts.find((prompt) => prompt.id === 'START')?.body).toBe(autopilotExecution.startPrompt)
+    expect(controlPrompts.find((prompt) => prompt.id === 'CONTINUE')?.body).toBe('ادامه بده')
     expect(serviceExecutionPromptStages).toHaveLength(23)
     expect(promptsPerService.every((prompts) => prompts.length >= 13 && prompts.length <= 23)).toBe(true)
     expect(new Set(promptsPerService.map((prompts) => prompts.length)).size).toBeGreaterThan(1)
@@ -124,6 +131,9 @@ describe('ServiceOS product proposal', () => {
 
   it('lets the execution guide select a service and exposes its prompt sequence', () => {
     renderRoute('/codex-execution')
+    expect(screen.getByRole('heading', { name: /یک‌بار Master Prompt/ })).not.toBeNull()
+    expect(screen.getAllByRole('button', { name: /کپی Master Prompt/ }).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('ادامه بده').length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
     expect(screen.getByRole('heading', { name: /مسیر انتشار/ })).not.toBeNull()
