@@ -42,6 +42,20 @@ describe('ServiceOS product proposal', () => {
     expect(screen.queryByText(/اول یک کسب‌وکار سلامت قابل‌دفاع/)).toBeNull()
   })
 
+  it('publishes the complete execution audio guide as a standalone web page', () => {
+    renderRoute()
+    expect(screen.getAllByRole('link', { name: 'نسخه شنیداری' }).length).toBeGreaterThan(0)
+
+    const audioGuide = readFileSync('public/execution-audio-guide.html', 'utf8')
+    expect(audioGuide.length).toBeGreaterThan(300_000)
+    expect(audioGuide).toContain('فصل هفتم: فاز سه، کارخانه ربات‌های تلگرام')
+    expect(audioGuide).toContain('فصل یازدهم: چرخه کامل ساخت هر سرویس')
+    expect(audioGuide).toContain('پیوست - ۷. محتوا، رسانه و سرگرمی')
+    expect(audioGuide).toContain('id="theme-toggle"')
+    expect(audioGuide).toContain('id="reading-progress-bar"')
+    expect((audioGuide.match(/class="chapter-heading"/g) ?? []).length).toBeGreaterThanOrEqual(30)
+  })
+
   it.each([
     ['/services', 'نقشه باز سرویس‌ها'],
     ['/business', 'هر کسب‌وکار، یک ویترین هوشمند؛ هر نیاز، یک تطبیق قابل‌اندازه‌گیری'],
