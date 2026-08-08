@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
-import { readFileSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync, statSync } from 'node:fs'
 import App from '../App'
 import { autopilotExecution, controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
@@ -33,6 +33,7 @@ import {
   telegramProvisioningPaths,
 } from '../content/ownerHandoffContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
+import { infographicMeta, infographics } from '../content/infographicContent'
 
 function renderRoute(route = '/') {
   return render(
@@ -79,11 +80,44 @@ describe('ServiceOS product proposal', () => {
     ['/services/3', 'مشاوره اولیه پزشکی و آزمایش'],
     ['/docs', 'کاتالوگ اجرایی ServiceOS'],
     ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
+    ['/infographics', 'کل پلتفرم در ۵۶ اینفوگرافی فارسی'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', async (route, heading) => {
     renderRoute(route)
     expect(await screen.findByRole('heading', { level: 1, name: heading }, { timeout: 5000 })).not.toBeNull()
+  })
+
+  it('publishes a complete, searchable and downloadable Persian infographic library', async () => {
+    expect(infographics).toHaveLength(56)
+    expect(new Set(infographics.map((item) => item.id)).size).toBe(infographics.length)
+    expect(new Set(infographics.map((item) => item.slug)).size).toBe(infographics.length)
+
+    const pngFiles = readdirSync('public/infographics')
+      .filter((file) => /^\d{2}-.*\.png$/.test(file))
+      .sort()
+    expect(pngFiles).toHaveLength(infographics.length)
+
+    for (const file of pngFiles) {
+      const image = readFileSync(`public/infographics/${file}`)
+      expect(image.subarray(1, 4).toString()).toBe('PNG')
+      expect(image.readUInt32BE(16)).toBe(1200)
+      expect(image.readUInt32BE(20)).toBe(1500)
+      expect(image.length).toBeGreaterThan(500_000)
+    }
+
+    expect(statSync('public/infographics/serviceos-infographics-fa.zip').size).toBeGreaterThan(30_000_000)
+    expect(statSync('public/infographics/assets/serviceos-visual-foundation.png').size).toBeGreaterThan(1_000_000)
+
+    renderRoute('/infographics')
+    expect(await screen.findByRole('heading', { level: 1, name: 'کل پلتفرم در ۵۶ اینفوگرافی فارسی' })).not.toBeNull()
+    expect(screen.getAllByRole('link', { name: /دانلود همه تصاویر|دانلود ZIP کامل/ })).toHaveLength(2)
+    expect(screen.getAllByRole('article')).toHaveLength(56)
+
+    fireEvent.change(screen.getByPlaceholderText(/جستجوی تلگرام/), { target: { value: 'D07' } })
+    expect(screen.getAllByRole('article')).toHaveLength(2)
+    expect(screen.getByRole('heading', { name: /D07/ })).not.toBeNull()
+    expect(infographicMeta.dimensions).toContain('۱۲۰۰')
   })
 
   it('publishes a multi-hundred-page implementation catalog', () => {
