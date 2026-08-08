@@ -391,9 +391,18 @@ export const infographics = [
 ]
 
 export const infographicMeta = {
-  count: infographics.length,
+  count: infographics.length + 1,
+  standardCount: infographics.length,
   updatedAt: '۱۴۰۵/۰۵/۱۷',
   dimensions: '۱۲۰۰ × ۱۵۰۰ پیکسل',
   archive: './infographics/serviceos-infographics-fa.zip',
   cover: imagePath('00', 'cover'),
+  megaMap: {
+    title: 'نقشه مادر ServiceOS',
+    dimensions: '۱۰٬۰۰۰ × ۱۰٬۰۰۰ پیکسل',
+    megapixels: 100,
+    services: services.length,
+    master: './infographics/serviceos-master-map-10000.jpg',
+    preview: './infographics/serviceos-master-map-preview.jpg',
+  },
 }

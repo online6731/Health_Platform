@@ -43,6 +43,26 @@ function renderRoute(route = '/') {
   )
 }
 
+function readJpegDimensions(buffer) {
+  let offset = 2
+  const startOfFrameMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf])
+  while (offset < buffer.length - 9) {
+    if (buffer[offset] !== 0xff) {
+      offset += 1
+      continue
+    }
+    const marker = buffer[offset + 1]
+    offset += 2
+    if (marker === 0xd8 || marker === 0xd9) continue
+    const segmentLength = buffer.readUInt16BE(offset)
+    if (startOfFrameMarkers.has(marker)) {
+      return { height: buffer.readUInt16BE(offset + 3), width: buffer.readUInt16BE(offset + 5) }
+    }
+    offset += segmentLength
+  }
+  throw new Error('JPEG dimensions not found')
+}
+
 describe('ServiceOS product proposal', () => {
   it('presents the new Telegram-first network thesis', () => {
     renderRoute()
@@ -80,7 +100,7 @@ describe('ServiceOS product proposal', () => {
     ['/services/3', 'مشاوره اولیه پزشکی و آزمایش'],
     ['/docs', 'کاتالوگ اجرایی ServiceOS'],
     ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
-    ['/infographics', 'کل پلتفرم در ۵۶ اینفوگرافی فارسی'],
+    ['/infographics', 'کل پلتفرم در ۵۶ اینفوگرافی و یک نقشه مادر'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', async (route, heading) => {
@@ -90,6 +110,8 @@ describe('ServiceOS product proposal', () => {
 
   it('publishes a complete, searchable and downloadable Persian infographic library', async () => {
     expect(infographics).toHaveLength(56)
+    expect(infographicMeta.count).toBe(57)
+    expect(infographicMeta.standardCount).toBe(56)
     expect(new Set(infographics.map((item) => item.id)).size).toBe(infographics.length)
     expect(new Set(infographics.map((item) => item.slug)).size).toBe(infographics.length)
 
@@ -106,11 +128,18 @@ describe('ServiceOS product proposal', () => {
       expect(image.length).toBeGreaterThan(500_000)
     }
 
-    expect(statSync('public/infographics/serviceos-infographics-fa.zip').size).toBeGreaterThan(30_000_000)
+    const masterMap = readFileSync('public/infographics/serviceos-master-map-10000.jpg')
+    const masterPreview = readFileSync('public/infographics/serviceos-master-map-preview.jpg')
+    expect(readJpegDimensions(masterMap)).toEqual({ width: 10_000, height: 10_000 })
+    expect(readJpegDimensions(masterPreview)).toEqual({ width: 2500, height: 2500 })
+    expect(masterMap.length).toBeGreaterThan(7_000_000)
+    expect(statSync('public/infographics/serviceos-infographics-fa.zip').size).toBeGreaterThan(40_000_000)
     expect(statSync('public/infographics/assets/serviceos-visual-foundation.png').size).toBeGreaterThan(1_000_000)
 
     renderRoute('/infographics')
-    expect(await screen.findByRole('heading', { level: 1, name: 'کل پلتفرم در ۵۶ اینفوگرافی فارسی' })).not.toBeNull()
+    expect(await screen.findByRole('heading', { level: 1, name: 'کل پلتفرم در ۵۶ اینفوگرافی و یک نقشه مادر' })).not.toBeNull()
+    expect(screen.getByRole('heading', { name: 'کل پروژه در یک تصویر بسیار بزرگ' })).not.toBeNull()
+    expect(screen.getByRole('link', { name: /دانلود تصویر ۱۰٬۰۰۰×۱۰٬۰۰۰/ })).not.toBeNull()
     expect(screen.getAllByRole('link', { name: /دانلود همه تصاویر|دانلود ZIP کامل/ })).toHaveLength(2)
     expect(screen.getAllByRole('article')).toHaveLength(56)
 

@@ -19,8 +19,8 @@ export default function InfographicsPage() {
         <div className="container infographics-hero__grid">
           <div>
             <span className="infographics-kicker"><Image size={17} />SERVICEOS VISUAL PLAYBOOK</span>
-            <h1>کل پلتفرم در ۵۶ اینفوگرافی فارسی</h1>
-            <p>مراحل D00 تا D18، معماری، محیط‌های انتشار، تلگرام، AI، داده، ایمنی، شبکه کسب‌وکار، درآمد، ریسک، سرویس‌ها و اجرای Codex با متن دقیق و خروجی PNG آماده ارائه.</p>
+            <h1>کل پلتفرم در ۵۶ اینفوگرافی و یک نقشه مادر</h1>
+            <p>مراحل D00 تا D18، معماری، محیط‌های انتشار، تلگرام، AI، داده، ایمنی، شبکه کسب‌وکار، درآمد، ریسک و تمام سرویس‌ها؛ به‌اضافه یک تصویر ۱۰۰ مگاپیکسلی از کل پروژه.</p>
             <div className="infographics-hero__actions">
               <a className="button button--primary" href="#gallery">مشاهده مجموعه <ArrowLeft size={18} /></a>
               <a className="button button--ghost" href={infographicMeta.archive} download><FileArchive size={18} /> دانلود همه تصاویر</a>
@@ -28,13 +28,43 @@ export default function InfographicsPage() {
             <dl className="infographics-hero__stats">
               <div><dt>{infographicMeta.count.toLocaleString('fa-IR')}</dt><dd>تصویر مستقل</dd></div>
               <div><dt>{infographicMeta.dimensions}</dt><dd>ابعاد هر PNG</dd></div>
-              <div><dt>۳۵ مگابایت</dt><dd>بسته کامل ZIP</dd></div>
+              <div><dt>حدود ۴۵ مگابایت</dt><dd>بسته کامل ZIP</dd></div>
             </dl>
           </div>
           <a className="infographics-cover" href={infographicMeta.cover} target="_blank" rel="noreferrer">
             <img src={infographicMeta.cover} alt="جلد مجموعه اینفوگرافی ServiceOS" />
             <span>مشاهده جلد در اندازه اصلی <ExternalLink size={15} /></span>
           </a>
+        </div>
+      </section>
+
+      <section className="megaposter-showcase">
+        <div className="container megaposter-showcase__grid">
+          <a className="megaposter-showcase__visual" href={infographicMeta.megaMap.master} target="_blank" rel="noreferrer">
+            <img src={infographicMeta.megaMap.preview} alt="پیش‌نمایش نقشه مادر ده‌هزار در ده‌هزار پیکسل ServiceOS" />
+            <span><ExternalLink size={18} />بازکردن تصویر ۱۰۰ مگاپیکسلی</span>
+          </a>
+          <div className="megaposter-showcase__copy">
+            <span>MASTER MAP · 10K × 10K</span>
+            <h2>کل پروژه در یک تصویر بسیار بزرگ</h2>
+            <p>این نقشه برای نمایش روی مانیتور بزرگ، چاپ، جلسه سرمایه‌گذاری و تحویل به تیم اجرا ساخته شده است. با بزرگ‌نمایی، جزئیات هر بخش و نام تمام سرویس‌ها خوانده می‌شود.</p>
+            <div className="megaposter-showcase__facts">
+              <div><strong>۷۸</strong><small>سرویس در ۷ خانواده</small></div>
+              <div><strong>۱۹</strong><small>واحد تحویل D00–D18</small></div>
+              <div><strong>۷</strong><small>محیط انتشار</small></div>
+              <div><strong>۱۰۰MP</strong><small>رزولوشن واقعی</small></div>
+            </div>
+            <ul>
+              <li>چشم‌انداز، مدل دو سطحی AI و انسان و معماری پنج‌لایه</li>
+              <li>معرفی تمام خانواده‌ها و نام و توضیح ۷۸ سرویس</li>
+              <li>نقشه راه کسب‌وکار، نسخه بتا، Production و مسیر تحویل فنی</li>
+              <li>مدل درآمدی، آمادگی انتشار، ریسک‌ها و تعریف پایان پروژه</li>
+            </ul>
+            <div className="megaposter-showcase__actions">
+              <a className="button button--primary" href={infographicMeta.megaMap.master} download><Download size={18} />دانلود تصویر ۱۰٬۰۰۰×۱۰٬۰۰۰</a>
+              <a className="button button--ghost" href={infographicMeta.megaMap.preview} download><Image size={18} />دانلود پیش‌نمایش سبک</a>
+            </div>
+          </div>
         </div>
       </section>
 
