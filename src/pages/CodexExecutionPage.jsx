@@ -56,6 +56,16 @@ import {
   telegramOwnershipModels,
 } from '../content/implementationDetailsContent'
 import {
+  deliveryIncrements,
+  deliveryLanes,
+  executionIncrementPrompt,
+  executionBlueprintMeta,
+  programRisks,
+  readinessDimensions,
+  referenceVerticalSlice,
+  telegramCurrentCapabilities,
+} from '../content/executionBlueprintContent'
+import {
   autonomyGroups,
   authorityLayers,
   ownerHandoffMeta,
@@ -83,7 +93,7 @@ export default function CodexExecutionPage() {
   const selectedService = services.find((service) => service.id === Number(selectedServiceId)) ?? services[0]
   const servicePrompts = useMemo(() => buildConditionalServicePrompts(selectedService), [selectedService])
   const serviceProfile = useMemo(() => buildServiceImplementationProfile(selectedService), [selectedService])
-  const totalPromptCount = sharedPrompts.length + controlPrompts.length + implementationAreas.length + servicePromptTotal
+  const totalPromptCount = sharedPrompts.length + controlPrompts.length + implementationAreas.length + deliveryIncrements.length + servicePromptTotal
   const normalized = query.trim().toLocaleLowerCase('fa')
   const normalizedDetail = detailQuery.trim().toLocaleLowerCase('fa')
   const filteredPrompts = useMemo(() => sharedPrompts.filter((item) => {
@@ -129,7 +139,7 @@ export default function CodexExecutionPage() {
             <p>{codexExecutionMeta.subtitle}</p>
             <div className="codex-plan__hero-actions">
               <a className="button button--primary" href="#autopilot">شروع چهارمرحله‌ای <ArrowLeft size={18} /></a>
-              <a className="button button--ghost" href="#release-system">مسیر Test تا Production</a>
+              <a className="button button--ghost" href="#execution-blueprint">نقشه ساخت قابل تحویل</a>
             </div>
           </div>
           <aside className="codex-command-card" aria-label="خلاصه برنامه اجرا">
@@ -138,7 +148,7 @@ export default function CodexExecutionPage() {
             <dl>
               <div><dt>{releaseEnvironments.length.toLocaleString('fa-IR')}</dt><dd>محیط انتشار</dd></div>
               <div><dt>{implementationAreas.length.toLocaleString('fa-IR')}</dt><dd>حوزه ممیزی</dd></div>
-              <div><dt>{servicePromptRange}</dt><dd>پرامپت شرطی هر سرویس</dd></div>
+              <div><dt>{deliveryIncrements.length.toLocaleString('fa-IR')}</dt><dd>واحد تحویل سرتاسری</dd></div>
             </dl>
           </aside>
         </div>
@@ -152,6 +162,7 @@ export default function CodexExecutionPage() {
             ['#method', 'روش اجرا'],
             ['#capacity', 'ظرفیت هر پرامپت'],
             ['#phases', 'فازها و گیت‌ها'],
+            ['#execution-blueprint', 'نقشه ساخت دقیق'],
             ['#release-system', 'Test تا Production'],
             ['#telegram-control', 'توکن و مالکیت ربات'],
             ['#detail-registry', 'رجیستری جزئیات'],
@@ -308,6 +319,63 @@ export default function CodexExecutionPage() {
         </div>
       </section>
 
+      <section className="codex-plan__section codex-plan__section--blueprint" id="execution-blueprint">
+        <div className="container">
+          <PlanHeading eyebrow={executionBlueprintMeta.version} title={executionBlueprintMeta.title} description={executionBlueprintMeta.subtitle} />
+
+          <div className="codex-blueprint-audit">
+            <ClipboardCheck size={30} />
+            <div><span>نتیجه بازبینی اجرایی</span><h3>دیگر هیچ مرحله‌ای فقط یک عنوان کلی نیست</h3><p>هر واحد پایین دقیقاً می‌گوید چه چیزی از قبل لازم است، چه کارهایی انجام می‌شود، چه فایل یا سامانه‌ای تحویل می‌گیریم، چه کسی پاسخ‌گوست، چه آزمونی عبور را ثابت می‌کند و کدام تأیید واقعاً به مالک نیاز دارد.</p></div>
+            <small>{executionBlueprintMeta.planningAssumption}</small>
+          </div>
+
+          <div className="codex-lane-grid" aria-label="مسیرهای موازی اجرای پلتفرم">
+            {deliveryLanes.map((lane, index) => (
+              <article className={`codex-lane-card codex-lane-card--${lane.id}`} key={lane.id}>
+                <header><span>{String(index + 1).padStart(2, '0')}</span><h3>{lane.title}</h3></header>
+                <dl><div><dt>پاسخ‌گو</dt><dd>{lane.owner}</dd></div><div><dt>شروع</dt><dd>{lane.starts}</dd></div></dl>
+                <ul>{lane.outputs.map((item) => <li key={item}>{item}</li>)}</ul>
+                <p><CheckCircle2 size={16} /><span>{lane.proof}</span></p>
+              </article>
+            ))}
+          </div>
+
+          <div className="codex-increment-header">
+            <div><span>DELIVERY INCREMENTS</span><h3>{deliveryIncrements.length.toLocaleString('fa-IR')} واحد تحویل وابسته؛ به همین ترتیب اجرا شوند</h3></div>
+            <p>هر واحد باید پیش از بازشدن واحد بعدی، خروجی و شاهد خودش را در STATE و BACKLOG ثبت کند. اجرای موازی فقط بین Laneهایی مجاز است که وابستگی مشترک حل‌شده دارند.</p>
+          </div>
+          <div className="codex-increment-list">
+            {deliveryIncrements.map((item, index) => <ExecutionIncrementCard item={item} index={index} copiedId={copiedId} onCopy={copyPrompt} key={item.id} />)}
+          </div>
+
+          <div className="codex-reference-flow">
+            <header><Waypoints size={25} /><div><span>REFERENCE VERTICAL SLICE</span><h3>یک درخواست واقعی دقیقاً از چه مسیرهایی عبور می‌کند؟</h3></div></header>
+            <div>{referenceVerticalSlice.map(([number, title, text]) => <article key={number}><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></article>)}</div>
+          </div>
+
+          <div className="codex-readiness-matrix">
+            <header><ShieldCheck size={25} /><div><span>GO / NO-GO SCORECARD</span><h3>شش امضای لازم پیش از ورود کاربر واقعی</h3></div></header>
+            <div>{readinessDimensions.map((dimension) => (
+              <article key={dimension.title}>
+                <header><h4>{dimension.title}</h4><span>{dimension.owner}</span></header>
+                <p><strong>مانع انتشار:</strong> {dimension.blocking}</p>
+                <ul>{dimension.checks.map((check) => <li key={check}><Check size={14} />{check}</li>)}</ul>
+              </article>
+            ))}</div>
+          </div>
+
+          <div className="codex-risk-register">
+            <header><Gauge size={25} /><div><span>PROGRAM RISK REGISTER</span><h3>ریسک‌های سراسری، نشانه شروع و واکنش از قبل مشخص</h3></div></header>
+            <div>{programRisks.map(([id, risk, trigger, prevention, response, owner]) => (
+              <article key={id}>
+                <span>{id}</span><h4>{risk}</h4>
+                <dl><div><dt>نشانه</dt><dd>{trigger}</dd></div><div><dt>پیشگیری</dt><dd>{prevention}</dd></div><div><dt>واکنش</dt><dd>{response}</dd></div><div><dt>مالک</dt><dd>{owner}</dd></div></dl>
+              </article>
+            ))}</div>
+          </div>
+        </div>
+      </section>
+
       <section className="codex-plan__section codex-plan__section--release" id="release-system">
         <div className="container">
           <PlanHeading eyebrow="SERVICE RELEASE TRAIN" title="مسیر انتشار هر سرویس؛ از Test و Beta تا نسخه اصلی" description="یک دامنه تست مشترک می‌تواند ورودی باشد، اما namespace داده، Secret، Bot Token، Webhook و Feature Flag هر سرویس و محیط جداست. نسخه تأییدشده با همان artifact به Production ارتقا پیدا می‌کند؛ دوباره Build نمی‌شود." />
@@ -368,6 +436,10 @@ export default function CodexExecutionPage() {
           <div className="codex-telegram-note">
             <Lock size={24} />
             <div><strong>دو محدودیت طراحی</strong><p>هر Bot در هر محیط فقط یک Webhook فعال دارد؛ بنابراین Beta و Production به Bot و Token مجزا نیاز دارند. همچنین Bot API کانال را server-side ایجاد نمی‌کند؛ Mini App با <code>requestChat</code> پنجره رسمی انتخاب یا ساخت را باز می‌کند و اقدام نهایی با تأیید کاربر انجام می‌شود.</p></div>
+          </div>
+          <div className="codex-telegram-current">
+            <header><Sparkles size={24} /><div><span>TELEGRAM PLATFORM UPDATE · 2026</span><h3>قابلیت‌های جدید؛ استفاده فقط با قرارداد، fallback و Feature Flag</h3></div></header>
+            <div>{telegramCurrentCapabilities.map(([title, text]) => <article key={title}><strong>{title}</strong><p>{text}</p></article>)}</div>
           </div>
           <div className="codex-source-links" aria-label="منابع رسمی تلگرام">
             <span>مبنای جاری: مستندات رسمی Telegram</span>
@@ -501,6 +573,41 @@ function PlanHeading({ eyebrow, title, description, invert = false }) {
     <header className={`codex-plan-heading ${invert ? 'codex-plan-heading--invert' : ''}`}>
       <div><span>{eyebrow}</span><h2>{title}</h2></div><p>{description}</p>
     </header>
+  )
+}
+
+function ExecutionIncrementCard({ item, index, copiedId, onCopy }) {
+  const promptId = `INCREMENT-${item.id}`
+  const copied = copiedId === promptId
+  return (
+    <details className="codex-increment-card" open={index === 0}>
+      <summary>
+        <span>{item.id}</span>
+        <div><small>{item.lane}</small><h3>{item.title}</h3><p>{item.goal}</p></div>
+        <dl><div><dt>برآورد برنامه‌ریزی</dt><dd>{item.estimate}</dd></div><div><dt>پاسخ‌گو</dt><dd>{item.owner}</dd></div></dl>
+        <i><ArrowLeft size={18} /></i>
+      </summary>
+      <div className="codex-increment-card__body">
+        <div className="codex-increment-dependency"><GitBranch size={18} /><span><strong>وابستگی ورود</strong>{item.dependsOn}</span></div>
+        <IncrementList title="کارهای دقیق این واحد" items={item.tasks} />
+        <IncrementList title="خروجی‌های قابل تحویل" items={item.deliverables} code />
+        <IncrementList title="معیارهای پذیرش" items={item.acceptance} checked />
+        <div className="codex-increment-gates">
+          <p><Users size={18} /><span><strong>گیت انسانی</strong>{item.humanGate}</span></p>
+          <p><ClipboardCheck size={18} /><span><strong>شاهد عبور</strong>{item.evidence}</span></p>
+        </div>
+        <button className="codex-increment-copy" type="button" onClick={() => onCopy(promptId, executionIncrementPrompt(item))}>{copied ? <Check size={17} /> : <Copy size={17} />}{copied ? 'پرامپت واحد کپی شد' : `کپی پرامپت اجرای ${item.id}`}</button>
+      </div>
+    </details>
+  )
+}
+
+function IncrementList({ title, items, code = false, checked = false }) {
+  return (
+    <section className="codex-increment-listing">
+      <h4>{title}</h4>
+      <ul>{items.map((item) => <li key={item}>{checked && <Check size={14} />}{code ? <code dir="ltr">{item}</code> : item}</li>)}</ul>
+    </section>
   )
 }
 

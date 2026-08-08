@@ -14,6 +14,15 @@ import {
   serviceExecutionPromptStages,
 } from '../content/implementationDetailsContent'
 import {
+  deliveryIncrements,
+  deliveryLanes,
+  executionIncrementPrompt,
+  programRisks,
+  readinessDimensions,
+  referenceVerticalSlice,
+  telegramCurrentCapabilities,
+} from '../content/executionBlueprintContent'
+import {
   autonomyGroups,
   authorityLayers,
   ownerHandoffMeta,
@@ -128,6 +137,30 @@ describe('ServiceOS product proposal', () => {
     expect(networkStageIds).not.toContain('EP-11')
   })
 
+  it('turns the platform roadmap into dependency-aware delivery increments', () => {
+    expect(deliveryLanes).toHaveLength(8)
+    expect(deliveryIncrements).toHaveLength(19)
+    expect(deliveryIncrements[0].id).toBe('D00')
+    expect(deliveryIncrements.at(-1).id).toBe('D18')
+    expect(deliveryIncrements.every((item) => (
+      item.dependsOn
+      && item.owner
+      && item.tasks.length >= 5
+      && item.deliverables.length >= 5
+      && item.acceptance.length >= 4
+      && item.humanGate
+      && item.evidence
+    ))).toBe(true)
+    expect(executionIncrementPrompt(deliveryIncrements[0])).toContain('فقط اولین واحد مستقل و قابل بازگشت')
+    expect(referenceVerticalSlice).toHaveLength(14)
+    expect(readinessDimensions).toHaveLength(6)
+    expect(programRisks.length).toBeGreaterThanOrEqual(10)
+    expect(telegramCurrentCapabilities.some(([title]) => title === 'Rich Messages')).toBe(true)
+    expect(implementationAreas.length).toBeGreaterThanOrEqual(34)
+    expect(autopilotExecution.startPrompt).toContain('executionBlueprintContent.js')
+    expect(autopilotExecution.startPrompt).toContain('D00 تا D18')
+  })
+
   it('collects all owner dependencies in one gitignored handoff file', () => {
     expect(ownerHandoffMeta.localPath).toBe('.codex/owner-inputs.local.yaml')
     expect(ownerHandoffMeta.templatePath).toBe('docs/templates/OWNER_INPUTS.example.yaml')
@@ -209,6 +242,10 @@ describe('ServiceOS product proposal', () => {
     expect(screen.getAllByText('ادامه بده').length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText('CTRL-01').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/کارخانه ساخت ۷۸ سرویس/)).not.toBeNull()
+    expect(screen.getByRole('heading', { name: /از مخزن خالی تا اولین تراکنش واقعی/ })).not.toBeNull()
+    expect(screen.getByRole('button', { name: 'کپی پرامپت اجرای D00' })).not.toBeNull()
+    expect(screen.getAllByText('D18').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByText('Rich Messages')).not.toBeNull()
     expect(screen.getByRole('heading', { name: /مسیر انتشار/ })).not.toBeNull()
     expect(screen.getByRole('heading', { name: /رجیستری جزئیات اجرایی/ })).not.toBeNull()
     fireEvent.change(screen.getByRole('combobox', { name: 'انتخاب از کل کاتالوگ' }), { target: { value: '18' } })

@@ -1,7 +1,7 @@
 export const codexExecutionMeta = {
   title: 'نقشه اجرای ServiceOS با Codex',
-  subtitle: 'یک فایل ورودی مالک و یک دستور شروع؛ بعد فقط «ادامه بده». Codex خودش وضعیت، گیت، دسترسی، پرامپت بعدی، تست و ثبت پیشرفت را از داخل مخزن مدیریت می‌کند.',
-  version: 'Execution Playbook v1.4 · Coherent Autopilot',
+  subtitle: 'یک فایل ورودی مالک و یک دستور شروع؛ بعد فقط «ادامه بده». نقشه جدید هر گام را به واحد تحویل وابسته با خروجی، مالک، گیت انسانی، شاهد و معیار پذیرش تبدیل می‌کند.',
+  version: 'Execution Playbook v2.0 · Executable Autopilot',
   servicePromptCount: '۱۳ تا ۲۳ پرامپت شرطی',
 }
 
@@ -65,6 +65,7 @@ export const sharedPrompts = [
   prompt('CTRL-02', 'کنترل برنامه', 'ایجاد دفتر وضعیت و قرارداد ادامه کار', 'S', 'حفظ تداوم بین پرامپت‌ها و جلوگیری از تکرار.', `بر اساس ممیزی مصوب، docs/execution/STATE.md و docs/execution/BACKLOG.md را بساز. STATE باید شامل هدف جاری، شاخه، آخرین Commit سالم، مرحله فعال، گیت‌های سبز/قرمز، تصمیم‌های باز و دقیقاً یک Next Action باشد. Backlog باید شناسه، وابستگی، اندازه S/M/L، معیار پذیرش و وضعیت داشته باشد. هیچ قابلیت جدیدی نساز. این دو فایل از این پس منبع شروع هر پرامپت هستند.`),
   prompt('CTRL-03', 'کنترل برنامه', 'تثبیت دامنه MVP و فهرست عدم‌ساخت', 'S', 'جلوگیری از پخش شدن دامنه در شروع.', `کاتالوگ اجرایی و اهداف سرمایه‌گذاری را بخوان و دامنه MVP را به یک جریان سرتاسری محدود کن: Omni Agent، دو سرویس تخصصی موج اول، Business Onboarding، Storefront، Search/Referral و Subscription. در docs/execution/MVP_SCOPE.md قابلیت‌های داخل، خارج، فرض‌ها، وابستگی‌ها، معیار موفقیت و Kill Criteria را بنویس. تصمیم قطعی جدید را بدون شاهد تحمیل نکن و موارد مبهم را به‌صورت فرض قابل آزمون ثبت کن.`),
   prompt('CTRL-04', 'کنترل برنامه', 'طرح شاخه‌ها، Commit و انتشار', 'S', 'ایجاد یک مسیر تحویل قابل بازیابی.', `برای ServiceOS یک قرارداد ساده توسعه بنویس: نام‌گذاری شاخه‌ها، اندازه Commit، پیام Commit، گیت Merge، نسخه‌گذاری، Feature Flag و مسیر انتشار local → preview → test/integration → alpha → closed-beta → canary → production. مشخص کن هر مرحله چه مالک، شاهد، معیار ورود/خروج و Rollback دارد. خروجی در docs/execution/DELIVERY_PROTOCOL.md باشد. وضعیت فعلی Git و GitHub Pages را حفظ کن و هیچ تاریخچه‌ای را بازنویسی نکن.`),
+  prompt('CTRL-05', 'کنترل برنامه', 'مادی‌سازی نقشه تحویل D00 تا D18', 'M', 'تبدیل نقشه اجرایی سایت به برنامه وابستگی‌دار واقعی همین مخزن.', `src/content/executionBlueprintContent.js را کامل بخوان. براساس وضعیت واقعی مخزن، واحدهای D00 تا D18 را در docs/execution/DELIVERY_PLAN.md مادی کن: برای هر واحد status، dependency، owner role، taskهای S/M/L، خروجی، معیار پذیرش، human gate و evidence path بنویس. واحدهای واقعاً تکمیل‌شده را فقط با شاهد Done کن؛ بقیه را Pending یا Blocked نگه دار. BACKLOG را با همین شناسه‌ها هم‌تراز و دقیقاً یک Next Action فعال کن. هیچ قابلیت محصولی را در این واحد نساز.`),
 
   prompt('REL-01', 'قطار انتشار', 'توپولوژی محیط، دامنه و جداسازی داده', 'L', 'ساخت مرز واقعی بین آزمایش، بتای بسته و محصول اصلی.', `یک Environment Registry نسخه‌دار برای local، preview هر Pull Request، test/integration، alpha داخلی، closed-beta، canary و production طراحی و پیاده کن. برای هر محیط owner، audience، domain/base URL، API endpoint، database/schema، cache، object storage، queue، secret namespace، telemetry project، payment mode و BotInstanceهای مجاز را ثبت کن. هر service × environment باید دامنه یا route صریح، Telegram bot/token، webhook و Mini App URL جدا داشته باشد؛ یک Bot token فقط یک webhook فعال دارد و نباید بین beta و production مشترک باشد. ورود alpha/beta فقط با allowlist و احراز هویت سمت سرور باشد. انتقال PII یا داده سلامت تولید به محیط پایین‌تر ممنوع؛ فقط داده ساختگی یا ماسک‌شده مجاز است. schema و validator، نمونه manifest بدون secret، policy دسترسی و آزمون جلوگیری از اتصال اشتباه به production را اضافه کن. خروجی‌های لازم: docs/contracts/environment-registry، ADR جداسازی محیط و runbook ساخت/جمع‌کردن preview.`),
   prompt('REL-02', 'قطار انتشار', 'Build یک‌باره و Promotion همان Artifact', 'L', 'حذف تفاوت پنهان بین نسخه تست‌شده و نسخه منتشرشده.', `Pipeline انتشار را طوری پیاده کن که هر Commit فقط یک‌بار build شود و همان artifact تغییرناپذیر با commit SHA، digest، dependency lock، SBOM و نتیجه تست از test به alpha، closed-beta، canary و production promote شود؛ برای هر محیط build تازه انجام نده و تنظیمات را بیرون artifact تزریق کن. ReleaseCandidate، Artifact، Deployment و PromotionApproval را نسخه‌دار ثبت کن. گیت هر مرحله باید unit/integration/E2E، migration dry-run، AI eval، safety، security scan، cost budget، smoke test و تأیید مالک را با شاهد ماشینی نگه دارد. migrationها را با الگوی expand/contract و سازگاری نسخه قبلی طراحی کن. health check پس از deploy، توقف خودکار promotion، rollback به artifact قبلی و reconciliation پس از شکست را پیاده و با یک drill واقعی مستند کن.`),
@@ -117,7 +118,7 @@ export const sharedPrompts = [
 ]
 
 export const programPhases = [
-  { id: 'P0', title: 'کنترل و خط مبنا', horizon: 'قبل از کدنویسی', objective: 'شناخت وضعیت واقعی، تثبیت دامنه و طراحی مرز محیط‌ها.', gate: 'ممیزی شاهددار + Backlog اندازه‌گذاری‌شده + MVP Scope + Environment Registry مصوب', prompts: ['CTRL-01', 'CTRL-02', 'CTRL-03', 'CTRL-04', 'REL-01'] },
+  { id: 'P0', title: 'کنترل و خط مبنا', horizon: 'قبل از کدنویسی', objective: 'شناخت وضعیت واقعی، تثبیت دامنه و طراحی مرز محیط‌ها.', gate: 'ممیزی شاهددار + Backlog اندازه‌گذاری‌شده + MVP Scope + Delivery Plan + Environment Registry مصوب', prompts: ['CTRL-01', 'CTRL-02', 'CTRL-03', 'CTRL-04', 'CTRL-05', 'REL-01'] },
   { id: 'P1', title: 'معماری و زیرساخت پایه', horizon: 'موج زیرساخت', objective: 'ساخت مرزهای مشترک، داده، هویت، رضایت، artifact و rollout کنترل‌شده.', gate: 'Build سبز + Migration از صفر + جداسازی محیط + آزمون دسترسی و قرارداد', prompts: ['ARC-01', 'ARC-02', 'ARC-03', 'ARC-04', 'ARC-05', 'ARC-06', 'ARC-07', 'REL-02', 'REL-03'] },
   { id: 'P2', title: 'هسته هوشمند قابل ارزیابی', horizon: 'پیش از عامل‌ها', objective: 'مسیریابی مدل، RAG، حافظه، ابزار، ایمنی و Eval.', gate: 'Dataset پایه + آستانه Eval + هزینه و نسخه هر اجرا قابل ردیابی', prompts: ['AI-01', 'AI-02', 'AI-03', 'AI-04', 'AI-05', 'AI-06', 'AI-07'] },
   { id: 'P3', title: 'Telegram MVP', horizon: 'اولین Vertical Slice', objective: 'Control Plane، ناوگان Bot، Mini App، Omni و ارجاع در یک مسیر واقعی.', gate: 'BotInstance آزمایش مستقل است، کاربر مجاز یک Task را کامل می‌کند و هیچ secret یا update تکراری نشت نمی‌کند', prompts: ['TGC-01', 'TGC-02', 'TGC-03', 'TGC-04', 'EXP-01', 'EXP-02', 'EXP-03', 'EXP-04', 'EXP-05'] },
@@ -209,6 +210,7 @@ https://github.com/online6731/Health_Platform
    - src/content/codexExecutionContent.js
    - src/content/ownerHandoffContent.js
    - src/content/implementationDetailsContent.js
+   - src/content/executionBlueprintContent.js
    - کاتالوگ docs و صفحات سرویس‌ها
 8. اگر AGENTS.md وجود ندارد آن را ایجاد کن؛ اگر وجود دارد فقط یک بخش کوتاه «ServiceOS Autopilot» به آن اضافه یا به‌روز کن و محتوای موجود را حفظ کن. چون AGENTS در آغاز هر Run کشف می‌شود، پروتکل همین Prompt را در Bootstrap جاری مستقیماً اجرا کن و AGENTS را برای Runهای بعدی منبع پایدار قرار بده. از قراردادن کاتالوگ طولانی در AGENTS خودداری کن و جزئیات را به STATE/Backlog ارجاع بده.
 9. پوشه docs/execution را در صورت نبود ایجاد کن.
@@ -229,6 +231,7 @@ https://github.com/online6731/Health_Platform
 - اگر گیت قبلی قرمز است، بدون افزودن قابلیت جدید کوچک‌ترین Repair معتبر را انجام بده و گیت را دوباره اجرا کن.
 - اگر گیت سبز است، فقط همان Next Action را اجرا کن؛ مرحله بعدی را هم‌زمان شروع نکن.
 - اگر Next Action یک شناسه مانند CTRL/REL/ARC/AI/TGC/EXP/NET/OPS/SURF/LAUNCH دارد، متن همان شناسه را از sharedPrompts در codexExecutionContent.js پیدا کن.
+- اگر Next Action یک شناسه D00 تا D18 است، واحد متناظر را از deliveryIncrements در executionBlueprintContent.js بخوان، با executionIncrementPrompt به دستور اجرایی تبدیل و در صورت نیاز به Taskهای S/M/L خرد کن.
 - اگر شناسه EP است، پرامپت شرطی همان سرویس را با buildConditionalServicePrompts در implementationDetailsContent.js تولید و اجرا کن.
 - اگر واحد X یا بیش از ظرفیت یک نوبت است، آن را به S/M/L بشکن، اولین واحد مستقل را اجرا و بقیه را در BACKLOG نگه دار.
 - برای تصمیم‌های برگشت‌پذیر و کم‌ریسک، امن‌ترین پیش‌فرض را انتخاب و در Decision Log ثبت کن؛ سؤال غیرضروری نپرس.
