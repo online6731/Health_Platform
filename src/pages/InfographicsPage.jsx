@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ArrowLeft, Download, ExternalLink, FileArchive, Grid3X3, Image, Search } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { infographicCategories, infographicMeta, infographics } from '../content/infographicContent'
 
 export default function InfographicsPage() {
@@ -61,6 +62,7 @@ export default function InfographicsPage() {
               <li>مدل درآمدی، آمادگی انتشار، ریسک‌ها و تعریف پایان پروژه</li>
             </ul>
             <div className="megaposter-showcase__actions">
+              <Link className="button button--primary" to="/execution-map"><Grid3X3 size={18} />ورود به نقشه تعاملی</Link>
               <a className="button button--primary" href={infographicMeta.megaMap.master} download><Download size={18} />دانلود تصویر ۱۰٬۰۰۰×۱۰٬۰۰۰</a>
               <a className="button button--ghost" href={infographicMeta.megaMap.preview} download><Image size={18} />دانلود پیش‌نمایش سبک</a>
             </div>

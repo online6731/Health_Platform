@@ -15,6 +15,7 @@ import ServicesPage from './pages/ServicesPage'
 import TrustPage from './pages/TrustPage'
 
 const CodexExecutionPage = lazy(() => import('./pages/CodexExecutionPage'))
+const ExecutionMapPage = lazy(() => import('./pages/ExecutionMapPage'))
 const InfographicsPage = lazy(() => import('./pages/InfographicsPage'))
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="docs/platform/:chapterId" element={<PlatformDocsPage />} />
         <Route path="docs/services/:serviceId/:volumeId?" element={<ServiceDocsPage />} />
         <Route path="codex-execution" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن نقشه اجرایی…</p></div>}><CodexExecutionPage /></Suspense>} />
+        <Route path="execution-map" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن نقشه تعاملی…</p></div>}><ExecutionMapPage /></Suspense>} />
         <Route path="infographics" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن گالری تصویری…</p></div>}><InfographicsPage /></Suspense>} />
         <Route path="business" element={<BusinessPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />

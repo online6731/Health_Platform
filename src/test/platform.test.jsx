@@ -34,6 +34,7 @@ import {
 } from '../content/ownerHandoffContent'
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 import { infographicMeta, infographics } from '../content/infographicContent'
+import { environmentNodes, executionMapStages, serviceWaves } from '../content/executionMapContent'
 
 function renderRoute(route = '/') {
   return render(
@@ -101,6 +102,7 @@ describe('ServiceOS product proposal', () => {
     ['/docs', 'کاتالوگ اجرایی ServiceOS'],
     ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
     ['/infographics', 'کل پلتفرم در ۵۶ اینفوگرافی و یک نقشه مادر'],
+    ['/execution-map', 'نقشه اجرایی تعاملی ServiceOS'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', async (route, heading) => {
@@ -147,6 +149,27 @@ describe('ServiceOS product proposal', () => {
     expect(screen.getAllByRole('article')).toHaveLength(2)
     expect(screen.getByRole('heading', { name: /D07/ })).not.toBeNull()
     expect(infographicMeta.dimensions).toContain('۱۲۰۰')
+  })
+
+  it('turns the execution blueprint into a multi-level searchable map', async () => {
+    expect(executionMapStages).toHaveLength(7)
+    expect(executionMapStages.flatMap((stage) => stage.increments)).toHaveLength(19)
+    expect(serviceWaves.flatMap((wave) => wave.services)).toHaveLength(services.length)
+    expect(environmentNodes).toHaveLength(7)
+
+    renderRoute('/execution-map')
+    expect(await screen.findByRole('heading', { level: 1, name: 'نقشه اجرایی تعاملی ServiceOS' })).not.toBeNull()
+    expect(screen.getAllByRole('button', { name: 'تمرکز روی هسته هوشمند' }).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByRole('button', { name: /^نمایش جزئیات D/ })).toHaveLength(19)
+
+    fireEvent.click(screen.getByRole('button', { name: 'نمایش جزئیات D07' }))
+    expect(screen.getByRole('heading', { level: 2, name: 'Agent Runtime، Prompt Registry و ابزارها' })).not.toBeNull()
+    expect(screen.getByText('فهرست ابزارهای مجاز و سطح تأیید خرید/رزرو/ارسال.')).not.toBeNull()
+
+    const search = screen.getByRole('textbox', { name: 'جستجو در نقشه اجرا' })
+    fireEvent.change(search, { target: { value: 'Closed Beta' } })
+    fireEvent.click(screen.getByRole('button', { name: /^beta Closed Beta$/i }))
+    expect(screen.getByRole('heading', { level: 2, name: 'Closed Beta' })).not.toBeNull()
   })
 
   it('publishes a multi-hundred-page implementation catalog', () => {
