@@ -119,6 +119,22 @@ html[data-theme="dark"] {
   .cover { min-height: 720px; margin-top: 28px; margin-bottom: 28px; padding: 58px 54px 42px; border-radius: 34px; box-shadow: var(--web-shadow); }
   .cover::before { inset: 34px; border-radius: 26px; }
   .cover h1 { font-size: clamp(34px, 6vw, 56px); }
+  .audio-player-panel { width: min(940px, calc(100% - 32px)); margin: 0 auto 28px; padding: 34px 38px; border: 1px solid var(--web-border); border-radius: 28px; background: linear-gradient(135deg, rgba(116, 91, 236, .13), rgba(46, 204, 173, .14)), var(--web-paper); box-shadow: var(--web-shadow); scroll-margin-top: 90px; }
+  .audio-player__header { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; margin-bottom: 22px; }
+  .audio-player__badge { display: inline-flex; width: fit-content; padding: 5px 11px; border: 1px solid rgba(111, 94, 226, .35); border-radius: 99px; color: #6a55dc; background: rgba(255, 255, 255, .58); font-size: 11px; font-weight: 800; }
+  html[data-theme="dark"] .audio-player__badge { color: #b7aaff; background: rgba(17, 23, 37, .52); }
+  .audio-player-panel h2 { margin: 10px 0 4px; font-size: 23px; }
+  .audio-player-panel p { margin: 0; color: var(--web-muted); font-size: 13px; }
+  .audio-player__wave { height: 54px; display: flex; align-items: center; gap: 5px; direction: ltr; }
+  .audio-player__wave i { display: block; width: 5px; border-radius: 99px; background: linear-gradient(180deg, #7961ef, #35cdb0); }
+  .audio-player__wave i:nth-child(1), .audio-player__wave i:nth-child(7) { height: 18px; }
+  .audio-player__wave i:nth-child(2), .audio-player__wave i:nth-child(6) { height: 30px; }
+  .audio-player__wave i:nth-child(3), .audio-player__wave i:nth-child(5) { height: 44px; }
+  .audio-player__wave i:nth-child(4) { height: 54px; }
+  .audio-player-panel audio { display: block; width: 100%; min-height: 48px; accent-color: #725de7; }
+  .audio-player__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .audio-player__actions a { display: inline-flex; align-items: center; min-height: 38px; padding: 7px 13px; border: 1px solid var(--web-border); border-radius: 12px; color: var(--web-text); background: var(--web-paper); text-decoration: none; font-size: 12px; font-weight: 750; }
+  .audio-player__actions a:hover { border-color: #7c69e7; }
   .intro-page, .toc-page { page-break-after: auto; background: var(--web-paper); border: 1px solid var(--web-border); border-radius: 28px; padding: 44px; margin-bottom: 28px; box-shadow: var(--web-shadow); }
   .intro-card { background: linear-gradient(135deg, rgba(240, 250, 248, .8), rgba(245, 242, 255, .82)); border-color: var(--web-border); }
   html[data-theme="dark"] .intro-card { background: linear-gradient(135deg, rgba(27, 57, 59, .55), rgba(43, 34, 73, .52)); }
@@ -148,6 +164,10 @@ html[data-theme="dark"] {
   .cover-metrics { grid-template-columns: 1fr; gap: 8px; }
   .metric { min-height: auto; padding: 10px 14px; display: flex; align-items: center; gap: 12px; }
   .metric b { font-size: 20px; }
+  .audio-player-panel { width: min(100% - 20px, 940px); padding: 24px 18px; border-radius: 22px; }
+  .audio-player__header { grid-template-columns: 1fr; gap: 10px; }
+  .audio-player__wave { display: none; }
+  .audio-player-panel h2 { font-size: 20px; }
   .intro-page, .toc-page { padding: 24px 18px; border-radius: 22px; }
   .toc-grid { grid-template-columns: 1fr; }
   .toc-item strong { font-size: 9pt; }
@@ -163,7 +183,7 @@ html[data-theme="dark"] {
 }
 @media print {
   a { color: inherit; }
-  .web-toolbar, .reading-progress, .back-to-top { display: none !important; }
+  .web-toolbar, .reading-progress, .back-to-top, .audio-player-panel { display: none !important; }
   html[data-theme] body { color: #172135; background: #fff; }
 }
 </style>
@@ -178,6 +198,7 @@ html[data-theme="dark"] {
     </a>
     <span class="web-toolbar__meta">راهنمای شنیداری اجرای کامل محصول</span>
     <div class="web-toolbar__actions">
+      <a class="audio-shortcut" href="#short-audio">پخش صوت</a>
       <a class="toc-shortcut" href="#toc">فهرست فصل‌ها</a>
       <button id="theme-toggle" type="button" aria-label="تغییر حالت رنگ">حالت شب</button>
       <a href="./#/codex-execution"><span aria-hidden="true">←</span> بازگشت</a>
@@ -197,6 +218,25 @@ html[data-theme="dark"] {
     <div class="metric"><b>23</b><span>مرحله شرطی برای ساخت هر سرویس</span></div>
   </div>
   <div class="cover-foot"><span>نسخه شنیداری جامع</span><span>مرداد ۱۴۰۵</span></div>
+</section>
+
+<section class="audio-player-panel" id="short-audio" aria-labelledby="short-audio-title">
+  <div class="audio-player__header">
+    <div>
+      <span class="audio-player__badge">نسخه کوتاه · ۹ دقیقه و ۵۷ ثانیه</span>
+      <h2 id="short-audio-title">همه ایده و مسیر اجرا را در ده دقیقه بشنوید</h2>
+      <p>خلاصه فارسی از محصول، ربات‌های تلگرام، معماری، درآمد، بتای بسته و مسیر توسعه سرویس‌ها.</p>
+    </div>
+    <div class="audio-player__wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <audio controls preload="metadata" aria-label="نسخه صوتی کوتاه نقشه اجرای ServiceOS">
+    <source src="./audio/serviceos-overview-10min-fa.mp3" type="audio/mpeg">
+    مرورگر شما از پخش مستقیم فایل صوتی پشتیبانی نمی‌کند.
+  </audio>
+  <div class="audio-player__actions">
+    <a href="./audio/serviceos-overview-10min-fa.mp3" download>دریافت فایل MP3</a>
+    <a href="#toc">رفتن به متن کامل و فصل‌ها</a>
+  </div>
 </section>
 
 <section class="intro-page">

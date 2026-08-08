@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
-import { readFileSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 import App from '../App'
 import { autopilotExecution, controlPrompts, sharedPrompts } from '../content/codexExecutionContent'
 import { getDocumentationStats, getServiceDocument, platformChapters, serviceDocVolumes } from '../content/docsContent'
@@ -53,7 +53,10 @@ describe('ServiceOS product proposal', () => {
     expect(audioGuide).toContain('پیوست - ۷. محتوا، رسانه و سرگرمی')
     expect(audioGuide).toContain('id="theme-toggle"')
     expect(audioGuide).toContain('id="reading-progress-bar"')
+    expect(audioGuide).toContain('id="short-audio"')
+    expect(audioGuide).toContain('./audio/serviceos-overview-10min-fa.mp3')
     expect((audioGuide.match(/class="chapter-heading"/g) ?? []).length).toBeGreaterThanOrEqual(30)
+    expect(statSync('public/audio/serviceos-overview-10min-fa.mp3').size).toBeGreaterThan(4_000_000)
   })
 
   it.each([
