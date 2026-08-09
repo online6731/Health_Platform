@@ -38,6 +38,7 @@ import { environmentNodes, executionMapStages, serviceWaves } from '../content/e
 import {
   crossServiceRelations,
   ecosystemFamilies,
+  ecosystemMapSize,
   ecosystemMapStats,
   ecosystemServiceNodes,
   getServiceConnections,
@@ -202,11 +203,18 @@ describe('ServiceOS product proposal', () => {
     renderRoute('/service-map')
     expect(await screen.findByRole('heading', { level: 1, name: 'همه سرویس‌ها؛ یک شبکه متصل' }, { timeout: 5000 })).not.toBeNull()
     expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
+    const connectionsCanvas = document.querySelector('.ecosystem-map__connections')
+    expect(Number(connectionsCanvas.getAttribute('width'))).toBeLessThan(ecosystemMapSize.width / 2)
+    expect(connectionsCanvas.getAttribute('data-render-scale')).toBe('0.42')
 
     fireEvent.click(screen.getByRole('button', { name: 'انتخاب سرویس تغذیه و رژیم' }))
     expect(screen.getByRole('heading', { level: 2, name: 'تغذیه و رژیم' })).not.toBeNull()
     expect(screen.getAllByText('برنامه‌ساز، Vision غذا و مربی عادت').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByRole('button', { name: /آشپزی و دستور غذای هوشمند.*همکاری در جریان کار/ })).not.toBeNull()
+    expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
+    fireEvent.click(screen.getByRole('button', { name: 'بازگشت به کل نقشه' }))
+    expect(screen.queryByLabelText('جزئیات سرویس انتخاب‌شده')).toBeNull()
+    expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
 
     const search = screen.getByRole('textbox', { name: 'جستجو در نقشه سرویس‌ها' })
     fireEvent.change(search, { target: { value: 'پادکست' } })
@@ -216,7 +224,7 @@ describe('ServiceOS product proposal', () => {
     fireEvent.click(screen.getByRole('button', { name: 'نمایش تمام‌صفحه' }))
     expect(await screen.findByRole('button', { name: 'خروج از تمام‌صفحه' })).not.toBeNull()
     expect(screen.getByTestId('service-ecosystem-viewport').classList.contains('is-fallback-fullscreen')).toBe(true)
-  })
+  }, 15_000)
 
   it('publishes a multi-hundred-page implementation catalog', () => {
     const stats = getDocumentationStats()

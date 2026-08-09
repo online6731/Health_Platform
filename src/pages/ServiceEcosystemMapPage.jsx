@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowUpLeft,
   Bot,
@@ -39,6 +39,7 @@ import {
 
 const MIN_SCALE = .09
 const MAX_SCALE = 1.45
+const CONNECTION_RENDER_SCALE = .42
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
 const familyIcons = {
@@ -84,6 +85,7 @@ function EcosystemConnections({ selectedId, activeFamily }) {
     if (!canvas || navigator.userAgent.toLocaleLowerCase().includes('jsdom')) return
     const context = canvas.getContext('2d')
     if (!context) return
+    context.setTransform(CONNECTION_RENDER_SCALE, 0, 0, CONNECTION_RENDER_SCALE, 0, 0)
     context.clearRect(0, 0, ecosystemMapSize.width, ecosystemMapSize.height)
     context.lineCap = 'round'
     context.lineJoin = 'round'
@@ -162,7 +164,15 @@ function EcosystemConnections({ selectedId, activeFamily }) {
     context.globalAlpha = 1
   }, [activeFamily, selectedId])
 
-  return <canvas ref={canvasRef} className="ecosystem-map__connections" width={ecosystemMapSize.width} height={ecosystemMapSize.height} aria-hidden="true" />
+  return <canvas
+    ref={canvasRef}
+    className="ecosystem-map__connections"
+    width={Math.round(ecosystemMapSize.width * CONNECTION_RENDER_SCALE)}
+    height={Math.round(ecosystemMapSize.height * CONNECTION_RENDER_SCALE)}
+    style={{ width: ecosystemMapSize.width, height: ecosystemMapSize.height }}
+    data-render-scale={CONNECTION_RENDER_SCALE}
+    aria-hidden="true"
+  />
 }
 
 function ServiceInspector({ selection, onClose, onService }) {
@@ -234,9 +244,52 @@ function ServiceInspector({ selection, onClose, onService }) {
   )
 }
 
+const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFamily, selectedId, relatedIds, onFamily, onService }) {
+  return (
+    <>
+      <EcosystemConnections selectedId={selectedId} activeFamily={activeFamily} />
+      <div className="ecosystem-canvas-title"><Network /><span><b>ServiceOS Connected Atlas</b><small>یک هویت · یک حافظه · یک شبکه · چند تجربه مستقل</small></span></div>
+
+      {ecosystemFamilies.map((family) => {
+        const Icon = familyIcons[family.id]
+        const isDimmed = activeFamily !== 'all' && activeFamily !== family.id
+        return <section className={`ecosystem-family ecosystem-family--${family.id} ${isDimmed ? 'is-dimmed' : ''}`} key={family.id} style={{ '--family-color': family.color, left: family.x, top: family.y, width: family.width, height: family.height }} aria-labelledby={`ecosystem-family-${family.id}`}>
+          <button type="button" className="ecosystem-family__header" onClick={() => onFamily(family.id)} aria-label={`تمرکز روی خانواده ${family.title}`}>
+            <span><Icon /><i>{family.short}</i></span><h2 id={`ecosystem-family-${family.id}`}>{family.title}</h2><p>{family.description}</p><b>{family.serviceCount.toLocaleString('fa-IR')} سرویس</b>
+          </button>
+        </section>
+      })}
+
+      {ecosystemServiceNodes.map((service) => {
+        const family = getFamilyForService(service.id)
+        const isSelected = selectedId === service.id
+        const isRelated = relatedIds.has(service.id)
+        const isDimmed = (selectedId && !isSelected && !isRelated) || (activeFamily !== 'all' && activeFamily !== service.familyId)
+        return <button
+          className={`ecosystem-service-node ${service.id === 1 ? 'is-omni' : ''} ${isSelected ? 'is-selected' : ''} ${isRelated ? 'is-related' : ''} ${isDimmed ? 'is-dimmed' : ''}`}
+          style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
+          type="button"
+          key={service.id}
+          onClick={() => onService(service.id)}
+          aria-label={`انتخاب سرویس ${service.name}`}
+          aria-pressed={isSelected}
+        >
+          <span><b>{service.id.toLocaleString('fa-IR', { minimumIntegerDigits: 2 })}</b><small>PHASE {service.phase}</small></span>
+          <h3>{service.name}</h3>
+          <i>{service.en}</i>
+          <p>{service.summary}</p>
+          <footer><Bot /><small>{service.capability}</small><Building2 /><small>{service.human}</small></footer>
+        </button>
+      })}
+    </>
+  )
+})
+
 export default function ServiceEcosystemMapPage() {
   const viewportRef = useRef(null)
   const dragRef = useRef(null)
+  const wheelFrameRef = useRef(null)
+  const wheelInputRef = useRef(null)
   const [view, setView] = useState({ scale: .23, x: 20, y: 20 })
   const [dragging, setDragging] = useState(false)
   const [selection, setSelection] = useState(null)
@@ -282,7 +335,7 @@ export default function ServiceEcosystemMapPage() {
     setSelection({ type: 'service', data: node })
     setActiveFamily('all')
     setQuery('')
-    focusRect(node, node.id === 1 ? .72 : .9)
+    focusRect(node, node.id === 1 ? .52 : .64)
   }, [focusRect])
 
   const selectFamily = useCallback((familyId) => {
@@ -342,6 +395,11 @@ export default function ServiceEcosystemMapPage() {
     }
   }, [fitMap])
 
+  useEffect(() => () => {
+    if (wheelFrameRef.current) cancelAnimationFrame(wheelFrameRef.current)
+    if (dragRef.current?.frame) cancelAnimationFrame(dragRef.current.frame)
+  }, [])
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       const active = document.fullscreenElement === viewportRef.current
@@ -384,31 +442,57 @@ export default function ServiceEcosystemMapPage() {
   const handleWheel = (event) => {
     event.preventDefault()
     const bounds = viewportRef.current.getBoundingClientRect()
-    const pointerX = event.clientX - bounds.left
-    const pointerY = event.clientY - bounds.top
-    setView((current) => {
-      const scale = clamp(current.scale * (event.deltaY > 0 ? .9 : 1.1), MIN_SCALE, MAX_SCALE)
-      const mapX = (pointerX - current.x) / current.scale
-      const mapY = (pointerY - current.y) / current.scale
-      return constrainView({ scale, x: pointerX - (mapX * scale), y: pointerY - (mapY * scale) }, bounds.width, bounds.height)
+    wheelInputRef.current = {
+      pointerX: event.clientX - bounds.left,
+      pointerY: event.clientY - bounds.top,
+      direction: event.deltaY > 0 ? -1 : 1,
+      width: bounds.width,
+      height: bounds.height,
+    }
+    if (wheelFrameRef.current) return
+    wheelFrameRef.current = requestAnimationFrame(() => {
+      const input = wheelInputRef.current
+      wheelFrameRef.current = null
+      if (!input) return
+      setView((current) => {
+        const scale = clamp(current.scale * (input.direction < 0 ? .9 : 1.1), MIN_SCALE, MAX_SCALE)
+        const mapX = (input.pointerX - current.x) / current.scale
+        const mapY = (input.pointerY - current.y) / current.scale
+        return constrainView({ scale, x: input.pointerX - (mapX * scale), y: input.pointerY - (mapY * scale) }, input.width, input.height)
+      })
     })
   }
 
   const handlePointerDown = (event) => {
-    if (event.target.closest('button, input, a, aside')) return
+    if (event.target.closest?.('button, input, a, aside')) return
     event.currentTarget.setPointerCapture?.(event.pointerId)
-    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, viewX: view.x, viewY: view.y }
+    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, latestX: event.clientX, latestY: event.clientY, viewX: view.x, viewY: view.y, frame: null }
     setDragging(true)
   }
 
   const handlePointerMove = (event) => {
     if (!dragRef.current || dragRef.current.pointerId !== event.pointerId) return
-    const bounds = viewportRef.current.getBoundingClientRect()
-    setView((current) => constrainView({ ...current, x: dragRef.current.viewX + event.clientX - dragRef.current.x, y: dragRef.current.viewY + event.clientY - dragRef.current.y }, bounds.width, bounds.height))
+    dragRef.current.latestX = event.clientX
+    dragRef.current.latestY = event.clientY
+    if (dragRef.current.frame) return
+    dragRef.current.frame = requestAnimationFrame(() => {
+      const drag = dragRef.current
+      if (!drag) return
+      drag.frame = null
+      const bounds = viewportRef.current.getBoundingClientRect()
+      setView((current) => constrainView({ ...current, x: drag.viewX + drag.latestX - drag.x, y: drag.viewY + drag.latestY - drag.y }, bounds.width, bounds.height))
+    })
   }
 
   const handlePointerUp = (event) => {
-    if (dragRef.current?.pointerId !== event.pointerId) return
+    const drag = dragRef.current
+    if (drag?.pointerId !== event.pointerId) return
+    if (drag.frame) cancelAnimationFrame(drag.frame)
+    const bounds = viewportRef.current.getBoundingClientRect()
+    const wasCancelled = event.type === 'pointercancel'
+    const finalX = wasCancelled ? drag.latestX : event.clientX
+    const finalY = wasCancelled ? drag.latestY : event.clientY
+    setView((current) => constrainView({ ...current, x: drag.viewX + finalX - drag.x, y: drag.viewY + finalY - drag.y }, bounds.width, bounds.height))
     dragRef.current = null
     setDragging(false)
     event.currentTarget.releasePointerCapture?.(event.pointerId)
@@ -479,7 +563,7 @@ export default function ServiceEcosystemMapPage() {
               <input type="range" min={MIN_SCALE * 100} max={MAX_SCALE * 100} step="1" value={view.scale * 100} onChange={(event) => setZoomLevel(Number(event.target.value) / 100)} aria-label="تنظیم درصد بزرگنمایی" />
               <output>{Math.round(view.scale * 100).toLocaleString('fa-IR')}٪</output>
               <button type="button" onClick={() => zoomBy(1 / 1.2)} aria-label="کوچک‌نمایی"><ZoomOut size={19} /></button>
-              <button type="button" onClick={showOverview} aria-label="جا دادن کل نقشه در قاب"><Scan size={18} /></button>
+              <button type="button" onClick={showOverview} aria-label="جا دادن کل نقشه در قاب" title="بازگشت به کل نقشه"><Scan size={18} /></button>
               <button className={isFullscreen ? 'is-active' : ''} type="button" onClick={toggleFullscreen} aria-label={isFullscreen ? 'خروج از تمام‌صفحه' : 'نمایش تمام‌صفحه'} aria-pressed={isFullscreen}>{isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}</button>
               <button className={showHelp ? 'is-active' : ''} type="button" onClick={() => setShowHelp((current) => !current)} aria-label="راهنمای استفاده از نقشه" aria-pressed={showHelp}><Keyboard size={18} /></button>
             </div>
@@ -497,43 +581,11 @@ export default function ServiceEcosystemMapPage() {
           <div className="ecosystem-map-legend" aria-label="راهنمای رنگ اتصال‌ها"><span><i className="is-platform" />ریل مشترک</span><span><i className="is-cross" />جریان بین‌سرویسی</span><span><i className="is-family" />هم‌خانواده</span></div>
 
           <div className="ecosystem-map-canvas" style={{ width: ecosystemMapSize.width, height: ecosystemMapSize.height, transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})` }}>
-            <EcosystemConnections selectedId={selectedId} activeFamily={activeFamily} />
-            <div className="ecosystem-canvas-title"><Network /><span><b>ServiceOS Connected Atlas</b><small>یک هویت · یک حافظه · یک شبکه · چند تجربه مستقل</small></span></div>
-
-            {ecosystemFamilies.map((family) => {
-              const Icon = familyIcons[family.id]
-              const isDimmed = activeFamily !== 'all' && activeFamily !== family.id
-              return <section className={`ecosystem-family ecosystem-family--${family.id} ${isDimmed ? 'is-dimmed' : ''}`} key={family.id} style={{ '--family-color': family.color, left: family.x, top: family.y, width: family.width, height: family.height }} aria-labelledby={`ecosystem-family-${family.id}`}>
-                <button type="button" className="ecosystem-family__header" onClick={() => selectFamily(family.id)} aria-label={`تمرکز روی خانواده ${family.title}`}>
-                  <span><Icon /><i>{family.short}</i></span><h2 id={`ecosystem-family-${family.id}`}>{family.title}</h2><p>{family.description}</p><b>{family.serviceCount.toLocaleString('fa-IR')} سرویس</b>
-                </button>
-              </section>
-            })}
-
-            {ecosystemServiceNodes.map((service) => {
-              const family = getFamilyForService(service.id)
-              const isSelected = selectedId === service.id
-              const isRelated = relatedIds.has(service.id)
-              const isDimmed = (selectedId && !isSelected && !isRelated) || (activeFamily !== 'all' && activeFamily !== service.familyId)
-              return <button
-                className={`ecosystem-service-node ${service.id === 1 ? 'is-omni' : ''} ${isSelected ? 'is-selected' : ''} ${isRelated ? 'is-related' : ''} ${isDimmed ? 'is-dimmed' : ''}`}
-                style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
-                type="button"
-                key={service.id}
-                onClick={() => selectService(service.id)}
-                aria-label={`انتخاب سرویس ${service.name}`}
-                aria-pressed={isSelected}
-              >
-                <span><b>{service.id.toLocaleString('fa-IR', { minimumIntegerDigits: 2 })}</b><small>PHASE {service.phase}</small></span>
-                <h3>{service.name}</h3>
-                <i>{service.en}</i>
-                <p>{service.summary}</p>
-                <footer><Bot /><small>{service.capability}</small><Building2 /><small>{service.human}</small></footer>
-              </button>
-            })}
+            <EcosystemCanvasContent activeFamily={activeFamily} selectedId={selectedId} relatedIds={relatedIds} onFamily={selectFamily} onService={selectService} />
           </div>
 
           <div className="execution-map-depth" aria-label="سطح جزئیات فعلی"><span className={scaleBand === 'overview' ? 'is-active' : ''}>خانواده‌ها</span><span className={scaleBand === 'structure' ? 'is-active' : ''}>سرویس‌ها</span><span className={scaleBand === 'detail' ? 'is-active' : ''}>اتصالات</span></div>
+          {(selection || activeFamily !== 'all') && <button className="ecosystem-map-reset" type="button" onClick={showOverview}><Scan size={16} /> بازگشت به کل نقشه</button>}
           <div className="execution-map-hint" aria-live="polite"><Network size={16} /><span>{selectedId ? `${relatedIds.size.toLocaleString('fa-IR')} اتصال مستقیم برجسته شده` : scaleBand === 'overview' ? 'یک خانواده را برای ورود انتخاب کنید' : 'یک سرویس را برای دیدن اتصال‌ها باز کنید'}</span></div>
           <ServiceInspector selection={selection} onClose={() => setSelection(null)} onService={selectService} />
         </div>
