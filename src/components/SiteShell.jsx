@@ -5,7 +5,8 @@ import BrandMark from './BrandMark'
 
 const navigation = [
   { to: '/', label: 'چشم‌انداز' },
-  { to: '/services', label: 'نقشه سرویس‌ها' },
+  { to: '/service-map', label: 'نقشه سرویس‌ها' },
+  { to: '/services', label: 'کاتالوگ سرویس‌ها' },
   { to: '/docs', label: 'کاتالوگ اجرایی' },
   { to: '/infographics', label: 'اینفوگرافی‌ها' },
   { to: '/execution-map', label: 'نقشه تعاملی' },
@@ -18,7 +19,8 @@ const navigation = [
 
 const titles = {
   '/': 'ServiceOS | شبکه خدمات هوشمند، تلگرام‌اول',
-  '/services': 'نقشه سرویس‌ها | ServiceOS',
+  '/services': 'کاتالوگ سرویس‌ها | ServiceOS',
+  '/service-map': 'نقشه تعاملی اکوسیستم سرویس‌ها | ServiceOS',
   '/docs': 'کاتالوگ اجرایی محصول و مهندسی | ServiceOS',
   '/codex-execution': 'نقشه اجرای ServiceOS با Codex',
   '/infographics': 'مجموعه اینفوگرافی‌های ServiceOS',
@@ -128,7 +130,8 @@ export default function SiteShell() {
           </div>
           <nav aria-label="دسترسی سریع">
             <strong>محصول</strong>
-            <Link to="/services">نقشه سرویس‌ها</Link>
+            <Link to="/services">کاتالوگ سرویس‌ها</Link>
+            <Link to="/service-map">نقشه تعاملی اکوسیستم سرویس‌ها</Link>
             <Link to="/docs">کاتالوگ اجرایی</Link>
             <Link to="/codex-execution">راهنمای ساخت با Codex</Link>
             <Link to="/infographics">۵۶ اینفوگرافی + نقشه مادر</Link>

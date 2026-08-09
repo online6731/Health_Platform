@@ -35,6 +35,13 @@ import {
 import { serviceBlueprints, serviceCategories, services } from '../content/platformContent'
 import { infographicMeta, infographics } from '../content/infographicContent'
 import { environmentNodes, executionMapStages, serviceWaves } from '../content/executionMapContent'
+import {
+  crossServiceRelations,
+  ecosystemFamilies,
+  ecosystemMapStats,
+  ecosystemServiceNodes,
+  getServiceConnections,
+} from '../content/serviceEcosystemMapContent'
 
 function renderRoute(route = '/') {
   return render(
@@ -103,6 +110,7 @@ describe('ServiceOS product proposal', () => {
     ['/codex-execution', 'نقشه اجرای ServiceOS با Codex'],
     ['/infographics', 'کل پلتفرم در ۵۶ اینفوگرافی و یک نقشه مادر'],
     ['/execution-map', 'نقشه اجرایی تعاملی ServiceOS'],
+    ['/service-map', 'همه سرویس‌ها؛ یک شبکه متصل'],
     ['/docs/platform/multi-agent', 'معماری چندعاملی و ارکستراسیون'],
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', async (route, heading) => {
@@ -180,6 +188,34 @@ describe('ServiceOS product proposal', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'راهنمای استفاده از نقشه' }))
     expect(screen.getByRole('heading', { level: 2, name: 'راهنمای کنترل نقشه' })).not.toBeNull()
+  })
+
+  it('maps every service and reveals its platform and cross-service connections', async () => {
+    expect(ecosystemServiceNodes).toHaveLength(services.length)
+    expect(new Set(ecosystemServiceNodes.map((service) => service.id)).size).toBe(services.length)
+    expect(ecosystemFamilies).toHaveLength(6)
+    expect(ecosystemMapStats.catalogFamilies).toBe(serviceCategories.length - 1)
+    expect(crossServiceRelations.length).toBeGreaterThan(120)
+    expect(getServiceConnections(5).some((connection) => connection.service.id === 69 && connection.type === 'cross')).toBe(true)
+    expect(getServiceConnections(5).filter((connection) => connection.type === 'platform')).toHaveLength(6)
+
+    renderRoute('/service-map')
+    expect(await screen.findByRole('heading', { level: 1, name: 'همه سرویس‌ها؛ یک شبکه متصل' }, { timeout: 5000 })).not.toBeNull()
+    expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
+
+    fireEvent.click(screen.getByRole('button', { name: 'انتخاب سرویس تغذیه و رژیم' }))
+    expect(screen.getByRole('heading', { level: 2, name: 'تغذیه و رژیم' })).not.toBeNull()
+    expect(screen.getAllByText('برنامه‌ساز، Vision غذا و مربی عادت').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByRole('button', { name: /آشپزی و دستور غذای هوشمند.*همکاری در جریان کار/ })).not.toBeNull()
+
+    const search = screen.getByRole('textbox', { name: 'جستجو در نقشه سرویس‌ها' })
+    fireEvent.change(search, { target: { value: 'پادکست' } })
+    fireEvent.click(screen.getByRole('button', { name: /کتاب، پادکست و مسیر مطالعه.*Reading Scout/ }))
+    expect(screen.getByRole('heading', { level: 2, name: 'کتاب، پادکست و مسیر مطالعه' })).not.toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'نمایش تمام‌صفحه' }))
+    expect(await screen.findByRole('button', { name: 'خروج از تمام‌صفحه' })).not.toBeNull()
+    expect(screen.getByTestId('service-ecosystem-viewport').classList.contains('is-fallback-fullscreen')).toBe(true)
   })
 
   it('publishes a multi-hundred-page implementation catalog', () => {

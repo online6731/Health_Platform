@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { LayoutGrid, Network, Search, SlidersHorizontal } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import PageHero from '../components/PageHero'
 import ServiceCard from '../components/ServiceCard'
 import ServiceNetworkMap from '../components/ServiceNetworkMap'
@@ -53,6 +54,7 @@ export default function ServicesPage() {
                 <LayoutGrid size={17} aria-hidden="true" /> نمای کارت‌ها
               </button>
             </div>
+            <Link className="service-map-launch" to="/service-map"><Network size={17} /> باز کردن نقشه بزرگ و تعاملی</Link>
           </div>
 
           {viewMode === 'network' ? <ServiceNetworkMap /> : (
