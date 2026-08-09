@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   CircleDollarSign,
   Clapperboard,
+  GripVertical,
   HeartPulse,
   Keyboard,
   Layers3,
@@ -39,8 +40,23 @@ import {
 
 const MIN_SCALE = .09
 const MAX_SCALE = 1.45
+const DEFAULT_INSPECTOR_WIDTH = 440
+const MIN_INSPECTOR_WIDTH = 320
+const MAX_INSPECTOR_WIDTH = 720
+const MIN_MAP_PANE_WIDTH = 360
+const INSPECTOR_STORAGE_KEY = 'serviceos-service-panel-width'
 const CONNECTION_RENDER_SCALE = .42
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+
+const getInitialInspectorWidth = () => {
+  try {
+    const savedWidth = Number(window.localStorage.getItem(INSPECTOR_STORAGE_KEY))
+    if (Number.isFinite(savedWidth) && savedWidth > 0) return clamp(savedWidth, MIN_INSPECTOR_WIDTH, MAX_INSPECTOR_WIDTH)
+  } catch {
+    // Local storage can be unavailable in private or embedded browser contexts.
+  }
+  return DEFAULT_INSPECTOR_WIDTH
+}
 const ecosystemFamilyById = new Map(ecosystemFamilies.map((family) => [family.id, family]))
 
 const familyIcons = {
@@ -217,7 +233,7 @@ function ServiceInspector({ selection, onClose, onService }) {
       <aside className="ecosystem-inspector" aria-label="جزئیات خانواده سرویس" data-testid="service-control-panel" tabIndex="0">
         <header className="ecosystem-inspector__header">
           <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
-          <div><span>{family.short}</span><h2>{family.title}</h2><small>کنترل خانواده محصول</small></div>
+          <div><span>{family.short}</span><h2>{family.title}</h2><small>کنترل خانواده محصول · پنل مستقل و قابل تنظیم</small></div>
         </header>
         <nav className="ecosystem-inspector__rail" aria-label="بخش‌های پنل خانواده"><span className="is-active">نمای کلی</span><span>سرویس‌ها</span><span>فازها</span></nav>
         <section className="ecosystem-inspector__section"><h3>تعریف خانواده</h3><p>{family.description}</p></section>
@@ -248,7 +264,7 @@ function ServiceInspector({ selection, onClose, onService }) {
     <aside className="ecosystem-inspector" aria-label="جزئیات سرویس انتخاب‌شده" data-testid="service-control-panel" tabIndex="0">
       <header className="ecosystem-inspector__header">
         <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
-        <div><span>سرویس {service.id.toLocaleString('fa-IR')} · {family?.title} · فاز {service.phase.toLocaleString('fa-IR')}</span><h2>{service.name}</h2><small className="ecosystem-inspector__en">{service.en}</small></div>
+        <div><span>سرویس {service.id.toLocaleString('fa-IR')} · {family?.title} · فاز {service.phase.toLocaleString('fa-IR')}</span><h2>{service.name}</h2><small className="ecosystem-inspector__en">{service.en}</small><small>پنل مستقل · جداکننده سمت چپ را برای تغییر عرض بکشید</small></div>
       </header>
       <nav className="ecosystem-inspector__rail" aria-label="بخش‌های پنل سرویس"><span className="is-active">نمای کلی</span><span>اتصال‌ها</span><span>اجرا</span><span>مستندات</span></nav>
 
@@ -347,10 +363,13 @@ export default function ServiceEcosystemMapPage() {
   const shellRef = useRef(null)
   const viewportRef = useRef(null)
   const dragRef = useRef(null)
+  const panelResizeRef = useRef(null)
   const wheelFrameRef = useRef(null)
   const wheelInputRef = useRef(null)
   const [view, setView] = useState({ scale: .23, x: 20, y: 20 })
   const [dragging, setDragging] = useState(false)
+  const [inspectorWidth, setInspectorWidth] = useState(getInitialInspectorWidth)
+  const [isResizingInspector, setIsResizingInspector] = useState(false)
   const [selection, setSelection] = useState(null)
   const [activeFamily, setActiveFamily] = useState('all')
   const [query, setQuery] = useState('')
@@ -432,6 +451,94 @@ export default function ServiceEcosystemMapPage() {
     fitMap()
   }, [activeFamily, fitMap, focusRect, selection])
 
+  const getInspectorWidthBounds = useCallback(() => {
+    const shellWidth = shellRef.current?.getBoundingClientRect().width || window.innerWidth || 1280
+    return {
+      min: MIN_INSPECTOR_WIDTH,
+      max: Math.max(MIN_INSPECTOR_WIDTH, Math.min(MAX_INSPECTOR_WIDTH, shellWidth - MIN_MAP_PANE_WIDTH - 14)),
+    }
+  }, [])
+
+  const commitInspectorWidth = useCallback((requestedWidth) => {
+    const bounds = getInspectorWidthBounds()
+    const nextWidth = Math.round(clamp(requestedWidth, bounds.min, bounds.max))
+    setInspectorWidth(nextWidth)
+    shellRef.current?.style.setProperty('--inspector-width', `${nextWidth}px`)
+    try { window.localStorage.setItem(INSPECTOR_STORAGE_KEY, String(nextWidth)) } catch {
+      // The live resize remains available even when preferences cannot persist.
+    }
+    requestAnimationFrame(refocusCurrent)
+  }, [getInspectorWidthBounds, refocusCurrent])
+
+  const startInspectorResize = useCallback((event) => {
+    if (event.button != null && event.button !== 0) return
+    event.preventDefault()
+    const shellBounds = shellRef.current?.getBoundingClientRect()
+    if (!shellBounds) return
+    const widthBounds = getInspectorWidthBounds()
+    panelResizeRef.current = {
+      right: shellBounds.right,
+      min: widthBounds.min,
+      max: widthBounds.max,
+      width: inspectorWidth,
+      frame: null,
+    }
+    event.currentTarget.setPointerCapture?.(event.pointerId)
+    setIsResizingInspector(true)
+  }, [getInspectorWidthBounds, inspectorWidth])
+
+  const handleInspectorResizeKeyDown = useCallback((event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
+    event.preventDefault()
+    const widthBounds = getInspectorWidthBounds()
+    const step = event.shiftKey ? 64 : 24
+    if (event.key === 'Home') commitInspectorWidth(widthBounds.min)
+    else if (event.key === 'End') commitInspectorWidth(widthBounds.max)
+    else commitInspectorWidth(inspectorWidth + (event.key === 'ArrowLeft' ? step : -step))
+  }, [commitInspectorWidth, getInspectorWidthBounds, inspectorWidth])
+
+  useEffect(() => {
+    if (!isResizingInspector) return undefined
+    const previousCursor = document.body.style.cursor
+    const previousUserSelect = document.body.style.userSelect
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+
+    const handlePointerMove = (event) => {
+      const resize = panelResizeRef.current
+      if (!resize || !Number.isFinite(event.clientX)) return
+      resize.width = clamp(resize.right - event.clientX, resize.min, resize.max)
+      if (resize.frame) return
+      resize.frame = requestAnimationFrame(() => {
+        if (!panelResizeRef.current) return
+        panelResizeRef.current.frame = null
+        shellRef.current?.style.setProperty('--inspector-width', `${Math.round(panelResizeRef.current.width)}px`)
+      })
+    }
+
+    const finishResize = () => {
+      const resize = panelResizeRef.current
+      if (!resize) return
+      if (resize.frame) cancelAnimationFrame(resize.frame)
+      panelResizeRef.current = null
+      setIsResizingInspector(false)
+      commitInspectorWidth(resize.width)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', finishResize)
+    window.addEventListener('pointercancel', finishResize)
+    window.addEventListener('blur', finishResize)
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', finishResize)
+      window.removeEventListener('pointercancel', finishResize)
+      window.removeEventListener('blur', finishResize)
+      document.body.style.cursor = previousCursor
+      document.body.style.userSelect = previousUserSelect
+    }
+  }, [commitInspectorWidth, isResizingInspector])
+
   const setZoomLevel = (requestedScale) => {
     const bounds = viewportRef.current?.getBoundingClientRect()
     const width = bounds?.width || 1280
@@ -474,17 +581,22 @@ export default function ServiceEcosystemMapPage() {
 
   useEffect(() => {
     const frame = requestAnimationFrame(refocusCurrent)
-    const handleResize = () => refocusCurrent()
+    const handleResize = () => {
+      const widthBounds = getInspectorWidthBounds()
+      if (selection && (inspectorWidth < widthBounds.min || inspectorWidth > widthBounds.max)) commitInspectorWidth(inspectorWidth)
+      else refocusCurrent()
+    }
     window.addEventListener('resize', handleResize)
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', handleResize)
     }
-  }, [refocusCurrent])
+  }, [commitInspectorWidth, getInspectorWidthBounds, inspectorWidth, refocusCurrent, selection])
 
   useEffect(() => () => {
     if (wheelFrameRef.current) cancelAnimationFrame(wheelFrameRef.current)
     if (dragRef.current?.frame) cancelAnimationFrame(dragRef.current.frame)
+    if (panelResizeRef.current?.frame) cancelAnimationFrame(panelResizeRef.current.frame)
   }, [])
 
   useEffect(() => {
@@ -623,7 +735,12 @@ export default function ServiceEcosystemMapPage() {
           })}
         </div>
 
-        <div ref={shellRef} className={`ecosystem-control-shell ${selection ? 'has-inspector' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`} data-testid="service-control-shell">
+        <div
+          ref={shellRef}
+          className={`ecosystem-control-shell ${selection ? 'has-inspector' : ''} ${isResizingInspector ? 'is-resizing-inspector' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`}
+          style={{ '--inspector-width': `${inspectorWidth}px` }}
+          data-testid="service-control-shell"
+        >
           <div
             ref={viewportRef}
             className={`execution-map-viewport ecosystem-map-viewport ${dragging ? 'is-dragging' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`}
@@ -679,6 +796,21 @@ export default function ServiceEcosystemMapPage() {
           {(selection || activeFamily !== 'all') && <button className="ecosystem-map-reset" type="button" onClick={showOverview}><Scan size={16} /> بازگشت به کل نقشه</button>}
           <div className="execution-map-hint" aria-live="polite"><Network size={16} /><span>{selectedId ? `${relatedIds.size.toLocaleString('fa-IR')} اتصال مستقیم برجسته شده` : scaleBand === 'overview' ? 'یک خانواده را برای ورود انتخاب کنید' : 'یک سرویس را برای دیدن اتصال‌ها باز کنید'}</span></div>
           </div>
+          {selection && <div
+            className="ecosystem-pane-resizer"
+            data-testid="service-panel-resizer"
+            role="separator"
+            aria-label="تغییر اندازه پنل جزئیات سرویس"
+            aria-orientation="vertical"
+            aria-valuemin={MIN_INSPECTOR_WIDTH}
+            aria-valuemax={MAX_INSPECTOR_WIDTH}
+            aria-valuenow={inspectorWidth}
+            tabIndex="0"
+            title="برای تغییر عرض بکشید؛ دوبار کلیک برای بازنشانی"
+            onPointerDown={startInspectorResize}
+            onKeyDown={handleInspectorResizeKeyDown}
+            onDoubleClick={() => commitInspectorWidth(DEFAULT_INSPECTOR_WIDTH)}
+          ><GripVertical size={17} aria-hidden="true" /></div>}
           <ServiceInspector selection={selection} onClose={closeInspector} onService={selectService} />
         </div>
       </section>
