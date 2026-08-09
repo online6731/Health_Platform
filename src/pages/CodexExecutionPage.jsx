@@ -76,6 +76,7 @@ import {
   telegramProvisioningPaths,
 } from '../content/ownerHandoffContent'
 import { services } from '../content/platformContent'
+import { reportAudiences, reportCatalog, reportLevels, telegramReportTopics } from '../content/reportingContent'
 
 const phaseFilters = ['همه', ...new Set(sharedPrompts.map((item) => item.phase))]
 const servicePromptCounts = services.map((service) => buildConditionalServicePrompts(service).length)
@@ -165,6 +166,7 @@ export default function CodexExecutionPage() {
             ['#execution-blueprint', 'نقشه ساخت دقیق'],
             ['#release-system', 'Test تا Production'],
             ['#telegram-control', 'توکن و مالکیت ربات'],
+            ['#reporting-system', 'گزارش و کنترل‌روم'],
             ['#detail-registry', 'رجیستری جزئیات'],
             ['#start', 'پرامپت‌های کنترل'],
             ['#library', 'کتابخانه مشترک'],
@@ -445,6 +447,22 @@ export default function CodexExecutionPage() {
             <span>مبنای جاری: مستندات رسمی Telegram</span>
             {telegramOfficialReferences.map(([label, url]) => <a href={url} target="_blank" rel="noreferrer" key={url}>{label}<ExternalLink size={13} /></a>)}
           </div>
+        </div>
+      </section>
+
+      <section className="codex-plan__section codex-reporting-bridge" id="reporting-system">
+        <div className="container">
+          <PlanHeading eyebrow="REPORTING & EVIDENCE CONTROL PLANE" title="هر اجرای «ادامه بده» یک گزارش قابل تصمیم و قابل ممیزی می‌سازد" description="یک رکورد پایه به نمای مدیر سیستم، مدیر محصول، سرمایه‌گذار، برنامه‌نویس، SRE، AI/Safety، رشد و مالی تبدیل می‌شود. گزارش کامل آرشیو می‌شود و خلاصه Redacted به Topic مناسب تلگرام می‌رود؛ نبود اتصال فقط Outbox می‌سازد." />
+          <div className="codex-reporting-bridge__stats">
+            <article><strong>{reportLevels.length.toLocaleString('fa-IR')}</strong><span>سطح از Incident فوری تا گزارش سرمایه‌گذار</span></article>
+            <article><strong>{reportAudiences.length.toLocaleString('fa-IR')}</strong><span>نمای نقش‌محور از یک منبع حقیقت</span></article>
+            <article><strong>{reportCatalog.length.toLocaleString('fa-IR')}</strong><span>نوع گزارش با Trigger، Owner و Schema</span></article>
+            <article><strong>{telegramReportTopics.length.toLocaleString('fa-IR')}</strong><span>Topic داخلی با Routing و Retry مستقل</span></article>
+          </div>
+          <div className="codex-reporting-bridge__flow">
+            {['Source و Artifact', 'اعتبارسنجی داده', 'نمای مخاطب و Redaction', 'Archive و Telegram/Outbox', 'Ack، تصمیم و اقدام'].map((item, index) => <div key={item}><i>{index + 1}</i><span>{item}</span>{index < 4 && <ArrowLeft size={16} />}</div>)}
+          </div>
+          <div className="codex-reporting-bridge__note"><ShieldCheck size={23} /><p><strong>Metric ساختگی ممنوع است.</strong> هر عدد Source، دوره، تعریف، تازگی و کامل‌بودن دارد. Topic تلگرام برای دسته‌بندی است؛ گزارش سرمایه‌گذار خارجی در مقصد جدا و فقط پس از Approval ارسال می‌شود.</p><Link className="button button--primary" to="/reporting">ورود به مرکز فرمان گزارش‌ها <ArrowLeft size={18} /></Link></div>
         </div>
       </section>
 

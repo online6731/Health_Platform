@@ -33,6 +33,7 @@ export const platformChapters = [
   ['safety-governance', 'ایمنی AI، سیاست و حاکمیت', 'trust'],
   ['privacy-security', 'حریم خصوصی و امنیت سرتاسری', 'trust'],
   ['observability-evals', 'مشاهده‌پذیری، ارزیابی و کیفیت مدل', 'delivery'],
+  ['reporting-governance', 'گزارش‌دهی چندسطحی، شواهد و کنترل‌روم', 'delivery'],
   ['devops-environments', 'محیط‌ها، CI/CD و زیرساخت اجرا', 'delivery'],
   ['qa-release', 'راهبرد آزمون و مدیریت انتشار', 'delivery'],
   ['api-standards', 'استاندارد API و قرارداد سرویس‌ها', 'engineering'],
@@ -311,6 +312,7 @@ const platformChapterBodies = {
   'multi-agent': ['هر Agent مالک Prompt، ابزار، دانش، سیاست و سنجه دامنه خود است.', 'Router فقط بر مبنای Intent تصمیم نمی‌گیرد؛ ریسک، هزینه، entitlement و ظرفیت ابزار نیز ورودی تصمیم‌اند.', 'Context مشترک باید حداقلی و consent-aware باشد؛ هر Agent نباید کل حافظه کاربر را ببیند.'],
   'safety-governance': ['سیاست ایمنی قبل و بعد از مدل اجرا می‌شود و تنها به System Prompt متکی نیست.', 'هر حوزه یک Risk Owner، Golden Set، Kill Switch و مسیر Human Review دارد.', 'در تعارض درآمد و ایمنی، سیاست ایمنی همیشه مقدم است و این تقدم باید در کد قابل آزمون باشد.'],
   'privacy-security': ['داده بر اساس حساسیت طبقه‌بندی و کمینه‌سازی می‌شود.', 'رضایت باید هدف، گیرنده، مدت و امکان لغو را روشن کند.', 'امنیت شامل tenant isolation، secret management، audit، retention و پاسخ رخداد است.'],
+  'reporting-governance': ['هر گزارش یک Artifact نسخه‌دار با Source، دوره، freshness، completeness، confidence، شاهد و Owner اقدام است؛ متن تولیدشده بدون این قرارداد گزارش محسوب نمی‌شود.', 'یک رکورد Canonical نماهای مدیر سیستم، محصول، سرمایه‌گذار، مهندسی، SRE، AI/Safety، رشد و مالی را می‌سازد؛ عدد بدون Metric Registry یا منبع معتبر ممنوع است.', 'تلگرام فقط سطح تحویل Summary و Link است؛ گزارش کامل در Archive کنترل‌شده می‌ماند، Topicها مرز امنیتی نیستند و مقصد خارجی نیازمند نسخه Sanitized و Approval جداست.'],
   'api-standards': ['APIها contract-first، نسخه‌دار و idempotent طراحی می‌شوند.', 'فرمت خطا باید machine-readable و برای کاربر قابل ترجمه باشد.', 'عملیات طولانی job-based و قابل پیگیری هستند.'],
   'program-roadmap': ['ساخت سرویس‌ها سریالی و evidence-led است، نه اجرای هم‌زمان کاتالوگ.', 'هر فاز با گیت تقاضا، کیفیت، ایمنی، اقتصاد و عرضه بسته می‌شود.', 'تیم‌های پلتفرم، Agent و Business OS روی قراردادهای مشترک همگام می‌شوند.'],
 }
@@ -377,4 +379,3 @@ export function getNextServiceDoc(service, volumeId) {
   const nextService = services[serviceIndex + 1]
   return nextService ? { service: nextService, volume: serviceDocVolumes[0] } : null
 }
-

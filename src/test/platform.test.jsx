@@ -43,6 +43,14 @@ import {
   ecosystemServiceNodes,
   getServiceConnections,
 } from '../content/serviceEcosystemMapContent'
+import {
+  reportAudiences,
+  reportCatalog,
+  reportLevels,
+  reportingBootstrapPrompt,
+  reportRequiredSections,
+  telegramReportTopics,
+} from '../content/reportingContent'
 
 function renderRoute(route = '/') {
   return render(
@@ -300,6 +308,38 @@ describe('ServiceOS product proposal', () => {
     expect(document.sections.some((section) => section.title.includes('مدل داده'))).toBe(true)
   })
 
+  it('defines a role-aware evidence system and Telegram reporting control room', async () => {
+    expect(reportLevels).toHaveLength(6)
+    expect(reportAudiences).toHaveLength(8)
+    expect(reportCatalog).toHaveLength(18)
+    expect(telegramReportTopics).toHaveLength(12)
+    expect(new Set(reportCatalog.map((item) => item.id)).size).toBe(reportCatalog.length)
+    expect(new Set(telegramReportTopics.map((item) => item.id)).size).toBe(telegramReportTopics.length)
+    expect(reportCatalog.every((item) => (
+      item.level
+      && item.audiences.length > 0
+      && item.required.length >= 5
+      && telegramReportTopics.some((topic) => topic.id === item.destination)
+    ))).toBe(true)
+    expect(reportAudiences.every((item) => reportCatalog.some((reportItem) => reportItem.audiences.includes(item.id)))).toBe(true)
+    expect(reportRequiredSections.length).toBeGreaterThanOrEqual(10)
+    expect(reportingBootstrapPrompt).toContain('outbox')
+    expect(reportingBootstrapPrompt).toContain('idempotency')
+    expect(autopilotExecution.startPrompt).toContain('REPORTING_SYSTEM_BLUEPRINT.md')
+    expect(autopilotExecution.startPrompt).toContain('RPT-001')
+    expect(autopilotExecution.startPrompt).toContain('docs/execution/reporting/outbox')
+    expect(sharedPrompts.some((promptItem) => promptItem.id === 'OPS-06')).toBe(true)
+    expect(sharedPrompts.some((promptItem) => promptItem.id === 'OPS-07')).toBe(true)
+
+    renderRoute('/reporting')
+    expect(await screen.findByRole('heading', { level: 1, name: 'مرکز فرمان گزارش‌ها و شواهد اجرا' })).not.toBeNull()
+    expect(screen.getByRole('heading', { name: 'گروه لاگ، شبیه یک کنترل‌روم با Topicهای مستقل' })).not.toBeNull()
+    expect(screen.getAllByRole('article').length).toBeGreaterThan(30)
+    fireEvent.click(screen.getByRole('button', { name: 'سرمایه‌گذار و هیئت‌مدیره' }))
+    expect(screen.getByRole('heading', { name: 'بسته سرمایه‌گذار' })).not.toBeNull()
+    expect(screen.queryByRole('heading', { name: 'رسید اجرای Codex' })).toBeNull()
+  })
+
   it('publishes a capacity-aware Codex execution program for every service', () => {
     const promptsPerService = services.map((service) => buildConditionalServicePrompts(service))
     const generated = promptsPerService.flat()
@@ -384,6 +424,11 @@ describe('ServiceOS product proposal', () => {
       'provisioning_mode: "manager-link"',
       'enable_owner_mtproto_automation: false',
       'migrate_raw_secrets_after_validation: true',
+      'reporting:',
+      'control_room_chat_id:',
+      'investor_external_delivery_requires_approval: true',
+      'reporting_bot_token:',
+      'create_private_reporting_supergroup_and_enable_topics:',
     ]) expect(ownerInputTemplate).toContain(field)
     const committedTemplate = readFileSync('docs/templates/OWNER_INPUTS.example.yaml', 'utf8')
     const normalizeTemplate = (value) => value.slice(value.indexOf('meta:')).split('\n')

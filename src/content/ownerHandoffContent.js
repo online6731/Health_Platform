@@ -1,12 +1,12 @@
 export const ownerHandoffMeta = {
-  version: 'Owner Handoff v1.1 · 2026-08-07',
+  version: 'Owner Handoff v1.2 · 2026-08-09',
   localPath: '.codex/owner-inputs.local.yaml',
   templatePath: 'docs/templates/OWNER_INPUTS.example.yaml',
 }
 
 export const quickStartSteps = [
   ['۱', 'فایل را کامل کن', 'فقط بخش‌های required_now و تصمیم‌های موج اول؛ اطلاعات مراحل بعد می‌تواند فعلاً خالی بماند.'],
-  ['۲', 'Bootstrap تلگرام', 'یک Manager Bot بساز و Bot Management Mode را فعال کن؛ مسیر پیش‌فرض دیگر API Hash نمی‌خواهد.'],
+  ['۲', 'Bootstrap تلگرام', 'یک Manager Bot و یک Private Reporting Forum بساز؛ Bot Management Mode و Topics را فعال کن.'],
   ['۳', 'Master Prompt را بده', 'Codex اعتبار فایل، قابلیت‌های Runtime و همه گیت‌های آینده را یک‌جا ممیزی می‌کند.'],
   ['۴', 'فقط ادامه بده', 'Codex تا نزدیک‌ترین گیت واقعی پیش می‌رود و کارهای انسانی را در یک Checkpoint تجمیع می‌کند.'],
 ]
@@ -28,8 +28,8 @@ export const readinessGates = [
   {
     id: 'alpha',
     label: 'قبل از Alpha',
-    owner: 'کاربران Allowlist، Provider آزمایشی و تأیید ساخت/اتصال Botهای همان موج',
-    codex: 'محیط Alpha، Bot Registry، Webhook، مشاهده‌پذیری و تست امنیت',
+    owner: 'کاربران Allowlist، Provider آزمایشی، تأیید Botهای موج و گروه خصوصی گزارش با Topics/Admin',
+    codex: 'محیط Alpha، Bot Registry، Webhook، گزارش‌ساز، Topic Router، مشاهده‌پذیری و تست امنیت',
     stop: 'نبود حساب یا تأیید همان Provider؛ توسعه Local همچنان ادامه دارد',
   },
   {
@@ -87,6 +87,7 @@ export const autonomyGroups = [
       'تولید username، ساخت لینک رسمی Managed Bot و تکمیل خودکار Provisioning پس از تأیید کاربر',
       'دریافت، انتقال به Vault، چرخش و revoke کردن Tokenهای Managed Bot در محدوده مجاز',
       'تنظیم profile، commands، menu، webhook، health check و monitoring ربات‌ها',
+      'تولید Run Receipt و گزارش‌های دوره‌ای، ساخت/بازیابی Topic، Routing، Retry و تخلیه Outbox گزارش',
       'استقرار، smoke test، rollback و به‌روزرسانی مستندات در محدوده Authority فایل مالک',
     ],
   },
@@ -101,6 +102,7 @@ export const autonomyGroups = [
       'فقط برای همان مسیر اختیاری: Login تعاملی با OTP/2FA مستقیم در Terminal، بدون ذخیره این دو مقدار',
       'ارائه یا اتصال حساب‌های GitHub، دامنه/DNS، Cloud، AI و Payment که واقعاً قرار است استفاده شوند',
       'تأیید نام برند، دامنه اصلی، prefix ربات‌ها، کشور، زبان، موج اول و سقف کاربران Beta',
+      'ساخت Private Supergroup گزارش، فعال‌کردن Topics و Admin کردن Reporting Bot با حداقل مجوز لازم',
     ],
   },
   {
@@ -114,6 +116,7 @@ export const autonomyGroups = [
       'تأیید نهایی سیاست حریم خصوصی، شرایط استفاده و متن‌های پزشکی/حقوقی توسط مسئول صلاحیت‌دار',
       'تأیید انسانی انتشار Production، هزینه واقعی، Refund، حذف داده یا اقدام برگشت‌ناپذیر',
       'تأییدهای App Store/Google Play، قراردادهای Provider و حساب‌های بانکی/تسویه در فاز مربوطه',
+      'تأیید مقصد جدا و نسخه Sanitized گزارش سرمایه‌گذار پیش از هر ارسال خارجی',
     ],
   },
   {
@@ -126,6 +129,7 @@ export const autonomyGroups = [
       'Recovery Code، کلید خصوصی امضا، seed phrase و اطلاعات کامل کارت/حساب',
       'توکن یا API Key داخل فایل Commit‌شونده، Screenshot، Issue، Log یا خروجی مدل',
       'داده واقعی سلامت/حقوقی کاربران برای Test؛ فقط داده ساختگی یا ماسک‌شده',
+      'گزارش یا پیام Telegram شامل Secret، PII خام، داده سلامت/حقوقی یا URL حساس',
     ],
   },
 ]
@@ -144,7 +148,7 @@ export const ownerInputTemplate = `# ServiceOS Owner Inputs — LOCAL SECRET FIL
 # Autopilot باید مقدار Secretها را redact کند و فقط وضعیت presence/validity را گزارش دهد.
 
 meta:
-  version: 2
+  version: 3
   completed_by_owner: false
   reviewed_at: ""
   owner_timezone: "Asia/Tehran"
@@ -219,8 +223,47 @@ telegram:
   # OTP، رمز 2FA و Recovery Code هرگز در این فایل ذخیره نشوند.
   never_store_otp_or_2fa_here: true
 
+reporting:
+  enabled: true
+  mode: "private-forum"
+  timezone: "Asia/Tehran"
+  control_room_title: "ServiceOS | Control Room"
+  control_room_chat_id: ""
+  reporting_bot_username: ""
+  reporting_bot_secret_ref: ""
+  bot_is_admin: false
+  bot_can_manage_topics: false
+  bot_can_post_messages: false
+  auto_create_topics: true
+  per_active_service_topics: true
+  investor_external_destination_chat_id: ""
+  investor_external_delivery_requires_approval: true
+  send_run_receipts: true
+  daily_digest_time: "21:00"
+  weekly_review_day: "Thursday"
+  weekly_review_time: "18:00"
+  monthly_investor_day: 1
+  telegram_message_limit: 3500
+  full_report_delivery: "link"
+  retain_telegram_days: 365
+  do_not_send: [secrets, raw_pii, health_payloads, access_tokens]
+  topic_ids:
+    critical: ""
+    executive: ""
+    product: ""
+    engineering: ""
+    releases: ""
+    ai_safety: ""
+    sre_incidents: ""
+    security_privacy: ""
+    growth_business: ""
+    investor_internal: ""
+    finance_cost: ""
+    owner_actions: ""
+
 secret_refs:
   manager_bot_token: ""
+  reporting_bot_token: ""
   mtproto_session: ""
   openai_api_key: ""
   cloud_credential: ""
@@ -307,6 +350,9 @@ manual_actions_status:
   obtain_telegram_api_id_hash_if_owner_mtproto: "not-required"
   complete_interactive_telegram_login_if_owner_mtproto: "not-required"
   confirm_managed_bot_creation_in_telegram: "pending-at-alpha"
+  create_private_reporting_supergroup_and_enable_topics: "pending-before-alpha"
+  add_reporting_bot_as_admin: "pending-before-alpha"
+  confirm_investor_destination: "pending-before-beta"
   purchase_or_connect_domain: "pending"
   complete_payment_kyc: "pending"
   approve_legal_documents: "pending"

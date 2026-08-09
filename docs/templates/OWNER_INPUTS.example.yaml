@@ -4,7 +4,7 @@
 # recovery codes, raw Telegram session strings, or real user health data here.
 
 meta:
-  version: 2
+  version: 3
   completed_by_owner: false
   reviewed_at: ""
   owner_timezone: "Asia/Tehran"
@@ -73,8 +73,47 @@ telegram:
   bot_management_mode_enabled: false
   never_store_otp_or_2fa_here: true
 
+reporting:
+  enabled: true
+  mode: "private-forum"
+  timezone: "Asia/Tehran"
+  control_room_title: "ServiceOS | Control Room"
+  control_room_chat_id: ""
+  reporting_bot_username: ""
+  reporting_bot_secret_ref: ""
+  bot_is_admin: false
+  bot_can_manage_topics: false
+  bot_can_post_messages: false
+  auto_create_topics: true
+  per_active_service_topics: true
+  investor_external_destination_chat_id: ""
+  investor_external_delivery_requires_approval: true
+  send_run_receipts: true
+  daily_digest_time: "21:00"
+  weekly_review_day: "Thursday"
+  weekly_review_time: "18:00"
+  monthly_investor_day: 1
+  telegram_message_limit: 3500
+  full_report_delivery: "link"
+  retain_telegram_days: 365
+  do_not_send: [secrets, raw_pii, health_payloads, access_tokens]
+  topic_ids:
+    critical: ""
+    executive: ""
+    product: ""
+    engineering: ""
+    releases: ""
+    ai_safety: ""
+    sre_incidents: ""
+    security_privacy: ""
+    growth_business: ""
+    investor_internal: ""
+    finance_cost: ""
+    owner_actions: ""
+
 secret_refs:
   manager_bot_token: ""
+  reporting_bot_token: ""
   mtproto_session: ""
   openai_api_key: ""
   cloud_credential: ""
@@ -161,6 +200,9 @@ manual_actions_status:
   obtain_telegram_api_id_hash_if_owner_mtproto: "not-required"
   complete_interactive_telegram_login_if_owner_mtproto: "not-required"
   confirm_managed_bot_creation_in_telegram: "pending-at-alpha"
+  create_private_reporting_supergroup_and_enable_topics: "pending-before-alpha"
+  add_reporting_bot_as_admin: "pending-before-alpha"
+  confirm_investor_destination: "pending-before-beta"
   purchase_or_connect_domain: "pending"
   complete_payment_kyc: "pending"
   approve_legal_documents: "pending"

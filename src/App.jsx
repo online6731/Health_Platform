@@ -18,6 +18,7 @@ const CodexExecutionPage = lazy(() => import('./pages/CodexExecutionPage'))
 const ExecutionMapPage = lazy(() => import('./pages/ExecutionMapPage'))
 const ServiceEcosystemMapPage = lazy(() => import('./pages/ServiceEcosystemMapPage'))
 const InfographicsPage = lazy(() => import('./pages/InfographicsPage'))
+const ReportingSystemPage = lazy(() => import('./pages/ReportingSystemPage'))
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="docs/platform/:chapterId" element={<PlatformDocsPage />} />
         <Route path="docs/services/:serviceId/:volumeId?" element={<ServiceDocsPage />} />
         <Route path="codex-execution" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن نقشه اجرایی…</p></div>}><CodexExecutionPage /></Suspense>} />
+        <Route path="reporting" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن مرکز گزارش‌ها…</p></div>}><ReportingSystemPage /></Suspense>} />
         <Route path="execution-map" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن نقشه تعاملی…</p></div>}><ExecutionMapPage /></Suspense>} />
         <Route path="infographics" element={<Suspense fallback={<div className="route-loader" role="status"><span /><p>در حال آماده‌کردن گالری تصویری…</p></div>}><InfographicsPage /></Suspense>} />
         <Route path="business" element={<BusinessPage />} />

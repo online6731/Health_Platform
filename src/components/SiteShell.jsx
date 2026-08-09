@@ -12,6 +12,7 @@ const navigation = [
   { to: '/execution-map', label: 'نقشه تعاملی' },
   { to: './execution-audio-guide.html', label: 'نسخه شنیداری', external: true },
   { to: '/codex-execution', label: 'ساخت با Codex' },
+  { to: '/reporting', label: 'گزارش‌ها' },
   { to: '/business', label: 'پلتفرم کسب‌وکار' },
   { to: '/roadmap', label: 'نقشه اجرا' },
   { to: '/investor', label: 'مدل سرمایه‌گذاری' },
@@ -23,6 +24,7 @@ const titles = {
   '/service-map': 'نقشه تعاملی اکوسیستم سرویس‌ها | ServiceOS',
   '/docs': 'کاتالوگ اجرایی محصول و مهندسی | ServiceOS',
   '/codex-execution': 'نقشه اجرای ServiceOS با Codex',
+  '/reporting': 'مرکز فرمان گزارش‌ها | ServiceOS',
   '/infographics': 'مجموعه اینفوگرافی‌های ServiceOS',
   '/execution-map': 'نقشه اجرایی تعاملی ServiceOS',
   '/business': 'پلتفرم کسب‌وکار | ServiceOS',
@@ -134,6 +136,7 @@ export default function SiteShell() {
             <Link to="/service-map">نقشه تعاملی اکوسیستم سرویس‌ها</Link>
             <Link to="/docs">کاتالوگ اجرایی</Link>
             <Link to="/codex-execution">راهنمای ساخت با Codex</Link>
+            <Link to="/reporting">مرکز فرمان گزارش‌ها</Link>
             <Link to="/infographics">۵۶ اینفوگرافی + نقشه مادر</Link>
             <Link to="/execution-map">نقشه اجرایی تعاملی</Link>
             <a href="./execution-audio-guide.html">نسخه وب و شنیداری نقشه اجرا</a>

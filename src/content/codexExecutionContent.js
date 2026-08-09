@@ -47,6 +47,7 @@ export const operatingRules = [
   ['مستندات هم‌زمان با کد', 'هر تغییر دامنه، API، تصمیم معماری و سناریوی خطر باید در همان کار به کاتالوگ و ADR برگردد.'],
   ['حفظ تغییرات کاربر', 'هیچ Reset مخرب، حذف گسترده یا بازنویسی فایل‌های نامرتبط مجاز نیست؛ تعارض‌ها باید گزارش و محدود شوند.'],
   ['موج، نه انفجار', 'پس از هسته مشترک، سرویس‌ها در موج‌های کوچک ساخته می‌شوند تا یادگیری موج قبلی وارد قالب موج بعد شود.'],
+  ['گزارش بخشی از تحویل', 'هر واحد فقط با Run Receipt، شاهد، کیفیت داده، مخاطب و وضعیت تحویل/Outbox بسته می‌شود؛ عدد بدون منبع ممنوع است.'],
 ]
 
 export const executionArtifacts = [
@@ -56,6 +57,9 @@ export const executionArtifacts = [
   ['docs/contracts/', 'قرارداد API، Event، داده، خطا و نسخه‌بندی بین ماژول‌ها'],
   ['docs/evals/', 'سناریوهای ارزیابی AI، داده طلایی، آستانه قبولی و گزارش رگرسیون'],
   ['docs/runbooks/', 'انتشار، Rollback، رخداد امنیتی، قطعی مدل، خطای پرداخت و بازیابی داده'],
+  ['docs/execution/reports/', 'نسخه Canonical گزارش‌های Run، Gate، روزانه، هفتگی، رخداد و سرمایه‌گذار'],
+  ['docs/execution/reporting/REPORT_REGISTRY.md', 'کاتالوگ نوع گزارش، مخاطب، Schema، زمان‌بندی، تأیید، محرمانگی و Retention'],
+  ['docs/execution/reporting/outbox/', 'پیام‌های Redacted آماده تحویل که به‌دلیل نبود اتصال یا خطای مقصد هنوز ارسال نشده‌اند'],
 ]
 
 const prompt = (id, phase, title, size, purpose, body) => ({ id, phase, title, size, purpose, body })
@@ -110,6 +114,8 @@ export const sharedPrompts = [
   prompt('OPS-03', 'عملیات و کیفیت', 'تهدیدنگاری و سخت‌سازی امنیتی', 'L', 'کاهش ریسک قبل از پایلوت.', `Threat Model بر پایه asset، actor، trust boundary و abuse case تهیه کن. webhook spoofing، prompt injection، data exfiltration، IDOR، tenant escape، file attack، payment abuse و admin misuse را اولویت‌بندی و کنترل کن. تست امنیت خودکار و backlog باقی‌مانده با severity بساز.`),
   prompt('OPS-04', 'عملیات و کیفیت', 'تاب‌آوری، Queue و بازیابی', 'L', 'حفظ سرویس در خرابی مدل و اتصال بیرونی.', `سیاست timeout/retry/backoff/dead-letter، circuit breaker، degraded mode و reconciliation job را پیاده کن. خرابی Model Provider، Telegram، پرداخت، search index و database را شبیه‌سازی کن. RPO/RTO، backup restore drill و runbook پاسخ را ثبت کن.`),
   prompt('OPS-05', 'عملیات و کیفیت', 'گیت آمادگی تولید', 'M', 'توقف انتشار ناقص با یک چک‌لیست اجرایی.', `Production Readiness Review اجرا کن: tests، migrations، secrets، SLO، dashboards، alerts، cost cap، privacy، safety eval، incident owner، rollback و support. موارد را به Pass/Fail/Exception با شاهد تقسیم کن. تا رفع Blockerها انتشار نده و STATE/BACKLOG را دقیق به‌روز کن.`),
+  prompt('OPS-06', 'عملیات و کیفیت', 'قرارداد گزارش چندسطحی و شواهد', 'L', 'ساخت یک منبع حقیقت و نماهای مدیر، محصول، سرمایه‌گذار، مهندسی و عملیات.', `docs/REPORTING_SYSTEM_BLUEPRINT.md را اجرا کن. Report/Metric/Stakeholder/Approval/Retention Registry، Schema نسخه‌دار و Renderهای Executive، Product، Investor، Engineering، SRE، AI/Safety، Growth و Finance را بساز. Run Receipt هر اجرای Codex، Gate Report، Daily/Weekly/Monthly و Incident reports باید Source، freshness، completeness، confidence، Artifact SHA، KPI در برابر Target، ریسک، تصمیم، Owner و Deadline داشته باشند. عدد یا وضعیت بدون شاهد نساز؛ N/A و Forecast را صریح نگه دار. JSON/Markdown Canonical، redaction، audience allowlist، correction/supersedes، lineage و تست بازتولید را تحویل بده.`),
+  prompt('OPS-07', 'عملیات و کیفیت', 'کنترل‌روم Telegram و Report Relay', 'L', 'تحویل منظم گزارش‌ها به Topicهای مستقل بدون تبدیل Telegram به منبع حقیقت.', `Report Relay تلگرام را مطابق Blueprint پیاده کن. یک Private Forum برای کنترل‌روم در Owner Inputs تعریف کن؛ پس از اقدام یک‌باره مالک و Admin شدن Bot، Topicهای critical، executive، product، engineering، releases، ai_safety، sre_incidents، security_privacy، growth_business، finance_cost، investor_internal و owner_actions را idempotent ایجاد/بازیابی کن. فقط Summary و Link Redacted بفرست؛ Secret، PII، داده سلامت/حقوقی و payload خام ممنوع. Delivery Registry، idempotency key، retry/backoff، rate-limit، permission failure، outbox، dead-letter، backfill، ack و retention را پیاده و تست کن. Topic جداسازی امنیتی نیست؛ مقصد خارجی سرمایه‌گذار باید جدا، Sanitized و نیازمند approval باشد. نبود Telegram فقط Outbox می‌سازد و اجرای محصول را متوقف نمی‌کند.`),
 
   prompt('SURF-01', 'سطوح بعدی', 'پرتال وب روی همان هسته', 'L', 'گسترش کانال بدون تکرار منطق.', `پس از اثبات MVP، پرتال وب کاربر و کسب‌وکار را روی همان API/Contracts بساز. ورود، تاریخچه، سرویس‌ها، storefront، رزرو، پرداخت و تنظیمات رضایت را پوشش بده. هیچ Domain Logic را در Frontend تکرار نکن. responsive، accessibility و E2E مسیرهای حیاتی را کامل کن.`),
   prompt('SURF-02', 'سطوح بعدی', 'پایه اپ موبایل و قرارداد همگام‌سازی', 'L', 'آماده‌سازی کانال موبایل پس از اثبات.', `فقط پس از عبور از گیت وب، معماری اپ موبایل را با navigation، secure storage، session، notifications، upload و offline read محدود طراحی و scaffold کن. API parity matrix و قرارداد deep-link از Telegram/Web را بساز. قابلیت دامنه جدید اضافه نکن.`),
@@ -123,7 +129,7 @@ export const programPhases = [
   { id: 'P2', title: 'هسته هوشمند قابل ارزیابی', horizon: 'پیش از عامل‌ها', objective: 'مسیریابی مدل، RAG، حافظه، ابزار، ایمنی و Eval.', gate: 'Dataset پایه + آستانه Eval + هزینه و نسخه هر اجرا قابل ردیابی', prompts: ['AI-01', 'AI-02', 'AI-03', 'AI-04', 'AI-05', 'AI-06', 'AI-07'] },
   { id: 'P3', title: 'Telegram MVP', horizon: 'اولین Vertical Slice', objective: 'Control Plane، ناوگان Bot، Mini App، Omni و ارجاع در یک مسیر واقعی.', gate: 'BotInstance آزمایش مستقل است، کاربر مجاز یک Task را کامل می‌کند و هیچ secret یا update تکراری نشت نمی‌کند', prompts: ['TGC-01', 'TGC-02', 'TGC-03', 'TGC-04', 'EXP-01', 'EXP-02', 'EXP-03', 'EXP-04', 'EXP-05'] },
   { id: 'P4', title: 'شبکه عرضه و درآمد', horizon: 'B2B + Monetization', objective: 'ثبت، احراز، ویترین، جستجو، رزرو، CRM و اشتراک.', gate: 'یک ارائه‌دهنده تأییدشده یک لید مجاز را تا نتیجه پیگیری می‌کند', prompts: ['NET-01', 'NET-02', 'NET-03', 'NET-04', 'NET-05', 'NET-06'] },
-  { id: 'P5', title: 'عملیات، امنیت و تولید', horizon: 'پیش از بتا', objective: 'اداره، مشاهده، تاب‌آوری و ارتقای کنترل‌شده تا production.', gate: 'Production Readiness بدون Blocker + canary قابل مشاهده + Rollback تمرین‌شده', prompts: ['OPS-01', 'OPS-02', 'OPS-03', 'OPS-04', 'OPS-05', 'REL-04'] },
+  { id: 'P5', title: 'عملیات، امنیت و تولید', horizon: 'پیش از بتا', objective: 'اداره، مشاهده، گزارش‌دهی نقش‌محور، تاب‌آوری و ارتقای کنترل‌شده تا production.', gate: 'Production Readiness بدون Blocker + گزارش Canonical/Telegram آزمایش‌شده + canary قابل مشاهده + Rollback تمرین‌شده', prompts: ['OPS-01', 'OPS-02', 'OPS-03', 'OPS-04', 'OPS-05', 'OPS-06', 'OPS-07', 'REL-04'] },
   { id: 'P6', title: 'کارخانه سرویس‌ها', horizon: 'موج‌های ۲ تا ۴', objective: 'هر سرویس بر اساس پروفایل واقعی خود با ۱۳ تا ۲۳ پرامپت شرطی و گیت مستقل ساخته می‌شود؛ مرحله نامرتبط تولید نمی‌شود.', gate: 'پروفایل اجرایی معتبر + Eval + Runbook + مالک + مسیر alpha/beta/canary + شواهد استفاده مستقل', prompts: [] },
   { id: 'P7', title: 'وب، موبایل و رشد', horizon: 'پس از اثبات', objective: 'گسترش سطح دسترسی و تصمیم درباره موج بعد بر اساس داده.', gate: 'API parity + پایلوت اندازه‌گیری‌شده + تصمیم Continue/Pivot/Stop', prompts: ['SURF-01', 'SURF-02', 'LAUNCH-01', 'LAUNCH-02'] },
 ]
@@ -169,14 +175,14 @@ export const servicePromptStages = [
     title: 'عملیات، اقتصاد و آمادگی پایلوت',
     size: 'M',
     output: 'Dashboard، Runbook، Cost Budget و Pilot Gate',
-    build: (service) => `برای ${service.name} metrics و traceهای activation، task success، safety، latency، model cost، referral، conversion و retention را اضافه کن. سقف هزینه هر Task، alert، support workflow، runbook خرابی و rollback را تعریف کن. پلن درآمدی «${service.monetization}» را فقط به Entitlement مشترک وصل کن و پرداخت را وارد ranking یا تصمیم ایمنی نکن. Production Readiness محدود سرویس را اجرا کن.`,
+    build: (service) => `برای ${service.name} metrics و traceهای activation، task success، safety، latency، model cost، referral، conversion و retention را اضافه کن. سقف هزینه هر Task، alert، support workflow، runbook خرابی و rollback را تعریف کن. پلن درآمدی «${service.monetization}» را فقط به Entitlement مشترک وصل کن و پرداخت را وارد ranking یا تصمیم ایمنی نکن. نماهای Product، Engineering، SRE و Finance این سرویس را از Report Record مشترک بساز؛ Metricها باید تعریف، Source، freshness و Target داشته باشند. Production Readiness محدود سرویس را اجرا کن.`,
   },
   {
     id: 'SVC-07',
     title: 'پایلوت، یادگیری و تصمیم مقیاس',
     size: 'M',
     output: 'گزارش پایلوت و Verdict ساخت/اصلاح/توقف',
-    build: (service) => `پایلوت کنترل‌شده ${service.name} را با cohort، feature flag، رضایت، سقف مصرف و معیار توقف آماده کن. پس از دریافت داده واقعی، نتیجه را بر اساس task success، safety، unit cost، retention، referral quality و willingness-to-pay تحلیل کن. در docs/services/${service.slug}/PILOT_REPORT.md برای هر فرض Verdict بده و تصمیم Scale، Iterate، Merge یا Stop را ثبت کن. فقط پس از Verdict مثبت سرویس بعدی همان موج را شروع کن.`,
+    build: (service) => `پایلوت کنترل‌شده ${service.name} را با cohort، feature flag، رضایت، سقف مصرف و معیار توقف آماده کن. پس از دریافت داده واقعی، نتیجه را بر اساس task success، safety، unit cost، retention، referral quality و willingness-to-pay تحلیل کن. در docs/services/${service.slug}/PILOT_REPORT.md برای هر فرض Verdict بده و تصمیم Scale، Iterate، Merge یا Stop را ثبت کن. گزارش RPT-018 را با نماهای Executive، Product، Engineering، AI/Safety و Investor Sanitized تولید و مسیر approval/Telegram آن را ثبت کن. فقط پس از Verdict مثبت سرویس بعدی همان موج را شروع کن.`,
   },
 ]
 
@@ -211,12 +217,15 @@ https://github.com/online6731/Health_Platform
    - src/content/ownerHandoffContent.js
    - src/content/implementationDetailsContent.js
    - src/content/executionBlueprintContent.js
+   - src/content/reportingContent.js و docs/REPORTING_SYSTEM_BLUEPRINT.md
    - کاتالوگ docs و صفحات سرویس‌ها
 8. اگر AGENTS.md وجود ندارد آن را ایجاد کن؛ اگر وجود دارد فقط یک بخش کوتاه «ServiceOS Autopilot» به آن اضافه یا به‌روز کن و محتوای موجود را حفظ کن. چون AGENTS در آغاز هر Run کشف می‌شود، پروتکل همین Prompt را در Bootstrap جاری مستقیماً اجرا کن و AGENTS را برای Runهای بعدی منبع پایدار قرار بده. از قراردادن کاتالوگ طولانی در AGENTS خودداری کن و جزئیات را به STATE/Backlog ارجاع بده.
 9. پوشه docs/execution را در صورت نبود ایجاد کن.
 10. اگر docs/execution/BASELINE_AUDIT.md وجود ندارد، در همین نوبت محتوای CTRL-01 را اجرا کن و نقاط توقف فنی، حسابی، حقوقی، مالی، امنیتی و عملیاتی را هم ممیزی کن.
 11. اگر docs/execution/STATE.md یا BACKLOG.md وجود ندارد، بعد از ممیزی در همین نوبت CTRL-02 را اجرا و هر دو را بساز. STATE باید دقیقاً یک Next Action و شناسه پرامپت بعدی داشته باشد.
 12. اگر این فایل‌ها از قبل معتبرند، ممیزی یا کار انجام‌شده را تکرار نکن؛ وضعیت واقعی آن‌ها را مبنا قرار بده.
+13. در اولین نوبت این قراردادهای گزارش‌دهی را بساز یا اعتبارسنجی کن: docs/execution/reporting/REPORTING_CONTRACT.md، REPORT_REGISTRY.md، METRIC_REGISTRY.md، STAKEHOLDER_MATRIX.md، TELEGRAM_ROUTING.md، APPROVAL_MATRIX.md و پوشه‌های docs/execution/reports/runs و docs/execution/reporting/outbox. این کار بخشی از Bootstrap است و نباید Metric ساختگی یا Secret تولید کند.
+14. از همین نوبت برای هر Run یک شناسه پایدار و یک RPT-001 در docs/execution/reports/runs/YYYY-MM-DD/<run-id>.md به‌همراه JSON ماشین‌خوان بساز. گزارش باید هدف، Scope، Diff، Test/Build/Eval، شاهد، ریسک، Next Action، freshness، completeness، confidence و وضعیت تحویل Telegram یا Outbox را داشته باشد.
 
 قواعد اختصاصی اتوماسیون Telegram:
 - مسیر پیش‌فرض telegram.provisioning_mode=manager-link است: Manager Bot لینک رسمی یا request_managed_bot می‌سازد، کاربر در UI خود Telegram ساخت را تأیید می‌کند، سپس Manager Bot update را می‌گیرد و Token را با getManagedBotToken دریافت می‌کند. این مسیر به API ID/API Hash یا Login حساب مالک نیاز ندارد.
@@ -225,6 +234,16 @@ https://github.com/online6731/Health_Platform
 - OTP، رمز 2FA، Recovery Code و Session String خام را هرگز در Chat یا Owner Inputs درخواست یا ذخیره نکن. اگر owner-mtproto انتخاب شده و نشست آماده نیست، اسکریپت Setup تعاملی بساز؛ Session نهایی فقط در Secret Store و با Reference ثبت شود.
 - Token را در source، YAML Commit‌شونده، STATE، Log یا خروجی چاپ نکن. اگر Secret خام موقتاً در فایل محلی داده شده، پس از اعتبارسنجی آن را به Secret Store منتقل، Reference را ثبت و مقدار خام را پاک کن. Rotation/Revoke، profile، commands، menu، webhook، Mini App، health check و audit را در همان flow کامل کن.
 - همه ۷۸ سرویس و همه محیط‌ها را از روز اول نساز. فقط Botهای موج فعال و محیط‌های مجاز را تا سقف telegram.max_bots_to_create_now Provision کن. BOT_CREATE_LIMIT_EXCEEDED، USERNAME_OCCUPIED، MANAGER_PERMISSION_MISSING یا لغو تأیید کاربر Gate واقعی‌اند، نه دلیل توقف سایر کارها.
+
+قواعد اختصاصی سیستم گزارش و کنترل‌روم Telegram:
+- گزارش کامل و منبع حقیقت در docs/execution/reports یا Archive امن است؛ Telegram فقط Summary کوتاه Redacted، لینک شاهد، Report ID و Action را دریافت می‌کند.
+- مالک یک‌بار Private Supergroup را می‌سازد، Topics را فعال و Reporting Bot را Admin می‌کند. پس از وجود Chat ID و Permission، Codex باید Topicهای استاندارد را idempotent ایجاد/بازیابی، message_thread_idها را ثبت و Routing را خودکار کند.
+- Topic در یک Forum مرز امنیتی مستقل برای اعضای همان گروه نیست. گزارش خارجی سرمایه‌گذار یا شخص ثالث باید مقصد خصوصی جدا، Audience view Sanitized و approval صریح داشته باشد.
+- هیچ Secret، Token، PII خام، متن سلامت/حقوقی، URL حساس یا Payload کاربر در گزارش یا Telegram قرار نده. Redaction باید rule/schema-based و fail-closed باشد؛ فقط به مدل زبانی تکیه نکن.
+- اگر Bot، Chat ID، Topic، Permission یا authority.send_external_messages آماده نیست، Canonical report را بساز و پیام را با idempotency key در docs/execution/reporting/outbox قرار بده؛ اجرای مستقل Local/Test را متوقف نکن.
+- هیچ Metric را حدس نزن. Source، query/version، period، freshness و completeness را ثبت کن؛ نبود داده N/A و پیش‌بینی Forecast با روش محاسبه است.
+- هر Gate، Release، Incident، Daily/Weekly/Monthly close و Beta verdict گزارش نوع متناظر می‌سازد. هر گزارش Blocker یا تصمیم باید Owner، Deadline و وضعیت Ack داشته باشد.
+- Delivery Registry باید retry/backoff، rate limit، dedup، dead-letter، backfill، correction/supersedes و retention را پوشش دهد. ارسال موفق با chat_id، message_thread_id و message_id ثبت می‌شود، بدون ذخیره Token.
 
 پروتکل دائمی «ادامه بده» که باید در AGENTS.md ثبت شود:
 - ابتدا AGENTS، STATE، BACKLOG، آخرین Commitها، تغییرات Git و شواهد گیت قبلی را بخوان.
@@ -240,6 +259,8 @@ https://github.com/online6731/Health_Platform
 - هرجا Owner Inputs اختیار روشن داده و credential معتبر موجود است، اقدام را خودت انجام بده و فقط نتیجه redact‌شده و شاهد قابل ممیزی ارائه کن؛ دوباره برای همان اختیار سؤال نپرس.
 - تست‌های متناسب، lint، build، contract test، E2E یا Eval لازم را اجرا کن. تست یا آستانه ایمنی را برای سبزشدن دور نزن.
 - Diff را برای رگرسیون، Secret و تغییر نامرتبط بررسی کن.
+- پس از Test و پیش از پایان نوبت، Run Receipt نوع RPT-001 را در Markdown/JSON تولید و Schema، Source، Redaction، Audience و یکسانی Next Action با STATE را اعتبارسنجی کن.
+- اگر تحویل Telegram مجاز و آماده است خلاصه را به Topic متناظر بفرست؛ در غیر این صورت Outbox بساز و delivery_status را صریح گزارش کن. شکست تحویل، نتیجه Test یا Gate را جعل یا تغییر نمی‌دهد.
 - فقط پس از تکمیل معیار پذیرش، STATE و BACKLOG را با شاهد به‌روز کن و دقیقاً یک Next Action جدید قرار بده.
 - در صورت امن و پیکربندی‌بودن Git، فقط فایل‌های همین واحد را با شناسه مرحله Commit کن؛ تغییر نامرتبط کاربر را Commit نکن.
 - اگر کل برنامه واقعاً تمام شده است، Next Action را COMPLETE کن و گزارش نهایی بده؛ مرحله ساختگی جدید تولید نکن.
@@ -255,6 +276,7 @@ https://github.com/online6731/Health_Platform
 - مسیر فایل واحد Owner Inputs و خلاصه همه اقدام‌های انسانی لازم در تمام گیت‌ها، بدون نمایش Secret
 - Next Action ثبت‌شده
 - ریسک یا Blocker واقعی
+- Report ID، مسیر Run Receipt، کیفیت داده و وضعیت Telegram delivery یا Outbox
 - و در آخر دقیقاً این جمله: «برای اجرای مرحله بعد فقط بنویس: ادامه بده»`,
 }
 

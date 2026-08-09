@@ -239,11 +239,11 @@ export const deliveryIncrements = [
     dependsOn: 'تمام مسیرهای MVP',
     owner: 'Operations Lead + SRE',
     goal: 'محصول قبل از Beta قابل اداره، توضیح، توقف و بازیابی باشد.',
-    tasks: ['Admin role/field/action matrix', 'Support case و safe impersonation', 'trace/metric/log/cost dashboards', 'SLO/error budget و alert routing', 'runbook incident، vendor outage و data recovery'],
-    deliverables: ['Admin Console', 'Support Queue', 'SLO Dashboard', 'Alert Catalog', 'Incident Runbooks'],
-    acceptance: ['هیچ اقدام Admin بدون reason/audit نیست', 'هشدار به owner و runbook درست وصل است', 'Trace مسیر Bot→AI→Tool→Outcome را پوشش می‌دهد', 'قطعی Provider degraded mode روشن دارد'],
-    humanGate: 'On-call roster، SLA پشتیبانی و کانال ارتباط رخداد.',
-    evidence: 'incident game-day، alert drill و support case sample.',
+    tasks: ['Admin role/field/action matrix', 'Support case و safe impersonation', 'trace/metric/log/cost dashboards', 'SLO/error budget و alert routing', 'Report/Metric/Stakeholder Registry و نماهای نقش‌محور', 'Telegram Forum topic router، outbox، retry، dedup و backfill', 'runbook incident، vendor outage و data recovery'],
+    deliverables: ['Admin Console', 'Support Queue', 'SLO Dashboard', 'Alert Catalog', 'Reporting Contract و Report Registry', 'Telegram Report Relay و Delivery Registry', 'Incident Runbooks'],
+    acceptance: ['هیچ اقدام Admin بدون reason/audit نیست', 'هشدار به owner و runbook درست وصل است', 'Trace مسیر Bot→AI→Tool→Outcome را پوشش می‌دهد', 'گزارش مدیر/محصول/سرمایه‌گذار/فنی از یک رکورد پایه و بدون Metric ساختگی تولید می‌شود', 'Telegram فقط Summary بدون Secret/PII می‌گیرد و Retry پیام تکراری نمی‌سازد', 'قطعی Telegram با Outbox اجرای محصول را متوقف نمی‌کند', 'قطعی Provider degraded mode روشن دارد'],
+    humanGate: 'On-call roster، SLA پشتیبانی، ساخت Private Reporting Forum، Admin شدن Bot و مقصد جداگانه سرمایه‌گذار.',
+    evidence: 'incident game-day، alert drill، نمونه گزارش همه نقش‌ها، redaction/routing drill و support case sample.',
   }),
   increment('D17', 'انتشار و یادگیری', 'Alpha، Closed Beta، Canary و تصمیم مقیاس', '۱۵ تا ۳۰ روز مشاهده', {
     dependsOn: 'D00 تا D16',
@@ -293,6 +293,7 @@ ${item.acceptance.map((criterion) => `- ${criterion}`).join('\n')}
 - تست، failure path، security/privacy، هزینه و rollback متناسب را اجرا کن؛ آزمون را دور نزن.
 - فقط فایل‌های همین واحد را تغییر بده و تغییر نامرتبط کاربر را حفظ کن.
 - پس از عبور واقعی، این شاهد را ثبت کن: ${item.evidence}
+- Run Receipt این واحد را مطابق docs/REPORTING_SYSTEM_BLUEPRINT.md در Markdown/JSON تولید کن؛ Source، کیفیت داده، شاهد، مخاطب و وضعیت Telegram/Outbox را ثبت کن.
 - STATE و BACKLOG را به‌روز کن و دقیقاً یک Next Action قرار بده.`
 
 export const referenceVerticalSlice = [
