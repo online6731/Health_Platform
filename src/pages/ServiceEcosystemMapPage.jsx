@@ -77,7 +77,7 @@ function getScaleBand(scale) {
 function constrainView(candidate, viewportWidth, viewportHeight) {
   const mapWidth = ecosystemMapSize.width * candidate.scale
   const mapHeight = ecosystemMapSize.height * candidate.scale
-  const visibleEdge = Math.min(150, Math.max(72, Math.min(viewportWidth, viewportHeight) * .14))
+  const visibleEdge = Math.min(280, Math.max(110, Math.min(viewportWidth, viewportHeight) * .22))
   const constrainAxis = (offset, contentSize, viewportSize) => (
     contentSize <= viewportSize
       ? (viewportSize - contentSize) / 2
@@ -87,6 +87,23 @@ function constrainView(candidate, viewportWidth, viewportHeight) {
     ...candidate,
     x: constrainAxis(candidate.x, mapWidth, viewportWidth),
     y: constrainAxis(candidate.y, mapHeight, viewportHeight),
+  }
+}
+
+function getViewportFrame(viewportWidth, viewportHeight, hasInspector = false) {
+  const compact = viewportWidth <= 760
+  const horizontalInset = clamp(viewportWidth * .035, compact ? 18 : 34, compact ? 30 : 64)
+  const topInset = compact ? (hasInspector ? 126 : 112) : (hasInspector ? 126 : 88)
+  const bottomInset = compact ? 62 : 70
+  const width = Math.max(180, viewportWidth - (horizontalInset * 2))
+  const height = Math.max(160, viewportHeight - topInset - bottomInset)
+  return {
+    left: horizontalInset,
+    top: topInset,
+    width,
+    height,
+    centerX: horizontalInset + (width / 2),
+    centerY: topInset + (height / 2),
   }
 }
 
@@ -328,6 +345,7 @@ const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFami
         const isFocused = focusedIds?.has(service.id)
         const isCompact = focusedIds ? !isFocused : scaleBand === 'overview'
         const isDimmed = Boolean(focusedIds && !isFocused)
+        const density = service.height < 220 ? 'tight' : service.height < 300 ? 'medium' : 'roomy'
         if (isCompact) return <button
           className={`ecosystem-service-dot ${isDimmed ? 'is-muted' : ''}`}
           style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
@@ -342,6 +360,7 @@ const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFami
         return <button
           className={`ecosystem-service-node ${service.id === 1 ? 'is-omni' : ''} ${isSelected ? 'is-selected' : ''} ${isRelated ? 'is-related' : ''} ${isDimmed ? 'is-dimmed' : ''}`}
           style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
+          data-density={density}
           type="button"
           key={service.id}
           onClick={() => onService(service.id)}
@@ -351,8 +370,8 @@ const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFami
           <span><b>{service.id.toLocaleString('fa-IR', { minimumIntegerDigits: 2 })}</b><small>PHASE {service.phase}</small></span>
           <h3>{service.name}</h3>
           <i>{service.en}</i>
-          <p>{service.summary}</p>
-          <footer><Bot /><small>{service.capability}</small><Building2 /><small>{service.human}</small></footer>
+          {density !== 'tight' && <p>{service.summary}</p>}
+          {density === 'roomy' && <footer><Bot /><small>{service.capability}</small><Building2 /><small>{service.human}</small></footer>}
         </button>
       })}
     </>
@@ -387,29 +406,32 @@ export default function ServiceEcosystemMapPage() {
     return null
   }, [activeFamily, relatedIds, selectedId])
 
-  const fitMap = useCallback(() => {
+  const fitMap = useCallback((hasInspector = false) => {
     const bounds = viewportRef.current?.getBoundingClientRect()
     const width = bounds?.width || 1280
     const height = bounds?.height || 820
-    const scale = clamp(Math.min((width - 54) / ecosystemMapSize.width, (height - 54) / ecosystemMapSize.height), MIN_SCALE, .42)
-    setView({ scale, x: (width - (ecosystemMapSize.width * scale)) / 2, y: (height - (ecosystemMapSize.height * scale)) / 2 })
+    const frame = getViewportFrame(width, height, hasInspector)
+    const scale = clamp(Math.min(frame.width / ecosystemMapSize.width, frame.height / ecosystemMapSize.height), MIN_SCALE, .42)
+    setView({ scale, x: frame.centerX - ((ecosystemMapSize.width * scale) / 2), y: frame.centerY - ((ecosystemMapSize.height * scale) / 2) })
   }, [])
 
   const showOverview = useCallback(() => {
     setSelection(null)
     setActiveFamily('all')
-    fitMap()
+    fitMap(false)
   }, [fitMap])
 
-  const focusRect = useCallback((rect, requestedScale) => {
+  const focusRect = useCallback((rect, requestedScale, hasInspector = false) => {
     const bounds = viewportRef.current?.getBoundingClientRect()
     const width = bounds?.width || 1280
     const height = bounds?.height || 820
-    const scale = clamp(requestedScale ?? Math.min((width - 140) / rect.width, (height - 170) / rect.height, .82), MIN_SCALE, MAX_SCALE)
+    const frame = getViewportFrame(width, height, hasInspector)
+    const fitScale = Math.min(frame.width / rect.width, frame.height / rect.height, .86)
+    const scale = clamp(Math.min(requestedScale ?? fitScale, fitScale), MIN_SCALE, MAX_SCALE)
     setView(constrainView({
       scale,
-      x: (width / 2) - ((rect.x + (rect.width / 2)) * scale),
-      y: (height / 2) - ((rect.y + (rect.height / 2)) * scale),
+      x: frame.centerX - ((rect.x + (rect.width / 2)) * scale),
+      y: frame.centerY - ((rect.y + (rect.height / 2)) * scale),
     }, width, height))
   }, [])
 
@@ -440,15 +462,15 @@ export default function ServiceEcosystemMapPage() {
 
   const refocusCurrent = useCallback(() => {
     if (selection?.type === 'service') {
-      focusRect(selection.data, selection.data.id === 1 ? .52 : .64)
+      focusRect(selection.data, selection.data.id === 1 ? .52 : .64, true)
       return
     }
     const family = selection?.type === 'family' ? selection.data : ecosystemFamilyById.get(activeFamily)
     if (family) {
-      focusRect(family)
+      focusRect(family, undefined, Boolean(selection))
       return
     }
-    fitMap()
+    fitMap(false)
   }, [activeFamily, fitMap, focusRect, selection])
 
   const getInspectorWidthBounds = useCallback(() => {
@@ -539,19 +561,20 @@ export default function ServiceEcosystemMapPage() {
     }
   }, [commitInspectorWidth, isResizingInspector])
 
-  const setZoomLevel = (requestedScale) => {
+  const setZoomLevel = useCallback((requestedScale) => {
     const bounds = viewportRef.current?.getBoundingClientRect()
     const width = bounds?.width || 1280
     const height = bounds?.height || 820
-    const centerX = width / 2
-    const centerY = height / 2
+    const frame = getViewportFrame(width, height, Boolean(selection))
+    const centerX = frame.centerX
+    const centerY = frame.centerY
     setView((current) => {
       const scale = clamp(requestedScale, MIN_SCALE, MAX_SCALE)
       const mapX = (centerX - current.x) / current.scale
       const mapY = (centerY - current.y) / current.scale
       return constrainView({ scale, x: centerX - (mapX * scale), y: centerY - (mapY * scale) }, width, height)
     })
-  }
+  }, [selection])
 
   const zoomBy = (factor) => setZoomLevel(view.scale * factor)
 
@@ -636,7 +659,7 @@ export default function ServiceEcosystemMapPage() {
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [closeInspector, isFallbackFullscreen, showOverview, toggleFullscreen, view.scale])
+  }, [closeInspector, isFallbackFullscreen, setZoomLevel, showOverview, toggleFullscreen, view.scale])
 
   const handleWheel = (event) => {
     event.preventDefault()
@@ -696,6 +719,11 @@ export default function ServiceEcosystemMapPage() {
     event.currentTarget.releasePointerCapture?.(event.pointerId)
   }
 
+  const handleMapDoubleClick = (event) => {
+    if (event.target.closest?.('button, input, a, aside')) return
+    refocusCurrent()
+  }
+
   const searchResults = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase('fa')
     if (!normalized) return []
@@ -751,6 +779,7 @@ export default function ServiceEcosystemMapPage() {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
+            onDoubleClick={handleMapDoubleClick}
           >
           <div className="execution-map-toolbar">
             <div className="execution-map-search">
@@ -771,7 +800,7 @@ export default function ServiceEcosystemMapPage() {
               <input type="range" min={MIN_SCALE * 100} max={MAX_SCALE * 100} step="1" value={view.scale * 100} onChange={(event) => setZoomLevel(Number(event.target.value) / 100)} aria-label="تنظیم درصد بزرگنمایی" />
               <output>{Math.round(view.scale * 100).toLocaleString('fa-IR')}٪</output>
               <button type="button" onClick={() => zoomBy(1 / 1.2)} aria-label="کوچک‌نمایی"><ZoomOut size={19} /></button>
-              <button type="button" onClick={showOverview} aria-label="جا دادن کل نقشه در قاب" title="بازگشت به کل نقشه"><Scan size={18} /></button>
+              <button type="button" onClick={refocusCurrent} aria-label="تمرکز مجدد روی نمای فعلی" title="تمرکز مجدد روی انتخاب"><Scan size={18} /></button>
               <button className={isFullscreen ? 'is-active' : ''} type="button" onClick={toggleFullscreen} aria-label={isFullscreen ? 'خروج از تمام‌صفحه' : 'نمایش تمام‌صفحه'} aria-pressed={isFullscreen}>{isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}</button>
               <button className={showHelp ? 'is-active' : ''} type="button" onClick={() => setShowHelp((current) => !current)} aria-label="راهنمای استفاده از نقشه" aria-pressed={showHelp}><Keyboard size={18} /></button>
             </div>
@@ -781,7 +810,7 @@ export default function ServiceEcosystemMapPage() {
             <button type="button" onClick={() => setShowHelp(false)} aria-label="بستن راهنما"><X size={18} /></button>
             <span>SERVICE MAP CONTROLS</span><h2>چطور نقشه را بخوانیم؟</h2>
             <div><b>نمای دور</b><p>شش خوشه و ریل‌های اتصال به هسته مشترک دیده می‌شوند.</p></div>
-            <div><b>نمای نزدیک</b><p>روی هر ربات بزنید تا همه اتصال‌های مستقیم آن برجسته شوند.</p></div>
+            <div><b>نمای نزدیک</b><p>روی هر ربات بزنید تا اتصال‌های مستقیم آن برجسته شوند؛ دوبار کلیک روی فضای خالی، نمای فعلی را دوباره در قاب می‌چیند.</p></div>
             <div><b>رنگ خط</b><p>بنفش زیرساخت، سبز اتصال جریان کار و نارنجی رابطه هم‌خانواده است.</p></div>
             <div><b>میان‌بر</b><p><kbd>+</kbd> <kbd>−</kbd> زوم · <kbd>0</kbd> کل نقشه · <kbd>F</kbd> تمام‌صفحه · <kbd>Esc</kbd> خروج</p></div>
           </aside>}

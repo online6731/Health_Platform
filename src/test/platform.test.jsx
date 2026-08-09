@@ -199,6 +199,15 @@ describe('ServiceOS product proposal', () => {
     expect(crossServiceRelations.length).toBeGreaterThan(120)
     expect(getServiceConnections(5).some((connection) => connection.service.id === 69 && connection.type === 'cross')).toBe(true)
     expect(getServiceConnections(5).filter((connection) => connection.type === 'platform')).toHaveLength(6)
+    ecosystemServiceNodes.forEach((node) => {
+      const family = ecosystemFamilies.find((item) => item.id === node.familyId)
+      expect(family).toBeDefined()
+      expect(node.x).toBeGreaterThanOrEqual(family.x)
+      expect(node.y).toBeGreaterThanOrEqual(family.y)
+      expect(node.x + node.width).toBeLessThanOrEqual(family.x + family.width)
+      expect(node.y + node.height).toBeLessThanOrEqual(family.y + family.height)
+    })
+    expect(ecosystemServiceNodes.filter((node) => node.height < 220)).toHaveLength(23)
 
     renderRoute('/service-map')
     expect(await screen.findByRole('heading', { level: 1, name: 'همه سرویس‌ها؛ یک شبکه متصل' }, { timeout: 5000 })).not.toBeNull()
@@ -212,6 +221,16 @@ describe('ServiceOS product proposal', () => {
     fireEvent.click(screen.getByRole('button', { name: 'کل شبکه' }))
     expect(connectionsCanvas.getAttribute('data-connection-mode')).toBe('network')
     fireEvent.click(screen.getByRole('button', { name: 'مسیرهای مهم' }))
+    expect(screen.getByRole('button', { name: 'تمرکز مجدد روی نمای فعلی' })).not.toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'تمرکز روی خانواده زندگی و خدمات محلی' }))
+    const tightNodes = document.querySelectorAll(".ecosystem-service-node[data-density='tight']")
+    expect(tightNodes).toHaveLength(23)
+    tightNodes.forEach((node) => {
+      expect(node.querySelector('p')).toBeNull()
+      expect(node.querySelector('footer')).toBeNull()
+    })
+    fireEvent.click(screen.getByRole('button', { name: 'بازگشت به کل نقشه' }))
 
     fireEvent.click(screen.getByRole('button', { name: 'انتخاب سرویس تغذیه و رژیم' }))
     expect(screen.getByRole('heading', { level: 2, name: 'تغذیه و رژیم' })).not.toBeNull()
