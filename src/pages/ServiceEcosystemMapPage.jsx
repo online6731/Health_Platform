@@ -214,11 +214,13 @@ function ServiceInspector({ selection, onClose, onService }) {
     const familyServices = family.serviceIds.map((id) => ecosystemNodeById.get(id)).filter(Boolean)
     const phaseCounts = [1, 2, 3, 4].map((phase) => ({ phase, count: familyServices.filter((service) => service.phase === phase).length }))
     return (
-      <aside className="ecosystem-inspector" aria-label="جزئیات خانواده سرویس">
-        <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
-        <span>{family.short}</span>
-        <h2>{family.title}</h2>
-        <p>{family.description}</p>
+      <aside className="ecosystem-inspector" aria-label="جزئیات خانواده سرویس" data-testid="service-control-panel" tabIndex="0">
+        <header className="ecosystem-inspector__header">
+          <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
+          <div><span>{family.short}</span><h2>{family.title}</h2><small>کنترل خانواده محصول</small></div>
+        </header>
+        <nav className="ecosystem-inspector__rail" aria-label="بخش‌های پنل خانواده"><span className="is-active">نمای کلی</span><span>سرویس‌ها</span><span>فازها</span></nav>
+        <section className="ecosystem-inspector__section"><h3>تعریف خانواده</h3><p>{family.description}</p></section>
         <div className="ecosystem-inspector__stats">
           <div><b>{family.serviceCount.toLocaleString('fa-IR')}</b><small>سرویس</small></div>
           {phaseCounts.map((item) => <div key={item.phase}><b>{item.count.toLocaleString('fa-IR')}</b><small>فاز {item.phase.toLocaleString('fa-IR')}</small></div>)}
@@ -227,6 +229,7 @@ function ServiceInspector({ selection, onClose, onService }) {
         <div className="ecosystem-inspector__relations">
           {familyServices.map((service) => <button type="button" key={service.id} onClick={() => onService(service.id)}><b>{service.id.toLocaleString('fa-IR')}</b><span>{service.name}</span><ChevronLeft size={15} /></button>)}
         </div>
+        <section className="ecosystem-inspector__extension"><Layers3 size={20} /><div><b>فضای توسعه خانواده</b><p>اولویت‌بندی، مالک محصول، KPI مشترک و وضعیت انتشار سرویس‌های این خوشه می‌تواند در همین پنل افزوده شود.</p></div></section>
       </aside>
     )
   }
@@ -234,6 +237,7 @@ function ServiceInspector({ selection, onClose, onService }) {
   const service = selection.data
   const family = getFamilyForService(service.id)
   const connections = getServiceConnections(service.id)
+  const connectionCounts = Object.fromEntries(['cross', 'family', 'platform'].map((type) => [type, connections.filter((item) => item.type === type).length]))
   const groups = [
     { type: 'cross', title: 'اتصال بین‌سرویسی', description: 'این سرویس‌ها یک جریان کار واقعی را با هم کامل می‌کنند.' },
     { type: 'family', title: 'سرویس‌های هم‌خانواده', description: 'نزدیک‌ترین قابلیت‌های مکمل در همین خوشه.' },
@@ -241,12 +245,21 @@ function ServiceInspector({ selection, onClose, onService }) {
   ]
 
   return (
-    <aside className="ecosystem-inspector" aria-label="جزئیات سرویس انتخاب‌شده">
-      <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
-      <span>سرویس {service.id.toLocaleString('fa-IR')} · {family?.title} · فاز {service.phase.toLocaleString('fa-IR')}</span>
-      <h2>{service.name}</h2>
-      <small className="ecosystem-inspector__en">{service.en}</small>
-      <p>{service.summary}</p>
+    <aside className="ecosystem-inspector" aria-label="جزئیات سرویس انتخاب‌شده" data-testid="service-control-panel" tabIndex="0">
+      <header className="ecosystem-inspector__header">
+        <button className="ecosystem-inspector__close" type="button" onClick={onClose} aria-label="بستن جزئیات"><X size={19} /></button>
+        <div><span>سرویس {service.id.toLocaleString('fa-IR')} · {family?.title} · فاز {service.phase.toLocaleString('fa-IR')}</span><h2>{service.name}</h2><small className="ecosystem-inspector__en">{service.en}</small></div>
+      </header>
+      <nav className="ecosystem-inspector__rail" aria-label="بخش‌های پنل سرویس"><span className="is-active">نمای کلی</span><span>اتصال‌ها</span><span>اجرا</span><span>مستندات</span></nav>
+
+      <section className="ecosystem-inspector__section"><h3>تعریف محصول</h3><p>{service.summary}</p><p>نسخه اولیه این سرویس به‌صورت ربات مستقل تلگرام عرضه می‌شود، اما هویت، حافظه، پرداخت، ایمنی و ارجاع را از هسته مشترک ServiceOS دریافت می‌کند.</p></section>
+
+      <div className="ecosystem-inspector__control-grid" aria-label="خلاصه کنترل سرویس">
+        <div><small>موج اجرا</small><b>فاز {service.phase.toLocaleString('fa-IR')}</b></div>
+        <div><small>کانال اولیه</small><b>Telegram Bot</b></div>
+        <div><small>اتصال مستقیم</small><b>{connections.length.toLocaleString('fa-IR')}</b></div>
+        <div><small>مدل تحویل</small><b>AI + Human</b></div>
+      </div>
 
       <div className="ecosystem-inspector__flow">
         <div><Bot size={19} /><span><small>سطح ۱ · اقدام AI</small><b>{service.capability}</b></span></div>
@@ -260,7 +273,7 @@ function ServiceInspector({ selection, onClose, onService }) {
         const items = connections.filter((connection) => connection.type === group.type)
         if (!items.length) return null
         return <div className={`ecosystem-inspector__group is-${group.type}`} key={group.type}>
-          <h3>{group.title}</h3><p>{group.description}</p>
+          <h3>{group.title}<small>{connectionCounts[group.type].toLocaleString('fa-IR')}</small></h3><p>{group.description}</p>
           <div className="ecosystem-inspector__relations">
             {items.map((item) => <button type="button" key={item.service.id} onClick={() => onService(item.service.id)}><b>{item.service.id.toLocaleString('fa-IR')}</b><span><strong>{item.service.name}</strong><small>{item.label}</small></span><ChevronLeft size={15} /></button>)}
           </div>
@@ -271,6 +284,7 @@ function ServiceInspector({ selection, onClose, onService }) {
         <Link to={`/services/${service.id}`}>شناسنامه محصول <ChevronLeft size={16} /></Link>
         <Link to={`/docs/services/${service.id}/product`}>کاتالوگ اجرایی <ChevronLeft size={16} /></Link>
       </div>
+      <section className="ecosystem-inspector__extension"><Layers3 size={20} /><div><b>فضای کنترل کامل سرویس</b><p>این ساختار برای اضافه‌شدن وضعیت توسعه، مالک، نسخه پرامپت، قرارداد API، KPI، رخدادها، هزینه مدل و تاریخچه انتشار آماده شده است.</p></div></section>
     </aside>
   )
 }
@@ -330,6 +344,7 @@ const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFami
 })
 
 export default function ServiceEcosystemMapPage() {
+  const shellRef = useRef(null)
   const viewportRef = useRef(null)
   const dragRef = useRef(null)
   const wheelFrameRef = useRef(null)
@@ -385,16 +400,37 @@ export default function ServiceEcosystemMapPage() {
     setSelection({ type: 'service', data: node })
     setActiveFamily('all')
     setQuery('')
-    focusRect(node, node.id === 1 ? .52 : .64)
-  }, [focusRect])
+  }, [])
 
   const selectFamily = useCallback((familyId) => {
     const family = ecosystemFamilies.find((item) => item.id === familyId)
     if (!family) return
     setActiveFamily(familyId)
     setSelection({ type: 'family', data: family })
-    focusRect(family)
-  }, [focusRect])
+  }, [])
+
+  const closeInspector = useCallback(() => {
+    if (selection?.type === 'service') {
+      const family = ecosystemFamilyById.get(selection.data.familyId)
+      setSelection(null)
+      if (family) setActiveFamily(family.id)
+      return
+    }
+    setSelection(null)
+  }, [selection])
+
+  const refocusCurrent = useCallback(() => {
+    if (selection?.type === 'service') {
+      focusRect(selection.data, selection.data.id === 1 ? .52 : .64)
+      return
+    }
+    const family = selection?.type === 'family' ? selection.data : ecosystemFamilyById.get(activeFamily)
+    if (family) {
+      focusRect(family)
+      return
+    }
+    fitMap()
+  }, [activeFamily, fitMap, focusRect, selection])
 
   const setZoomLevel = (requestedScale) => {
     const bounds = viewportRef.current?.getBoundingClientRect()
@@ -413,8 +449,8 @@ export default function ServiceEcosystemMapPage() {
   const zoomBy = (factor) => setZoomLevel(view.scale * factor)
 
   const toggleFullscreen = useCallback(async () => {
-    const viewport = viewportRef.current
-    if (!viewport) return
+    const shell = shellRef.current
+    if (!shell) return
     if (isNativeFullscreen) {
       try { await document.exitFullscreen?.() } catch { setIsNativeFullscreen(false) }
       return
@@ -423,10 +459,10 @@ export default function ServiceEcosystemMapPage() {
       setIsFallbackFullscreen(false)
       return
     }
-    if (viewport.requestFullscreen) {
+    if (shell.requestFullscreen) {
       try {
-        await viewport.requestFullscreen({ navigationUI: 'hide' })
-        if (document.fullscreenElement === viewport) setIsNativeFullscreen(true)
+        await shell.requestFullscreen({ navigationUI: 'hide' })
+        if (document.fullscreenElement === shell) setIsNativeFullscreen(true)
         else setIsFallbackFullscreen(true)
         return
       } catch {
@@ -437,13 +473,14 @@ export default function ServiceEcosystemMapPage() {
   }, [isFallbackFullscreen, isNativeFullscreen])
 
   useEffect(() => {
-    const frame = requestAnimationFrame(fitMap)
-    window.addEventListener('resize', fitMap)
+    const frame = requestAnimationFrame(refocusCurrent)
+    const handleResize = () => refocusCurrent()
+    window.addEventListener('resize', handleResize)
     return () => {
       cancelAnimationFrame(frame)
-      window.removeEventListener('resize', fitMap)
+      window.removeEventListener('resize', handleResize)
     }
-  }, [fitMap])
+  }, [refocusCurrent])
 
   useEffect(() => () => {
     if (wheelFrameRef.current) cancelAnimationFrame(wheelFrameRef.current)
@@ -452,7 +489,7 @@ export default function ServiceEcosystemMapPage() {
 
   useEffect(() => {
     const handleFullscreenChange = () => {
-      const active = document.fullscreenElement === viewportRef.current
+      const active = document.fullscreenElement === shellRef.current
       setIsNativeFullscreen(active)
       if (active) setIsFallbackFullscreen(false)
     }
@@ -464,12 +501,12 @@ export default function ServiceEcosystemMapPage() {
     if (!isFullscreen) return undefined
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    const frame = requestAnimationFrame(fitMap)
+    const frame = requestAnimationFrame(refocusCurrent)
     return () => {
       cancelAnimationFrame(frame)
       document.body.style.overflow = previousOverflow
     }
-  }, [fitMap, isFullscreen])
+  }, [isFullscreen, refocusCurrent])
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -482,12 +519,12 @@ export default function ServiceEcosystemMapPage() {
       if (event.key === 'Escape') {
         setShowHelp(false)
         if (isFallbackFullscreen) setIsFallbackFullscreen(false)
-        else setSelection(null)
+        else closeInspector()
       }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [isFallbackFullscreen, showOverview, toggleFullscreen, view.scale])
+  }, [closeInspector, isFallbackFullscreen, showOverview, toggleFullscreen, view.scale])
 
   const handleWheel = (event) => {
     event.preventDefault()
@@ -586,17 +623,18 @@ export default function ServiceEcosystemMapPage() {
           })}
         </div>
 
-        <div
-          ref={viewportRef}
-          className={`execution-map-viewport ecosystem-map-viewport ${dragging ? 'is-dragging' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`}
-          data-testid="service-ecosystem-viewport"
-          data-scale-band={scaleBand}
-          onWheel={handleWheel}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
+        <div ref={shellRef} className={`ecosystem-control-shell ${selection ? 'has-inspector' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`} data-testid="service-control-shell">
+          <div
+            ref={viewportRef}
+            className={`execution-map-viewport ecosystem-map-viewport ${dragging ? 'is-dragging' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`}
+            data-testid="service-ecosystem-viewport"
+            data-scale-band={scaleBand}
+            onWheel={handleWheel}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
           <div className="execution-map-toolbar">
             <div className="execution-map-search">
               <Search size={18} />
@@ -640,7 +678,8 @@ export default function ServiceEcosystemMapPage() {
           <div className="execution-map-depth" aria-label="سطح جزئیات فعلی"><span className={scaleBand === 'overview' ? 'is-active' : ''}>خانواده‌ها</span><span className={scaleBand === 'structure' ? 'is-active' : ''}>سرویس‌ها</span><span className={scaleBand === 'detail' ? 'is-active' : ''}>اتصالات</span></div>
           {(selection || activeFamily !== 'all') && <button className="ecosystem-map-reset" type="button" onClick={showOverview}><Scan size={16} /> بازگشت به کل نقشه</button>}
           <div className="execution-map-hint" aria-live="polite"><Network size={16} /><span>{selectedId ? `${relatedIds.size.toLocaleString('fa-IR')} اتصال مستقیم برجسته شده` : scaleBand === 'overview' ? 'یک خانواده را برای ورود انتخاب کنید' : 'یک سرویس را برای دیدن اتصال‌ها باز کنید'}</span></div>
-          <ServiceInspector selection={selection} onClose={() => setSelection(null)} onService={selectService} />
+          </div>
+          <ServiceInspector selection={selection} onClose={closeInspector} onService={selectService} />
         </div>
       </section>
 
