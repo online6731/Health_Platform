@@ -6,11 +6,14 @@ import {
   ChevronLeft,
   CircleDollarSign,
   Crosshair,
+  Keyboard,
   Layers3,
   Map,
   Maximize2,
+  Minimize2,
   Network,
   Rocket,
+  Scan,
   Search,
   ShieldCheck,
   UserCheck,
@@ -35,6 +38,23 @@ function getScaleBand(scale) {
   if (scale < 0.42) return 'overview'
   if (scale < 0.78) return 'structure'
   return 'detail'
+}
+
+function constrainView(candidate, viewportWidth, viewportHeight) {
+  const mapWidth = executionMapSize.width * candidate.scale
+  const mapHeight = executionMapSize.height * candidate.scale
+  const visibleEdge = Math.min(150, Math.max(72, Math.min(viewportWidth, viewportHeight) * .14))
+  const constrainAxis = (offset, contentSize, viewportSize) => (
+    contentSize <= viewportSize
+      ? (viewportSize - contentSize) / 2
+      : clamp(offset, visibleEdge - contentSize, viewportSize - visibleEdge)
+  )
+
+  return {
+    ...candidate,
+    x: constrainAxis(candidate.x, mapWidth, viewportWidth),
+    y: constrainAxis(candidate.y, mapHeight, viewportHeight),
+  }
 }
 
 function MapConnections() {
@@ -167,7 +187,16 @@ export default function ExecutionMapPage() {
   const [dragging, setDragging] = useState(false)
   const [selection, setSelection] = useState(null)
   const [query, setQuery] = useState('')
+  const [showHelp, setShowHelp] = useState(false)
+  const [isNativeFullscreen, setIsNativeFullscreen] = useState(false)
+  const [isFallbackFullscreen, setIsFallbackFullscreen] = useState(false)
   const scaleBand = getScaleBand(view.scale)
+  const isFullscreen = isNativeFullscreen || isFallbackFullscreen
+  const activeStageId = selection?.type === 'stage'
+    ? selection.data.id
+    : selection?.type === 'increment'
+      ? findStageByIncrement(selection.data.id)?.id
+      : null
 
   const fitMap = useCallback(() => {
     const rect = viewportRef.current?.getBoundingClientRect()
@@ -175,8 +204,45 @@ export default function ExecutionMapPage() {
     const height = rect?.height || 820
     const scale = clamp(Math.min((width - 54) / executionMapSize.width, (height - 54) / executionMapSize.height), MIN_SCALE, .42)
     setView({ scale, x: (width - (executionMapSize.width * scale)) / 2, y: (height - (executionMapSize.height * scale)) / 2 })
-    setSelection(null)
   }, [])
+
+  const showOverview = useCallback(() => {
+    setSelection(null)
+    fitMap()
+  }, [fitMap])
+
+  const toggleFullscreen = useCallback(async () => {
+    const viewport = viewportRef.current
+    if (!viewport) return
+
+    if (isNativeFullscreen) {
+      try {
+        await document.exitFullscreen?.()
+      } catch {
+        setIsNativeFullscreen(false)
+      }
+      return
+    }
+
+    if (isFallbackFullscreen) {
+      setIsFallbackFullscreen(false)
+      return
+    }
+
+    if (viewport.requestFullscreen) {
+      try {
+        await viewport.requestFullscreen({ navigationUI: 'hide' })
+        if (document.fullscreenElement === viewport) setIsNativeFullscreen(true)
+        else setIsFallbackFullscreen(true)
+        return
+      } catch {
+        // Some embedded browsers expose the API but reject it. The CSS fallback
+        // below keeps the map usable in exactly those contexts.
+      }
+    }
+
+    setIsFallbackFullscreen(true)
+  }, [isFallbackFullscreen, isNativeFullscreen])
 
   useEffect(() => {
     const frame = requestAnimationFrame(fitMap)
@@ -188,27 +254,66 @@ export default function ExecutionMapPage() {
   }, [fitMap])
 
   useEffect(() => {
+    const handleFullscreenChange = () => {
+      const active = document.fullscreenElement === viewportRef.current
+      setIsNativeFullscreen(active)
+      if (active) setIsFallbackFullscreen(false)
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  }, [])
+
+  useEffect(() => {
+    if (!isFullscreen) return undefined
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const frame = requestAnimationFrame(fitMap)
+    return () => {
+      cancelAnimationFrame(frame)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [fitMap, isFullscreen])
+
+  useEffect(() => {
     const onKeyDown = (event) => {
-      if (event.target instanceof HTMLInputElement) return
-      if (event.key === '+' || event.key === '=') setView((current) => ({ ...current, scale: clamp(current.scale * 1.18, MIN_SCALE, MAX_SCALE) }))
-      if (event.key === '-') setView((current) => ({ ...current, scale: clamp(current.scale / 1.18, MIN_SCALE, MAX_SCALE) }))
-      if (event.key === '0') fitMap()
-      if (event.key === 'Escape') setSelection(null)
+      if (event.target instanceof HTMLInputElement || event.target?.isContentEditable) return
+      const zoomFromKeyboard = (factor) => {
+        const bounds = viewportRef.current?.getBoundingClientRect()
+        const width = bounds?.width || 1280
+        const height = bounds?.height || 820
+        setView((current) => {
+          const scale = clamp(current.scale * factor, MIN_SCALE, MAX_SCALE)
+          const mapX = ((width / 2) - current.x) / current.scale
+          const mapY = ((height / 2) - current.y) / current.scale
+          return constrainView({ scale, x: (width / 2) - (mapX * scale), y: (height / 2) - (mapY * scale) }, width, height)
+        })
+      }
+      if (event.key === '+' || event.key === '=') zoomFromKeyboard(1.18)
+      if (event.key === '-') zoomFromKeyboard(1 / 1.18)
+      if (event.key === '0') showOverview()
+      if (event.key.toLocaleLowerCase() === 'f') toggleFullscreen()
+      if (event.key === '?' || event.key.toLocaleLowerCase() === 'h') setShowHelp((current) => !current)
+      if (event.key === 'Escape') {
+        setShowHelp(false)
+        if (isFallbackFullscreen) setIsFallbackFullscreen(false)
+        else setSelection(null)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [fitMap])
+  }, [isFallbackFullscreen, showOverview, toggleFullscreen])
 
   const focusRect = useCallback((rect, targetScale = .72) => {
     const viewport = viewportRef.current?.getBoundingClientRect()
     const width = viewport?.width || 1280
     const height = viewport?.height || 820
     const scale = clamp(targetScale, MIN_SCALE, MAX_SCALE)
-    setView({
+    setView(constrainView({
       scale,
       x: (width / 2) - ((rect.x + (rect.width / 2)) * scale),
       y: (height / 2) - ((rect.y + (rect.height / 2)) * scale),
-    })
+    }, width, height))
   }, [])
 
   const selectStage = (stage) => {
@@ -232,17 +337,19 @@ export default function ExecutionMapPage() {
     focusRect({ ...environment, height: 500, y: 2300 }, .78)
   }
 
-  const zoomBy = (factor) => {
+  const setZoomLevel = (requestedScale) => {
     const viewport = viewportRef.current?.getBoundingClientRect()
     const centerX = (viewport?.width || 1280) / 2
     const centerY = (viewport?.height || 820) / 2
     setView((current) => {
-      const scale = clamp(current.scale * factor, MIN_SCALE, MAX_SCALE)
+      const scale = clamp(requestedScale, MIN_SCALE, MAX_SCALE)
       const mapX = (centerX - current.x) / current.scale
       const mapY = (centerY - current.y) / current.scale
-      return { scale, x: centerX - (mapX * scale), y: centerY - (mapY * scale) }
+      return constrainView({ scale, x: centerX - (mapX * scale), y: centerY - (mapY * scale) }, viewport?.width || 1280, viewport?.height || 820)
     })
   }
+
+  const zoomBy = (factor) => setZoomLevel(view.scale * factor)
 
   const handleWheel = (event) => {
     event.preventDefault()
@@ -253,7 +360,7 @@ export default function ExecutionMapPage() {
       const scale = clamp(current.scale * (event.deltaY > 0 ? .9 : 1.1), MIN_SCALE, MAX_SCALE)
       const mapX = (pointerX - current.x) / current.scale
       const mapY = (pointerY - current.y) / current.scale
-      return { scale, x: pointerX - (mapX * scale), y: pointerY - (mapY * scale) }
+      return constrainView({ scale, x: pointerX - (mapX * scale), y: pointerY - (mapY * scale) }, bounds.width, bounds.height)
     })
   }
 
@@ -266,7 +373,8 @@ export default function ExecutionMapPage() {
 
   const handlePointerMove = (event) => {
     if (!dragRef.current || dragRef.current.pointerId !== event.pointerId) return
-    setView((current) => ({ ...current, x: dragRef.current.viewX + event.clientX - dragRef.current.x, y: dragRef.current.viewY + event.clientY - dragRef.current.y }))
+    const bounds = viewportRef.current.getBoundingClientRect()
+    setView((current) => constrainView({ ...current, x: dragRef.current.viewX + event.clientX - dragRef.current.x, y: dragRef.current.viewY + event.clientY - dragRef.current.y }, bounds.width, bounds.height))
   }
 
   const handlePointerUp = (event) => {
@@ -292,6 +400,14 @@ export default function ExecutionMapPage() {
     else selectEnvironment(environmentNodes.find((environment) => environment.id === item.id))
   }
 
+  const handleSearchKeyDown = (event) => {
+    if (event.key === 'Enter' && searchResults[0]) openSearchResult(searchResults[0])
+    if (event.key === 'Escape') {
+      event.stopPropagation()
+      setQuery('')
+    }
+  }
+
   return (
     <div className="execution-map-page">
       <section className="execution-map-hero">
@@ -305,12 +421,13 @@ export default function ExecutionMapPage() {
 
       <section className="execution-map-workspace">
         <div className="container execution-map-stage-nav" aria-label="پرش سریع به مراحل">
-          {executionMapStages.map((stage) => <button type="button" key={stage.id} onClick={() => selectStage(stage)} aria-label={`تمرکز روی ${stage.title}`}><b>{stage.number}</b><span>{stage.title}</span></button>)}
+          {executionMapStages.map((stage) => <button className={activeStageId === stage.id ? 'is-active' : ''} type="button" key={stage.id} onClick={() => selectStage(stage)} aria-label={`تمرکز روی ${stage.title}`} aria-current={activeStageId === stage.id ? 'step' : undefined}><b>{stage.number}</b><span>{stage.title}</span></button>)}
         </div>
 
         <div
           ref={viewportRef}
-          className={`execution-map-viewport ${dragging ? 'is-dragging' : ''}`}
+          className={`execution-map-viewport ${dragging ? 'is-dragging' : ''} ${isFallbackFullscreen ? 'is-fallback-fullscreen' : ''} ${isFullscreen ? 'is-fullscreen' : ''}`}
+          data-testid="execution-map-viewport"
           data-scale-band={scaleBand}
           onWheel={handleWheel}
           onPointerDown={handlePointerDown}
@@ -321,18 +438,35 @@ export default function ExecutionMapPage() {
           <div className="execution-map-toolbar">
             <div className="execution-map-search">
               <Search size={18} />
-              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="جستجوی D07، بتا، پرداخت، RAG..." aria-label="جستجو در نقشه اجرا" />
-              {searchResults.length > 0 && <div className="execution-map-search__results">{searchResults.map((item) => <button type="button" key={`${item.type}-${item.id}`} onClick={() => openSearchResult(item)}><b>{item.id}</b><span>{item.title}</span></button>)}</div>}
+              <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={handleSearchKeyDown} placeholder="جستجوی D07، بتا، پرداخت، RAG..." aria-label="جستجو در نقشه اجرا" aria-expanded={Boolean(query)} aria-controls="execution-map-search-results" />
+              {query && <button className="execution-map-search__clear" type="button" onClick={() => setQuery('')} aria-label="پاک کردن جستجو"><X size={15} /></button>}
+              {query && <div id="execution-map-search-results" className="execution-map-search__results" role="list">
+                {searchResults.map((item) => <button type="button" key={`${item.type}-${item.id}`} onClick={() => openSearchResult(item)}><b>{item.id}</b><span>{item.title}</span></button>)}
+                {searchResults.length === 0 && <p className="execution-map-search__empty">نتیجه‌ای پیدا نشد؛ شناسه، مرحله یا کلیدواژه دیگری بنویسید.</p>}
+              </div>}
             </div>
             <div className="execution-map-zoom" role="group" aria-label="کنترل بزرگنمایی">
-              <button type="button" onClick={() => zoomBy(1.2)} aria-label="بزرگنمایی"><ZoomIn size={19} /></button>
-              <span>{Math.round(view.scale * 100).toLocaleString('fa-IR')}٪</span>
-              <button type="button" onClick={() => zoomBy(1 / 1.2)} aria-label="کوچک‌نمایی"><ZoomOut size={19} /></button>
-              <button type="button" onClick={fitMap} aria-label="نمایش کل نقشه"><Maximize2 size={18} /></button>
+              <button type="button" onClick={() => zoomBy(1.2)} aria-label="بزرگنمایی" title="بزرگنمایی (+)"><ZoomIn size={19} /></button>
+              <input type="range" min={MIN_SCALE * 100} max={MAX_SCALE * 100} step="1" value={view.scale * 100} onChange={(event) => setZoomLevel(Number(event.target.value) / 100)} aria-label="تنظیم درصد بزرگنمایی" />
+              <output>{Math.round(view.scale * 100).toLocaleString('fa-IR')}٪</output>
+              <button type="button" onClick={() => zoomBy(1 / 1.2)} aria-label="کوچک‌نمایی" title="کوچک‌نمایی (-)"><ZoomOut size={19} /></button>
+              <button type="button" onClick={showOverview} aria-label="جا دادن کل نقشه در قاب" title="نمای کلی (0)"><Scan size={18} /></button>
+              <button className={isFullscreen ? 'is-active' : ''} type="button" onClick={toggleFullscreen} aria-label={isFullscreen ? 'خروج از تمام‌صفحه' : 'نمایش تمام‌صفحه'} aria-pressed={isFullscreen} title={isFullscreen ? 'خروج از تمام‌صفحه (F)' : 'نمایش تمام‌صفحه (F)'}>{isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}</button>
+              <button className={showHelp ? 'is-active' : ''} type="button" onClick={() => setShowHelp((current) => !current)} aria-label="راهنمای استفاده از نقشه" aria-pressed={showHelp} title="راهنمای کنترل‌ها (H)"><Keyboard size={18} /></button>
             </div>
           </div>
 
-          <div className="execution-map-hint"><Crosshair size={16} /><span>{scaleBand === 'overview' ? 'روی یک مرحله کلیک کنید' : scaleBand === 'structure' ? 'یک واحد D را برای جزئیات باز کنید' : 'نمای جزئیات؛ نقشه را بکشید و حرکت دهید'}</span></div>
+          {showHelp && <aside className="execution-map-help" role="dialog" aria-label="راهنمای کنترل نقشه">
+            <button type="button" onClick={() => setShowHelp(false)} aria-label="بستن راهنما"><X size={18} /></button>
+            <span>MAP CONTROLS</span>
+            <h2>راهنمای کنترل نقشه</h2>
+            <div><b>حرکت</b><p>فضای خالی نقشه را با ماوس یا لمس بکشید.</p></div>
+            <div><b>زوم</b><p>چرخ ماوس، دکمه‌ها یا نوار درصد را استفاده کنید.</p></div>
+            <div><b>میان‌برها</b><p><kbd>+</kbd> <kbd>−</kbd> زوم · <kbd>0</kbd> نمای کلی · <kbd>F</kbd> تمام‌صفحه · <kbd>Esc</kbd> خروج یا بستن</p></div>
+            <div><b>جزئیات</b><p>مرحله، واحد D، موج سرویس یا محیط انتشار را انتخاب کنید.</p></div>
+          </aside>}
+
+          <div className="execution-map-hint" aria-live="polite"><Crosshair size={16} /><span>{scaleBand === 'overview' ? 'نمای کلی؛ روی یک مرحله کلیک کنید' : scaleBand === 'structure' ? 'نمای ساختار؛ یک واحد D را باز کنید' : 'نمای جزئیات؛ نقشه را بکشید و حرکت دهید'}</span></div>
 
           <div className="execution-map-canvas" style={{ width: executionMapSize.width, height: executionMapSize.height, transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})` }}>
             <MapConnections />

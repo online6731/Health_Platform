@@ -170,6 +170,16 @@ describe('ServiceOS product proposal', () => {
     fireEvent.change(search, { target: { value: 'Closed Beta' } })
     fireEvent.click(screen.getByRole('button', { name: /^beta Closed Beta$/i }))
     expect(screen.getByRole('heading', { level: 2, name: 'Closed Beta' })).not.toBeNull()
+
+    expect(screen.getByRole('button', { name: 'جا دادن کل نقشه در قاب' })).not.toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'نمایش تمام‌صفحه' }))
+    expect(await screen.findByRole('button', { name: 'خروج از تمام‌صفحه' })).not.toBeNull()
+    expect(screen.getByTestId('execution-map-viewport').classList.contains('is-fallback-fullscreen')).toBe(true)
+    fireEvent.click(screen.getByRole('button', { name: 'خروج از تمام‌صفحه' }))
+    expect(await screen.findByRole('button', { name: 'نمایش تمام‌صفحه' })).not.toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'راهنمای استفاده از نقشه' }))
+    expect(screen.getByRole('heading', { level: 2, name: 'راهنمای کنترل نقشه' })).not.toBeNull()
   })
 
   it('publishes a multi-hundred-page implementation catalog', () => {
