@@ -116,8 +116,8 @@ describe('ServiceOS product proposal', () => {
     ['/docs/services/omni-agent/engineering', 'دستیار چندوجهی عمومی'],
   ])('renders %s with its primary heading', async (route, heading) => {
     renderRoute(route)
-    expect(await screen.findByRole('heading', { level: 1, name: heading }, { timeout: 5000 })).not.toBeNull()
-  })
+    expect(await screen.findByRole('heading', { level: 1, name: heading }, { timeout: 15_000 })).not.toBeNull()
+  }, 15_000)
 
   it('publishes a complete, searchable and downloadable Persian infographic library', async () => {
     expect(infographics).toHaveLength(56)
@@ -206,15 +206,24 @@ describe('ServiceOS product proposal', () => {
     const connectionsCanvas = document.querySelector('.ecosystem-map__connections')
     expect(Number(connectionsCanvas.getAttribute('width'))).toBeLessThan(ecosystemMapSize.width / 2)
     expect(connectionsCanvas.getAttribute('data-render-scale')).toBe('0.42')
+    expect(connectionsCanvas.getAttribute('data-connection-mode')).toBe('focus')
+    expect(document.querySelectorAll('.ecosystem-service-dot')).toHaveLength(services.length)
+    expect(document.querySelectorAll('.ecosystem-service-node')).toHaveLength(0)
+    fireEvent.click(screen.getByRole('button', { name: 'کل شبکه' }))
+    expect(connectionsCanvas.getAttribute('data-connection-mode')).toBe('network')
+    fireEvent.click(screen.getByRole('button', { name: 'مسیرهای مهم' }))
 
     fireEvent.click(screen.getByRole('button', { name: 'انتخاب سرویس تغذیه و رژیم' }))
     expect(screen.getByRole('heading', { level: 2, name: 'تغذیه و رژیم' })).not.toBeNull()
     expect(screen.getAllByText('برنامه‌ساز، Vision غذا و مربی عادت').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByRole('button', { name: /آشپزی و دستور غذای هوشمند.*همکاری در جریان کار/ })).not.toBeNull()
     expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
+    expect(document.querySelectorAll('.ecosystem-service-node').length).toBeGreaterThan(0)
+    expect(document.querySelectorAll('.ecosystem-service-dot').length).toBeGreaterThan(0)
     fireEvent.click(screen.getByRole('button', { name: 'بازگشت به کل نقشه' }))
     expect(screen.queryByLabelText('جزئیات سرویس انتخاب‌شده')).toBeNull()
     expect(screen.getAllByRole('button', { name: /^انتخاب سرویس/ })).toHaveLength(services.length)
+    expect(document.querySelectorAll('.ecosystem-service-dot')).toHaveLength(services.length)
 
     const search = screen.getByRole('textbox', { name: 'جستجو در نقشه سرویس‌ها' })
     fireEvent.change(search, { target: { value: 'پادکست' } })

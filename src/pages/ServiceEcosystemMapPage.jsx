@@ -41,6 +41,7 @@ const MIN_SCALE = .09
 const MAX_SCALE = 1.45
 const CONNECTION_RENDER_SCALE = .42
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+const ecosystemFamilyById = new Map(ecosystemFamilies.map((family) => [family.id, family]))
 
 const familyIcons = {
   platform: Workflow,
@@ -77,7 +78,20 @@ function centerOf(rect) {
   return { x: rect.x + (rect.width / 2), y: rect.y + (rect.height / 2) }
 }
 
-function EcosystemConnections({ selectedId, activeFamily }) {
+function traceConnection(context, start, end) {
+  context.beginPath()
+  context.moveTo(start.x, start.y)
+  context.bezierCurveTo(
+    start.x + ((end.x - start.x) * .34),
+    start.y,
+    start.x + ((end.x - start.x) * .7),
+    end.y,
+    end.x,
+    end.y,
+  )
+}
+
+function EcosystemConnections({ selectedId, activeFamily, connectionMode }) {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -95,40 +109,42 @@ function EcosystemConnections({ selectedId, activeFamily }) {
 
     ecosystemFamilies.filter((family) => family.id !== 'platform').forEach((family) => {
       const familyCenter = centerOf(family)
-      context.beginPath()
-      context.moveTo(coreCenter.x, coreCenter.y)
-      context.bezierCurveTo(
-        coreCenter.x + ((familyCenter.x - coreCenter.x) * .46),
-        coreCenter.y,
-        coreCenter.x + ((familyCenter.x - coreCenter.x) * .7),
-        familyCenter.y,
-        familyCenter.x,
-        familyCenter.y,
-      )
+      traceConnection(context, coreCenter, familyCenter)
+      context.strokeStyle = '#ffffff'
+      context.globalAlpha = activeFamily === 'all' || activeFamily === family.id ? .9 : .3
+      context.lineWidth = activeFamily === family.id ? 25 : 18
+      context.stroke()
+      traceConnection(context, coreCenter, familyCenter)
       context.strokeStyle = family.color
-      context.globalAlpha = activeFamily === 'all' || activeFamily === family.id ? .34 : .08
-      context.lineWidth = activeFamily === family.id ? 22 : 13
+      context.globalAlpha = activeFamily === 'all' || activeFamily === family.id ? .52 : .12
+      context.lineWidth = activeFamily === family.id ? 11 : 7
       context.stroke()
     })
 
     context.globalAlpha = 1
-    crossServiceRelations.forEach(([leftId, rightId]) => {
-      const left = ecosystemNodeById.get(leftId)
-      const right = ecosystemNodeById.get(rightId)
-      if (!left || !right) return
-      const leftFamily = getFamilyForService(leftId)
-      const rightFamily = getFamilyForService(rightId)
-      if (activeFamily !== 'all' && leftFamily?.id !== activeFamily && rightFamily?.id !== activeFamily) return
-      const leftCenter = centerOf(left)
-      const rightCenter = centerOf(right)
-      context.beginPath()
-      context.moveTo(leftCenter.x, leftCenter.y)
-      context.lineTo(rightCenter.x, rightCenter.y)
-      context.strokeStyle = leftFamily?.color || '#8063ee'
-      context.globalAlpha = selectedId ? .025 : .065
-      context.lineWidth = 4
-      context.stroke()
-    })
+    const shouldDrawRelationNetwork = connectionMode === 'network' || (activeFamily !== 'all' && !selectedId)
+    if (shouldDrawRelationNetwork) {
+      crossServiceRelations.forEach(([leftId, rightId]) => {
+        const left = ecosystemNodeById.get(leftId)
+        const right = ecosystemNodeById.get(rightId)
+        if (!left || !right) return
+        const leftFamily = ecosystemFamilyById.get(left.familyId)
+        const rightFamily = ecosystemFamilyById.get(right.familyId)
+        const touchesActiveFamily = activeFamily === 'all' || leftFamily?.id === activeFamily || rightFamily?.id === activeFamily
+        if (!touchesActiveFamily) return
+        const leftCenter = centerOf(left)
+        const rightCenter = centerOf(right)
+        context.beginPath()
+        context.moveTo(leftCenter.x, leftCenter.y)
+        context.lineTo(rightCenter.x, rightCenter.y)
+        context.strokeStyle = activeFamily === 'all' ? '#7890a8' : '#19a98d'
+        context.globalAlpha = activeFamily === 'all' ? .12 : .22
+        context.lineWidth = activeFamily === 'all' ? 3 : 4
+        context.setLineDash(activeFamily === 'all' ? [10, 14] : [18, 11])
+        context.stroke()
+      })
+      context.setLineDash([])
+    }
 
     if (selectedId) {
       const selected = ecosystemNodeById.get(selectedId)
@@ -140,29 +156,43 @@ function EcosystemConnections({ selectedId, activeFamily }) {
           const targetCenter = centerOf(target)
           const color = connection.type === 'platform' ? '#8c70f2' : connection.type === 'cross' ? '#39d5b8' : '#f2ad52'
 
-          context.beginPath()
-          context.moveTo(selectedCenter.x, selectedCenter.y)
-          context.bezierCurveTo(
-            selectedCenter.x + ((targetCenter.x - selectedCenter.x) * .35),
-            selectedCenter.y,
-            selectedCenter.x + ((targetCenter.x - selectedCenter.x) * .68),
-            targetCenter.y,
-            targetCenter.x,
-            targetCenter.y,
-          )
+          traceConnection(context, selectedCenter, targetCenter)
+          context.setLineDash([])
+          context.strokeStyle = '#ffffff'
+          context.globalAlpha = .9
+          context.lineWidth = 18
+          context.stroke()
+          traceConnection(context, selectedCenter, targetCenter)
+          context.setLineDash(connection.type === 'cross' ? [22, 12] : connection.type === 'family' ? [7, 10] : [])
           context.strokeStyle = color
-          context.globalAlpha = .14
-          context.lineWidth = 28
-          context.stroke()
           context.globalAlpha = .88
-          context.lineWidth = 9
+          context.lineWidth = 7
           context.stroke()
+          context.setLineDash([])
+          context.beginPath()
+          context.arc(targetCenter.x, targetCenter.y, 14, 0, Math.PI * 2)
+          context.fillStyle = '#ffffff'
+          context.globalAlpha = 1
+          context.fill()
+          context.beginPath()
+          context.arc(targetCenter.x, targetCenter.y, 8, 0, Math.PI * 2)
+          context.fillStyle = color
+          context.fill()
         })
+        context.beginPath()
+        context.arc(selectedCenter.x, selectedCenter.y, 21, 0, Math.PI * 2)
+        context.fillStyle = '#ffffff'
+        context.fill()
+        context.beginPath()
+        context.arc(selectedCenter.x, selectedCenter.y, 12, 0, Math.PI * 2)
+        context.fillStyle = '#6f50db'
+        context.fill()
       }
     }
 
+    context.setLineDash([])
     context.globalAlpha = 1
-  }, [activeFamily, selectedId])
+  }, [activeFamily, connectionMode, selectedId])
 
   return <canvas
     ref={canvasRef}
@@ -171,6 +201,7 @@ function EcosystemConnections({ selectedId, activeFamily }) {
     height={Math.round(ecosystemMapSize.height * CONNECTION_RENDER_SCALE)}
     style={{ width: ecosystemMapSize.width, height: ecosystemMapSize.height }}
     data-render-scale={CONNECTION_RENDER_SCALE}
+    data-connection-mode={connectionMode}
     aria-hidden="true"
   />
 }
@@ -244,10 +275,10 @@ function ServiceInspector({ selection, onClose, onService }) {
   )
 }
 
-const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFamily, selectedId, relatedIds, onFamily, onService }) {
+const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFamily, connectionMode, focusedIds, scaleBand, selectedId, relatedIds, onFamily, onService }) {
   return (
     <>
-      <EcosystemConnections selectedId={selectedId} activeFamily={activeFamily} />
+      <EcosystemConnections selectedId={selectedId} activeFamily={activeFamily} connectionMode={connectionMode} />
       <div className="ecosystem-canvas-title"><Network /><span><b>ServiceOS Connected Atlas</b><small>یک هویت · یک حافظه · یک شبکه · چند تجربه مستقل</small></span></div>
 
       {ecosystemFamilies.map((family) => {
@@ -261,10 +292,23 @@ const EcosystemCanvasContent = memo(function EcosystemCanvasContent({ activeFami
       })}
 
       {ecosystemServiceNodes.map((service) => {
-        const family = getFamilyForService(service.id)
+        const family = ecosystemFamilyById.get(service.familyId)
         const isSelected = selectedId === service.id
         const isRelated = relatedIds.has(service.id)
-        const isDimmed = (selectedId && !isSelected && !isRelated) || (activeFamily !== 'all' && activeFamily !== service.familyId)
+        const isFocused = focusedIds?.has(service.id)
+        const isCompact = focusedIds ? !isFocused : scaleBand === 'overview'
+        const isDimmed = Boolean(focusedIds && !isFocused)
+        if (isCompact) return <button
+          className={`ecosystem-service-dot ${isDimmed ? 'is-muted' : ''}`}
+          style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
+          type="button"
+          key={service.id}
+          onClick={() => onService(service.id)}
+          aria-label={`انتخاب سرویس ${service.name}`}
+          aria-pressed={isSelected}
+        >
+          <b>{service.id.toLocaleString('fa-IR', { minimumIntegerDigits: 2 })}</b><span>{service.name}</span>
+        </button>
         return <button
           className={`ecosystem-service-node ${service.id === 1 ? 'is-omni' : ''} ${isSelected ? 'is-selected' : ''} ${isRelated ? 'is-related' : ''} ${isDimmed ? 'is-dimmed' : ''}`}
           style={{ '--family-color': family?.color, left: service.x, top: service.y, width: service.width, height: service.height }}
@@ -296,12 +340,18 @@ export default function ServiceEcosystemMapPage() {
   const [activeFamily, setActiveFamily] = useState('all')
   const [query, setQuery] = useState('')
   const [showHelp, setShowHelp] = useState(false)
+  const [connectionMode, setConnectionMode] = useState('focus')
   const [isNativeFullscreen, setIsNativeFullscreen] = useState(false)
   const [isFallbackFullscreen, setIsFallbackFullscreen] = useState(false)
   const isFullscreen = isNativeFullscreen || isFallbackFullscreen
   const scaleBand = getScaleBand(view.scale)
   const selectedId = selection?.type === 'service' ? selection.data.id : null
   const relatedIds = useMemo(() => new Set(selectedId ? getServiceConnections(selectedId).map((item) => item.service.id) : []), [selectedId])
+  const focusedIds = useMemo(() => {
+    if (selectedId) return new Set([selectedId, ...relatedIds])
+    if (activeFamily !== 'all') return new Set(ecosystemFamilyById.get(activeFamily)?.serviceIds ?? [])
+    return null
+  }, [activeFamily, relatedIds, selectedId])
 
   const fitMap = useCallback(() => {
     const bounds = viewportRef.current?.getBoundingClientRect()
@@ -441,24 +491,24 @@ export default function ServiceEcosystemMapPage() {
 
   const handleWheel = (event) => {
     event.preventDefault()
-    const bounds = viewportRef.current.getBoundingClientRect()
     wheelInputRef.current = {
-      pointerX: event.clientX - bounds.left,
-      pointerY: event.clientY - bounds.top,
+      clientX: event.clientX,
+      clientY: event.clientY,
       direction: event.deltaY > 0 ? -1 : 1,
-      width: bounds.width,
-      height: bounds.height,
     }
     if (wheelFrameRef.current) return
     wheelFrameRef.current = requestAnimationFrame(() => {
       const input = wheelInputRef.current
       wheelFrameRef.current = null
       if (!input) return
+      const bounds = viewportRef.current.getBoundingClientRect()
+      const pointerX = input.clientX - bounds.left
+      const pointerY = input.clientY - bounds.top
       setView((current) => {
         const scale = clamp(current.scale * (input.direction < 0 ? .9 : 1.1), MIN_SCALE, MAX_SCALE)
-        const mapX = (input.pointerX - current.x) / current.scale
-        const mapY = (input.pointerY - current.y) / current.scale
-        return constrainView({ scale, x: input.pointerX - (mapX * scale), y: input.pointerY - (mapY * scale) }, input.width, input.height)
+        const mapX = (pointerX - current.x) / current.scale
+        const mapY = (pointerY - current.y) / current.scale
+        return constrainView({ scale, x: pointerX - (mapX * scale), y: pointerY - (mapY * scale) }, bounds.width, bounds.height)
       })
     })
   }
@@ -466,7 +516,8 @@ export default function ServiceEcosystemMapPage() {
   const handlePointerDown = (event) => {
     if (event.target.closest?.('button, input, a, aside')) return
     event.currentTarget.setPointerCapture?.(event.pointerId)
-    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, latestX: event.clientX, latestY: event.clientY, viewX: view.x, viewY: view.y, frame: null }
+    const bounds = viewportRef.current.getBoundingClientRect()
+    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, latestX: event.clientX, latestY: event.clientY, viewX: view.x, viewY: view.y, width: bounds.width, height: bounds.height, frame: null }
     setDragging(true)
   }
 
@@ -479,8 +530,7 @@ export default function ServiceEcosystemMapPage() {
       const drag = dragRef.current
       if (!drag) return
       drag.frame = null
-      const bounds = viewportRef.current.getBoundingClientRect()
-      setView((current) => constrainView({ ...current, x: drag.viewX + drag.latestX - drag.x, y: drag.viewY + drag.latestY - drag.y }, bounds.width, bounds.height))
+      setView((current) => constrainView({ ...current, x: drag.viewX + drag.latestX - drag.x, y: drag.viewY + drag.latestY - drag.y }, drag.width, drag.height))
     })
   }
 
@@ -488,11 +538,10 @@ export default function ServiceEcosystemMapPage() {
     const drag = dragRef.current
     if (drag?.pointerId !== event.pointerId) return
     if (drag.frame) cancelAnimationFrame(drag.frame)
-    const bounds = viewportRef.current.getBoundingClientRect()
     const wasCancelled = event.type === 'pointercancel'
     const finalX = wasCancelled ? drag.latestX : event.clientX
     const finalY = wasCancelled ? drag.latestY : event.clientY
-    setView((current) => constrainView({ ...current, x: drag.viewX + finalX - drag.x, y: drag.viewY + finalY - drag.y }, bounds.width, bounds.height))
+    setView((current) => constrainView({ ...current, x: drag.viewX + finalX - drag.x, y: drag.viewY + finalY - drag.y }, drag.width, drag.height))
     dragRef.current = null
     setDragging(false)
     event.currentTarget.releasePointerCapture?.(event.pointerId)
@@ -558,6 +607,10 @@ export default function ServiceEcosystemMapPage() {
                 {searchResults.length === 0 && <p className="execution-map-search__empty">سرویسی پیدا نشد؛ نام، نیاز یا قابلیت دیگری بنویسید.</p>}
               </div>}
             </div>
+            <div className="ecosystem-connection-mode" role="group" aria-label="نحوه نمایش اتصال‌ها">
+              <button className={connectionMode === 'focus' ? 'is-active' : ''} type="button" onClick={() => setConnectionMode('focus')} aria-pressed={connectionMode === 'focus'}><Workflow size={16} /><span>مسیرهای مهم</span></button>
+              <button className={connectionMode === 'network' ? 'is-active' : ''} type="button" onClick={() => setConnectionMode('network')} aria-pressed={connectionMode === 'network'}><Network size={16} /><span>کل شبکه</span></button>
+            </div>
             <div className="execution-map-zoom" role="group" aria-label="کنترل نقشه سرویس‌ها">
               <button type="button" onClick={() => zoomBy(1.2)} aria-label="بزرگنمایی"><ZoomIn size={19} /></button>
               <input type="range" min={MIN_SCALE * 100} max={MAX_SCALE * 100} step="1" value={view.scale * 100} onChange={(event) => setZoomLevel(Number(event.target.value) / 100)} aria-label="تنظیم درصد بزرگنمایی" />
@@ -581,7 +634,7 @@ export default function ServiceEcosystemMapPage() {
           <div className="ecosystem-map-legend" aria-label="راهنمای رنگ اتصال‌ها"><span><i className="is-platform" />ریل مشترک</span><span><i className="is-cross" />جریان بین‌سرویسی</span><span><i className="is-family" />هم‌خانواده</span></div>
 
           <div className="ecosystem-map-canvas" style={{ width: ecosystemMapSize.width, height: ecosystemMapSize.height, transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})` }}>
-            <EcosystemCanvasContent activeFamily={activeFamily} selectedId={selectedId} relatedIds={relatedIds} onFamily={selectFamily} onService={selectService} />
+            <EcosystemCanvasContent activeFamily={activeFamily} connectionMode={connectionMode} focusedIds={focusedIds} scaleBand={scaleBand} selectedId={selectedId} relatedIds={relatedIds} onFamily={selectFamily} onService={selectService} />
           </div>
 
           <div className="execution-map-depth" aria-label="سطح جزئیات فعلی"><span className={scaleBand === 'overview' ? 'is-active' : ''}>خانواده‌ها</span><span className={scaleBand === 'structure' ? 'is-active' : ''}>سرویس‌ها</span><span className={scaleBand === 'detail' ? 'is-active' : ''}>اتصالات</span></div>
