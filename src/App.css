@@ -1,5 +1,5 @@
 /* Shell */
-.app-shell { min-height: 100vh; overflow: hidden; }
+.app-shell { min-height: 100vh; }
 .topbar {
   position: fixed;
   inset: 0 0 auto;
@@ -2315,7 +2315,8 @@
 .ecosystem-hero__stats div { display: grid; padding: 15px 17px; border: 1px solid rgba(55,61,89,.1); border-radius: 15px; background: rgba(255,255,255,.88); }
 .ecosystem-hero__stats b { color: #5f43cc; font-family: ui-monospace,Consolas,monospace; font-size: 1.35rem; }
 .ecosystem-hero__stats span { margin-top: 3px; color: #687084; font-size: .62rem; font-weight: 750; }
-.ecosystem-workspace { padding: 25px 0 100px; background: linear-gradient(180deg,#e8eef5,#f7f9fc); }
+.ecosystem-workspace { padding: 25px 0 0; background: linear-gradient(180deg,#e8eef5,#f7f9fc); }
+.ecosystem-workspace::after { display: block; height: 100px; content: ''; }
 .ecosystem-family-nav { display: grid; grid-template-columns: repeat(7,1fr); gap: 8px; margin-bottom: 14px; }
 .ecosystem-family-nav button { --family-color:#6c4ddd; min-width: 0; display: grid; grid-template-columns: 35px 1fr; align-items: center; gap: 8px; padding: 9px; color: #555d70; border: 1px solid rgba(42,47,73,.1); border-radius: 13px; background: rgba(255,255,255,.76); text-align: right; font: inherit; cursor: pointer; transition: border-color 150ms ease,background 150ms ease,transform 150ms ease; }
 .ecosystem-family-nav button:hover { border-color: color-mix(in srgb,var(--family-color) 38%,transparent); background: #fff; transform: translateY(-2px); }
@@ -2324,10 +2325,10 @@
 .ecosystem-family-nav button > span { min-width: 0; display: grid; }
 .ecosystem-family-nav b { overflow: hidden; font-size: .59rem; text-overflow: ellipsis; white-space: nowrap; }
 .ecosystem-family-nav small { color: #81889a; font-size: .5rem; }
-.ecosystem-control-shell { position: relative; height: min(82vh,960px); min-height: 730px; display: grid; grid-template-columns: minmax(0,1fr); overflow: visible; direction: ltr; isolation: isolate; background: transparent; }
+.ecosystem-control-shell { position: sticky; top: 88px; height: min(82vh,960px); min-height: min(730px,calc(100dvh - 104px)); display: grid; grid-template-columns: minmax(0,1fr); overflow: visible; direction: ltr; isolation: isolate; background: transparent; }
 .ecosystem-control-shell.has-inspector { grid-template-columns: minmax(320px,1fr) 14px minmax(320px,var(--inspector-width,440px)); }
 .ecosystem-control-shell.is-fallback-fullscreen { position: fixed; inset: 0; z-index: 1000; width: 100vw; height: 100dvh; min-height: 0; padding: 12px; background: #e8eef6; }
-.ecosystem-control-shell:fullscreen,.ecosystem-control-shell.is-fullscreen { width: 100vw; height: 100vh; height: 100dvh; min-height: 0; padding: 12px; background: #e8eef6; }
+.ecosystem-control-shell:fullscreen,.ecosystem-control-shell.is-fullscreen { position: relative; top: auto; width: 100vw; height: 100vh; height: 100dvh; min-height: 0; padding: 12px; background: #e8eef6; }
 .ecosystem-control-shell::backdrop { background: #e8eef6; }
 .ecosystem-map-viewport { grid-column: 1; width: auto; height: 100%; min-height: 0; container-name: service-map; container-type: inline-size; direction: rtl; border: 1px solid #d5deea; border-radius: 30px; background: #f4f7fb; box-shadow: 0 24px 70px rgba(43,55,82,.15); }
 .ecosystem-control-shell.has-inspector .ecosystem-map-viewport { border-radius: 30px; }
@@ -2594,7 +2595,7 @@
   .ecosystem-hero__stats { grid-template-columns: repeat(2,1fr); }
   .ecosystem-family-nav { display: flex; overflow-x: auto; }
   .ecosystem-family-nav button { flex: 0 0 170px; }
-  .ecosystem-control-shell { height: 76vh; min-height: 650px; border-radius: 20px; }
+  .ecosystem-control-shell { top: 78px; height: 76vh; min-height: min(650px,calc(100dvh - 92px)); border-radius: 20px; }
   .ecosystem-control-shell.has-inspector { grid-template-columns: 1fr; grid-template-rows: minmax(290px,44%) minmax(0,56%); row-gap: 10px; }
   .ecosystem-map-viewport { height: 100%; min-height: 0; }
   .ecosystem-control-shell.has-inspector .ecosystem-map-viewport { grid-column: 1; grid-row: 1; border-radius: 19px; }
